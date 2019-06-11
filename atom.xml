@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-06-11T09:06:59.252Z</updated>
+  <updated>2019-06-11T12:07:46.826Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Error JAVA_HOME is incorrectly set</title>
+    <link href="http://yoursite.com/2019/06/11/Error%20JAVA_HOME%20is%20incorrectly%20set.%20Please%20update%20Fhadoopconfhadoop-env.cmd%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2019/06/11/Error JAVA_HOME is incorrectly set. Please update Fhadoopconfhadoop-env.cmd解决方法/</id>
+    <published>2019-06-11T03:43:56.000Z</published>
+    <updated>2019-06-11T12:07:46.826Z</updated>
+    
+    <content type="html"><![CDATA[<p>在安装、调试、运行Hexo的过程中，出现了以下错误：</p><p><strong>Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd</strong></p><p>然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的：<br><img src="/images/Error/1.jpg" alt></p><p>然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量：</p><p><img src="/images/Error/2.jpg" alt></p><p>发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？<br>经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图：</p><p><img src="/images/Error/3.jpg" alt></p><p>或者也可以将jdk装到其他不存在空格的目录下。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在安装、调试、运行Hexo的过程中，出现了以下错误：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\et
+      
+    
+    </summary>
+    
+    
+      <category term="tags" scheme="http://yoursite.com/tags/tags/"/>
+    
+  </entry>
   
   <entry>
     <title>hexo 的常用命令</title>
@@ -30,28 +54,6 @@
       
       
         &lt;h2 id=&quot;常用-hexo-命令&quot;&gt;&lt;a href=&quot;#常用-hexo-命令&quot; class=&quot;headerlink&quot; title=&quot;常用 hexo 命令&quot;&gt;&lt;/a&gt;常用 hexo 命令&lt;/h2&gt;&lt;p&gt;hexo new “postName” #新建文章&lt;br&gt;hexo new 
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Error JAVA_HOME is incorrectly set</title>
-    <link href="http://yoursite.com/2019/06/11/Error%20JAVA_HOME%20is%20incorrectly%20set.%20Please%20update%20Fhadoopconfhadoop-env.cmd%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-    <id>http://yoursite.com/2019/06/11/Error JAVA_HOME is incorrectly set. Please update Fhadoopconfhadoop-env.cmd解决方法/</id>
-    <published>2019-06-11T03:43:56.000Z</published>
-    <updated>2019-06-11T06:42:25.358Z</updated>
-    
-    <content type="html"><![CDATA[<p>在安装、调试、运行Hexo的过程中，出现了以下错误：</p><p><strong>Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd</strong></p><p>然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的：<br><img src="/images/Error/1.jpg" alt></p><p>然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量：</p><p><img src="/images/Error/2.jpg" alt></p><p>发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？<br>经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图：</p><p><img src="/images/Error/3.jpg" alt></p><p>或者也可以将jdk装到其他不存在空格的目录下。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;在安装、调试、运行Hexo的过程中，出现了以下错误：&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\et
       
     
     </summary>

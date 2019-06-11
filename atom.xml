@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>changsk&#39;s blogs</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-06-11T06:42:25.358Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>changsk</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Error JAVA_HOME is incorrectly set</title>
+    <link href="http://yoursite.com/2019/06/11/Error%20JAVA_HOME%20is%20incorrectly%20set.%20Please%20update%20Fhadoopconfhadoop-env.cmd%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2019/06/11/Error JAVA_HOME is incorrectly set. Please update Fhadoopconfhadoop-env.cmd解决方法/</id>
+    <published>2019-06-11T03:43:56.000Z</published>
+    <updated>2019-06-11T06:42:25.358Z</updated>
+    
+    <content type="html"><![CDATA[<p>在安装、调试、运行Hexo的过程中，出现了以下错误：</p><p><strong>Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd</strong></p><p>然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的：<br><img src="/images/Error/1.jpg" alt></p><p>然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量：</p><p><img src="/images/Error/2.jpg" alt></p><p>发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？<br>经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图：</p><p><img src="/images/Error/3.jpg" alt></p><p>或者也可以将jdk装到其他不存在空格的目录下。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在安装、调试、运行Hexo的过程中，出现了以下错误：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\et
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>hexo 的常用命令</title>
+    <link href="http://yoursite.com/2019/06/11/hexo-command/"/>
+    <id>http://yoursite.com/2019/06/11/hexo-command/</id>
+    <published>2019-06-11T03:43:56.000Z</published>
+    <updated>2019-06-11T06:38:11.975Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="常用-hexo-命令"><a href="#常用-hexo-命令" class="headerlink" title="常用 hexo 命令"></a>常用 hexo 命令</h2><p>hexo new “postName” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo generate #生成静态页面至public目录<br>hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）<br>hexo deploy #将.deploy目录部署到GitHub<br>hexo help  #查看帮助<br>hexo version  #查看Hexo的版本</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;常用-hexo-命令&quot;&gt;&lt;a href=&quot;#常用-hexo-命令&quot; class=&quot;headerlink&quot; title=&quot;常用 hexo 命令&quot;&gt;&lt;/a&gt;常用 hexo 命令&lt;/h2&gt;&lt;p&gt;hexo new “postName” #新建文章&lt;br&gt;hexo new 
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2019/06/09/hello-world/"/>
+    <id>http://yoursite.com/2019/06/09/hello-world/</id>
+    <published>2019-06-09T09:58:48.064Z</published>
+    <updated>2019-06-09T09:58:48.065Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>

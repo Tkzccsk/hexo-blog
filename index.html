@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/Error_JAVA_HOME_is _incorrectly_set/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/10/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -320,7 +320,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/11/Error_JAVA_HOME_is _incorrectly_set/" itemprop="url">Error JAVA_HOME is incorrectly set</a></h1>
+                <a class="post-title-link" href="/2019/06/10/hello-world/" itemprop="url">Hello World</a></h1>
         
 
         <div class="post-meta">
@@ -332,8 +332,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-11T11:43:56+08:00">
-                2019-06-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-10T11:00:00+08:00">
+                2019-06-10
               </time>
             
 
@@ -342,6 +342,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -403,14 +425,19 @@
       
         
           
-            <p>在安装、调试、运行Hexo的过程中，出现了以下错误：</p>
-<p><strong>Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd</strong></p>
-<p>然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的：<br><img src="1.jpg" alt></p>
-<p>然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量：</p>
-<p><img src="2.jpg" alt></p>
-<p>发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？<br>经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图：</p>
-<p><img src="3.jpg" alt></p>
-<p>或者也可以将jdk装到其他不存在空格的目录下。</p>
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
           
         
@@ -591,6 +618,166 @@
 <h2 id="给文章添加标签和分类"><a href="#给文章添加标签和分类" class="headerlink" title="给文章添加标签和分类"></a>给文章添加标签和分类</h2><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: hexo 的常用命令</span><br><span class="line">date: 2019<span class="string">-06</span><span class="string">-11</span> 11:43:56</span><br><span class="line"><span class="keyword">tags:</span> </span><br><span class="line">- hexo # 文章标签</span><br><span class="line">- aaa</span><br><span class="line">- bbb</span><br><span class="line">categories: hexo # 该文章类别为 categories\hexo</span><br></pre></td></tr></table></figure>
 
 <p><strong>效果图：</strong><br><img src="1.jpg" alt="文章标签"><br><img src="2.jpg" alt="文章类别"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/Error_JAVA_HOME_is _incorrectly_set/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/11/Error_JAVA_HOME_is _incorrectly_set/" itemprop="url">Error JAVA_HOME is incorrectly set</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-11T11:43:56+08:00">
+                2019-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在安装、调试、运行Hexo的过程中，出现了以下错误：</p>
+<p><strong>Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd</strong></p>
+<p>然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的：<br><img src="1.jpg" alt></p>
+<p>然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量：</p>
+<p><img src="2.jpg" alt></p>
+<p>发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？<br>经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图：</p>
+<p><img src="3.jpg" alt></p>
+<p>或者也可以将jdk装到其他不存在空格的目录下。</p>
 
           
         
@@ -957,9 +1144,9 @@
 <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">push</span> origin changsk <span class="meta"># changsk 是我创建的一个分支</span></span><br></pre></td></tr></table></figure>
 
 <p>然后就收到报错，报错信息如下：<br><img src="3.jpg" alt><br>大概意思是：</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">更新（<span class="keyword">push</span>操作）被拒绝，因为github服务器上changsk分支的有些内容在本地仓库没有。</span><br></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">更新（<span class="keyword">push</span>操作）被拒绝，因为github远程仓库changsk分支的有些内容在本地仓库没有。</span><br></pre></td></tr></table></figure>
 
-<p>然后我想起了我昨天在 github 仓库 changsk 分支里面创建了一个 README.md，所以本地仓库是没有的，造成了远方仓库和本地仓库的不一致（精确来说是远方仓库有，但是本地仓库没有），所以 push 之前应该先把远方仓库的内容pull（拉取）到本地，然后才可以进行push。</p>
+<p>然后我想起了我昨天在 github 仓库 changsk 分支里面创建了一个 README.md，所以本地仓库是没有的，造成了远方仓库和本地仓库的不一致（精确来说是远方仓库有，但是本地仓库没有），所以 push 之前应该先把远程仓库的内容pull（拉取）到本地，然后才可以进行push。</p>
 <p>所以先应该执行</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git pull origin changsk</span></span><br></pre></td></tr></table></figure>
 
@@ -975,7 +1162,7 @@
 <p><img src="6.jpg" alt><br>最后执行 push 操作</p>
 <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> changsk</span><br></pre></td></tr></table></figure>
 
-<p><img src="7.jpg" alt></p>
+<p><img src="7.jpg" alt><br>问题解决。</p>
 
           
         
@@ -1150,8 +1337,8 @@
       
         
           
-            <p>搭建好本地 Hexo ，然后链接到了 github pages，也绑定了域名<br><a href="http://changsk.top" title="我的个人网站" target="_blank" rel="noopener">changsk.top</a> 。但是 github 仓库里面中的文件和本地文件不一样，有些差异，是因为本地文件经 <strong>hexo g</strong> 命令生成静态页面后，然后经<strong>hexo d</strong> deploy（部署）到github上，所以github仓库是没有本地hexo源文件。如果某一天不小心把本地仓库文件删了，或者换了电脑等原因，致使hexo源文件丢失，那么<br>会造成一定的损失。所以可以把本地 hexo 源文件也同步到 github 上面。</p>
-<p>执行以下命令的前提：<br><strong>当前主机已经可以通过SSH连接到 github 博客仓库</strong></p>
+            <p>搭建好本地 Hexo ，然后链接到了 github pages，也绑定了域名<br><a href="http://changsk.top" title="我的个人网站" target="_blank" rel="noopener">changsk.top</a> 。但是 github 博客仓库里面中的文件和本地文件不一样，有些差异，这是因为本地文件经 <strong>hexo g</strong> 命令生成静态页面后，然后经<strong>hexo d</strong> deploy（部署）到github上，所以github仓库是没有本地hexo源文件。如果某一天不小心把本地仓库文件删了，或者换了电脑等原因，致使hexo源文件丢失，那么会造成一定的损失。所以可以把本地 hexo 源文件也同步到 github 上面。方法是在原仓库另创建一个分支，专门用于同步本地 Hexo 源文件。</p>
+<p>执行以下命令的前提：<br><strong>当前主机已经可以通过SSH连接到 github 博客仓库（即本机生成的SSH KEY放入到 github 博客仓库当中去）</strong></p>
 <h2 id="新建-git-仓库"><a href="#新建-git-仓库" class="headerlink" title="新建 git 仓库"></a>新建 git 仓库</h2><p>首先新建一个文件夹，比如起名为 changsk_backup ，在此文件夹内打开Git Bash，输入命令：</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> init <span class="comment"># 在当前目录创建新的 Git 仓库</span></span><br></pre></td></tr></table></figure>
 
@@ -1164,212 +1351,25 @@
 
 <p><img src="2.jpg" alt></p>
 <h2 id="下载远程仓库"><a href="#下载远程仓库" class="headerlink" title="下载远程仓库"></a>下载远程仓库</h2><p>将GitHub上的博客仓库完全下载下来</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin <span class="keyword">master</span> <span class="title"># 将 master</span> 分区与 origin 分区合并</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin <span class="keyword">master</span> <span class="title"># 将远程仓库 origin</span> 的 <span class="keyword">master</span> <span class="title">分支 pull</span> 到本地仓库</span><br></pre></td></tr></table></figure>
 
-<h2 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h2><p>创建一个新分支（原来的分支名为master），输入命令：</p>
+<h2 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h2><p>创建并切换到一个新分支（原来的分支名为master），输入命令：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -<span class="selector-tag">b</span> changsk</span><br></pre></td></tr></table></figure>
 
-<p>上述命令相当于两条命令</p>
+<p>changsk 为新分支名<br>上述命令相当于两条命令</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">branch </span>changsk <span class="comment"># 创建分支</span></span><br><span class="line">git checkout changsk <span class="comment"># 切换分支</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="上传本地hexo源文件到github博客仓库的changsk分支"><a href="#上传本地hexo源文件到github博客仓库的changsk分支" class="headerlink" title="上传本地hexo源文件到github博客仓库的changsk分支"></a>上传本地hexo源文件到github博客仓库的changsk分支</h2><p>这样子我们就在我们的博客仓库中新建了一个名为changsk的分支，接下来把生成的.git文件复制到本地 hexo 仓库中去，现在changsk_backup就没有用了，可以删了。<br>接下来我们把本地的博客仓库中上传到GitHub的博客仓库的changsk分支中。</p>
+<h2 id="上传本地hexo源文件到github博客仓库的changsk分支"><a href="#上传本地hexo源文件到github博客仓库的changsk分支" class="headerlink" title="上传本地hexo源文件到github博客仓库的changsk分支"></a>上传本地hexo源文件到github博客仓库的changsk分支</h2><p>这样就在我们的博客仓库中新建了一个名为changsk的分支，接下来把生成的.git文件复制到本地 hexo 仓库中去，现在changsk_backup就没有用了，可以删了。<br>接下来我们把 Hexo 本地博客仓库源文件中上传到GitHub的博客仓库的changsk分支中。</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">add </span>.</span><br><span class="line"><span class="symbol">git</span> commit -m <span class="string">"backup"</span></span><br><span class="line"><span class="symbol">git</span> <span class="keyword">push </span>origin changsk</span><br></pre></td></tr></table></figure>
 
 <p>git add . ： 使用它会把工作时的所有变化提交到<strong>暂存区</strong>，包括文件内容修改(modified)以及新文件(new)，但<strong>不包括被删除的文件</strong><br>git commit -m “backup” ： 主要是将暂存区里的改动给提交到本地的版本库。-m 表示使用消息参数， “backup” 为 -m 的内容，用来表示这次提交的简要说明。<br>git push origin changsk ： 将本地仓库的代码推送到changsk分支。</p>
 <p>进入到GitHub的博客仓库中，可以发现出现了一个新的分支changsk，并且里面是我们的博客原件。<br>最好在上传备份之前写一份README.md 文件，作为一项说明（因为这是GitHub建议的）。<br>通过以上方式，我们就完成了备份啦，下一次更新了博客，首先执行</p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="meta">&amp; hexo d -g</span></span><br></pre></td></tr></table></figure>
 
-<p>生成及部署hexo，然后执行</p>
+<h6 id="注意：部署本地-Hexo-到-github-用的是-master-分支-config-yml中的声明"><a href="#注意：部署本地-Hexo-到-github-用的是-master-分支-config-yml中的声明" class="headerlink" title="注意：部署本地 Hexo 到 github 用的是 master 分支(__config.yml中的声明)"></a>注意：部署本地 Hexo 到 github 用的是 master 分支(__config.yml中的声明)</h6><p>生成及部署hexo，然后执行</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">add </span>.</span><br><span class="line"><span class="symbol">git</span> commit -m <span class="string">"backup"</span></span><br><span class="line"><span class="symbol">git</span> <span class="keyword">push </span>origin changsk</span><br></pre></td></tr></table></figure>
 
-<p>参考 ：<a href="https://blog.csdn.net/qq_34229391/article/details/82251852" target="_blank" rel="noopener">https://blog.csdn.net/qq_34229391/article/details/82251852</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/12/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changsk">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="changsk's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/12/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-12T17:01:36+08:00">
-                2019-06-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>进行本地 Hexo 源文件的备份。<br>参考 ：<a href="https://blog.csdn.net/qq_34229391/article/details/82251852" target="_blank" rel="noopener">https://blog.csdn.net/qq_34229391/article/details/82251852</a></p>
 
           
         

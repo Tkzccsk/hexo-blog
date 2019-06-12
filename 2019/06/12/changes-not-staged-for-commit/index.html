@@ -88,13 +88,13 @@
 
 
 
-<meta name="description" content="在使用 git 的过程中，要把当前文件夹下的内容 push 到 changsk 分支，先执行  1git add .  然后执行 1git commit -m &quot;backup&quot;  最后执行 push 操作 1git push origin changsk # changsk 是我创建的一个分支  然后就收到报错，报错信息如下：大概意思是： 1更新（push操作）被拒绝，因为github服务器上ch">
+<meta name="description" content="在使用 git 的过程中，要把当前文件夹下的内容 push 到 changsk 分支，先执行  1git add .  然后执行 1git commit -m &quot;backup&quot;  最后执行 push 操作 1git push origin changsk # changsk 是我创建的一个分支  然后就收到报错，报错信息如下：大概意思是： 1更新（push操作）被拒绝，因为github远程仓库ch">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="changes not staged for commit">
 <meta property="og:url" content="http://yoursite.com/2019/06/12/changes-not-staged-for-commit/index.html">
 <meta property="og:site_name" content="changsk&#39;s blogs">
-<meta property="og:description" content="在使用 git 的过程中，要把当前文件夹下的内容 push 到 changsk 分支，先执行  1git add .  然后执行 1git commit -m &quot;backup&quot;  最后执行 push 操作 1git push origin changsk # changsk 是我创建的一个分支  然后就收到报错，报错信息如下：大概意思是： 1更新（push操作）被拒绝，因为github服务器上ch">
+<meta property="og:description" content="在使用 git 的过程中，要把当前文件夹下的内容 push 到 changsk 分支，先执行  1git add .  然后执行 1git commit -m &quot;backup&quot;  最后执行 push 操作 1git push origin changsk # changsk 是我创建的一个分支  然后就收到报错，报错信息如下：大概意思是： 1更新（push操作）被拒绝，因为github远程仓库ch">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/06/12/changes-not-staged-for-commit/1.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/06/12/changes-not-staged-for-commit/2.jpg">
@@ -103,10 +103,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/12/changes-not-staged-for-commit/5.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/06/12/changes-not-staged-for-commit/6.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/06/12/changes-not-staged-for-commit/7.jpg">
-<meta property="og:updated_time" content="2019-06-12T11:35:03.935Z">
+<meta property="og:updated_time" content="2019-06-12T13:07:08.703Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="changes not staged for commit">
-<meta name="twitter:description" content="在使用 git 的过程中，要把当前文件夹下的内容 push 到 changsk 分支，先执行  1git add .  然后执行 1git commit -m &quot;backup&quot;  最后执行 push 操作 1git push origin changsk # changsk 是我创建的一个分支  然后就收到报错，报错信息如下：大概意思是： 1更新（push操作）被拒绝，因为github服务器上ch">
+<meta name="twitter:description" content="在使用 git 的过程中，要把当前文件夹下的内容 push 到 changsk 分支，先执行  1git add .  然后执行 1git commit -m &quot;backup&quot;  最后执行 push 操作 1git push origin changsk # changsk 是我创建的一个分支  然后就收到报错，报错信息如下：大概意思是： 1更新（push操作）被拒绝，因为github远程仓库ch">
 <meta name="twitter:image" content="http://yoursite.com/2019/06/12/changes-not-staged-for-commit/1.jpg">
 
 
@@ -447,9 +447,9 @@
 <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">push</span> origin changsk <span class="meta"># changsk 是我创建的一个分支</span></span><br></pre></td></tr></table></figure>
 
 <p>然后就收到报错，报错信息如下：<br><img src="3.jpg" alt><br>大概意思是：</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">更新（<span class="keyword">push</span>操作）被拒绝，因为github服务器上changsk分支的有些内容在本地仓库没有。</span><br></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">更新（<span class="keyword">push</span>操作）被拒绝，因为github远程仓库changsk分支的有些内容在本地仓库没有。</span><br></pre></td></tr></table></figure>
 
-<p>然后我想起了我昨天在 github 仓库 changsk 分支里面创建了一个 README.md，所以本地仓库是没有的，造成了远方仓库和本地仓库的不一致（精确来说是远方仓库有，但是本地仓库没有），所以 push 之前应该先把远方仓库的内容pull（拉取）到本地，然后才可以进行push。</p>
+<p>然后我想起了我昨天在 github 仓库 changsk 分支里面创建了一个 README.md，所以本地仓库是没有的，造成了远方仓库和本地仓库的不一致（精确来说是远方仓库有，但是本地仓库没有），所以 push 之前应该先把远程仓库的内容pull（拉取）到本地，然后才可以进行push。</p>
 <p>所以先应该执行</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git pull origin changsk</span></span><br></pre></td></tr></table></figure>
 
@@ -465,7 +465,7 @@
 <p><img src="6.jpg" alt><br>最后执行 push 操作</p>
 <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> changsk</span><br></pre></td></tr></table></figure>
 
-<p><img src="7.jpg" alt></p>
+<p><img src="7.jpg" alt><br>问题解决。</p>
 
       
     </div>

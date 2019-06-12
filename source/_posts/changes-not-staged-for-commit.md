@@ -27,9 +27,9 @@ git push origin changsk # changsk 是我创建的一个分支
 大概意思是：
 
 ```
-更新（push操作）被拒绝，因为github服务器上changsk分支的有些内容在本地仓库没有。
+更新（push操作）被拒绝，因为github远程仓库changsk分支的有些内容在本地仓库没有。
 ```
-然后我想起了我昨天在 github 仓库 changsk 分支里面创建了一个 README.md，所以本地仓库是没有的，造成了远方仓库和本地仓库的不一致（精确来说是远方仓库有，但是本地仓库没有），所以 push 之前应该先把远方仓库的内容pull（拉取）到本地，然后才可以进行push。
+然后我想起了我昨天在 github 仓库 changsk 分支里面创建了一个 README.md，所以本地仓库是没有的，造成了远方仓库和本地仓库的不一致（精确来说是远方仓库有，但是本地仓库没有），所以 push 之前应该先把远程仓库的内容pull（拉取）到本地，然后才可以进行push。
 
 所以先应该执行
 ```
@@ -62,3 +62,4 @@ git commit -m "backup"
 git push origin changsk
 ```
 ![](7.jpg)
+问题解决。

@@ -1,7 +1,6 @@
 ---
 title: Error JAVA_HOME is incorrectly set
-date: 2019-06-11 11:43:56
-tags: tags
+date: 2019-06-11 11:43:56 
 ---
 在安装、调试、运行Hexo的过程中，出现了以下错误：
 

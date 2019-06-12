@@ -4,7 +4,7 @@
 
 # Site                  #网站相关信息
 title: changsk's blogs  #网站标题 
-subtitle:               #网站副标题
+subtitle: chang.sk@foxmail.com              #网站副标题
 description:            #网站描述
 keywords: seeker        #网站关键字
 author: changsk         #网站作者
@@ -18,7 +18,7 @@ root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
-# Directory                #目录
+# Directory               #目录
 source_dir: source        #源文件
 public_dir: public        #生成的网页文件
 tag_dir: tags             #标签
@@ -84,3 +84,8 @@ deploy:
   
 #插件，例如生成 RSS 和站点地图的
 plugins: hexo-generate-feed
+
+admin:
+  username: changsk
+  password_hash: $2a$10$1sQQ8O93sHRHcaFPDUW69Orasm/Dm.iVqGhMcG1eSpQDVDnniHuxO
+  secret: secret

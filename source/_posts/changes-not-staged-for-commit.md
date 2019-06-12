@@ -1,5 +1,5 @@
 ---
-title: changes_not_staged_for_commit
+title: changes not staged for commit
 date: 2019-06-12 12:43:42
 tags:
 - git
@@ -46,3 +46,13 @@ git commit -m "backup"
 经过网上查阅，大部分人都说是因为没有执行 **git add .**，但我显然不是这个问题。
 原因是我要 push 的本地仓库里面还有另外的clone过来的git仓库，我查看文件夹，就像报错信息里面说的， themes/next（Hexo 的一个主题，也是本网站使用的主题） 里面是我 git clone 下来的一个仓库。
 解决办法是删除 themes/next 文件夹里面的隐藏文件夹 .git
+然后再执行就没有问题了。
+```
+git commit -m "backup"
+```
+![](/images/changes-not-staged-for-commit/6.jpg)
+最后执行 push 操作
+```
+git push origin changsk
+```
+![](/images/changes-not-staged-for-commit/7.jpg)

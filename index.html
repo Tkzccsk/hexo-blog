@@ -363,7 +363,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/10/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/12/git-command/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -383,7 +383,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/10/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+                <a href="/2019/06/12/git-command/" class="post-title-link" itemprop="url">git 创建分支</a>
               
             
           </h1>
@@ -408,24 +408,12 @@
                 
               
 
-              <time title="创建时间：2019-06-10 11:00:00" itemprop="dateCreated datePublished" datetime="2019-06-10T11:00:00+08:00">2019-06-10</time>
+              <time title="创建时间：2019-06-12 14:57:14 / 修改时间：21:04:31" itemprop="dateCreated datePublished" datetime="2019-06-12T14:57:14+08:00">2019-06-12</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-12 21:15:54" itemprop="dateModified" datetime="2019-06-12T21:15:54+08:00">2019-06-12</time>
               
             
           </span>
@@ -442,7 +430,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
 
                 
                 
@@ -471,7 +459,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.4k</span>
+                <span title="本文字数">5.8k</span>
               
 
               
@@ -485,7 +473,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -507,19 +495,454 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+            <p>搭建好本地 Hexo ，然后链接到了 github pages，也绑定了域名<br><a href="http://changsk.top" title="我的个人网站" target="_blank" rel="noopener">changsk.top</a> 。但是 github 博客仓库里面中的文件和本地文件不一样，有些差异，这是因为本地文件经 <strong>hexo g</strong> 命令生成静态页面后，然后经<strong>hexo d</strong> deploy（部署）到github上，所以github仓库是没有本地hexo源文件。如果某一天不小心把本地仓库文件删了，或者换了电脑等原因，致使hexo源文件丢失，那么会造成一定的损失。所以可以把本地 hexo 源文件也同步到 github 上面。方法是在原仓库另创建一个分支，专门用于同步本地 Hexo 源文件。</p>
+<p>执行以下命令的前提：<br><strong>当前主机已经可以通过SSH连接到 github 博客仓库（即本机生成的SSH KEY放入到 github 博客仓库当中去）</strong></p>
+<h2 id="新建-git-仓库"><a href="#新建-git-仓库" class="headerlink" title="新建 git 仓库"></a>新建 git 仓库</h2><p>首先新建一个文件夹，比如起名为 changsk_backup ，在此文件夹内打开Git Bash，输入命令：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> init <span class="comment"># 在当前目录创建新的 Git 仓库</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p><img src="1.jpg" alt><br>可以看到在当前文件夹里面会生成隐藏文件夹 .git，表示当前文件夹是一个git仓库</p>
+<h2 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">add</span> origin http<span class="variable">s:</span>//github.<span class="keyword">com</span>/Tkzccsk/changsk.git</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/Tkzccsk/changsk.git" target="_blank" rel="noopener">https://github.com/Tkzccsk/changsk.git</a> 是博客仓库的地址，获取方式是登录GitHub，找到自己的博客的仓库。远程库的名字就是origin，这是Git默认的叫法，可以起其他名。</p>
+<p>查看远程仓库的名称</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git remote</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p><img src="2.jpg" alt></p>
+<h2 id="下载远程仓库"><a href="#下载远程仓库" class="headerlink" title="下载远程仓库"></a>下载远程仓库</h2><p>将GitHub上的博客仓库完全下载下来</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin <span class="keyword">master</span> <span class="title"># 将远程仓库 origin</span> 的 <span class="keyword">master</span> <span class="title">分支 pull</span> 到本地仓库</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h2 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h2><p>创建并切换到一个新分支（原来的分支名为master），输入命令：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -<span class="selector-tag">b</span> changsk</span><br></pre></td></tr></table></figure>
+
+<p>changsk 为新分支名<br>上述命令相当于两条命令</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">branch </span>changsk <span class="comment"># 创建分支</span></span><br><span class="line">git checkout changsk <span class="comment"># 切换分支</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="上传本地hexo源文件到github博客仓库的changsk分支"><a href="#上传本地hexo源文件到github博客仓库的changsk分支" class="headerlink" title="上传本地hexo源文件到github博客仓库的changsk分支"></a>上传本地hexo源文件到github博客仓库的changsk分支</h2><p>这样就在我们的博客仓库中新建了一个名为changsk的分支，接下来把生成的.git文件复制到本地 hexo 仓库中去，现在changsk_backup就没有用了，可以删了。<br>接下来我们把 Hexo 本地博客仓库源文件中上传到GitHub的博客仓库的changsk分支中。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">add </span>.</span><br><span class="line"><span class="symbol">git</span> commit -m <span class="string">"backup"</span></span><br><span class="line"><span class="symbol">git</span> <span class="keyword">push </span>origin changsk</span><br></pre></td></tr></table></figure>
+
+<p>git add . ： 使用它会把工作时的所有变化提交到<strong>暂存区</strong>，包括文件内容修改(modified)以及新文件(new)，但<strong>不包括被删除的文件</strong><br>git commit -m “backup” ： 主要是将暂存区里的改动给提交到本地的版本库。-m 表示使用消息参数， “backup” 为 -m 的内容，用来表示这次提交的简要说明。<br>git push origin changsk ： 将本地仓库的代码推送到changsk分支。</p>
+<p>进入到GitHub的博客仓库中，可以发现出现了一个新的分支changsk，并且里面是我们的博客原件。<br>最好在上传备份之前写一份README.md 文件，作为一项说明（因为这是GitHub建议的）。<br>通过以上方式，我们就完成了备份啦，下一次更新了博客，首先执行</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="meta">&amp; hexo d -g</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="注意：部署本地-Hexo-到-github-用的是-master-分支-config-yml中的声明"><a href="#注意：部署本地-Hexo-到-github-用的是-master-分支-config-yml中的声明" class="headerlink" title="注意：部署本地 Hexo 到 github 用的是 master 分支(__config.yml中的声明)"></a>注意：部署本地 Hexo 到 github 用的是 master 分支(__config.yml中的声明)</h6><p>生成及部署hexo，然后执行</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">add </span>.</span><br><span class="line"><span class="symbol">git</span> commit -m <span class="string">"backup"</span></span><br><span class="line"><span class="symbol">git</span> <span class="keyword">push </span>origin changsk</span><br></pre></td></tr></table></figure>
+
+<p>进行本地 Hexo 源文件的备份。<br>参考 ：<a href="https://blog.csdn.net/qq_34229391/article/details/82251852" target="_blank" rel="noopener">https://blog.csdn.net/qq_34229391/article/details/82251852</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/12/changes-not-staged-for-commit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/12/changes-not-staged-for-commit/" class="post-title-link" itemprop="url">changes not staged for commit</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-12 12:43:42 / 修改时间：21:07:08" itemprop="dateCreated datePublished" datetime="2019-06-12T12:43:42+08:00">2019-06-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在使用 git 的过程中，要把当前文件夹下的内容 push 到 changsk 分支，先执行 </p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">add</span><span class="bash"> .</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="1.jpg" alt><br>然后执行</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"backup"</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="2.jpg" alt><br>最后执行 push 操作</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">push</span> origin changsk <span class="meta"># changsk 是我创建的一个分支</span></span><br></pre></td></tr></table></figure>
+
+<p>然后就收到报错，报错信息如下：<br><img src="3.jpg" alt><br>大概意思是：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">更新（<span class="keyword">push</span>操作）被拒绝，因为github远程仓库changsk分支的有些内容在本地仓库没有。</span><br></pre></td></tr></table></figure>
+
+<p>然后我想起了我昨天在 github 仓库 changsk 分支里面创建了一个 README.md，所以本地仓库是没有的，造成了远方仓库和本地仓库的不一致（精确来说是远方仓库有，但是本地仓库没有），所以 push 之前应该先把远程仓库的内容pull（拉取）到本地，然后才可以进行push。</p>
+<p>所以先应该执行</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git pull origin changsk</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="4.jpg" alt><br>然后执行</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">add</span><span class="bash"> .</span></span><br></pre></td></tr></table></figure>
+
+<p>然后执行</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"backup"</span></span><br></pre></td></tr></table></figure>
+
+<p>又收到一个不同的错误<br><img src="5.jpg" alt><br>经过网上查阅，大部分人都说是因为没有执行 <strong>git add .</strong>，但我显然不是这个问题。<br>原因是我要 push 的本地仓库里面还有另外的clone过来的git仓库，我查看文件夹，就像报错信息里面说的， themes/next（Hexo 的一个主题，也是本网站使用的主题） 里面是我 git clone 下来的一个仓库。<br>解决办法是删除 themes/next 文件夹里面的隐藏文件夹 .git<br>然后再执行就没有问题了。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"backup"</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="6.jpg" alt><br>最后执行 push 操作</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> changsk</span><br></pre></td></tr></table></figure>
+
+<p><img src="7.jpg" alt><br>问题解决。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/12/CRLF-CR-LF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/12/CRLF-CR-LF/" class="post-title-link" itemprop="url">CRLF CR LF</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-12 10:07:36 / 修改时间：19:35:22" itemprop="dateCreated datePublished" datetime="2019-06-12T10:07:36+08:00">2019-06-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>deploy 本地 Hexo 到 github pages 的时候，遇到了两陌生的单词：<strong>LF</strong>和<strong>CRLF</strong> ，本着不求甚解的态度，去网上找了相关的资料，特此记录，以便日后查看。其实前几天在安装 Hexo 的过程中有过一个设置<strong>LF</strong>和<strong>CRLF</strong> 的转换的选项，当时没理。<br><img src="1.jpg" alt="CRLF-CR-LF"></p>
+<h4 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h4><p><strong>CR</strong>：Carriage Return，对应ASCII中转义字符\r，表示<strong>回车</strong><br><strong>LF</strong>：Linefeed，对应ASCII中转义字符\n，表示<strong>换行</strong><br><strong>CRLF</strong>：Carriage Return &amp; Linefeed，\r\n，表示<strong>回车并换行</strong></p>
+<ul>
+<li>Windows操作系统采用<strong>两个字符</strong>来进行换行，即CRLF</li>
+<li>Unix/Linux/Mac OS X操作系统采用单个字符LF来进行换行</li>
+</ul>
+<h4 id="野史"><a href="#野史" class="headerlink" title="野史"></a>野史</h4><pre><code>据野史记载，在很久以前的机械打字机时代，CR和LF分别具有不同的作用：LF会将打印纸张上移一行位置，但是保持当前打字的水平位置不变；CR则会将“Carriage”（打字机上的滚动托架）滚回到打印纸张的最左侧，但是保持当前打字的垂直位置不变，即还是在同一行。当CR和LF组合使用时，则会将打印纸张上移一行，且下一个打字位置将回到该行的最左侧，也就是我们今天所理解的换行操作。
+随着时间的推移，机械打字机渐渐地退出了历史舞台，当初的纸张变成了今天的显示器，打字机的按键也演变为了如今的键盘。在操作系统出现的年代，受限于内存和软盘空间的不足，一些操作系统的设计者决定采用单个字符来表示换行符，如Unix的LF、MacIntosh的CR。他们的意图都是为了进行换行操作，只是当初并没有一个国际标准，所以才有这样字符上的不同。</code></pre><p>参考：<a href="https://www.jianshu.com/p/b03ad01acd69" target="_blank" rel="noopener">https://www.jianshu.com/p/b03ad01acd69</a></p>
 
           
         
@@ -975,7 +1398,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/12/CRLF-CR-LF/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/10/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -995,7 +1418,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/12/CRLF-CR-LF/" class="post-title-link" itemprop="url">CRLF CR LF</a>
+                <a href="/2019/06/10/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
               
             
           </h1>
@@ -1020,12 +1443,24 @@
                 
               
 
-              <time title="创建时间：2019-06-12 10:07:36 / 修改时间：19:35:22" itemprop="dateCreated datePublished" datetime="2019-06-12T10:07:36+08:00">2019-06-12</time>
+              <time title="创建时间：2019-06-10 11:00:00" itemprop="dateCreated datePublished" datetime="2019-06-10T11:00:00+08:00">2019-06-10</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-12 21:15:54" itemprop="dateModified" datetime="2019-06-12T21:15:54+08:00">2019-06-12</time>
               
             
           </span>
@@ -1042,7 +1477,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
 
                 
                 
@@ -1071,7 +1506,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.2k</span>
+                <span title="本文字数">2.4k</span>
               
 
               
@@ -1085,7 +1520,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -1107,454 +1542,19 @@
       
         
           
-            <p>deploy 本地 Hexo 到 github pages 的时候，遇到了两陌生的单词：<strong>LF</strong>和<strong>CRLF</strong> ，本着不求甚解的态度，去网上找了相关的资料，特此记录，以便日后查看。其实前几天在安装 Hexo 的过程中有过一个设置<strong>LF</strong>和<strong>CRLF</strong> 的转换的选项，当时没理。<br><img src="1.jpg" alt="CRLF-CR-LF"></p>
-<h4 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h4><p><strong>CR</strong>：Carriage Return，对应ASCII中转义字符\r，表示<strong>回车</strong><br><strong>LF</strong>：Linefeed，对应ASCII中转义字符\n，表示<strong>换行</strong><br><strong>CRLF</strong>：Carriage Return &amp; Linefeed，\r\n，表示<strong>回车并换行</strong></p>
-<ul>
-<li>Windows操作系统采用<strong>两个字符</strong>来进行换行，即CRLF</li>
-<li>Unix/Linux/Mac OS X操作系统采用单个字符LF来进行换行</li>
-</ul>
-<h4 id="野史"><a href="#野史" class="headerlink" title="野史"></a>野史</h4><pre><code>据野史记载，在很久以前的机械打字机时代，CR和LF分别具有不同的作用：LF会将打印纸张上移一行位置，但是保持当前打字的水平位置不变；CR则会将“Carriage”（打字机上的滚动托架）滚回到打印纸张的最左侧，但是保持当前打字的垂直位置不变，即还是在同一行。当CR和LF组合使用时，则会将打印纸张上移一行，且下一个打字位置将回到该行的最左侧，也就是我们今天所理解的换行操作。
-随着时间的推移，机械打字机渐渐地退出了历史舞台，当初的纸张变成了今天的显示器，打字机的按键也演变为了如今的键盘。在操作系统出现的年代，受限于内存和软盘空间的不足，一些操作系统的设计者决定采用单个字符来表示换行符，如Unix的LF、MacIntosh的CR。他们的意图都是为了进行换行操作，只是当初并没有一个国际标准，所以才有这样字符上的不同。</code></pre><p>参考：<a href="https://www.jianshu.com/p/b03ad01acd69" target="_blank" rel="noopener">https://www.jianshu.com/p/b03ad01acd69</a></p>
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
-          
-        
-      
-    </div>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-    
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-    
-
-    
-      
-    
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/12/changes-not-staged-for-commit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changsk">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="changsk's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/12/changes-not-staged-for-commit/" class="post-title-link" itemprop="url">changes not staged for commit</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-12 12:43:42 / 修改时间：21:07:08" itemprop="dateCreated datePublished" datetime="2019-06-12T12:43:42+08:00">2019-06-12</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">3.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在使用 git 的过程中，要把当前文件夹下的内容 push 到 changsk 分支，先执行 </p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">add</span><span class="bash"> .</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="1.jpg" alt><br>然后执行</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"backup"</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="2.jpg" alt><br>最后执行 push 操作</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">push</span> origin changsk <span class="meta"># changsk 是我创建的一个分支</span></span><br></pre></td></tr></table></figure>
-
-<p>然后就收到报错，报错信息如下：<br><img src="3.jpg" alt><br>大概意思是：</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">更新（<span class="keyword">push</span>操作）被拒绝，因为github远程仓库changsk分支的有些内容在本地仓库没有。</span><br></pre></td></tr></table></figure>
-
-<p>然后我想起了我昨天在 github 仓库 changsk 分支里面创建了一个 README.md，所以本地仓库是没有的，造成了远方仓库和本地仓库的不一致（精确来说是远方仓库有，但是本地仓库没有），所以 push 之前应该先把远程仓库的内容pull（拉取）到本地，然后才可以进行push。</p>
-<p>所以先应该执行</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git pull origin changsk</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="4.jpg" alt><br>然后执行</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">add</span><span class="bash"> .</span></span><br></pre></td></tr></table></figure>
-
-<p>然后执行</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"backup"</span></span><br></pre></td></tr></table></figure>
-
-<p>又收到一个不同的错误<br><img src="5.jpg" alt><br>经过网上查阅，大部分人都说是因为没有执行 <strong>git add .</strong>，但我显然不是这个问题。<br>原因是我要 push 的本地仓库里面还有另外的clone过来的git仓库，我查看文件夹，就像报错信息里面说的， themes/next（Hexo 的一个主题，也是本网站使用的主题） 里面是我 git clone 下来的一个仓库。<br>解决办法是删除 themes/next 文件夹里面的隐藏文件夹 .git<br>然后再执行就没有问题了。</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"backup"</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="6.jpg" alt><br>最后执行 push 操作</p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> changsk</span><br></pre></td></tr></table></figure>
-
-<p><img src="7.jpg" alt><br>问题解决。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/12/git-command/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changsk">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="changsk's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/12/git-command/" class="post-title-link" itemprop="url">git 创建分支</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-12 14:57:14 / 修改时间：21:04:31" itemprop="dateCreated datePublished" datetime="2019-06-12T14:57:14+08:00">2019-06-12</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">5.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">5 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>搭建好本地 Hexo ，然后链接到了 github pages，也绑定了域名<br><a href="http://changsk.top" title="我的个人网站" target="_blank" rel="noopener">changsk.top</a> 。但是 github 博客仓库里面中的文件和本地文件不一样，有些差异，这是因为本地文件经 <strong>hexo g</strong> 命令生成静态页面后，然后经<strong>hexo d</strong> deploy（部署）到github上，所以github仓库是没有本地hexo源文件。如果某一天不小心把本地仓库文件删了，或者换了电脑等原因，致使hexo源文件丢失，那么会造成一定的损失。所以可以把本地 hexo 源文件也同步到 github 上面。方法是在原仓库另创建一个分支，专门用于同步本地 Hexo 源文件。</p>
-<p>执行以下命令的前提：<br><strong>当前主机已经可以通过SSH连接到 github 博客仓库（即本机生成的SSH KEY放入到 github 博客仓库当中去）</strong></p>
-<h2 id="新建-git-仓库"><a href="#新建-git-仓库" class="headerlink" title="新建 git 仓库"></a>新建 git 仓库</h2><p>首先新建一个文件夹，比如起名为 changsk_backup ，在此文件夹内打开Git Bash，输入命令：</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> init <span class="comment"># 在当前目录创建新的 Git 仓库</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="1.jpg" alt><br>可以看到在当前文件夹里面会生成隐藏文件夹 .git，表示当前文件夹是一个git仓库</p>
-<h2 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">add</span> origin http<span class="variable">s:</span>//github.<span class="keyword">com</span>/Tkzccsk/changsk.git</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://github.com/Tkzccsk/changsk.git" target="_blank" rel="noopener">https://github.com/Tkzccsk/changsk.git</a> 是博客仓库的地址，获取方式是登录GitHub，找到自己的博客的仓库。远程库的名字就是origin，这是Git默认的叫法，可以起其他名。</p>
-<p>查看远程仓库的名称</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git remote</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="2.jpg" alt></p>
-<h2 id="下载远程仓库"><a href="#下载远程仓库" class="headerlink" title="下载远程仓库"></a>下载远程仓库</h2><p>将GitHub上的博客仓库完全下载下来</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin <span class="keyword">master</span> <span class="title"># 将远程仓库 origin</span> 的 <span class="keyword">master</span> <span class="title">分支 pull</span> 到本地仓库</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h2><p>创建并切换到一个新分支（原来的分支名为master），输入命令：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -<span class="selector-tag">b</span> changsk</span><br></pre></td></tr></table></figure>
-
-<p>changsk 为新分支名<br>上述命令相当于两条命令</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">branch </span>changsk <span class="comment"># 创建分支</span></span><br><span class="line">git checkout changsk <span class="comment"># 切换分支</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="上传本地hexo源文件到github博客仓库的changsk分支"><a href="#上传本地hexo源文件到github博客仓库的changsk分支" class="headerlink" title="上传本地hexo源文件到github博客仓库的changsk分支"></a>上传本地hexo源文件到github博客仓库的changsk分支</h2><p>这样就在我们的博客仓库中新建了一个名为changsk的分支，接下来把生成的.git文件复制到本地 hexo 仓库中去，现在changsk_backup就没有用了，可以删了。<br>接下来我们把 Hexo 本地博客仓库源文件中上传到GitHub的博客仓库的changsk分支中。</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">add </span>.</span><br><span class="line"><span class="symbol">git</span> commit -m <span class="string">"backup"</span></span><br><span class="line"><span class="symbol">git</span> <span class="keyword">push </span>origin changsk</span><br></pre></td></tr></table></figure>
-
-<p>git add . ： 使用它会把工作时的所有变化提交到<strong>暂存区</strong>，包括文件内容修改(modified)以及新文件(new)，但<strong>不包括被删除的文件</strong><br>git commit -m “backup” ： 主要是将暂存区里的改动给提交到本地的版本库。-m 表示使用消息参数， “backup” 为 -m 的内容，用来表示这次提交的简要说明。<br>git push origin changsk ： 将本地仓库的代码推送到changsk分支。</p>
-<p>进入到GitHub的博客仓库中，可以发现出现了一个新的分支changsk，并且里面是我们的博客原件。<br>最好在上传备份之前写一份README.md 文件，作为一项说明（因为这是GitHub建议的）。<br>通过以上方式，我们就完成了备份啦，下一次更新了博客，首先执行</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="meta">&amp; hexo d -g</span></span><br></pre></td></tr></table></figure>
-
-<h6 id="注意：部署本地-Hexo-到-github-用的是-master-分支-config-yml中的声明"><a href="#注意：部署本地-Hexo-到-github-用的是-master-分支-config-yml中的声明" class="headerlink" title="注意：部署本地 Hexo 到 github 用的是 master 分支(__config.yml中的声明)"></a>注意：部署本地 Hexo 到 github 用的是 master 分支(__config.yml中的声明)</h6><p>生成及部署hexo，然后执行</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">add </span>.</span><br><span class="line"><span class="symbol">git</span> commit -m <span class="string">"backup"</span></span><br><span class="line"><span class="symbol">git</span> <span class="keyword">push </span>origin changsk</span><br></pre></td></tr></table></figure>
-
-<p>进行本地 Hexo 源文件的备份。<br>参考 ：<a href="https://blog.csdn.net/qq_34229391/article/details/82251852" target="_blank" rel="noopener">https://blog.csdn.net/qq_34229391/article/details/82251852</a></p>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
           
         

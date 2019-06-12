@@ -6,7 +6,7 @@ tags:
 categories: 操作系统
 ---
 deploy 本地 Hexo 到 github pages 的时候，遇到了两陌生的单词：**LF**和**CRLF** ，本着不求甚解的态度，去网上找了相关的资料，特此记录，以便日后查看。其实前几天在安装 Hexo 的过程中有过一个设置**LF**和**CRLF** 的转换的选项，当时没理。
-![CRLF-CR-LF](/images/CRLF-CR-LF/1.jpg)
+![CRLF-CR-LF](1.jpg)
 
 #### 名词解释
 

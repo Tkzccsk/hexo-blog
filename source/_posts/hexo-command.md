@@ -41,8 +41,8 @@ tags:
 categories: hexo # 该文章类别为 categories\hexo
 ```
 **效果图：**
-![文章标签](/images/hexo-command/1.jpg)
-![文章类别](/images/hexo-command/2.jpg)
+![文章标签](1.jpg)
+![文章类别](2.jpg)
 
 
 

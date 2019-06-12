@@ -10,19 +10,22 @@ categories: git
 ```
  git add .
 ```
-![](/images/changes-not-staged-for-commit/1.jpg)
+![](1.jpg)
 然后执行
+
 ```
 git commit -m "backup"
 ```
-![](/images/changes-not-staged-for-commit/2.jpg)
+![](2.jpg)
 最后执行 push 操作
+
 ```
 git push origin changsk # changsk 是我创建的一个分支
 ```
 然后就收到报错，报错信息如下：
-![](/images/changes-not-staged-for-commit/3.jpg)
+![](3.jpg)
 大概意思是：
+
 ```
 更新（push操作）被拒绝，因为github服务器上changsk分支的有些内容在本地仓库没有。
 ```
@@ -32,8 +35,9 @@ git push origin changsk # changsk 是我创建的一个分支
 ```
 git pull origin changsk
 ```
-![](/images/changes-not-staged-for-commit/4.jpg)
+![](4.jpg)
 然后执行
+
 ```
 git add .
 ```
@@ -42,17 +46,19 @@ git add .
 git commit -m "backup"
 ```
 又收到一个不同的错误
-![](/images/changes-not-staged-for-commit/5.jpg)
+![](5.jpg)
 经过网上查阅，大部分人都说是因为没有执行 **git add .**，但我显然不是这个问题。
 原因是我要 push 的本地仓库里面还有另外的clone过来的git仓库，我查看文件夹，就像报错信息里面说的， themes/next（Hexo 的一个主题，也是本网站使用的主题） 里面是我 git clone 下来的一个仓库。
 解决办法是删除 themes/next 文件夹里面的隐藏文件夹 .git
 然后再执行就没有问题了。
+
 ```
 git commit -m "backup"
 ```
-![](/images/changes-not-staged-for-commit/6.jpg)
+![](6.jpg)
 最后执行 push 操作
+
 ```
 git push origin changsk
 ```
-![](/images/changes-not-staged-for-commit/7.jpg)
+![](7.jpg)

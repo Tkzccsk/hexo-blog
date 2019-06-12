@@ -51,7 +51,7 @@ highlight:                 #语法高亮
 index_generator:
   path: ''
   per_page: 10            #每页显示文章的数量，默认为 10
-  order_by: -date         #显示文章的顺序，默认为 -date
+  order_by: date          #显示文章的顺序 -date(按照日期升序) date(按照日期降序)
   
 # Category & Tag                   #分类和标签
 default_category: uncategorized    #默认分类

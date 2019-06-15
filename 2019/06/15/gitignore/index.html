@@ -107,21 +107,18 @@
 
 
 
-  <meta name="description" content="搭建好本地 Hexo ，然后链接到了 github pages，也绑定了域名changsk.top 。但是 github 博客仓库里面中的文件和本地文件不一样，有些差异，这是因为本地文件经 hexo g 命令生成静态页面后，然后经hexo d deploy（部署）到github上，所以github仓库是没有本地hexo源文件。如果某一天不小心把本地仓库文件删了，或者换了电脑等原因，致使hexo源文">
+  <meta name="description" content="下面文章参考自：Git 忽略提交 .gitignore 前言在使用Git的过程中，有的文件比如日志，临时文件，编译的中间文件等不需要提交到代码仓库，这时就要设置相应的忽略规则，来忽略这些文件的提交。">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git 创建分支">
-<meta property="og:url" content="http://changsk.top/2019/06/12/git-command/index.html">
+<meta property="og:title" content="gitignore">
+<meta property="og:url" content="http://changsk.top/2019/06/15/gitignore/index.html">
 <meta property="og:site_name" content="changsk&#39;s blogs">
-<meta property="og:description" content="搭建好本地 Hexo ，然后链接到了 github pages，也绑定了域名changsk.top 。但是 github 博客仓库里面中的文件和本地文件不一样，有些差异，这是因为本地文件经 hexo g 命令生成静态页面后，然后经hexo d deploy（部署）到github上，所以github仓库是没有本地hexo源文件。如果某一天不小心把本地仓库文件删了，或者换了电脑等原因，致使hexo源文">
+<meta property="og:description" content="下面文章参考自：Git 忽略提交 .gitignore 前言在使用Git的过程中，有的文件比如日志，临时文件，编译的中间文件等不需要提交到代码仓库，这时就要设置相应的忽略规则，来忽略这些文件的提交。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://changsk.top/2019/06/12/git-command/1.jpg">
-<meta property="og:image" content="http://changsk.top/2019/06/12/git-command/2.jpg">
-<meta property="og:updated_time" content="2019-06-15T07:13:23.842Z">
+<meta property="og:updated_time" content="2019-06-15T10:46:38.559Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git 创建分支">
-<meta name="twitter:description" content="搭建好本地 Hexo ，然后链接到了 github pages，也绑定了域名changsk.top 。但是 github 博客仓库里面中的文件和本地文件不一样，有些差异，这是因为本地文件经 hexo g 命令生成静态页面后，然后经hexo d deploy（部署）到github上，所以github仓库是没有本地hexo源文件。如果某一天不小心把本地仓库文件删了，或者换了电脑等原因，致使hexo源文">
-<meta name="twitter:image" content="http://changsk.top/2019/06/12/git-command/1.jpg">
+<meta name="twitter:title" content="gitignore">
+<meta name="twitter:description" content="下面文章参考自：Git 忽略提交 .gitignore 前言在使用Git的过程中，有的文件比如日志，临时文件，编译的中间文件等不需要提交到代码仓库，这时就要设置相应的忽略规则，来忽略这些文件的提交。">
 
 
 
@@ -130,7 +127,7 @@
 
 
 
-  <link rel="canonical" href="http://changsk.top/2019/06/12/git-command/">
+  <link rel="canonical" href="http://changsk.top/2019/06/15/gitignore/">
 
 
 
@@ -140,7 +137,7 @@
   };
 </script>
 
-  <title>git 创建分支 | changsk's blogs</title>
+  <title>gitignore | changsk's blogs</title>
   
 
 
@@ -369,7 +366,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/12/git-command/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/15/gitignore/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -386,7 +383,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">git 创建分支
+          <h1 class="post-title" itemprop="name headline">gitignore
 
               
             
@@ -412,24 +409,12 @@
                 
               
 
-              <time title="创建时间：2019-06-12 14:57:14" itemprop="dateCreated datePublished" datetime="2019-06-12T14:57:14+08:00">2019-06-12</time>
+              <time title="创建时间：2019-06-15 18:23:05 / 修改时间：18:46:38" itemprop="dateCreated datePublished" datetime="2019-06-15T18:23:05+08:00">2019-06-15</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-15 15:13:23" itemprop="dateModified" datetime="2019-06-15T15:13:23+08:00">2019-06-15</time>
               
             
           </span>
@@ -482,7 +467,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5.7k</span>
+                <span title="本文字数">5.2k</span>
               
 
               
@@ -516,41 +501,69 @@
       
 
       
-        <p>搭建好本地 Hexo ，然后链接到了 github pages，也绑定了域名<br><a href="http://changsk.top" title="我的个人网站">changsk.top</a> 。但是 github 博客仓库里面中的文件和本地文件不一样，有些差异，这是因为本地文件经 <strong>hexo g</strong> 命令生成静态页面后，然后经<strong>hexo d</strong> deploy（部署）到github上，所以github仓库是没有本地hexo源文件。如果某一天不小心把本地仓库文件删了，或者换了电脑等原因，致使hexo源文件丢失，那么会造成一定的损失。所以可以把本地 hexo 源文件也同步到 github 上面。方法是在原仓库另创建一个分支，专门用于同步本地 Hexo 源文件。</p>
+        <p>下面文章参考自：<a href="https://www.jianshu.com/p/74bd0ceb6182" target="_blank" rel="noopener">Git 忽略提交 .gitignore</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在使用Git的过程中，有的文件比如日志，临时文件，编译的中间文件等不需要提交到代码仓库，这时就要设置相应的忽略规则，来忽略这些文件的提交。</p>
 <a id="more"></a>
 
-<p>执行以下命令的前提：<br><strong>当前主机已经可以通过SSH连接到 github 博客仓库（即本机生成的SSH KEY放入到 github 博客仓库当中去）</strong></p>
-<h2 id="新建-git-仓库"><a href="#新建-git-仓库" class="headerlink" title="新建 git 仓库"></a>新建 git 仓库</h2><p>首先新建一个文件夹，比如起名为 changsk_backup ，在此文件夹内打开Git Bash，输入命令：</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> init <span class="comment"># 在当前目录创建新的 Git 仓库</span></span><br></pre></td></tr></table></figure>
+<h3 id="规则-作用"><a href="#规则-作用" class="headerlink" title="规则                          作用"></a>规则                          作用</h3><p> /mtk                         过滤整个文件夹<br> *.zip                         过滤所有.zip文件<br> /mtk/do.c                过滤某个具体文件<br> !/mtk/one.txt         追踪（不过滤）某个具体文件</p>
+<ul>
+<li>注意：如果你创建.gitignore文件之前就push了某一文件，那么即使你在.gitignore文件中写入过滤该文件的规则，该规则也不会起作用，git仍然会对该文件进行版本管理。</li>
+</ul>
+<h3 id="配置语法"><a href="#配置语法" class="headerlink" title="配置语法"></a>配置语法</h3><p>以斜杠“/”开头表示目录；<br> 以星号“*”通配多个字符；<br> 以问号“?”通配单个字符<br> 以方括号“[]”包含单个字符的匹配列表；<br> 以叹号“!”表示不忽略(跟踪)匹配到的文件或目录。</p>
+<ul>
+<li>注意： git 对于 .gitignore配置文件是按行从上到下进行规则匹配的</li>
+</ul>
+<h2 id="Git-忽略文件提交的方法"><a href="#Git-忽略文件提交的方法" class="headerlink" title="Git 忽略文件提交的方法"></a>Git 忽略文件提交的方法</h2><p>有三种方法可以实现忽略Git中不想提交的文件。</p>
+<h3 id="在Git项目中定义-gitignore-文件"><a href="#在Git项目中定义-gitignore-文件" class="headerlink" title="在Git项目中定义 .gitignore 文件"></a>在Git项目中定义 .gitignore 文件</h3><p>这种方式通过在项目的某个文件夹下定义 .gitignore 文件，在该文件中定义相应的忽略规则，来管理当前文件夹下的文件的Git提交行为。</p>
+<p>.gitignore 文件是可以提交到共有仓库中，这就为该项目下的所有开发者都共享一套定义好的忽略规则。</p>
+<p>在 .gitingore 文件中，遵循相应的语法，在每一行指定一个忽略规则。如：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*.log</span><br><span class="line">*.temp</span><br><span class="line">/vendor</span><br></pre></td></tr></table></figure>
 
-<p><img src="1.jpg" alt><br>可以看到在当前文件夹里面会生成隐藏文件夹 .git，表示当前文件夹是一个git仓库</p>
-<h2 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">add</span> origin http<span class="variable">s:</span>//github.<span class="keyword">com</span>/Tkzccsk/changsk.git</span><br></pre></td></tr></table></figure>
+<h3 id="在Git项目的设置中指定排除文件"><a href="#在Git项目的设置中指定排除文件" class="headerlink" title="在Git项目的设置中指定排除文件"></a>在Git项目的设置中指定排除文件</h3><p>这种方式只是临时指定该项目的行为，需要编辑当前项目下的 .git/info/exclude 文件，然后将需要忽略提交的文件写入其中。</p>
+<p>需要注意的是，这种方式指定的忽略文件的根目录是项目根目录。</p>
+<h3 id="定义Git全局的-gitignore-文件"><a href="#定义Git全局的-gitignore-文件" class="headerlink" title="定义Git全局的 .gitignore 文件"></a>定义Git全局的 .gitignore 文件</h3><p>除了可以在项目中定义 .gitignore 文件外，还可以设置全局的 git .gitignore 文件来管理所有Git项目的行为。这种方式在不同的项目开发者之间是不共享的，是属于项目之上Git应用级别的行为。</p>
+<p>这种方式也需要创建相应的 .gitignore 文件，可以放在任意位置。然后在使用以下命令配置Git：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global core.excludesfile ~/.gitignore</span><br></pre></td></tr></table></figure>
 
-<p><a href="https://github.com/Tkzccsk/changsk.git" target="_blank" rel="noopener">https://github.com/Tkzccsk/changsk.git</a> 是博客仓库的地址，获取方式是登录GitHub，找到自己的博客的仓库。远程库的名字就是origin，这是Git默认的叫法，可以起其他名。</p>
-<p>查看远程仓库的名称</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git remote</span></span><br></pre></td></tr></table></figure>
+<h2 id="Git-忽略规则"><a href="#Git-忽略规则" class="headerlink" title="Git 忽略规则"></a>Git 忽略规则</h2><p>详细的忽略规则可以参考<a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">官方英文文档</a></p>
+<h3 id="Git-忽略规则优先级"><a href="#Git-忽略规则优先级" class="headerlink" title="Git 忽略规则优先级"></a>Git 忽略规则优先级</h3><p>在 .gitingore 文件中，每一行指定一个忽略规则，Git 检查忽略规则的时候有多个来源，它的优先级如下（由高到低）：</p>
+<ul>
+<li>从命令行中读取可用的忽略规则</li>
+<li>当前目录定义的规则</li>
+<li>父级目录定义的规则，依次地推</li>
+<li>$GIT_DIR/info/exclude 文件中定义的规则</li>
+<li>core.excludesfile中定义的全局规则</li>
+</ul>
+<h3 id="Git-忽略规则匹配语法"><a href="#Git-忽略规则匹配语法" class="headerlink" title="Git 忽略规则匹配语法"></a>Git 忽略规则匹配语法</h3><p>在 .gitignore 文件中，每一行的忽略规则的语法如下：</p>
+<ul>
+<li><code>空格</code>不匹配任意文件，可作为分隔符，可用反斜杠转义</li>
+<li><code># 开头</code>的模式标识注释，可以使用反斜杠进行转义</li>
+<li><code>! 开头</code>的模式标识否定，该文件将会再次被包含，<strong>如果排除了该文件的父级目录，则使用 ! 也不会再次被包含</strong>。可以使用反斜杠进行转义</li>
+<li><code>/ 结束</code>的模式只匹配文件夹以及在该文件夹路径下的内容，但是不匹配该文件</li>
+<li><code>/ 开始</code>的模式匹配项目跟目录</li>
+<li>如果一个模式不包含斜杠，则它匹配相对于当前 .gitignore 文件路径的内容，如果该模式不在 .gitignore 文件中，则相对于项目根目录</li>
+<li><code>**</code>匹配多级目录，可在开始，中间，结束</li>
+<li><code>?</code>通用匹配单个字符</li>
+<li><code>[]</code>通用匹配单个字符列表</li>
+</ul>
+<h3 id="常用匹配示例："><a href="#常用匹配示例：" class="headerlink" title="常用匹配示例："></a>常用匹配示例：</h3><ul>
+<li>bin/: 忽略当前路径下的bin文件夹，该文件夹下的所有内容都会被忽略，不忽略 bin 文件</li>
+<li>/bin: 忽略根目录下的bin文件</li>
+<li>/*.c: 忽略 cat.c，不忽略 build/cat.c</li>
+<li>debug/*.obj: 忽略 debug/io.obj，不忽略 debug/common/io.obj 和 tools/debug/io.obj</li>
+<li>**/foo: 忽略/foo, a/foo, a/b/foo等</li>
+<li>a/**/b: 忽略a/b, a/x/b, a/x/y/b等</li>
+<li>!/bin/run.sh: 不忽略 bin 目录下的 run.sh 文件</li>
+<li>*.log: 忽略所有 .log 文件</li>
+<li>config.php: 忽略当前路径的 config.php 文件</li>
+</ul>
+<h2 id="gitignore规则不生效"><a href="#gitignore规则不生效" class="headerlink" title=".gitignore规则不生效"></a>.gitignore规则不生效</h2><p>.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。</p>
+<p>解决方法就是先把本地缓存删除（改变成未track状态），然后再提交:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached .</span><br><span class="line">git <span class="keyword">add</span><span class="bash"> .</span></span><br><span class="line">git commit -m <span class="string">'update .gitignore'</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="2.jpg" alt></p>
-<h2 id="下载远程仓库"><a href="#下载远程仓库" class="headerlink" title="下载远程仓库"></a>下载远程仓库</h2><p>将GitHub上的博客仓库完全下载下来</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin <span class="keyword">master</span> <span class="title"># 将远程仓库 origin</span> 的 <span class="keyword">master</span> <span class="title">分支 pull</span> 到本地仓库</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h2><p>创建并切换到一个新分支（原来的分支名为master），输入命令：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -<span class="selector-tag">b</span> changsk</span><br></pre></td></tr></table></figure>
-
-<p>changsk 为新分支名<br>上述命令相当于两条命令</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">branch </span>changsk <span class="comment"># 创建分支</span></span><br><span class="line">git checkout changsk <span class="comment"># 切换分支</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="上传本地hexo源文件到github博客仓库的changsk分支"><a href="#上传本地hexo源文件到github博客仓库的changsk分支" class="headerlink" title="上传本地hexo源文件到github博客仓库的changsk分支"></a>上传本地hexo源文件到github博客仓库的changsk分支</h2><p>这样就在我们的博客仓库中新建了一个名为changsk的分支，接下来把生成的.git文件复制到本地 hexo 仓库中去，现在changsk_backup就没有用了，可以删了。<br>接下来我们把 Hexo 本地博客仓库源文件中上传到GitHub的博客仓库的changsk分支中。</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">add </span>.</span><br><span class="line"><span class="symbol">git</span> commit -m <span class="string">"backup"</span></span><br><span class="line"><span class="symbol">git</span> <span class="keyword">push </span>origin changsk</span><br></pre></td></tr></table></figure>
-
-<p>git add . ： 使用它会把工作时的所有变化提交到<strong>暂存区</strong>，包括文件内容修改(modified)以及新文件(new)，但<strong>不包括被删除的文件</strong><br>git commit -m “backup” ： 主要是将暂存区里的改动给提交到本地的版本库。-m 表示使用消息参数， “backup” 为 -m 的内容，用来表示这次提交的简要说明。<br>git push origin changsk ： 将本地仓库的代码推送到changsk分支。</p>
-<p>进入到GitHub的博客仓库中，可以发现出现了一个新的分支changsk，并且里面是我们的博客原件。<br>最好在上传备份之前写一份README.md 文件，作为一项说明（因为这是GitHub建议的）。<br>通过以上方式，我们就完成了备份啦，下一次更新了博客，首先执行</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="meta">&amp; hexo d -g</span></span><br></pre></td></tr></table></figure>
-
-<h6 id="注意：部署本地-Hexo-到-github-用的是-master-分支-config-yml中的声明"><a href="#注意：部署本地-Hexo-到-github-用的是-master-分支-config-yml中的声明" class="headerlink" title="注意：部署本地 Hexo 到 github 用的是 master 分支(__config.yml中的声明)"></a>注意：部署本地 Hexo 到 github 用的是 master 分支(__config.yml中的声明)</h6><p>生成及部署hexo，然后执行</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">add </span>.</span><br><span class="line"><span class="symbol">git</span> commit -m <span class="string">"backup"</span></span><br><span class="line"><span class="symbol">git</span> <span class="keyword">push </span>origin changsk</span><br></pre></td></tr></table></figure>
-
-<p>进行本地 Hexo 源文件的备份。<br>参考 ：<a href="https://blog.csdn.net/qq_34229391/article/details/82251852" target="_blank" rel="noopener">https://blog.csdn.net/qq_34229391/article/details/82251852</a></p>
+<blockquote>
+<p>作者：王伟desire<br>链接：<a href="https://www.jianshu.com/p/74bd0ceb6182" target="_blank" rel="noopener">https://www.jianshu.com/p/74bd0ceb6182</a><br>来源：简书<br>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
+</blockquote>
 
       
     </div>
@@ -608,7 +621,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="http://changsk.top/2019/06/12/git-command/" title="git 创建分支">http://changsk.top/2019/06/12/git-command/</a>
+    <a href="http://changsk.top/2019/06/15/gitignore/" title="gitignore">http://changsk.top/2019/06/15/gitignore/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -655,8 +668,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/12/changes-not-staged-for-commit/" rel="next" title="changes not staged for commit">
-                <i class="fa fa-chevron-left"></i> changes not staged for commit
+              <a href="/2019/06/15/js-404/" rel="next" title="js css 404">
+                <i class="fa fa-chevron-left"></i> js css 404
               </a>
             
           </div>
@@ -664,10 +677,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/15/js-404/" rel="prev" title="js css 404">
-                js css 404 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -874,7 +883,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#新建-git-仓库"><span class="nav-number">1.</span> <span class="nav-text">新建 git 仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加远程仓库"><span class="nav-number">2.</span> <span class="nav-text">添加远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载远程仓库"><span class="nav-number">3.</span> <span class="nav-text">下载远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建新分支"><span class="nav-number">4.</span> <span class="nav-text">创建新分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传本地hexo源文件到github博客仓库的changsk分支"><span class="nav-number">5.</span> <span class="nav-text">上传本地hexo源文件到github博客仓库的changsk分支</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#注意：部署本地-Hexo-到-github-用的是-master-分支-config-yml中的声明"><span class="nav-number">5.0.0.0.1.</span> <span class="nav-text">注意：部署本地 Hexo 到 github 用的是 master 分支(__config.yml中的声明)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#规则-作用"><span class="nav-number">1.1.</span> <span class="nav-text">规则                          作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置语法"><span class="nav-number">1.2.</span> <span class="nav-text">配置语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-忽略文件提交的方法"><span class="nav-number">2.</span> <span class="nav-text">Git 忽略文件提交的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在Git项目中定义-gitignore-文件"><span class="nav-number">2.1.</span> <span class="nav-text">在Git项目中定义 .gitignore 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在Git项目的设置中指定排除文件"><span class="nav-number">2.2.</span> <span class="nav-text">在Git项目的设置中指定排除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义Git全局的-gitignore-文件"><span class="nav-number">2.3.</span> <span class="nav-text">定义Git全局的 .gitignore 文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-忽略规则"><span class="nav-number">3.</span> <span class="nav-text">Git 忽略规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-忽略规则优先级"><span class="nav-number">3.1.</span> <span class="nav-text">Git 忽略规则优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-忽略规则匹配语法"><span class="nav-number">3.2.</span> <span class="nav-text">Git 忽略规则匹配语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用匹配示例："><span class="nav-number">3.3.</span> <span class="nav-text">常用匹配示例：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitignore规则不生效"><span class="nav-number">4.</span> <span class="nav-text">.gitignore规则不生效</span></a></li></ol></div>
             
 
           </div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://changsk.top/"/>
-  <updated>2019-06-15T07:11:29.750Z</updated>
+  <updated>2019-06-15T10:46:38.559Z</updated>
   <id>http://changsk.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>gitignore</title>
+    <link href="http://changsk.top/2019/06/15/gitignore/"/>
+    <id>http://changsk.top/2019/06/15/gitignore/</id>
+    <published>2019-06-15T10:23:05.000Z</published>
+    <updated>2019-06-15T10:46:38.559Z</updated>
+    
+    <content type="html"><![CDATA[<p>下面文章参考自：<a href="https://www.jianshu.com/p/74bd0ceb6182" target="_blank" rel="noopener">Git 忽略提交 .gitignore</a></p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在使用Git的过程中，有的文件比如日志，临时文件，编译的中间文件等不需要提交到代码仓库，这时就要设置相应的忽略规则，来忽略这些文件的提交。</p><a id="more"></a><h3 id="规则-作用"><a href="#规则-作用" class="headerlink" title="规则                          作用"></a>规则                          作用</h3><p> /mtk                         过滤整个文件夹<br> *.zip                         过滤所有.zip文件<br> /mtk/do.c                过滤某个具体文件<br> !/mtk/one.txt         追踪（不过滤）某个具体文件</p><ul><li>注意：如果你创建.gitignore文件之前就push了某一文件，那么即使你在.gitignore文件中写入过滤该文件的规则，该规则也不会起作用，git仍然会对该文件进行版本管理。</li></ul><h3 id="配置语法"><a href="#配置语法" class="headerlink" title="配置语法"></a>配置语法</h3><p>以斜杠“/”开头表示目录；<br> 以星号“*”通配多个字符；<br> 以问号“?”通配单个字符<br> 以方括号“[]”包含单个字符的匹配列表；<br> 以叹号“!”表示不忽略(跟踪)匹配到的文件或目录。</p><ul><li>注意： git 对于 .gitignore配置文件是按行从上到下进行规则匹配的</li></ul><h2 id="Git-忽略文件提交的方法"><a href="#Git-忽略文件提交的方法" class="headerlink" title="Git 忽略文件提交的方法"></a>Git 忽略文件提交的方法</h2><p>有三种方法可以实现忽略Git中不想提交的文件。</p><h3 id="在Git项目中定义-gitignore-文件"><a href="#在Git项目中定义-gitignore-文件" class="headerlink" title="在Git项目中定义 .gitignore 文件"></a>在Git项目中定义 .gitignore 文件</h3><p>这种方式通过在项目的某个文件夹下定义 .gitignore 文件，在该文件中定义相应的忽略规则，来管理当前文件夹下的文件的Git提交行为。</p><p>.gitignore 文件是可以提交到共有仓库中，这就为该项目下的所有开发者都共享一套定义好的忽略规则。</p><p>在 .gitingore 文件中，遵循相应的语法，在每一行指定一个忽略规则。如：</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*.log</span><br><span class="line">*.temp</span><br><span class="line">/vendor</span><br></pre></td></tr></table></figure><h3 id="在Git项目的设置中指定排除文件"><a href="#在Git项目的设置中指定排除文件" class="headerlink" title="在Git项目的设置中指定排除文件"></a>在Git项目的设置中指定排除文件</h3><p>这种方式只是临时指定该项目的行为，需要编辑当前项目下的 .git/info/exclude 文件，然后将需要忽略提交的文件写入其中。</p><p>需要注意的是，这种方式指定的忽略文件的根目录是项目根目录。</p><h3 id="定义Git全局的-gitignore-文件"><a href="#定义Git全局的-gitignore-文件" class="headerlink" title="定义Git全局的 .gitignore 文件"></a>定义Git全局的 .gitignore 文件</h3><p>除了可以在项目中定义 .gitignore 文件外，还可以设置全局的 git .gitignore 文件来管理所有Git项目的行为。这种方式在不同的项目开发者之间是不共享的，是属于项目之上Git应用级别的行为。</p><p>这种方式也需要创建相应的 .gitignore 文件，可以放在任意位置。然后在使用以下命令配置Git：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global core.excludesfile ~/.gitignore</span><br></pre></td></tr></table></figure><h2 id="Git-忽略规则"><a href="#Git-忽略规则" class="headerlink" title="Git 忽略规则"></a>Git 忽略规则</h2><p>详细的忽略规则可以参考<a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">官方英文文档</a></p><h3 id="Git-忽略规则优先级"><a href="#Git-忽略规则优先级" class="headerlink" title="Git 忽略规则优先级"></a>Git 忽略规则优先级</h3><p>在 .gitingore 文件中，每一行指定一个忽略规则，Git 检查忽略规则的时候有多个来源，它的优先级如下（由高到低）：</p><ul><li>从命令行中读取可用的忽略规则</li><li>当前目录定义的规则</li><li>父级目录定义的规则，依次地推</li><li>$GIT_DIR/info/exclude 文件中定义的规则</li><li>core.excludesfile中定义的全局规则</li></ul><h3 id="Git-忽略规则匹配语法"><a href="#Git-忽略规则匹配语法" class="headerlink" title="Git 忽略规则匹配语法"></a>Git 忽略规则匹配语法</h3><p>在 .gitignore 文件中，每一行的忽略规则的语法如下：</p><ul><li><code>空格</code>不匹配任意文件，可作为分隔符，可用反斜杠转义</li><li><code># 开头</code>的模式标识注释，可以使用反斜杠进行转义</li><li><code>! 开头</code>的模式标识否定，该文件将会再次被包含，<strong>如果排除了该文件的父级目录，则使用 ! 也不会再次被包含</strong>。可以使用反斜杠进行转义</li><li><code>/ 结束</code>的模式只匹配文件夹以及在该文件夹路径下的内容，但是不匹配该文件</li><li><code>/ 开始</code>的模式匹配项目跟目录</li><li>如果一个模式不包含斜杠，则它匹配相对于当前 .gitignore 文件路径的内容，如果该模式不在 .gitignore 文件中，则相对于项目根目录</li><li><code>**</code>匹配多级目录，可在开始，中间，结束</li><li><code>?</code>通用匹配单个字符</li><li><code>[]</code>通用匹配单个字符列表</li></ul><h3 id="常用匹配示例："><a href="#常用匹配示例：" class="headerlink" title="常用匹配示例："></a>常用匹配示例：</h3><ul><li>bin/: 忽略当前路径下的bin文件夹，该文件夹下的所有内容都会被忽略，不忽略 bin 文件</li><li>/bin: 忽略根目录下的bin文件</li><li>/*.c: 忽略 cat.c，不忽略 build/cat.c</li><li>debug/*.obj: 忽略 debug/io.obj，不忽略 debug/common/io.obj 和 tools/debug/io.obj</li><li>**/foo: 忽略/foo, a/foo, a/b/foo等</li><li>a/**/b: 忽略a/b, a/x/b, a/x/y/b等</li><li>!/bin/run.sh: 不忽略 bin 目录下的 run.sh 文件</li><li>*.log: 忽略所有 .log 文件</li><li>config.php: 忽略当前路径的 config.php 文件</li></ul><h2 id="gitignore规则不生效"><a href="#gitignore规则不生效" class="headerlink" title=".gitignore规则不生效"></a>.gitignore规则不生效</h2><p>.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。</p><p>解决方法就是先把本地缓存删除（改变成未track状态），然后再提交:</p><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached .</span><br><span class="line">git <span class="keyword">add</span><span class="bash"> .</span></span><br><span class="line">git commit -m <span class="string">'update .gitignore'</span></span><br></pre></td></tr></table></figure><blockquote><p>作者：王伟desire<br>链接：<a href="https://www.jianshu.com/p/74bd0ceb6182" target="_blank" rel="noopener">https://www.jianshu.com/p/74bd0ceb6182</a><br>来源：简书<br>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下面文章参考自：&lt;a href=&quot;https://www.jianshu.com/p/74bd0ceb6182&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Git 忽略提交 .gitignore&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在使用Git的过程中，有的文件比如日志，临时文件，编译的中间文件等不需要提交到代码仓库，这时就要设置相应的忽略规则，来忽略这些文件的提交。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="git" scheme="http://changsk.top/categories/git/"/>
+    
+    
+      <category term="git" scheme="http://changsk.top/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>js css 404</title>

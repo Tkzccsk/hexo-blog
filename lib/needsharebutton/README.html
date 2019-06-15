@@ -1,0 +1,40 @@
+<p>update：已加上QQ空间，人人网，豆瓣的支持。</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>本来 V2MM 一直使用 <a href="https://github.com/revir/more-basic-share/">MoreBasicShare</a> 相安无事的，在将 <a href="https://github.com/revir/more-basic-share/">MoreBasicShare</a> 移植到 V2MM 的<a href="https://nodebb.tech/blog-comments2-bu-jin-jin-shi-yi-ge-bo-ke-ping-lun-xi-tong/">博客评论系统</a>的时候，发现 <a href="https://github.com/revir/more-basic-share/">MoreBasicShare</a> 有几点缺陷难以移植：</p>
+<ul>
+<li>代码结构不好，不方便扩展新的分享方式，其中用了大量的字符串拼接；</li>
+<li>依赖 jQuery, 而我们的博客评论系统是不依赖 jQuery 的；</li>
+</ul>
+<p>偶然发现一个老外写的纯 Javascript 的 <a href="https://github.com/DzmVasileusky/needShareButton">Need Share Button</a>, 效果非常好，于是就 Clone 了过来，扩展了一下，增加了很多国内的分享网站，做得更傻瓜易用了一些。</p>
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p>可以见 V2MM 上的分享按钮，此插件还包含一个 <a href="https://github.com/revir/need-more-share2/blob/master/demo/index.html">Demo</a> 页面，需把项目 clone 到本地展示。</p>
+<p><img src="https://github.com/revir/need-more-share2/raw/master/screenshot.png" alt="screenshot"></p>
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><p>有多种方式使用，最简单的方法，加载 js 和 css 后，创建一个 class 名为 <code>need-share-button</code> 的分享按钮就好了，其他什么都不用做。</p>
+<p>第一步：在网页里加载 <strong>needsharebutton.min.js</strong> 和 <strong>needsharebutton.min.css</strong>。</p>
+<pre><code class="markup">&lt;!-- needsharebutton Javascript file --&gt;
+&lt;script src=&quot;js/needsharebutton.min.js&quot;&gt;&lt;/script&gt;
+&lt;!-- needsharebutton CSS file --&gt;
+&lt;link href=&quot;css/needsharebutton.min.css&quot; rel=&quot;stylesheet&quot; /&gt;</code></pre>
+<p>第二步：创建一个<code>need-share-button</code>，插件会自动找到所有 <code>need-share-button</code>, 制作成分享按钮。</p>
+<pre><code class="markup">&lt;button  class=&quot;btn btn-default need-share-button&quot;&gt;Share&lt;/button&gt;</code></pre>
+<p>这样你会看到网页上的 Share Button 已经可以使用了， 还可以通过 <code>data-share-</code> 传参。</p>
+<p>第三步：如果需要使用别的名字，可以手动调用 <code>needShareButton</code> 函数，比如：</p>
+<pre><code class="javascript"><span class="keyword">new</span> needShareButton(<span class="built_in">document</span>.getElementById(<span class="string">'my-share-button'</span>));
+# or
+<span class="keyword">new</span> needShareButton(<span class="string">'#my-share-button'</span>);
+</code></pre>
+<h2 id="needShareButton-函数"><a href="#needShareButton-函数" class="headerlink" title="needShareButton 函数"></a>needShareButton 函数</h2><p><code>needShareButton</code> 函数有两个参数：</p>
+<ol>
+<li>element, 可以是 Dom 节点，也可以是 CSS 选择器;</li>
+<li>options, 选项；</li>
+</ol>
+<h2 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h2><p>Options 可以通过参数传进去，也可以放在 DOM 节点里（加上 <code>data-share-</code> 前缀）。</p>
+<ol>
+<li>iconStyle： <code>default</code> or <code>box</code>；</li>
+<li>boxForm： <code>horizontal</code> or <code>vertical</code>;</li>
+<li>position: <code>bottomCenter</code>, <code>top / middle / bottom + Left / Center / Right</code>;</li>
+<li>networks: 默认： <code>&#39;Weibo,Wechat,Douban,QQZone,Twitter,Pinterest,Facebook,GooglePlus,Reddit,Linkedin,Tumblr,Evernote&#39;</code>; 注意，默认没有 <code>RenRen</code>，如果需要分享到人人网，在 networks 参数里加上 <code>RenRen</code>;</li>
+<li>url: 默认： <code>location.href</code>;</li>
+<li>title: 默认：<code>document.title</code>;</li>
+<li>image: 默认从 <code>meta[property=&quot;og:image&quot;]</code> 或 <code>meta[name=&quot;twitter:image&quot;]</code> 取值；</li>
+<li>description: 默认从 <code>meta[property=&quot;og:description&quot;]</code> 或 <code>meta[name=&quot;twitter:description&quot;]</code> 取值；</li>
+</ol>
+<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p>感谢<a href="https://github.com/DzmVasileusky/needShareButton">DzmVasileusky</a>，此项目基于他的作品改编。</p>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>changsk&#39;s blogs</title>
+  
+  <subtitle>chang.sk@foxmail.com</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://changsk.top/"/>
+  <updated>2019-06-15T07:11:29.750Z</updated>
+  <id>http://changsk.top/</id>
+  
+  <author>
+    <name>changsk</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>js css 404</title>
+    <link href="http://changsk.top/2019/06/15/js-404/"/>
+    <id>http://changsk.top/2019/06/15/js-404/</id>
+    <published>2019-06-15T06:02:41.000Z</published>
+    <updated>2019-06-15T07:11:29.750Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>本地调试Hexo的过程中，无意间打开google浏览器的开发者模式，然后发现很多有关 <strong>css</strong>、<strong>js</strong>404的错误：</p><a id="more"></a><p><img src="1.jpg" alt></p><h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>首先打开Hexo所使用的主题所在目录（我用的是next6，点击<a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">这里</a>下载），依次进入source/lib目录下，发现并没有 canvas-nest等文件夹，所以也并没有canvas-nest.min.js等文件，问题锁定。<br><img src="2.jpg" alt></p><h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>打开Hexo所用主题所在目录，找到主题配置文件<strong>_config.yml</strong>，将其打开，然后搜索<strong>canvas_nest</strong>，结果如下图：<br><img src="3.jpg" alt></p><p><strong>canvas_nest</strong>下面 enable 属性为 true，说明开启了<strong>canvas_nest</strong>，但是并没有对应的lib支持，所以需要安装对应的lib。</p><h4 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h4><p>切换到Hexo主题根目录下，我的是：<strong>D:\work\hexo\changsk\themes\next6</strong>。</p><p>看上图，写明了lib的下载地址：<strong>Dependencies: <a href="https://github.com/theme-next/theme-next-canvas-nest" target="_blank" rel="noopener">https://github.com/theme-next/theme-next-canvas-nest</a></strong></p><p>只需下载即可，在这里利用 <strong>git clone</strong>，执行以下命令：</p><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone  <span class="symbol">https:</span>/<span class="regexp">/github.com/theme</span>-<span class="keyword">next</span>/theme-<span class="keyword">next</span>-canvas-nest source/<span class="class"><span class="keyword">lib</span>/<span class="title">canvas</span>-<span class="title">nest</span></span></span><br></pre></td></tr></table></figure><p><img src="4.jpg" alt><br><strong><em>note：source/lib/canvas-nest 表示下载的lib存放的位置，next6的lib资源文件都放在source/lib下，canvas-nest文件夹的名称要和报错信息里面文件夹名称一致，不然还是会报404错误，找不到该资源文件。</em></strong></p><p>当然也可以手动进行下载，然后放到正确的位置。<br>执行完成后，可以发现lib下面多了个文件夹，里面有前端所需要的<strong>canvas-nest.min.js</strong><br><img src="5.jpg" alt><br>然后执行</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo clean</span></span><br><span class="line"><span class="attribute">hexo g</span></span><br><span class="line"><span class="attribute">hexo s</span></span><br></pre></td></tr></table></figure><p>进行本地调试，发现<strong>canvas-nest.min.js 404</strong>错误已经消失，其他类似的错误都可以通过这种方式解决。</p><h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>执行<strong>git clone *<em>之后，下载目录下面会有 *</em>.git</strong>文件夹，<strong><em>最好把它删掉</em></strong>。</p><p>因为如果进行hexo源文件备份的话，会把整个hexo源文件push到github仓库，包括theme文件夹，因为theme文件夹/source/lib/<em>的一些lib是通过*</em>git clone<strong>的方式获取的。这种方式下载的lib会在文件夹下面生成</strong>.git<strong>。那么进行hexo备份的时候，会发现有多个</strong>.git**文件夹存在，就会报错，详情看<a href="http://localhost:4000/2019/06/12/changes-not-staged-for-commit/" target="_blank" rel="noopener">这里</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h3&gt;&lt;p&gt;本地调试Hexo的过程中，无意间打开google浏览器的开发者模式，然后发现很多有关 &lt;strong&gt;css&lt;/strong&gt;、&lt;strong&gt;js&lt;/strong&gt;404的错误：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="前端" scheme="http://changsk.top/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="404" scheme="http://changsk.top/tags/404/"/>
+    
+      <category term="css" scheme="http://changsk.top/tags/css/"/>
+    
+      <category term="js" scheme="http://changsk.top/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git 创建分支</title>
+    <link href="http://changsk.top/2019/06/12/git-command/"/>
+    <id>http://changsk.top/2019/06/12/git-command/</id>
+    <published>2019-06-12T06:57:14.000Z</published>
+    <updated>2019-06-15T07:13:23.842Z</updated>
+    
+    <content type="html"><![CDATA[<p>搭建好本地 Hexo ，然后链接到了 github pages，也绑定了域名<br><a href="http://changsk.top" title="我的个人网站">changsk.top</a> 。但是 github 博客仓库里面中的文件和本地文件不一样，有些差异，这是因为本地文件经 <strong>hexo g</strong> 命令生成静态页面后，然后经<strong>hexo d</strong> deploy（部署）到github上，所以github仓库是没有本地hexo源文件。如果某一天不小心把本地仓库文件删了，或者换了电脑等原因，致使hexo源文件丢失，那么会造成一定的损失。所以可以把本地 hexo 源文件也同步到 github 上面。方法是在原仓库另创建一个分支，专门用于同步本地 Hexo 源文件。</p><a id="more"></a><p>执行以下命令的前提：<br><strong>当前主机已经可以通过SSH连接到 github 博客仓库（即本机生成的SSH KEY放入到 github 博客仓库当中去）</strong></p><h2 id="新建-git-仓库"><a href="#新建-git-仓库" class="headerlink" title="新建 git 仓库"></a>新建 git 仓库</h2><p>首先新建一个文件夹，比如起名为 changsk_backup ，在此文件夹内打开Git Bash，输入命令：</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> init <span class="comment"># 在当前目录创建新的 Git 仓库</span></span><br></pre></td></tr></table></figure><p><img src="1.jpg" alt><br>可以看到在当前文件夹里面会生成隐藏文件夹 .git，表示当前文件夹是一个git仓库</p><h2 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">add</span> origin http<span class="variable">s:</span>//github.<span class="keyword">com</span>/Tkzccsk/changsk.git</span><br></pre></td></tr></table></figure><p><a href="https://github.com/Tkzccsk/changsk.git" target="_blank" rel="noopener">https://github.com/Tkzccsk/changsk.git</a> 是博客仓库的地址，获取方式是登录GitHub，找到自己的博客的仓库。远程库的名字就是origin，这是Git默认的叫法，可以起其他名。</p><p>查看远程仓库的名称</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git remote</span></span><br></pre></td></tr></table></figure><p><img src="2.jpg" alt></p><h2 id="下载远程仓库"><a href="#下载远程仓库" class="headerlink" title="下载远程仓库"></a>下载远程仓库</h2><p>将GitHub上的博客仓库完全下载下来</p><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin <span class="keyword">master</span> <span class="title"># 将远程仓库 origin</span> 的 <span class="keyword">master</span> <span class="title">分支 pull</span> 到本地仓库</span><br></pre></td></tr></table></figure><h2 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h2><p>创建并切换到一个新分支（原来的分支名为master），输入命令：</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -<span class="selector-tag">b</span> changsk</span><br></pre></td></tr></table></figure><p>changsk 为新分支名<br>上述命令相当于两条命令</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">branch </span>changsk <span class="comment"># 创建分支</span></span><br><span class="line">git checkout changsk <span class="comment"># 切换分支</span></span><br></pre></td></tr></table></figure><h2 id="上传本地hexo源文件到github博客仓库的changsk分支"><a href="#上传本地hexo源文件到github博客仓库的changsk分支" class="headerlink" title="上传本地hexo源文件到github博客仓库的changsk分支"></a>上传本地hexo源文件到github博客仓库的changsk分支</h2><p>这样就在我们的博客仓库中新建了一个名为changsk的分支，接下来把生成的.git文件复制到本地 hexo 仓库中去，现在changsk_backup就没有用了，可以删了。<br>接下来我们把 Hexo 本地博客仓库源文件中上传到GitHub的博客仓库的changsk分支中。</p><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">add </span>.</span><br><span class="line"><span class="symbol">git</span> commit -m <span class="string">"backup"</span></span><br><span class="line"><span class="symbol">git</span> <span class="keyword">push </span>origin changsk</span><br></pre></td></tr></table></figure><p>git add . ： 使用它会把工作时的所有变化提交到<strong>暂存区</strong>，包括文件内容修改(modified)以及新文件(new)，但<strong>不包括被删除的文件</strong><br>git commit -m “backup” ： 主要是将暂存区里的改动给提交到本地的版本库。-m 表示使用消息参数， “backup” 为 -m 的内容，用来表示这次提交的简要说明。<br>git push origin changsk ： 将本地仓库的代码推送到changsk分支。</p><p>进入到GitHub的博客仓库中，可以发现出现了一个新的分支changsk，并且里面是我们的博客原件。<br>最好在上传备份之前写一份README.md 文件，作为一项说明（因为这是GitHub建议的）。<br>通过以上方式，我们就完成了备份啦，下一次更新了博客，首先执行</p><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="meta">&amp; hexo d -g</span></span><br></pre></td></tr></table></figure><h6 id="注意：部署本地-Hexo-到-github-用的是-master-分支-config-yml中的声明"><a href="#注意：部署本地-Hexo-到-github-用的是-master-分支-config-yml中的声明" class="headerlink" title="注意：部署本地 Hexo 到 github 用的是 master 分支(__config.yml中的声明)"></a>注意：部署本地 Hexo 到 github 用的是 master 分支(__config.yml中的声明)</h6><p>生成及部署hexo，然后执行</p><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">add </span>.</span><br><span class="line"><span class="symbol">git</span> commit -m <span class="string">"backup"</span></span><br><span class="line"><span class="symbol">git</span> <span class="keyword">push </span>origin changsk</span><br></pre></td></tr></table></figure><p>进行本地 Hexo 源文件的备份。<br>参考 ：<a href="https://blog.csdn.net/qq_34229391/article/details/82251852" target="_blank" rel="noopener">https://blog.csdn.net/qq_34229391/article/details/82251852</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;搭建好本地 Hexo ，然后链接到了 github pages，也绑定了域名&lt;br&gt;&lt;a href=&quot;http://changsk.top&quot; title=&quot;我的个人网站&quot;&gt;changsk.top&lt;/a&gt; 。但是 github 博客仓库里面中的文件和本地文件不一样，有些差异，这是因为本地文件经 &lt;strong&gt;hexo g&lt;/strong&gt; 命令生成静态页面后，然后经&lt;strong&gt;hexo d&lt;/strong&gt; deploy（部署）到github上，所以github仓库是没有本地hexo源文件。如果某一天不小心把本地仓库文件删了，或者换了电脑等原因，致使hexo源文件丢失，那么会造成一定的损失。所以可以把本地 hexo 源文件也同步到 github 上面。方法是在原仓库另创建一个分支，专门用于同步本地 Hexo 源文件。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="git" scheme="http://changsk.top/categories/git/"/>
+    
+    
+      <category term="git" scheme="http://changsk.top/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>changes not staged for commit</title>
+    <link href="http://changsk.top/2019/06/12/changes-not-staged-for-commit/"/>
+    <id>http://changsk.top/2019/06/12/changes-not-staged-for-commit/</id>
+    <published>2019-06-12T04:43:42.000Z</published>
+    <updated>2019-06-15T07:12:37.201Z</updated>
+    
+    <content type="html"><![CDATA[<p>在使用 git 的过程中，要把当前文件夹下的内容 push 到 changsk 分支，先执行 </p><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">add</span><span class="bash"> .</span></span><br></pre></td></tr></table></figure><a id="more"></a><p><img src="1.jpg" alt><br>然后执行</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"backup"</span></span><br></pre></td></tr></table></figure><p><img src="2.jpg" alt><br>最后执行 push 操作，将当前本地 git 仓库提交到 origin 远程仓库的 changsk 分支</p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">push</span> origin changsk <span class="meta"># changsk 是我创建的一个分支</span></span><br></pre></td></tr></table></figure><p>然后就收到报错，报错信息如下：<br><img src="3.jpg" alt><br>大概意思是：</p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">更新（<span class="keyword">push</span>操作）被拒绝，因为github远程仓库changsk分支的有些内容在本地仓库没有。</span><br></pre></td></tr></table></figure><p>然后我想起了我昨天在 github 仓库 changsk 分支里面创建了一个 README.md，所以本地仓库是没有的，造成了远方仓库和本地仓库的不一致（精确来说是远方仓库有，但是本地仓库没有），所以 push 之前应该先把远程仓库的内容pull（拉取）到本地，然后才可以进行push。</p><p>所以先应该执行</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git pull origin changsk</span></span><br></pre></td></tr></table></figure><p>将远程仓库 origin 的 chagnsk 分支和当前本地 git 仓库进行合并，使它们保持一致<br><img src="4.jpg" alt><br>然后执行</p><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">add</span><span class="bash"> .</span></span><br></pre></td></tr></table></figure><p>然后执行</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"backup"</span></span><br></pre></td></tr></table></figure><p>又收到一个不同的错误<br><img src="5.jpg" alt><br>经过网上查阅，大部分人都说是因为没有执行 <strong>git add .</strong>，但我显然不是这个问题。<br>原因是我要 push 的本地仓库里面还有另外的clone过来的git仓库，我查看文件夹，就像报错信息里面说的， themes/next（Hexo 的一个主题，也是本网站使用的主题） 里面是我 git clone 下来的一个仓库。<br>解决办法是删除 themes/next 文件夹里面的隐藏文件夹 .git<br>然后再执行就没有问题了。</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"backup"</span></span><br></pre></td></tr></table></figure><p><img src="6.jpg" alt><br>最后执行 push 操作</p><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> changsk</span><br></pre></td></tr></table></figure><p><img src="7.jpg" alt><br>问题解决。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在使用 git 的过程中，要把当前文件夹下的内容 push 到 changsk 分支，先执行 &lt;/p&gt;
+&lt;figure class=&quot;highlight dockerfile&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git &lt;span class=&quot;keyword&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; .&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="git" scheme="http://changsk.top/categories/git/"/>
+    
+    
+      <category term="git" scheme="http://changsk.top/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CRLF CR LF</title>
+    <link href="http://changsk.top/2019/06/12/CRLF-CR-LF/"/>
+    <id>http://changsk.top/2019/06/12/CRLF-CR-LF/</id>
+    <published>2019-06-12T02:07:36.000Z</published>
+    <updated>2019-06-15T07:12:56.605Z</updated>
+    
+    <content type="html"><![CDATA[<p>deploy 本地 Hexo 到 github pages 的时候，遇到了两陌生的单词：<strong>LF</strong>和<strong>CRLF</strong> ，本着不求甚解的态度，去网上找了相关的资料，特此记录，以便日后查看。其实前几天在安装 Hexo 的过程中有过一个设置<strong>LF</strong>和<strong>CRLF</strong> 的转换的选项，当时没在意。</p><a id="more"></a><p><img src="1.jpg" alt="CRLF-CR-LF"></p><h4 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h4><p><strong>CR</strong>：Carriage Return，对应ASCII中转义字符\r，表示<strong>回车</strong><br><strong>LF</strong>：Linefeed，对应ASCII中转义字符\n，表示<strong>换行</strong><br><strong>CRLF</strong>：Carriage Return &amp; Linefeed，\r\n，表示<strong>回车并换行</strong></p><ul><li>Windows操作系统采用<strong>两个字符</strong>来进行换行，即CRLF</li><li>Unix/Linux/Mac OS X操作系统采用单个字符LF来进行换行</li></ul><h4 id="野史"><a href="#野史" class="headerlink" title="野史"></a>野史</h4><pre><code>据野史记载，在很久以前的机械打字机时代，CR和LF分别具有不同的作用：LF会将打印纸张上移一行位置，但是保持当前打字的水平位置不变；CR则会将“Carriage”（打字机上的滚动托架）滚回到打印纸张的最左侧，但是保持当前打字的垂直位置不变，即还是在同一行。当CR和LF组合使用时，则会将打印纸张上移一行，且下一个打字位置将回到该行的最左侧，也就是我们今天所理解的换行操作。随着时间的推移，机械打字机渐渐地退出了历史舞台，当初的纸张变成了今天的显示器，打字机的按键也演变为了如今的键盘。在操作系统出现的年代，受限于内存和软盘空间的不足，一些操作系统的设计者决定采用单个字符来表示换行符，如Unix的LF、MacIntosh的CR。他们的意图都是为了进行换行操作，只是当初并没有一个国际标准，所以才有这样字符上的不同。</code></pre><p>参考：<a href="https://www.jianshu.com/p/b03ad01acd69" target="_blank" rel="noopener">https://www.jianshu.com/p/b03ad01acd69</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;deploy 本地 Hexo 到 github pages 的时候，遇到了两陌生的单词：&lt;strong&gt;LF&lt;/strong&gt;和&lt;strong&gt;CRLF&lt;/strong&gt; ，本着不求甚解的态度，去网上找了相关的资料，特此记录，以便日后查看。其实前几天在安装 Hexo 的过程中有过一个设置&lt;strong&gt;LF&lt;/strong&gt;和&lt;strong&gt;CRLF&lt;/strong&gt; 的转换的选项，当时没在意。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="操作系统" scheme="http://changsk.top/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="操作系统" scheme="http://changsk.top/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Error JAVA_HOME is incorrectly set</title>
+    <link href="http://changsk.top/2019/06/11/Error_JAVA_HOME_is%20_incorrectly_set/"/>
+    <id>http://changsk.top/2019/06/11/Error_JAVA_HOME_is _incorrectly_set/</id>
+    <published>2019-06-11T03:43:56.000Z</published>
+    <updated>2019-06-15T07:13:13.125Z</updated>
+    
+    <content type="html"><![CDATA[<p>在安装、调试、运行Hexo的过程中，出现了以下错误：</p><p><strong>Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd</strong></p><p>然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的：</p><a id="more"></a><p><img src="1.jpg" alt></p><p>然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量：</p><p><img src="2.jpg" alt></p><p>发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？<br>经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图：</p><p><img src="3.jpg" alt></p><p>或者也可以将jdk装到其他不存在空格的目录下。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在安装、调试、运行Hexo的过程中，出现了以下错误：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的：&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>hexo 的常用命令</title>
+    <link href="http://changsk.top/2019/06/11/hexo-command/"/>
+    <id>http://changsk.top/2019/06/11/hexo-command/</id>
+    <published>2019-06-11T03:43:56.000Z</published>
+    <updated>2019-06-15T07:15:10.313Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="常用-hexo-命令"><a href="#常用-hexo-命令" class="headerlink" title="常用 hexo 命令"></a>常用 hexo 命令</h2><p>hexo new “postName” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo generate #生成静态页面至public目录<br>hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）<br>hexo deploy #将.deploy目录部署到GitHub<br>hexo help  #查看帮助<br>hexo version  #查看Hexo的版本</p><a id="more"></a><h2 id="缩写"><a href="#缩写" class="headerlink" title="缩写"></a>缩写</h2><p>hexo n == hexo new<br>hexo g == hexo generate<br>hexo s == hexo server<br>hexo d == hexo deploy</p><h2 id="组合命令："><a href="#组合命令：" class="headerlink" title="组合命令："></a>组合命令：</h2><p>hexo s -g #生成并本地预览<br>hexo d -g #生成并上传<br>hexo clear # 删除无用 tags 和 categories<br>hexo clean &amp; hexo d -g # 清除缓存 生成静态页面并发布</p><h2 id="给文章添加标签和分类"><a href="#给文章添加标签和分类" class="headerlink" title="给文章添加标签和分类"></a>给文章添加标签和分类</h2><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: hexo 的常用命令</span><br><span class="line">date: 2019<span class="string">-06</span><span class="string">-11</span> 11:43:56</span><br><span class="line"><span class="keyword">tags:</span> </span><br><span class="line">- hexo # 文章标签</span><br><span class="line">- aaa</span><br><span class="line">- bbb</span><br><span class="line">categories: hexo # 该文章类别为 categories\hexo</span><br></pre></td></tr></table></figure><p><strong>效果图：</strong><br><img src="1.jpg" alt="文章标签"><br><img src="2.jpg" alt="文章类别"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;常用-hexo-命令&quot;&gt;&lt;a href=&quot;#常用-hexo-命令&quot; class=&quot;headerlink&quot; title=&quot;常用 hexo 命令&quot;&gt;&lt;/a&gt;常用 hexo 命令&lt;/h2&gt;&lt;p&gt;hexo new “postName” #新建文章&lt;br&gt;hexo new page “pageName” #新建页面&lt;br&gt;hexo generate #生成静态页面至public目录&lt;br&gt;hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）&lt;br&gt;hexo deploy #将.deploy目录部署到GitHub&lt;br&gt;hexo help  #查看帮助&lt;br&gt;hexo version  #查看Hexo的版本&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://changsk.top/categories/hexo/"/>
+    
+    
+      <category term="hexo" scheme="http://changsk.top/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://changsk.top/2019/06/10/hello-world/"/>
+    <id>http://changsk.top/2019/06/10/hello-world/</id>
+    <published>2019-06-10T03:00:00.000Z</published>
+    <updated>2019-06-15T07:13:32.343Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><a id="more"></a><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://changsk.top/categories/hexo/"/>
+    
+    
+      <category term="hexo" scheme="http://changsk.top/tags/hexo/"/>
+    
+  </entry>
+  
+</feed>

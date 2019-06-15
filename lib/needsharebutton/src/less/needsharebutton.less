@@ -1,0 +1,398 @@
+/***********************************************
+  needShareButton
+  - Version 1.0.0
+  - Copyright 2015 Dzmitry Vasileuski
+  - Licensed under MIT (http://opensource.org/licenses/MIT)
+***********************************************/
+
+/* Social icons font
+***********************************************/
+
+@import url("fontello-embedded.css");
+
+.need-share-button {
+  position: relative;  // The share button position must be relative.
+}
+
+.need-share-button-opened {
+  position: relative;
+
+  img.need-share-wechat-code-image {
+    // width: auto;
+    max-width: 150px;
+    display: block;
+    margin: 5px auto;
+  }
+}
+
+@elemWidth: 50px;
+
+.need-share-button_dropdown {
+  position: absolute;
+  width: @elemWidth*6; // change it to show more elements in row @elemWidth*n
+  z-index: 10;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 4px;
+
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(.1);
+  // transition: opacity .25s ease-in;
+  transition: .3s;
+
+  font-size: 16px;
+
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+
+  white-space: normal;  // auto new line for inline-block link buttons.
+
+  .need-share-button-opened & {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.need-share-button_dropdown-box-vertical,
+.need-share-button_dropdown-box-horizontal {
+  border-radius: 0;
+}
+
+.need-share-button_dropdown-box-vertical {
+  width: @elemWidth;
+}
+
+.need-share-button_dropdown-box-horizontal {
+  width: auto;
+  white-space: nowrap;
+}
+
+.need-share-button_link {
+  display: inline-block;
+  width: @elemWidth;
+  height: @elemWidth;
+  line-height: @elemWidth;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    transition: .3s;
+    opacity: .7;
+  }
+}
+
+/* Dropdown position
+***********************************************/
+@dropdownOffset: 10px;
+
+.need-share-button_dropdown-top-left {
+  bottom: 100%;
+  right: 100%;
+  margin-right: @dropdownOffset;
+  margin-bottom: @dropdownOffset;
+}
+
+.need-share-button_dropdown-top-right {
+  bottom: 100%;
+  left: 100%;
+  margin-left: @dropdownOffset;
+  margin-bottom: @dropdownOffset;
+}
+
+.need-share-button_dropdown-top-center {
+  bottom: 100%;
+  left: 50%;
+  margin-bottom: @dropdownOffset;
+}
+
+.need-share-button_dropdown-middle-left {
+  top: 50%;
+  right: 100%;
+  margin-right: @dropdownOffset;
+}
+
+.need-share-button_dropdown-middle-right {
+  top: 50%;
+  left: 100%;
+  margin-left: @dropdownOffset;
+}
+
+.need-share-button_dropdown-bottom-left {
+  top: 100%;
+  right: 100%;
+  margin-right: @dropdownOffset;
+  margin-top: @dropdownOffset;
+}
+
+.need-share-button_dropdown-bottom-right {
+  top: 100%;
+  left: 100%;
+  margin-left: @dropdownOffset;
+  margin-top: @dropdownOffset;
+}
+
+.need-share-button_dropdown-bottom-center {
+  top: 100%;
+  left: 50%;
+  margin-top: @dropdownOffset;
+}
+
+
+/* Default theme
+***********************************************/
+.need-share-button-default {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    color: #333;
+    background-color: #fff;
+}
+
+
+/* Network buttons
+***********************************************/
+.need-share-button_wechat {
+  color: #a2dc30;
+
+  &.need-share-button_link-box {
+    background: #a2dc30;
+    color: #fff;
+  }
+}
+.need-share-button_weibo {
+  color: #d52b2b;
+
+  &.need-share-button_link-box {
+    background: #d52b2b;
+    color: #fff;
+  }
+}
+.need-share-button_douban {
+  color: #072;
+
+  &:before {
+    content: '豆';
+  }
+
+  &.need-share-button_link-box {
+    background: #072;
+    color: #fff;
+  }
+}
+.need-share-button_qqzone {
+  color: #ffce00;
+
+  &:before {
+    content: '\f1d6';
+  }
+
+  &.need-share-button_link-box {
+    background: #ffce00;
+    color: #fff;
+  }
+}
+.need-share-button_renren {
+  color: #207cc5;
+
+  &.need-share-button_link-box {
+    background: #207cc5;
+    color: #fff;
+  }
+}
+
+.need-share-button_mailto {
+  color: #EFBE00;
+
+  &:before {
+    content: '\e811';
+  }
+
+  &.need-share-button_link-box {
+    background: #EFBE00;
+    color: #fff;
+  }
+}
+.need-share-button_twitter {
+  color: #00ACEC;
+
+  &.need-share-button_link-box {
+    background: #00ACEC;
+    color: #fff;
+  }
+}
+.need-share-button_pinterest {
+  color: #CD2027;
+
+  &.need-share-button_link-box {
+    background: #CD2027;
+    color: #fff;
+  }
+}
+.need-share-button_facebook {
+  color: #3B5998;
+
+  &.need-share-button_link-box {
+    background: #3B5998;
+    color: #fff;
+  }
+}
+.need-share-button_googleplus {
+  color: #D44132;
+
+  &.need-share-button_link-box {
+    background: #D44132;
+    color: #fff;
+  }
+}
+.need-share-button_reddit {
+  color: #000000;
+
+  &.need-share-button_link-box {
+    background: #000000;
+    color: #fff;
+  }
+}
+.need-share-button_delicious {
+  color: #000000;
+
+  &.need-share-button_link-box {
+    background: #000000;
+    color: #fff;
+  }
+}
+.need-share-button_tapiture {
+  color: #30547D;
+
+  &.need-share-button_link-box {
+    background: #30547D;
+    color: #fff;
+  }
+}
+.need-share-button_stumbleupon {
+  color: #F04E23;
+
+  &.need-share-button_link-box {
+    background: #F04E23;
+    color: #fff;
+  }
+}
+.need-share-button_linkedin {
+  color: #0085AF;
+
+  &.need-share-button_link-box {
+    background: #0085AF;
+    color: #fff;
+  }
+}
+.need-share-button_slashdot {
+  color: #026664;
+
+  &.need-share-button_link-box {
+    background: #026664;
+    color: #fff;
+  }
+}
+.need-share-button_technorati {
+  color: #49AE47;
+
+  &.need-share-button_link-box {
+    background: #49AE47;
+    color: #fff;
+  }
+}
+.need-share-button_posterous {
+  color: #795D31;
+
+  &.need-share-button_link-box {
+    background: #795D31;
+    color: #fff;
+  }
+}
+.need-share-button_tumblr {
+  color: #34465D;
+
+  &.need-share-button_link-box {
+    background: #34465D;
+    color: #fff;
+  }
+}
+.need-share-button_googlebookmarks {
+  color: #FDE331;
+
+  &.need-share-button_link-box {
+    background: #FDE331;
+    color: #fff;
+  }
+}
+.need-share-button_newsvine {
+  color: #03652C;
+
+  &.need-share-button_link-box {
+    background: #03652C;
+    color: #fff;
+  }
+}
+.need-share-button_pingfm {
+  color: #94B5DA;
+
+  &.need-share-button_link-box {
+    background: #94B5DA;
+    color: #fff;
+  }
+}
+.need-share-button_evernote {
+  color: #79D626;
+
+  &.need-share-button_link-box {
+    background: #79D626;
+    color: #fff;
+  }
+}
+.need-share-button_friendfeed {
+  color: #B0CBE9;
+
+  &.need-share-button_link-box {
+    background: #B0CBE9;
+    color: #fff;
+  }
+}
+.need-share-button_vkontakte {
+  color: #4C75A3;
+
+  &.need-share-button_link-box {
+    background: #4C75A3;
+    color: #fff;
+  }
+}
+.need-share-button_odnoklassniki {
+  color: #ED812B;
+
+  &.need-share-button_link-box {
+    background: #ED812B;
+    color: #fff;
+  }
+}
+.need-share-button_mailru {
+  color: #F89C0E;
+
+  &.need-share-button_link-box {
+    background: #F89C0E;
+    color: #fff;
+  }
+}

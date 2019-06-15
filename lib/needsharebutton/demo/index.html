@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head><meta name="generator" content="Hexo 3.8.0">
+		<meta charset="utf-8">
+		<title>needShareButton demo</title>
+		<meta name="description" content>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="../dist/needsharebutton.min.css">
+
+	  <!-- Styles just for demo -->
+		<style>
+			body {
+				font: 14px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;
+				margin:0;
+				padding:0;
+				background: #DFF4FF;
+			}
+
+			.wrapper {
+				padding: 100px 60px;
+				text-align: center;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="wrapper">
+			<h2>Share button default mode on bottom center</h2>
+			<div id="i-share" data-share-position="bottomCenter" class="need-share-button-default">
+				Share
+			</div>
+
+			<h2>Share button box mode with chosen networks</h2>
+			<div id="share-button-2" class="need-share-button-default" data-share-icon-style="box" data-share-networks="Wechat,Twitter,RenRen,Facebook,GooglePlus,Linkedin,Delicious,mailto">Share</div>
+			<h2>Share button default mode on middle right</h2>
+			<div id="share-button-3" class="need-share-button-default" data-share-position="middleRight" data-share-networks="Wechat,Twitter,RenRen,Facebook,GooglePlus,Linkedin">Share</div>
+			<h2>Share button box mode on middle right</h2>
+			<div id="share-button-4" class="need-share-button-default" data-share-position="middleRight" data-share-icon-style="box" data-share-networks="Wechat,Twitter,RenRen,Facebook,GooglePlus,QQZone">Share</div>
+
+			<h2>Share button with class name 'need-share-button'</h2>
+			<div id="share-button-5" class="need-share-button-default need-share-button" data-share-position="middleRight" data-share-icon-style="box" data-share-networks="Wechat,Twitter,RenRen,Facebook,GooglePlus,QQZone">Share</div>
+
+		</div>
+
+		<script src="../dist/needsharebutton.js"></script>
+		<script>
+			new needShareButton(document.getElementById('i-share'));
+			new needShareButton(document.getElementById('share-button-2'));
+			new needShareButton(document.getElementById('share-button-3'));
+			new needShareButton(document.getElementById('share-button-4'));
+		</script>
+	</body>
+</html>

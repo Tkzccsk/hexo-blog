@@ -85,7 +85,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '6.7.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -111,17 +111,17 @@
 <meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo 的常用命令">
-<meta property="og:url" content="http://yoursite.com/2019/06/11/hexo-command/index.html">
+<meta property="og:url" content="http://changsk.top/2019/06/11/hexo-command/index.html">
 <meta property="og:site_name" content="changsk&#39;s blogs">
 <meta property="og:description" content="常用 hexo 命令hexo new “postName” #新建文章hexo new page “pageName” #新建页面hexo generate #生成静态页面至public目录hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）hexo deploy #将.deploy目录部署到GitHubhexo help  #查看帮助hexo ve">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/06/11/hexo-command/1.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/06/11/hexo-command/2.jpg">
-<meta property="og:updated_time" content="2019-06-12T10:18:24.422Z">
+<meta property="og:image" content="http://changsk.top/2019/06/11/hexo-command/1.jpg">
+<meta property="og:image" content="http://changsk.top/2019/06/11/hexo-command/2.jpg">
+<meta property="og:updated_time" content="2019-06-15T07:15:10.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo 的常用命令">
 <meta name="twitter:description" content="常用 hexo 命令hexo new “postName” #新建文章hexo new page “pageName” #新建页面hexo generate #生成静态页面至public目录hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）hexo deploy #将.deploy目录部署到GitHubhexo help  #查看帮助hexo ve">
-<meta name="twitter:image" content="http://yoursite.com/2019/06/11/hexo-command/1.jpg">
+<meta name="twitter:image" content="http://changsk.top/2019/06/11/hexo-command/1.jpg">
 
 
 
@@ -130,7 +130,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/11/hexo-command/">
+  <link rel="canonical" href="http://changsk.top/2019/06/11/hexo-command/">
 
 
 
@@ -369,7 +369,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/hexo-command/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/11/hexo-command/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -429,7 +429,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-12 18:18:24" itemprop="dateModified" datetime="2019-06-12T18:18:24+08:00">2019-06-12</time>
+                <time title="修改时间：2019-06-15 15:15:10" itemprop="dateModified" datetime="2019-06-15T15:15:10+08:00">2019-06-15</time>
               
             
           </span>
@@ -517,6 +517,8 @@
 
       
         <h2 id="常用-hexo-命令"><a href="#常用-hexo-命令" class="headerlink" title="常用 hexo 命令"></a>常用 hexo 命令</h2><p>hexo new “postName” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo generate #生成静态页面至public目录<br>hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）<br>hexo deploy #将.deploy目录部署到GitHub<br>hexo help  #查看帮助<br>hexo version  #查看Hexo的版本</p>
+<a id="more"></a>
+
 <h2 id="缩写"><a href="#缩写" class="headerlink" title="缩写"></a>缩写</h2><p>hexo n == hexo new<br>hexo g == hexo generate<br>hexo s == hexo server<br>hexo d == hexo deploy</p>
 <h2 id="组合命令："><a href="#组合命令：" class="headerlink" title="组合命令："></a>组合命令：</h2><p>hexo s -g #生成并本地预览<br>hexo d -g #生成并上传<br>hexo clear # 删除无用 tags 和 categories<br>hexo clean &amp; hexo d -g # 清除缓存 生成静态页面并发布</p>
 <h2 id="给文章添加标签和分类"><a href="#给文章添加标签和分类" class="headerlink" title="给文章添加标签和分类"></a>给文章添加标签和分类</h2><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: hexo 的常用命令</span><br><span class="line">date: 2019<span class="string">-06</span><span class="string">-11</span> 11:43:56</span><br><span class="line"><span class="keyword">tags:</span> </span><br><span class="line">- hexo # 文章标签</span><br><span class="line">- aaa</span><br><span class="line">- bbb</span><br><span class="line">categories: hexo # 该文章类别为 categories\hexo</span><br></pre></td></tr></table></figure>
@@ -579,7 +581,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="http://yoursite.com/2019/06/11/hexo-command/" title="hexo 的常用命令">http://yoursite.com/2019/06/11/hexo-command/</a>
+    <a href="http://changsk.top/2019/06/11/hexo-command/" title="hexo 的常用命令">http://changsk.top/2019/06/11/hexo-command/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -593,7 +595,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
+            <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
           
         </div>
       
@@ -710,7 +712,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -729,7 +731,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -748,7 +752,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -871,7 +881,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">4k</span>
+    <span title="站点总字数">6k</span>
   
 
   
@@ -882,7 +892,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">4 分钟</span>
+    <span title="站点阅读时长">5 分钟</span>
   
 </div>
 
@@ -890,8 +900,6 @@
 
 
 
-
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
 
 
 
@@ -938,6 +946,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

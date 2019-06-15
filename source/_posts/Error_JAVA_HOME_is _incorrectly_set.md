@@ -7,6 +7,8 @@ date: 2019-06-11 11:43:56
 **Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd**
 
 然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的：
+
+<!--more-->
 ![](1.jpg)
 
 然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量：

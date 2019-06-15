@@ -10,6 +10,7 @@ categories: git
 ```
  git add .
 ```
+<!--more-->
 ![](1.jpg)
 然后执行
 
@@ -17,7 +18,7 @@ categories: git
 git commit -m "backup"
 ```
 ![](2.jpg)
-最后执行 push 操作
+最后执行 push 操作，将当前本地 git 仓库提交到 origin 远程仓库的 changsk 分支
 
 ```
 git push origin changsk # changsk 是我创建的一个分支
@@ -35,6 +36,7 @@ git push origin changsk # changsk 是我创建的一个分支
 ```
 git pull origin changsk
 ```
+将远程仓库 origin 的 chagnsk 分支和当前本地 git 仓库进行合并，使它们保持一致
 ![](4.jpg)
 然后执行
 

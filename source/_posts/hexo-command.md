@@ -16,6 +16,8 @@ hexo deploy #将.deploy目录部署到GitHub
 hexo help  #查看帮助
 hexo version  #查看Hexo的版本
 
+<!--more-->
+
 ## 缩写
 
 hexo n == hexo new

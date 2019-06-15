@@ -13,7 +13,7 @@ timezone: Asia/Shanghai #网站使用的时区，这里默认使用电脑的时�
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com #用于绑定域名, 其他的不需要配置
+url: http://changsk.top #用于绑定域名, 其他的不需要配置
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -26,7 +26,9 @@ archive_dir: archives     #归档
 category_dir: categories  #分类
 code_dir: downloads/code
 i18n_dir: :lang           #国际化
-skip_render: README.md    #部署的时候不包含的文件
+skip_render:              #部署的时候不包含的文件
+  - README.md
+  - CNAME
 
 # Writing                   #写作                     
 new_post_name: :title.md    # File name of new posts #新文章标题

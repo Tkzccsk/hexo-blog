@@ -83,9 +83,9 @@ footer:
 
   theme:
     # Theme & scheme info link (Theme - NexT.scheme).
-    enable: true
+    enable: false
     # Version info of NexT after scheme info (vX.X.X).
-    version: true
+    version: false
   # -------------------------------------------------------------
   # Beian icp information for Chinese users. In China, every legal website should have a beian icp in website footer.
   # http://www.miitbeian.gov.cn
@@ -260,7 +260,7 @@ sidebar:
   # Back to top in sidebar.
   b2t: false
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true # 浏览页面的时候显示当前浏览进度
   # Enable sidebar on narrow view (only for Muse | Mist).
   onmobile: false
 
@@ -315,9 +315,9 @@ codeblock:
   border_radius:
   # Add copy button on codeblock
   copy_button:
-    enable: true
+    enable: true #增加复制按钮的开关
     # Show text copy result
-    show_result: true
+    show_result: true #点击复制完后是否显示 复制成功 结果提示
 
 # Wechat Subscriber
 #wechat_subscriber:

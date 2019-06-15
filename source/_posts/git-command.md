@@ -9,6 +9,8 @@ categories: git
 搭建好本地 Hexo ，然后链接到了 github pages，也绑定了域名
 [changsk.top](http://changsk.top "我的个人网站") 。但是 github 博客仓库里面中的文件和本地文件不一样，有些差异，这是因为本地文件经 **hexo g** 命令生成静态页面后，然后经**hexo d** deploy（部署）到github上，所以github仓库是没有本地hexo源文件。如果某一天不小心把本地仓库文件删了，或者换了电脑等原因，致使hexo源文件丢失，那么会造成一定的损失。所以可以把本地 hexo 源文件也同步到 github 上面。方法是在原仓库另创建一个分支，专门用于同步本地 Hexo 源文件。
 
+<!--more-->
+
 执行以下命令的前提：
 **当前主机已经可以通过SSH连接到 github 博客仓库（即本机生成的SSH KEY放入到 github 博客仓库当中去）**
 

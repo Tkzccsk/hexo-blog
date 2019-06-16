@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://changsk.top/"/>
-  <updated>2019-06-15T10:46:38.559Z</updated>
+  <updated>2019-06-16T15:37:17.865Z</updated>
   <id>http://changsk.top/</id>
   
   <author>
@@ -15,6 +15,135 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux grep命令详解</title>
+    <link href="http://changsk.top/2019/06/16/linux-grep/"/>
+    <id>http://changsk.top/2019/06/16/linux-grep/</id>
+    <published>2019-06-16T15:33:18.000Z</published>
+    <updated>2019-06-16T15:37:17.865Z</updated>
+    
+    <content type="html"><![CDATA[<p>一篇讲解<a href="http://www.zsythink.net/archives/1733" target="_blank" rel="noopener">grep</a>很好的文章，以便日后翻阅。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一篇讲解&lt;a href=&quot;http://www.zsythink.net/archives/1733&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;grep&lt;/a&gt;很好的文章，以便日后翻阅。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://changsk.top/categories/Linux/"/>
+    
+    
+      <category term="Linux命令" scheme="http://changsk.top/tags/Linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java中永久代的垃圾回收</title>
+    <link href="http://changsk.top/2019/06/16/java-perm-GC/"/>
+    <id>http://changsk.top/2019/06/16/java-perm-GC/</id>
+    <published>2019-06-16T14:22:27.000Z</published>
+    <updated>2019-06-16T15:32:44.927Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天面试被问到<strong>jvm中永久代会发生垃圾回收吗？</strong></p><a id="more"></a><p>首先，关于永久代的内容可以看这个：[jvm中方法区和永久代的关系]</p><blockquote><p>垃圾回收不会出现在永久代，但是如果永久代满了会触发完全垃圾回收（<strong>Full GC</strong>）。</p></blockquote><p>Hotspot的永久代是在方法区，主要存储的是类加载信息，静态变量以及常量，方法（字节码）等等，可以进行<strong>常量池回收</strong>和<strong>类型卸载</strong>。</p><ul><li>如果这个常量在其它任何对象都没被引用，则可以被回收。</li><li>而类型卸载有点复杂，有以下三点要求：</li></ul><ol><li>该类型的所有实例都已经被回收  </li><li>该类型的ClassLoader已经被回收  </li><li>该类型的java.lang.Class没有在任何地方被引用，该类型不能在任何地方以反射的方式实例化一个对象。在java8中，已经取消了永久代，但是引入了一个元数据区的navite内存区。 </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天面试被问到&lt;strong&gt;jvm中永久代会发生垃圾回收吗？&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://changsk.top/categories/Java/"/>
+    
+    
+      <category term="java" scheme="http://changsk.top/tags/java/"/>
+    
+      <category term="永久代" scheme="http://changsk.top/tags/%E6%B0%B8%E4%B9%85%E4%BB%A3/"/>
+    
+      <category term="metaspace" scheme="http://changsk.top/tags/metaspace/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>markdown语法</title>
+    <link href="http://changsk.top/2019/06/16/markdown-syntax/"/>
+    <id>http://changsk.top/2019/06/16/markdown-syntax/</id>
+    <published>2019-06-16T12:53:05.000Z</published>
+    <updated>2019-06-16T14:19:31.240Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>学习一下Markdown的语法，以便更好地组织文章结构。<br>在此记录，以便日后的查阅。</p><a id="more"></a><h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><blockquote><h4 id="Markdown是什么？"><a href="#Markdown是什么？" class="headerlink" title="Markdown是什么？"></a>Markdown<em>是什么</em>？</h4><h4 id="谁创造了它？"><a href="#谁创造了它？" class="headerlink" title="谁创造了它？"></a><em>谁</em>创造了它？</h4><h4 id="为什么要使用它？"><a href="#为什么要使用它？" class="headerlink" title="为什么要使用它？"></a><em>为什么</em>要使用它？</h4><h4 id="怎么使用？"><a href="#怎么使用？" class="headerlink" title="怎么使用？"></a><em>怎么</em>使用？</h4><h4 id="谁在用？"><a href="#谁在用？" class="headerlink" title="谁在用？"></a><em>谁</em>在用？</h4><h4 id="尝试一下"><a href="#尝试一下" class="headerlink" title="尝试一下"></a>尝试一下</h4></blockquote><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-Markdown是什么？"><a href="#1-Markdown是什么？" class="headerlink" title="1. Markdown是什么？"></a>1. Markdown<em>是什么</em>？</h3><p><strong>Markdown</strong>是一种轻量级<strong>标记语言</strong>，它以纯文本形式(<em>易读、易写、易更改</em>)编写文档，并最终以HTML格式发布。<br><strong>Markdown</strong>也可以理解为将以MARKDOWN语法编写的语言转换成HTML内容的工具。</p><h3 id="2-谁创造了它？"><a href="#2-谁创造了它？" class="headerlink" title="2. 谁创造了它？"></a>2. <em>谁</em>创造了它？</h3><p>它由<a href="http://www.aaronsw.com/" target="_blank" rel="noopener"><strong>Aaron Swartz</strong></a>和<strong>John Gruber</strong>共同设计，<strong>Aaron Swartz</strong>就是那位于去年（<em>2013年1月11日</em>）自杀,有着<strong>开挂</strong>一般人生经历的程序员。维基百科对他的<a href="http://zh.wikipedia.org/wiki/亚伦·斯沃茨" target="_blank" rel="noopener">介绍</a>是：<strong>软件工程师、作家、政治组织者、互联网活动家、维基百科人</strong>。</p><p>他有着足以让你跪拜的人生经历：</p><ul><li><strong>14岁</strong>参与RSS 1.0规格标准的制订。</li><li><strong>2004</strong>年入读<strong>斯坦福</strong>，之后退学。</li><li><strong>2005</strong>年创建<a href="http://infogami.org/" target="_blank" rel="noopener">Infogami</a>，之后与<a href="http://www.reddit.com/" target="_blank" rel="noopener">Reddit</a>合并成为其合伙人。</li><li><strong>2010</strong>年创立求进会（Demand Progress），积极参与禁止网络盗版法案（SOPA）活动，最终该提案被撤回。</li><li><strong>2011</strong>年7月19日，因被控从MIT和JSTOR下载480万篇学术论文并以免费形式上传于网络被捕。</li><li><strong>2013</strong>年1月自杀身亡。</li></ul><p>天才都有早逝的归途。</p><h3 id="3-为什么要使用它？"><a href="#3-为什么要使用它？" class="headerlink" title="3. 为什么要使用它？"></a>3. <em>为什么</em>要使用它？</h3><ul><li>它是易读（看起来舒服）、易写（语法简单）、易更改<strong>纯文本</strong>。处处体现着<strong>极简主义</strong>的影子。</li><li>兼容HTML，可以转换为HTML格式发布。</li><li>跨平台使用。</li><li>越来越多的网站支持Markdown。</li><li>更方便清晰地组织你的电子邮件。（Markdown-here, Airmail）</li><li>摆脱Word（我不是认真的）。</li></ul><h3 id="4-怎么使用？"><a href="#4-怎么使用？" class="headerlink" title="4. 怎么使用？"></a>4. <em>怎么</em>使用？</h3><p>如果不算<strong>扩展</strong>，Markdown的语法绝对<strong>简单</strong>到让你爱不释手。</p><p>Markdown语法主要分为如下几大部分： <strong>标题</strong>，<strong>段落</strong>，<strong>区块引用</strong>，<strong>代码区块</strong>，<strong>强调</strong>，<strong>列表</strong>，<strong>分割线</strong>，<strong>链接</strong>，<strong>图片</strong>，<strong>反斜杠 \</strong>，<strong>符号’`’</strong>。</p><h4 id="4-1-标题"><a href="#4-1-标题" class="headerlink" title="4.1 标题"></a>4.1 标题</h4><p>两种形式：<br>1）使用<code>=</code>和<code>-</code>标记一级和二级标题。</p><blockquote><p>一级标题<br><code>=========</code><br>二级标题<br><code>---------</code></p></blockquote><p>效果：</p><blockquote><h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2></blockquote><p>2）使用<code>#</code>，可表示1-6级标题。</p><blockquote><h1 id="一级标题-1"><a href="#一级标题-1" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题-1"><a href="#二级标题-1" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote><p>效果：</p><blockquote><h1 id="一级标题-2"><a href="#一级标题-2" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题-2"><a href="#二级标题-2" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题-1"><a href="#三级标题-1" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题-1"><a href="#四级标题-1" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题-1"><a href="#五级标题-1" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题-1"><a href="#六级标题-1" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote><h4 id="4-2-段落"><a href="#4-2-段落" class="headerlink" title="4.2 段落"></a>4.2 段落</h4><p>段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用<strong>两个以上</strong>空格加上回车（引用中换行省略回车）。</p><h4 id="4-3-区块引用"><a href="#4-3-区块引用" class="headerlink" title="4.3 区块引用"></a>4.3 区块引用</h4><p>在段落的每行或者只在第一行使用符号<code>&gt;</code>,还可使用多个嵌套引用，如：</p><blockquote><p>&gt; 区块引用<br>&gt;&gt; 嵌套引用</p></blockquote><p>效果：</p><blockquote><p>区块引用</p><blockquote><p>嵌套引用</p></blockquote></blockquote><h4 id="4-4-代码区块"><a href="#4-4-代码区块" class="headerlink" title="4.4 代码区块"></a>4.4 代码区块</h4><p>代码区块的建立是在每行加上4个空格或者一个制表符（如同写代码一样）。如<br>普通段落：</p><p>void main()<br>{printf(“Hello, Markdown.”);<br>}</p><p>代码区块：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello, Markdown."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>注意</strong>:需要和普通段落之间存在空行。</p><h4 id="4-5-强调"><a href="#4-5-强调" class="headerlink" title="4.5 强调"></a>4.5 强调</h4><p>在强调内容两侧分别加上<code>*</code>或者<code>_</code>，如：</p><blockquote><p><em>斜体</em>，<em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong></p></blockquote><p>效果：</p><blockquote><p><em>斜体</em>，<em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong></p></blockquote><h4 id="4-6-列表"><a href="#4-6-列表" class="headerlink" title="4.6 列表"></a>4.6 列表</h4><p>使用<code>·</code>、<code>+</code>、或<code>-</code>标记无序列表，如：</p><blockquote><p>-（+<em>） 第一项 -（+</em>） 第二项 - （+*）第三项</p></blockquote><p><strong>注意</strong>：标记有一个_空格<em>或</em>制表符_。若不在引用区块中，必须和前方段落之间存在空行。</p><p>效果：</p><blockquote><ul><li>第一项</li><li>第二项</li><li>第三项</li></ul></blockquote><p>有序列表的标记方式是将上述的符号换成数字,并辅以<code>.</code>，如：</p><blockquote><p>1 . 第一项<br>2 . 第二项<br>3 . 第三项</p></blockquote><p>效果：</p><blockquote><ol><li>第一项</li><li>第二项</li><li>第三项</li></ol></blockquote><h4 id="4-7-分割线"><a href="#4-7-分割线" class="headerlink" title="4.7 分割线"></a>4.7 分割线</h4><p>分割线最常使用就是三个或以上<code>*</code>，还可以使用<code>-</code>和<code>_</code>。</p><h4 id="4-8-链接"><a href="#4-8-链接" class="headerlink" title="4.8 链接"></a>4.8 链接</h4><p>链接可以由两种形式生成：<strong>行内式</strong>和<strong>参考式</strong>。<strong>行内式</strong>：</p><blockquote><p><a href="https:://github.com/younghz/Markdown" title="Markdown" target="_blank" rel="noopener">younghz的Markdown库</a>。</p></blockquote><p>效果：</p><blockquote><p><a href="https://github.com/younghz/://github.com/younghz/Markdown" target="_blank" rel="noopener">younghz的Markdown库</a>。</p></blockquote><p><strong>参考式</strong>：</p><blockquote><p><a href="https:://github.com/younghz/Markdown" title="Markdown" target="_blank" rel="noopener">younghz的Markdown库1</a><br><a href="https:://github.com/younghz/Markdown" title="Markdown" target="_blank" rel="noopener">younghz的Markdown库2</a></p></blockquote><p>效果：</p><blockquote><p><a href="https://github.com/younghz/://github.com/younghz/Markdown" target="_blank" rel="noopener">younghz的Markdown库1</a><br><a href="https://github.com/younghz/://github.com/younghz/Markdown" target="_blank" rel="noopener">younghz的Markdown库2</a></p></blockquote><p><strong>注意</strong>：上述的<code>[1]:https:://github.com/younghz/Markdown &quot;Markdown&quot;</code>不出现在区块中。</p><h4 id="4-9-图片"><a href="#4-9-图片" class="headerlink" title="4.9 图片"></a>4.9 图片</h4><p>添加图片的形式和链接相似，只需在链接的基础上前方加一个<code>！</code>。</p><h4 id="4-10-反斜杠"><a href="#4-10-反斜杠" class="headerlink" title="4.10 反斜杠\"></a>4.10 反斜杠<code>\</code></h4><p>相当于<strong>反转义</strong>作用。使符号成为普通符号。</p><h4 id="4-11-符号’-’"><a href="#4-11-符号’-’" class="headerlink" title="4.11 符号’`’"></a>4.11 符号’`’</h4><p>起到标记作用。如：</p><blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> ctrl+a</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure></blockquote><p>效果：</p><blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> ctrl+a</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure></blockquote><h4 id="5-谁在用？"><a href="#5-谁在用？" class="headerlink" title="5. 谁在用？"></a>5. <em>谁</em>在用？</h4><p>Markdown的使用者：</p><ul><li>GitHub</li><li>简书</li><li>Stack Overflow</li><li>Apollo</li><li>Moodle</li><li>Reddit</li><li>等等</li></ul><h4 id="6-尝试一下"><a href="#6-尝试一下" class="headerlink" title="6. 尝试一下"></a>6. 尝试一下</h4><ul><li><strong>Chrome</strong>下的插件诸如<code>stackedit</code>与<code>markdown-here</code>等非常方便，也不用担心平台受限。</li><li><strong>在线</strong>的dillinger.io评价也不错</li><li><strong>Windowns</strong>下的MarkdownPad也用过，不过免费版的体验不是很好。</li><li><strong>Mac</strong>下的Mou是国人贡献的，口碑很好。</li><li><strong>Linux</strong>下的ReText不错。</li></ul><p><strong>当然，最终境界永远都是笔下是语法，心中格式化 :)。</strong></p><hr><p><strong>注意</strong>：不同的Markdown解释器或工具对相应语法（扩展语法）的解释效果不尽相同，具体可参见工具的使用说明。 虽然有人想出面搞一个所谓的标准化的Markdown，[没想到还惹怒了健在的创始人John Gruber] (<a href="http://blog.codinghorror.com/standard-markdown-is-now-common-markdown/" target="_blank" rel="noopener">http://blog.codinghorror.com/standard-markdown-is-now-common-markdown/</a> )。</p><hr><p>以上基本是所有traditonal markdown的语法。</p><h3 id="其它："><a href="#其它：" class="headerlink" title="其它："></a>其它：</h3><p>列表的使用(非traditonal markdown)：</p><p>用<code>|</code>表示表格纵向边界，表头和表内容用<code>-</code>隔开，并可用<code>:</code>进行对齐设置，两边都有<code>:</code>则表示居中，若不加<code>:</code>则默认左对齐。</p><table><thead><tr><th>代码库</th><th>链接</th></tr></thead><tbody><tr><td>MarkDown</td><td><a href="https://github.com/younghz/Markdown" target="_blank" rel="noopener">https://github.com/younghz/Markdown</a></td></tr><tr><td>MarkDownCopy</td><td><a href="https://github.com/younghz/Markdown" target="_blank" rel="noopener">https://github.com/younghz/Markdown</a></td></tr></tbody></table><p>关于其它扩展语法可参见具体工具的使用说明。</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">以上内容来源自：https:<span class="regexp">//gi</span>thub.com<span class="regexp">/younghz/</span>Markdown</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;学习一下Markdown的语法，以便更好地组织文章结构。&lt;br&gt;在此记录，以便日后的查阅。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="markdown" scheme="http://changsk.top/categories/markdown/"/>
+    
+    
+      <category term="markdown" scheme="http://changsk.top/tags/markdown/"/>
+    
+      <category term="syntax" scheme="http://changsk.top/tags/syntax/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>jvm中方法区和永久代的关系</title>
+    <link href="http://changsk.top/2019/06/16/jvm-MethodArea-PERM/"/>
+    <id>http://changsk.top/2019/06/16/jvm-MethodArea-PERM/</id>
+    <published>2019-06-16T12:08:33.000Z</published>
+    <updated>2019-06-16T15:20:13.389Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>知道有<strong>方法区</strong>，知道里面存放的是什么东西。<br>知道有<strong>永久代</strong>，也知道它在jdk1.7和jdk1.8的区别。<br>但是对他们的关系有点稀里糊涂。。。</p><a id="more"></a><h2 id="什么是方法区？"><a href="#什么是方法区？" class="headerlink" title="什么是方法区？"></a>什么是方法区？</h2><p>方法区（Method Area）是jvm规范里面的<strong>运行时数据区</strong>的一个组成部分，jvm规范中的运行时数据区还包含了：<strong>pc寄存器、虚拟机栈、堆、方法区、运行时常量池、本地方法栈</strong>，还应该有堆外内存。</p><h2 id="方法区存储什么？"><a href="#方法区存储什么？" class="headerlink" title="方法区存储什么？"></a>方法区存储什么？</h2><p>主要用来存储<strong>class、运行时常量池、字段、方法、代码、JIT代码等</strong>。</p><p>注意：</p><ul><li><p>运行时数据区跟内存不是一个概念。</p></li><li><p>方法区是运行时数据区的一部分。</p></li><li><p>方法区是jvm<strong>规范</strong>中的一部分，并不是实际的实现，切忌将规范跟实现混为一谈。</p></li></ul><h2 id="永久代（Perm区）"><a href="#永久代（Perm区）" class="headerlink" title="永久代（Perm区）"></a>永久代（Perm区）</h2><p>永久代又叫<strong>Perm区</strong>，只存在于<strong>hotspot jvm</strong>中，并且只存在于<strong>jdk7和之前的版本</strong>中，jdk8中已经彻底移除了永久代，jdk8中引入了一个新的内存区域叫<strong>metaspace</strong>。</p><ul><li><p>并不是所有的jvm中都有永久代，ibm的j9，oracle的JRocket都没有永久代。</p></li><li><p>永久代是<strong>实现</strong>层面的东西。</p></li><li><p>永久代里面存的东西基本上就是方法区规定的那些东西。</p></li></ul><p>因此，我们可以说，<strong>永久代是方法区的一种实现</strong>，当然，在hotspot jdk8中metaspace可以看成是方法区的一种实现。</p><p>下面我们来看下hotspot jdk8中移除了永久代以后的内存结构：<br><img src="1.jpg" alt></p><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ul><li><p>方法区是规范层面的东西，规定了这一个区域要存放哪些东西</p></li><li><p>永久代（Hotspot虚拟机特有的概念）或者是metaspace是对方法区的不同实现，是实现层面的东西。</p></li></ul><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">作者：若鱼<span class="number">1919</span></span><br><span class="line">链接：https:<span class="regexp">//</span>www.imooc.com<span class="regexp">/article/</span><span class="number">47149</span></span><br><span class="line">来源：慕课网</span><br><span class="line">本文原创发布于慕课网 ，转载请注明出处，谢谢合作</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;知道有&lt;strong&gt;方法区&lt;/strong&gt;，知道里面存放的是什么东西。&lt;br&gt;知道有&lt;strong&gt;永久代&lt;/strong&gt;，也知道它在jdk1.7和jdk1.8的区别。&lt;br&gt;但是对他们的关系有点稀里糊涂。。。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://changsk.top/categories/Java/"/>
+    
+    
+      <category term="永久代" scheme="http://changsk.top/tags/%E6%B0%B8%E4%B9%85%E4%BB%A3/"/>
+    
+      <category term="metaspace" scheme="http://changsk.top/tags/metaspace/"/>
+    
+      <category term="jvm" scheme="http://changsk.top/tags/jvm/"/>
+    
+      <category term="方法区" scheme="http://changsk.top/tags/%E6%96%B9%E6%B3%95%E5%8C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>生产者-消费者问题详解</title>
+    <link href="http://changsk.top/2019/06/15/producer-consumer/"/>
+    <id>http://changsk.top/2019/06/15/producer-consumer/</id>
+    <published>2019-06-15T15:59:07.000Z</published>
+    <updated>2019-06-16T12:25:24.354Z</updated>
+    
+    <content type="html"><![CDATA[<p>文章参考自：<a href="http://blog.chinaunix.net/uid-21411227-id-1826740.html" target="_blank" rel="noopener">生产者-消费者问题详解</a></p><h3 id="一、明确定义"><a href="#一、明确定义" class="headerlink" title="一、明确定义"></a>一、明确定义</h3><p>要理解生产消费者问题，首先应弄清PV操作的含义：PV操作是由P操作原语和V操作原语组成（<strong>原语是不可中断的过程</strong>），对信号量进行操作，具体定义如下：</p><a id="more"></a><ul><li>P（S）：①将信号量S的值减1，即S=S-1；</li></ul><p>​                       ②如果S&gt;=0，则该进程继续执行；否则该进程置为等待状态，排入等待队列。</p><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解读：P操作可以理解为申请资源。P操作每次申请一个资源（S = S - <span class="number">1</span>，可用资源个数减少<span class="number">1</span>），如果可用资源的个数大于等于<span class="number">0</span>（S&gt;=<span class="number">0</span>），那么说明本次申请资源操作成功，继续执行后续程序。否则说明没有足够的资源供该进程使用，该进程置为等待状态，加入等待该资源的等待队列。</span><br></pre></td></tr></table></figure><ul><li>V（S）：①将信号量S的值加1，即S=S+1；</li></ul><p>​                       ②如果S&gt;0，则该进程继续执行；否则释放队列中第一个等待信号量的进程。</p><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解读：V操作可以理解为释放资源。V操作每次释放一个资源（S = S + <span class="number">1</span>，可用资源个数增加<span class="number">1</span>），如果可用资源的个数大于<span class="number">0</span>（S &gt; <span class="number">0</span>），说明本次释放资源操作成功，继续执行后续程序。否则释放该资源的等待队列中第一个等待信号量的进程。</span><br></pre></td></tr></table></figure><p>这只是书本的定义，对于这部分内容，老师先不要急于解释上面的程序流程，而是应该让学生首先知道P操作与V操作到底有什么作用。</p><p>P操作相当于申请资源，而V操作相当于释放资源。所以要学生记住以下几个关键字：</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">P操作<span class="comment">-----&gt;申请资源</span></span><br><span class="line"></span><br><span class="line">V操作<span class="comment">-----&gt;释放资源</span></span><br></pre></td></tr></table></figure><h3 id="二、形象启发"><a href="#二、形象启发" class="headerlink" title="二、形象启发"></a>二、形象启发</h3><p>为此举两个生活中的例子：</p><p>例一：在公共电话厅打电话</p><p>公共电话厅里有多个电话，如某人要打电话，首先要进行申请，看是否有电话空闲，若有，则可以使用电话，如果电话亭里所有电话都有人正在使用，那后来的人只有排队等候。当某人用完电话后，则有空电话腾出，正在排队的第一个人就可以使用电话。这就相当于PV操作：</p><figure class="highlight tp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">某人要打电话，首先要进行申请，相当于执行一次<span class="keyword">P</span>操作，申请一个可用资源（电话）；</span><br><span class="line"></span><br><span class="line">某人用完电话，则有空电话腾出，相当于执行一次V操作，释放一个可用资源（电话）。</span><br></pre></td></tr></table></figure><h3 id="三、分层解剖"><a href="#三、分层解剖" class="headerlink" title="三、分层解剖"></a>三、分层解剖</h3><p>在理解了PV操作的的含义后，就必须讲解利用PV操作可以实现进程的两种情况：<strong>互斥和同步</strong>。根据互斥和同步不同的特点，<strong>就有利用PV操作实现互斥与同步相对固定的结构模式</strong>。这里就不详细讲解了。但生产者-消费者问题是一个有代表性的进程同步问题。但是如果我们将问题细分成三种情况进行讲解，理解难度将大大降低。</p><h4 id="1）一个生产者，一个消费者，公用一个缓冲区。"><a href="#1）一个生产者，一个消费者，公用一个缓冲区。" class="headerlink" title="1）一个生产者，一个消费者，公用一个缓冲区。"></a><strong>1）一个生产者，一个消费者，公用一个缓冲区。</strong></h4><p>可以作以下比喻：将一个生产者比喻为一个生产厂家，如伊利牛奶厂家，而一个消费者，比喻是学生小明，而一个缓冲区则比喻成一间好又多(类似于商店)。第一种情况，可以理解成伊利牛奶生产厂家生产一盒牛奶，把它放在好又多一分店进行销售，而小明则可以从那里买到这盒牛奶。只有当厂家把牛奶放在商店里面后，小明才可以从商店里买到牛奶。所以很明显这是最简单的同步问题。</p><p>解题如下：</p><p>定义两个同步信号量：</p><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">empty——表示缓冲区是否为空，初值为<span class="number">1</span>。</span><br><span class="line"></span><br><span class="line">full——表示缓冲区中是否为满，初值为<span class="number">0</span>。</span><br></pre></td></tr></table></figure><p><strong>生产者进程</strong></p><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while(TRUE)&#123;</span><br><span class="line">生产一个产品<span class="comment">;</span></span><br><span class="line">    P(empty)<span class="comment">;</span></span><br><span class="line">    产品送往Buffer<span class="comment">;</span></span><br><span class="line">    V(full)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>生产者行为：</p><ol><li>生成一个商品</li><li>拿到 empty 同步信号量，执行P操作（empty -= 1，empty现在等于0，表示不为空），表示缓冲区有数据</li><li>产品运送Buffer</li><li>拿到 full 同步信号量，执行V操作（full += 1，full现在等于1，表示满），表示缓冲区有数据</li></ol><p><strong>消费者进程</strong></p><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while(TRUE)&#123;</span><br><span class="line">P(full)<span class="comment">;</span></span><br><span class="line">   从Buffer取出一个产品<span class="comment">;</span></span><br><span class="line">   V(empty)<span class="comment">;</span></span><br><span class="line">   消费该产品<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>消费者行为：</p><ol><li><p>拿到 full 同步信号量，执行P操作（full -= 1，full现在等于0，表示不满），表示缓冲区无数据</p></li><li><p>从Buffer取出一个产品</p></li><li><p>拿到 empty 同步信号量，执行V操作（empty += 1，empty现在等于1，表示空），表示缓冲区无数据</p></li><li><p>消费该产品</p><h4 id="2）一个生产者，一个消费者，公用n个环形缓冲区。"><a href="#2）一个生产者，一个消费者，公用n个环形缓冲区。" class="headerlink" title="2）一个生产者，一个消费者，公用n个环形缓冲区。"></a><strong>2）一个生产者，一个消费者，公用n个环形缓冲区。</strong></h4><p>第二种情况可以理解为伊利牛奶生产厂家可以生产好多牛奶，并将它们放在多个好又多分店进行销售，而小明可以从任一间好又多分店中购买到牛奶。同样，只有当厂家把牛奶放在某一分店里，小明才可以从这间分店中买到牛奶。不同于第一种情况的是，第二种情况有N个分店（即<strong>N个缓冲区形成一个环形缓冲区</strong>），所以要利用指针，要求厂家必须按一定的顺序将商品依次放到每一个分店中。<strong>缓冲区的指向则通过模运算得到。</strong></p><p>解题如下：</p><p>定义两个同步信号量：</p><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">empty——表示缓冲区是否为空，初值为<span class="built_in">n</span>。</span><br><span class="line"></span><br><span class="line">full——表示缓冲区中是否为满，初值为<span class="number">0</span>。</span><br></pre></td></tr></table></figure></li></ol><p>设缓冲区的编号为1～n-1，定义两个指针in和out，分别是生产者进程和消费者进程使用的指针，指向下一个可用的缓冲区。</p><p><strong>生产者进程</strong></p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">TRUE</span>)&#123;</span><br><span class="line">     生产一个产品;</span><br><span class="line">     P(empty);</span><br><span class="line">     产品送往buffer（<span class="keyword">in</span>）；</span><br><span class="line">     <span class="keyword">in</span>=(<span class="keyword">in</span>+<span class="number">1</span>)<span class="keyword">mod</span> n；</span><br><span class="line">     V(full);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>消费者进程</strong></p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">TRUE</span>)&#123;</span><br><span class="line">    P(full); </span><br><span class="line">    从buffer（<span class="keyword">out</span>）中取出产品；</span><br><span class="line">    <span class="keyword">out</span>=(<span class="keyword">out</span>+<span class="number">1</span>)<span class="keyword">mod</span> n；</span><br><span class="line">    V(empty);</span><br><span class="line">    消费该产品;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="3）一组生产者，一组消费者，公用n个环形缓冲区"><a href="#3）一组生产者，一组消费者，公用n个环形缓冲区" class="headerlink" title="3）一组生产者，一组消费者，公用n个环形缓冲区"></a><strong>3）一组生产者，一组消费者，公用n个环形缓冲区</strong></h4><p>第三种情况，可以理解成有多间牛奶生产厂家，如蒙牛，达能，光明等，消费者也不只小明一人，有许许多多消费者。不同的牛奶生产厂家生产的商品可以放在不同的好又多分店中销售，而不同的消费者可以去不同的分店中购买。当某一分店已放满某个厂家的商品时，下一个厂家只能把商品放在下一间分店。<strong>所以在这种情况中，生产者与消费者存在同步关系，而且各个生产者之间、各个消费者之间存在互斥关系</strong>,<strong>他们必须互斥地访问缓冲区</strong>。（<strong><em>得好好揣摩这句话</em></strong>）</p><p>解题如下：</p><p>定义四个信号量：</p><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">empty——表示缓冲区是否为空，初值为n。</span><br><span class="line"></span><br><span class="line">full——表示缓冲区中是否为满，初值为<span class="number">0</span>。</span><br><span class="line"></span><br><span class="line">mutex1——生产者之间的互斥信号量，初值为<span class="number">1</span>。</span><br><span class="line"></span><br><span class="line">mutex2——消费者之间的互斥信号量，初值为<span class="number">1</span>。</span><br></pre></td></tr></table></figure><p>设缓冲区的编号为1～n-1，定义两个指针in和out，分别是生产者进程和消费者进程使用的指针，指向下一个可用的缓冲区。</p><p><strong>生产者进程</strong></p><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(TRUE)&#123;</span><br><span class="line">    生产一个产品;</span><br><span class="line">    P(empty); <span class="comment">//生成产品，那么缓冲区一定不为空</span></span><br><span class="line">    P(mutex1)；<span class="comment">//同一时间只能有一个生产者生成商品</span></span><br><span class="line">    产品送往<span class="keyword">buffer</span>（<span class="keyword">in</span>）；</span><br><span class="line">    <span class="keyword">in</span>=(<span class="keyword">in</span>+<span class="number">1</span>)<span class="built_in">mod</span> n；</span><br><span class="line">    V(mutex1);</span><br><span class="line">    V(full);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>消费者进程</strong></p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">TRUE</span>)&#123;</span><br><span class="line">    P(full);</span><br><span class="line">    P(mutex2)；</span><br><span class="line">    从buffer（<span class="keyword">out</span>）中取出产品；</span><br><span class="line">    <span class="keyword">out</span>=(<span class="keyword">out</span>+<span class="number">1</span>)<span class="keyword">mod</span> n；</span><br><span class="line">    V（mutex2）；</span><br><span class="line">    V(empty);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;文章参考自：&lt;a href=&quot;http://blog.chinaunix.net/uid-21411227-id-1826740.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;生产者-消费者问题详解&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;一、明确定义&quot;&gt;&lt;a href=&quot;#一、明确定义&quot; class=&quot;headerlink&quot; title=&quot;一、明确定义&quot;&gt;&lt;/a&gt;一、明确定义&lt;/h3&gt;&lt;p&gt;要理解生产消费者问题，首先应弄清PV操作的含义：PV操作是由P操作原语和V操作原语组成（&lt;strong&gt;原语是不可中断的过程&lt;/strong&gt;），对信号量进行操作，具体定义如下：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="操作系统" scheme="http://changsk.top/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="生产者&amp;消费者" scheme="http://changsk.top/tags/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85/"/>
+    
+      <category term="PV操作" scheme="http://changsk.top/tags/PV%E6%93%8D%E4%BD%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>gitignore</title>
@@ -133,26 +262,6 @@
   </entry>
   
   <entry>
-    <title>Error JAVA_HOME is incorrectly set</title>
-    <link href="http://changsk.top/2019/06/11/Error_JAVA_HOME_is%20_incorrectly_set/"/>
-    <id>http://changsk.top/2019/06/11/Error_JAVA_HOME_is _incorrectly_set/</id>
-    <published>2019-06-11T03:43:56.000Z</published>
-    <updated>2019-06-15T07:13:13.125Z</updated>
-    
-    <content type="html"><![CDATA[<p>在安装、调试、运行Hexo的过程中，出现了以下错误：</p><p><strong>Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd</strong></p><p>然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的：</p><a id="more"></a><p><img src="1.jpg" alt></p><p>然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量：</p><p><img src="2.jpg" alt></p><p>发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？<br>经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图：</p><p><img src="3.jpg" alt></p><p>或者也可以将jdk装到其他不存在空格的目录下。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在安装、调试、运行Hexo的过程中，出现了以下错误：&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的：&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>hexo 的常用命令</title>
     <link href="http://changsk.top/2019/06/11/hexo-command/"/>
     <id>http://changsk.top/2019/06/11/hexo-command/</id>
@@ -171,6 +280,26 @@
     
     
       <category term="hexo" scheme="http://changsk.top/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Error JAVA_HOME is incorrectly set</title>
+    <link href="http://changsk.top/2019/06/11/Error_JAVA_HOME_is%20_incorrectly_set/"/>
+    <id>http://changsk.top/2019/06/11/Error_JAVA_HOME_is _incorrectly_set/</id>
+    <published>2019-06-11T03:43:56.000Z</published>
+    <updated>2019-06-15T07:13:13.125Z</updated>
+    
+    <content type="html"><![CDATA[<p>在安装、调试、运行Hexo的过程中，出现了以下错误：</p><p><strong>Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd</strong></p><p>然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的：</p><a id="more"></a><p><img src="1.jpg" alt></p><p>然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量：</p><p><img src="2.jpg" alt></p><p>发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？<br>经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图：</p><p><img src="3.jpg" alt></p><p>或者也可以将jdk装到其他不存在空格的目录下。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在安装、调试、运行Hexo的过程中，出现了以下错误：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的：&lt;/p&gt;
+    
+    </summary>
+    
     
   </entry>
   

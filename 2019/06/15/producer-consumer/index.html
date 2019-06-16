@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="文章参考自：生产者-消费者问题详解 一、明确定义要理解生产消费者问题，首先应弄清PV操作的含义：PV操作是由P操作原语和V操作原语组成（原语是不可中断的过程），对信号量进行操作，具体定义如下：">
+<meta name="keywords" content="生产者&amp;消费者,PV操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="生产者-消费者问题详解">
+<meta property="og:url" content="http://changsk.top/2019/06/15/producer-consumer/index.html">
+<meta property="og:site_name" content="changsk&#39;s blogs">
+<meta property="og:description" content="文章参考自：生产者-消费者问题详解 一、明确定义要理解生产消费者问题，首先应弄清PV操作的含义：PV操作是由P操作原语和V操作原语组成（原语是不可中断的过程），对信号量进行操作，具体定义如下：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-16T12:25:24.354Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="生产者-消费者问题详解">
+<meta name="twitter:description" content="文章参考自：生产者-消费者问题详解 一、明确定义要理解生产消费者问题，首先应弄清PV操作的含义：PV操作是由P操作原语和V操作原语组成（原语是不可中断的过程），对信号量进行操作，具体定义如下：">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="changsk's blogs" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://changsk.top/2019/06/15/producer-consumer/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>生产者-消费者问题详解 | changsk's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">changsk's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">chang.sk@foxmail.com</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/Tkzccsk" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/15/producer-consumer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">生产者-消费者问题详解
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-15 23:59:07" itemprop="dateCreated datePublished" datetime="2019-06-15T23:59:07+08:00">2019-06-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-16 20:25:24" itemprop="dateModified" datetime="2019-06-16T20:25:24+08:00">2019-06-16</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">12k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">11 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文章参考自：<a href="http://blog.chinaunix.net/uid-21411227-id-1826740.html" target="_blank" rel="noopener">生产者-消费者问题详解</a></p>
+<h3 id="一、明确定义"><a href="#一、明确定义" class="headerlink" title="一、明确定义"></a>一、明确定义</h3><p>要理解生产消费者问题，首先应弄清PV操作的含义：PV操作是由P操作原语和V操作原语组成（<strong>原语是不可中断的过程</strong>），对信号量进行操作，具体定义如下：</p>
+<a id="more"></a>
+
+<ul>
+<li>P（S）：①将信号量S的值减1，即S=S-1；</li>
+</ul>
+<p>​                       ②如果S&gt;=0，则该进程继续执行；否则该进程置为等待状态，排入等待队列。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解读：P操作可以理解为申请资源。P操作每次申请一个资源（S = S - <span class="number">1</span>，可用资源个数减少<span class="number">1</span>），如果可用资源的个数大于等于<span class="number">0</span>（S&gt;=<span class="number">0</span>），那么说明本次申请资源操作成功，继续执行后续程序。否则说明没有足够的资源供该进程使用，该进程置为等待状态，加入等待该资源的等待队列。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>V（S）：①将信号量S的值加1，即S=S+1；</li>
+</ul>
+<p>​                       ②如果S&gt;0，则该进程继续执行；否则释放队列中第一个等待信号量的进程。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解读：V操作可以理解为释放资源。V操作每次释放一个资源（S = S + <span class="number">1</span>，可用资源个数增加<span class="number">1</span>），如果可用资源的个数大于<span class="number">0</span>（S &gt; <span class="number">0</span>），说明本次释放资源操作成功，继续执行后续程序。否则释放该资源的等待队列中第一个等待信号量的进程。</span><br></pre></td></tr></table></figure>
+
+<p>这只是书本的定义，对于这部分内容，老师先不要急于解释上面的程序流程，而是应该让学生首先知道P操作与V操作到底有什么作用。</p>
+<p>P操作相当于申请资源，而V操作相当于释放资源。所以要学生记住以下几个关键字：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">P操作<span class="comment">-----&gt;申请资源</span></span><br><span class="line"></span><br><span class="line">V操作<span class="comment">-----&gt;释放资源</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二、形象启发"><a href="#二、形象启发" class="headerlink" title="二、形象启发"></a>二、形象启发</h3><p>为此举两个生活中的例子：</p>
+<p>例一：在公共电话厅打电话</p>
+<p>公共电话厅里有多个电话，如某人要打电话，首先要进行申请，看是否有电话空闲，若有，则可以使用电话，如果电话亭里所有电话都有人正在使用，那后来的人只有排队等候。当某人用完电话后，则有空电话腾出，正在排队的第一个人就可以使用电话。这就相当于PV操作：</p>
+<figure class="highlight tp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">某人要打电话，首先要进行申请，相当于执行一次<span class="keyword">P</span>操作，申请一个可用资源（电话）；</span><br><span class="line"></span><br><span class="line">某人用完电话，则有空电话腾出，相当于执行一次V操作，释放一个可用资源（电话）。</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、分层解剖"><a href="#三、分层解剖" class="headerlink" title="三、分层解剖"></a>三、分层解剖</h3><p>在理解了PV操作的的含义后，就必须讲解利用PV操作可以实现进程的两种情况：<strong>互斥和同步</strong>。根据互斥和同步不同的特点，<strong>就有利用PV操作实现互斥与同步相对固定的结构模式</strong>。这里就不详细讲解了。但生产者-消费者问题是一个有代表性的进程同步问题。但是如果我们将问题细分成三种情况进行讲解，理解难度将大大降低。</p>
+<h4 id="1）一个生产者，一个消费者，公用一个缓冲区。"><a href="#1）一个生产者，一个消费者，公用一个缓冲区。" class="headerlink" title="1）一个生产者，一个消费者，公用一个缓冲区。"></a><strong>1）一个生产者，一个消费者，公用一个缓冲区。</strong></h4><p>可以作以下比喻：将一个生产者比喻为一个生产厂家，如伊利牛奶厂家，而一个消费者，比喻是学生小明，而一个缓冲区则比喻成一间好又多(类似于商店)。第一种情况，可以理解成伊利牛奶生产厂家生产一盒牛奶，把它放在好又多一分店进行销售，而小明则可以从那里买到这盒牛奶。只有当厂家把牛奶放在商店里面后，小明才可以从商店里买到牛奶。所以很明显这是最简单的同步问题。</p>
+<p>解题如下：</p>
+<p>定义两个同步信号量：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">empty——表示缓冲区是否为空，初值为<span class="number">1</span>。</span><br><span class="line"></span><br><span class="line">full——表示缓冲区中是否为满，初值为<span class="number">0</span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>生产者进程</strong></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while(TRUE)&#123;</span><br><span class="line">	生产一个产品<span class="comment">;</span></span><br><span class="line">    P(empty)<span class="comment">;</span></span><br><span class="line">    产品送往Buffer<span class="comment">;</span></span><br><span class="line">    V(full)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生产者行为：</p>
+<ol>
+<li>生成一个商品</li>
+<li>拿到 empty 同步信号量，执行P操作（empty -= 1，empty现在等于0，表示不为空），表示缓冲区有数据</li>
+<li>产品运送Buffer</li>
+<li>拿到 full 同步信号量，执行V操作（full += 1，full现在等于1，表示满），表示缓冲区有数据</li>
+</ol>
+<p><strong>消费者进程</strong></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while(TRUE)&#123;</span><br><span class="line">	P(full)<span class="comment">;</span></span><br><span class="line">   从Buffer取出一个产品<span class="comment">;</span></span><br><span class="line">   V(empty)<span class="comment">;</span></span><br><span class="line">   消费该产品<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>消费者行为：</p>
+<ol>
+<li><p>拿到 full 同步信号量，执行P操作（full -= 1，full现在等于0，表示不满），表示缓冲区无数据</p>
+</li>
+<li><p>从Buffer取出一个产品</p>
+</li>
+<li><p>拿到 empty 同步信号量，执行V操作（empty += 1，empty现在等于1，表示空），表示缓冲区无数据</p>
+</li>
+<li><p>消费该产品</p>
+<h4 id="2）一个生产者，一个消费者，公用n个环形缓冲区。"><a href="#2）一个生产者，一个消费者，公用n个环形缓冲区。" class="headerlink" title="2）一个生产者，一个消费者，公用n个环形缓冲区。"></a><strong>2）一个生产者，一个消费者，公用n个环形缓冲区。</strong></h4><p>第二种情况可以理解为伊利牛奶生产厂家可以生产好多牛奶，并将它们放在多个好又多分店进行销售，而小明可以从任一间好又多分店中购买到牛奶。同样，只有当厂家把牛奶放在某一分店里，小明才可以从这间分店中买到牛奶。不同于第一种情况的是，第二种情况有N个分店（即<strong>N个缓冲区形成一个环形缓冲区</strong>），所以要利用指针，要求厂家必须按一定的顺序将商品依次放到每一个分店中。<strong>缓冲区的指向则通过模运算得到。</strong></p>
+<p>解题如下：</p>
+<p>定义两个同步信号量：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">empty——表示缓冲区是否为空，初值为<span class="built_in">n</span>。</span><br><span class="line"></span><br><span class="line">full——表示缓冲区中是否为满，初值为<span class="number">0</span>。</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>设缓冲区的编号为1～n-1，定义两个指针in和out，分别是生产者进程和消费者进程使用的指针，指向下一个可用的缓冲区。</p>
+<p><strong>生产者进程</strong></p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">TRUE</span>)&#123;</span><br><span class="line">     生产一个产品;</span><br><span class="line">     P(empty);</span><br><span class="line">     产品送往buffer（<span class="keyword">in</span>）；</span><br><span class="line">     <span class="keyword">in</span>=(<span class="keyword">in</span>+<span class="number">1</span>)<span class="keyword">mod</span> n；</span><br><span class="line">     V(full);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>消费者进程</strong></p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">TRUE</span>)&#123;</span><br><span class="line">    P(full); </span><br><span class="line">    从buffer（<span class="keyword">out</span>）中取出产品；</span><br><span class="line">    <span class="keyword">out</span>=(<span class="keyword">out</span>+<span class="number">1</span>)<span class="keyword">mod</span> n；</span><br><span class="line">    V(empty);</span><br><span class="line">    消费该产品;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3）一组生产者，一组消费者，公用n个环形缓冲区"><a href="#3）一组生产者，一组消费者，公用n个环形缓冲区" class="headerlink" title="3）一组生产者，一组消费者，公用n个环形缓冲区"></a><strong>3）一组生产者，一组消费者，公用n个环形缓冲区</strong></h4><p>第三种情况，可以理解成有多间牛奶生产厂家，如蒙牛，达能，光明等，消费者也不只小明一人，有许许多多消费者。不同的牛奶生产厂家生产的商品可以放在不同的好又多分店中销售，而不同的消费者可以去不同的分店中购买。当某一分店已放满某个厂家的商品时，下一个厂家只能把商品放在下一间分店。<strong>所以在这种情况中，生产者与消费者存在同步关系，而且各个生产者之间、各个消费者之间存在互斥关系</strong>,<strong>他们必须互斥地访问缓冲区</strong>。（<strong><em>得好好揣摩这句话</em></strong>）</p>
+<p>解题如下：</p>
+<p>定义四个信号量：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">empty——表示缓冲区是否为空，初值为n。</span><br><span class="line"></span><br><span class="line">full——表示缓冲区中是否为满，初值为<span class="number">0</span>。</span><br><span class="line"></span><br><span class="line">mutex1——生产者之间的互斥信号量，初值为<span class="number">1</span>。</span><br><span class="line"></span><br><span class="line">mutex2——消费者之间的互斥信号量，初值为<span class="number">1</span>。</span><br></pre></td></tr></table></figure>
+
+<p>设缓冲区的编号为1～n-1，定义两个指针in和out，分别是生产者进程和消费者进程使用的指针，指向下一个可用的缓冲区。</p>
+<p><strong>生产者进程</strong></p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(TRUE)&#123;</span><br><span class="line">    生产一个产品;</span><br><span class="line">    P(empty); <span class="comment">//生成产品，那么缓冲区一定不为空</span></span><br><span class="line">    P(mutex1)；<span class="comment">//同一时间只能有一个生产者生成商品</span></span><br><span class="line">    产品送往<span class="keyword">buffer</span>（<span class="keyword">in</span>）；</span><br><span class="line">    <span class="keyword">in</span>=(<span class="keyword">in</span>+<span class="number">1</span>)<span class="built_in">mod</span> n；</span><br><span class="line">    V(mutex1);</span><br><span class="line">    V(full);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>消费者进程</strong></p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">TRUE</span>)&#123;</span><br><span class="line">    P(full);</span><br><span class="line">    P(mutex2)；</span><br><span class="line">    从buffer（<span class="keyword">out</span>）中取出产品；</span><br><span class="line">    <span class="keyword">out</span>=(<span class="keyword">out</span>+<span class="number">1</span>)<span class="keyword">mod</span> n；</span><br><span class="line">    V（mutex2）；</span><br><span class="line">    V(empty);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="changsk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>changsk</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="http://changsk.top/2019/06/15/producer-consumer/" title="生产者-消费者问题详解">http://changsk.top/2019/06/15/producer-consumer/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/生产者-消费者/" rel="tag"><i class="fa fa-tag"></i> 生产者&消费者</a>
+          
+            <a href="/tags/PV操作/" rel="tag"><i class="fa fa-tag"></i> PV操作</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/15/gitignore/" rel="next" title="gitignore">
+                <i class="fa fa-chevron-left"></i> gitignore
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/16/jvm-MethodArea-PERM/" rel="prev" title="jvm中方法区和永久代的关系">
+                jvm中方法区和永久代的关系 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/me/me.jpg" alt="changsk">
+            
+              <p class="site-author-name" itemprop="name">changsk</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Tkzccsk" title="GitHub &rarr; https://github.com/Tkzccsk" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:2486623255@qq.com" title="E-Mail &rarr; mailto:2486623255@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/tkzc_csk" title="CSDN &rarr; https://blog.csdn.net/tkzc_csk" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、明确定义"><span class="nav-number">1.</span> <span class="nav-text">一、明确定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、形象启发"><span class="nav-number">2.</span> <span class="nav-text">二、形象启发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、分层解剖"><span class="nav-number">3.</span> <span class="nav-text">三、分层解剖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）一个生产者，一个消费者，公用一个缓冲区。"><span class="nav-number">3.1.</span> <span class="nav-text">1）一个生产者，一个消费者，公用一个缓冲区。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）一个生产者，一个消费者，公用n个环形缓冲区。"><span class="nav-number">3.2.</span> <span class="nav-text">2）一个生产者，一个消费者，公用n个环形缓冲区。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3）一组生产者，一组消费者，公用n个环形缓冲区"><span class="nav-number">3.3.</span> <span class="nav-text">3）一组生产者，一组消费者，公用n个环形缓冲区</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changsk</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">15k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">13 分钟</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+        pbOptions.iconStyle = "box";
+      
+        pbOptions.boxForm = "horizontal";
+      
+        pbOptions.position = "bottomCenter";
+      
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+        flOptions.iconStyle = "box";
+      
+        flOptions.boxForm = "horizontal";
+      
+        flOptions.position = "middleRight";
+      
+        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

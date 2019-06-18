@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://changsk.top/2019/06/17/java-design-pattern/</loc>
+    <lastmod>2019-06-18</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/18/java-volatile/</loc>
+    <lastmod>2019-06-18</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/17/what-is-resuful/</loc>
+    <lastmod>2019-06-17</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/17/kafka-zookeeper/</loc>
+    <lastmod>2019-06-17</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/17/java-sleep-wait/</loc>
+    <lastmod>2019-06-17</lastmod>
+  </url>  <url>
     <loc>http://changsk.top/2019/06/16/linux-grep/</loc>
-    <lastmod>2019-06-16</lastmod>
+    <lastmod>2019-06-17</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/17/Reactor-thread-model/</loc>
+    <lastmod>2019-06-17</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/06/16/java-perm-GC/</loc>
     <lastmod>2019-06-16</lastmod>

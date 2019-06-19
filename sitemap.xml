@@ -2,16 +2,65 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://changsk.top/2019/06/19/mysql-partition/</loc>
+    
+    <lastmod>2019-06-19T12:30:45.401Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/19/bridge/</loc>
+    
+    <lastmod>2019-06-19T07:44:32.520Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://changsk.top/2019/06/17/java-design-pattern/</loc>
     
-    <lastmod>2019-06-18T02:05:33.295Z</lastmod>
+    <lastmod>2019-06-19T07:27:44.692Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/18/mysql-explain/</loc>
+    
+    <lastmod>2019-06-19T03:31:50.136Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/18/java-dynamic-proxy/</loc>
+    
+    <lastmod>2019-06-18T09:41:27.961Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/18/mysql-master-slave-replication/</loc>
+    
+    <lastmod>2019-06-18T08:33:01.603Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/categories/index.html</loc>
+    
+    <lastmod>2019-06-18T02:57:49.294Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/18/java-clone-threeMethod/</loc>
+    
+    <lastmod>2019-06-18T02:56:16.460Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://changsk.top/2019/06/18/java-volatile/</loc>
     
-    <lastmod>2019-06-18T02:05:28.729Z</lastmod>
+    <lastmod>2019-06-18T02:24:03.430Z</lastmod>
     
   </url>
   
@@ -145,13 +194,6 @@
     <loc>http://changsk.top/tags/index.html</loc>
     
     <lastmod>2019-06-11T16:24:28.637Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://changsk.top/categories/index.html</loc>
-    
-    <lastmod>2019-06-11T16:24:07.584Z</lastmod>
     
   </url>
   

@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://changsk.top/2019/06/19/mysql-partition/</loc>
+    <lastmod>2019-06-19</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/19/bridge/</loc>
+    <lastmod>2019-06-19</lastmod>
+  </url>  <url>
     <loc>http://changsk.top/2019/06/17/java-design-pattern/</loc>
+    <lastmod>2019-06-19</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/18/mysql-explain/</loc>
+    <lastmod>2019-06-19</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/18/java-dynamic-proxy/</loc>
+    <lastmod>2019-06-18</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/18/mysql-master-slave-replication/</loc>
+    <lastmod>2019-06-18</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/18/java-clone-threeMethod/</loc>
     <lastmod>2019-06-18</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/06/18/java-volatile/</loc>

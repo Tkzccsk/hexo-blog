@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://changsk.top/2019/06/19/udisk-capacity-small/</loc>
-    <lastmod>2019-06-19</lastmod>
+    <loc>http://changsk.top/2019/06/20/java-synchronized/</loc>
+    <lastmod>2019-06-20</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/20/java-AQS/</loc>
+    <lastmod>2019-06-20</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/20/redis-data-type/</loc>
+    <lastmod>2019-06-20</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/16/markdown-syntax/</loc>
+    <lastmod>2019-06-20</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/06/17/java-design-pattern/</loc>
+    <lastmod>2019-06-20</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/19/redis-persistence/</loc>
+    <lastmod>2019-06-19</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/19/udisk-capacity-small/</loc>
     <lastmod>2019-06-19</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/06/19/mysql-partition/</loc>
@@ -47,9 +62,6 @@
     <lastmod>2019-06-16</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/06/16/jvm-MethodArea-PERM/</loc>
-    <lastmod>2019-06-16</lastmod>
-  </url>  <url>
-    <loc>http://changsk.top/2019/06/16/markdown-syntax/</loc>
     <lastmod>2019-06-16</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/06/15/producer-consumer/</loc>

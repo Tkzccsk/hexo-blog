@@ -2,16 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://changsk.top/2019/06/19/udisk-capacity-small/</loc>
+    <loc>http://changsk.top/2019/06/20/java-synchronized/</loc>
     
-    <lastmod>2019-06-19T13:37:12.837Z</lastmod>
+    <lastmod>2019-06-20T07:58:57.034Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/20/java-AQS/</loc>
+    
+    <lastmod>2019-06-20T03:38:08.529Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/20/redis-data-type/</loc>
+    
+    <lastmod>2019-06-20T01:54:36.154Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/16/markdown-syntax/</loc>
+    
+    <lastmod>2019-06-20T01:50:51.503Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://changsk.top/2019/06/17/java-design-pattern/</loc>
     
-    <lastmod>2019-06-19T12:43:37.509Z</lastmod>
+    <lastmod>2019-06-20T01:36:19.383Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/19/redis-persistence/</loc>
+    
+    <lastmod>2019-06-19T15:47:10.270Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/19/udisk-capacity-small/</loc>
+    
+    <lastmod>2019-06-19T13:40:17.049Z</lastmod>
     
   </url>
   
@@ -124,13 +159,6 @@
     <loc>http://changsk.top/2019/06/16/jvm-MethodArea-PERM/</loc>
     
     <lastmod>2019-06-16T15:20:13.389Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://changsk.top/2019/06/16/markdown-syntax/</loc>
-    
-    <lastmod>2019-06-16T14:19:31.240Z</lastmod>
     
   </url>
   

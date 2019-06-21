@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="changsk&#39;s blogs">
 <meta property="og:description" content="原文：MySQL 性能优化神器 Explain 使用分析 简介MySQL 提供了一个 EXPLAIN 命令, 它可以对 SELECT 语句进行分析, 并输出 SELECT 执行的详细信息, 以供开发人员针对性优化.EXPLAIN 命令用法十分简单, 在 SELECT 语句前加上 Explain 就可以了, 例如: 1EXPLAIN SELECT * from user_info WHERE id">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-19T03:31:50.136Z">
+<meta property="og:updated_time" content="2019-06-20T08:12:20.211Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql之explain详解">
 <meta name="twitter:description" content="原文：MySQL 性能优化神器 Explain 使用分析 简介MySQL 提供了一个 EXPLAIN 命令, 它可以对 SELECT 语句进行分析, 并输出 SELECT 执行的详细信息, 以供开发人员针对性优化.EXPLAIN 命令用法十分简单, 在 SELECT 语句前加上 Explain 就可以了, 例如: 1EXPLAIN SELECT * from user_info WHERE id">
@@ -455,7 +455,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-19 11:31:50" itemprop="dateModified" datetime="2019-06-19T11:31:50+08:00">2019-06-19</time>
+                <time title="修改时间：2019-06-20 16:12:20" itemprop="dateModified" datetime="2019-06-20T16:12:20+08:00">2019-06-20</time>
               
             
           </span>
@@ -545,6 +545,8 @@
         <p>原文：<a href="https://segmentfault.com/a/1190000008131735" target="_blank" rel="noopener">MySQL 性能优化神器 Explain 使用分析</a></p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>MySQL 提供了一个 <strong>EXPLAIN</strong> 命令, 它可以对 <code>SELECT</code> 语句进行分析, 并输出 <code>SELECT</code> 执行的详细信息, 以供开发人员针对性优化.<br>EXPLAIN 命令用法十分简单, 在 SELECT 语句前加上 Explain 就可以了, 例如:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">from</span> user_info <span class="keyword">WHERE</span> <span class="keyword">id</span> &lt; <span class="number">300</span>;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>为了接下来方便演示 EXPLAIN 的使用, 首先我们需要建立两个测试用的表, 并添加相应的数据:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`user_info`</span> (</span><br><span class="line">  <span class="string">`id`</span>   <span class="built_in">BIGINT</span>(<span class="number">20</span>)  <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span>,</span><br><span class="line">  <span class="string">`age`</span>  <span class="built_in">INT</span>(<span class="number">11</span>)              <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`name_index`</span> (<span class="string">`name`</span>)</span><br><span class="line">)</span><br><span class="line">  <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span></span><br><span class="line">  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span> = utf8</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> user_info (<span class="keyword">name</span>, age) <span class="keyword">VALUES</span> (<span class="string">'xys'</span>, <span class="number">20</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> user_info (<span class="keyword">name</span>, age) <span class="keyword">VALUES</span> (<span class="string">'a'</span>, <span class="number">21</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> user_info (<span class="keyword">name</span>, age) <span class="keyword">VALUES</span> (<span class="string">'b'</span>, <span class="number">23</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> user_info (<span class="keyword">name</span>, age) <span class="keyword">VALUES</span> (<span class="string">'c'</span>, <span class="number">50</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> user_info (<span class="keyword">name</span>, age) <span class="keyword">VALUES</span> (<span class="string">'d'</span>, <span class="number">15</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> user_info (<span class="keyword">name</span>, age) <span class="keyword">VALUES</span> (<span class="string">'e'</span>, <span class="number">20</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> user_info (<span class="keyword">name</span>, age) <span class="keyword">VALUES</span> (<span class="string">'f'</span>, <span class="number">21</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> user_info (<span class="keyword">name</span>, age) <span class="keyword">VALUES</span> (<span class="string">'g'</span>, <span class="number">23</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> user_info (<span class="keyword">name</span>, age) <span class="keyword">VALUES</span> (<span class="string">'h'</span>, <span class="number">50</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> user_info (<span class="keyword">name</span>, age) <span class="keyword">VALUES</span> (<span class="string">'i'</span>, <span class="number">15</span>);</span><br></pre></td></tr></table></figure>
@@ -867,7 +869,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -999,7 +1001,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">38</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1122,7 +1128,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">179k</span>
+    <span title="站点总字数">203k</span>
   
 
   
@@ -1133,7 +1139,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">2:42</span>
+    <span title="站点阅读时长">3:05</span>
   
 </div>
 

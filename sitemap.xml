@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://changsk.top/2019/06/21/java-WeakHashMap/</loc>
+    
+    <lastmod>2019-06-21T03:30:54.721Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/20/java-four-reference/</loc>
+    
+    <lastmod>2019-06-21T03:03:41.385Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/20/java-ThreadLocal/</loc>
+    
+    <lastmod>2019-06-20T09:57:36.973Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/18/mysql-explain/</loc>
+    
+    <lastmod>2019-06-20T08:12:20.211Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://changsk.top/2019/06/20/redis-data-type/</loc>
+    
+    <lastmod>2019-06-20T08:11:31.837Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://changsk.top/2019/06/20/java-synchronized/</loc>
     
     <lastmod>2019-06-20T08:05:29.440Z</lastmod>
@@ -12,13 +47,6 @@
     <loc>http://changsk.top/2019/06/20/java-AQS/</loc>
     
     <lastmod>2019-06-20T03:38:08.529Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://changsk.top/2019/06/20/redis-data-type/</loc>
-    
-    <lastmod>2019-06-20T01:54:36.154Z</lastmod>
     
   </url>
   
@@ -61,13 +89,6 @@
     <loc>http://changsk.top/2019/06/19/bridge/</loc>
     
     <lastmod>2019-06-19T07:44:32.520Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://changsk.top/2019/06/18/mysql-explain/</loc>
-    
-    <lastmod>2019-06-19T03:31:50.136Z</lastmod>
     
   </url>
   

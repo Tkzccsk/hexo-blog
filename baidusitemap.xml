@@ -1,6 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://changsk.top/2019/06/26/mysql-optimize/</loc>
+    <lastmod>2019-06-27</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/26/database-paradigms/</loc>
+    <lastmod>2019-06-27</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/27/java-HashMap-access/</loc>
+    <lastmod>2019-06-27</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/19/mysql-partition/</loc>
+    <lastmod>2019-06-26</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/18/mysql-master-slave-replication/</loc>
+    <lastmod>2019-06-26</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/18/mysql-explain/</loc>
+    <lastmod>2019-06-26</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/26/redis-skiplist/</loc>
+    <lastmod>2019-06-26</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/26/bitmap/</loc>
+    <lastmod>2019-06-26</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/26/java-create-instance/</loc>
+    <lastmod>2019-06-26</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/19/redis-persistence/</loc>
+    <lastmod>2019-06-26</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/26/redis-storage-structure/</loc>
+    <lastmod>2019-06-26</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/26/nagle/</loc>
+    <lastmod>2019-06-26</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/25/why-redis-quick/</loc>
+    <lastmod>2019-06-25</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/24/mss-mtu/</loc>
+    <lastmod>2019-06-24</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/24/get-post/</loc>
+    <lastmod>2019-06-24</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/23/TCP/</loc>
+    <lastmod>2019-06-24</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/18/java-dynamic-proxy/</loc>
+    <lastmod>2019-06-24</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/24/java-CopyOnWriteArraylist/</loc>
+    <lastmod>2019-06-24</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/24/java-Thread-safe-classes/</loc>
+    <lastmod>2019-06-24</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/21/java8-HashMap/</loc>
+    <lastmod>2019-06-23</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/21/page-replacement-algorithm/</loc>
+    <lastmod>2019-06-21</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/21/java-future-futuretask/</loc>
+    <lastmod>2019-06-21</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/06/21/lur-redis/</loc>
+    <lastmod>2019-06-21</lastmod>
+  </url>  <url>
     <loc>http://changsk.top/2019/06/21/java-WeakHashMap/</loc>
     <lastmod>2019-06-21</lastmod>
   </url>  <url>
@@ -8,9 +77,6 @@
     <lastmod>2019-06-21</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/06/20/java-ThreadLocal/</loc>
-    <lastmod>2019-06-20</lastmod>
-  </url>  <url>
-    <loc>http://changsk.top/2019/06/18/mysql-explain/</loc>
     <lastmod>2019-06-20</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/06/20/redis-data-type/</loc>
@@ -28,23 +94,11 @@
     <loc>http://changsk.top/2019/06/17/java-design-pattern/</loc>
     <lastmod>2019-06-20</lastmod>
   </url>  <url>
-    <loc>http://changsk.top/2019/06/19/redis-persistence/</loc>
-    <lastmod>2019-06-19</lastmod>
-  </url>  <url>
     <loc>http://changsk.top/2019/06/19/udisk-capacity-small/</loc>
-    <lastmod>2019-06-19</lastmod>
-  </url>  <url>
-    <loc>http://changsk.top/2019/06/19/mysql-partition/</loc>
     <lastmod>2019-06-19</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/06/19/bridge/</loc>
     <lastmod>2019-06-19</lastmod>
-  </url>  <url>
-    <loc>http://changsk.top/2019/06/18/java-dynamic-proxy/</loc>
-    <lastmod>2019-06-18</lastmod>
-  </url>  <url>
-    <loc>http://changsk.top/2019/06/18/mysql-master-slave-replication/</loc>
-    <lastmod>2019-06-18</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/06/18/java-clone-threeMethod/</loc>
     <lastmod>2019-06-18</lastmod>

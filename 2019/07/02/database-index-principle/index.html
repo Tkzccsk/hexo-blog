@@ -107,15 +107,25 @@
 
 
 
-  <meta name="keywords" content="seeker">
+  <meta name="description" content="本文转载自：深入浅出数据库索引原理  使用索引很简单，只要能写创建表的语句，就肯定能写创建索引的语句，要知道这个世界上是不存在不会创建表的服务器端程序员的。然而， 会使用索引是一回事， 而深入理解索引原理又能恰到好处使用索引又是另一回事，这完全是两个天差地别的境界（我自己也还没有达到这层境界）。很大一部份程序员对索引的了解仅限于到“加索引能使查询变快”这个概念为止。 为什么要给表加上主键？ 为什">
+<meta name="keywords" content="数据库索引">
 <meta property="og:type" content="article">
-<meta property="og:title" content="database_index_principle">
+<meta property="og:title" content="数据库索引原理">
 <meta property="og:url" content="http://changsk.top/2019/07/02/database-index-principle/index.html">
 <meta property="og:site_name" content="changsk&#39;s blogs">
+<meta property="og:description" content="本文转载自：深入浅出数据库索引原理  使用索引很简单，只要能写创建表的语句，就肯定能写创建索引的语句，要知道这个世界上是不存在不会创建表的服务器端程序员的。然而， 会使用索引是一回事， 而深入理解索引原理又能恰到好处使用索引又是另一回事，这完全是两个天差地别的境界（我自己也还没有达到这层境界）。很大一部份程序员对索引的了解仅限于到“加索引能使查询变快”这个概念为止。 为什么要给表加上主键？ 为什">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-01T17:13:29.590Z">
+<meta property="og:image" content="http://changsk.top/2019/07/02/database-index-principle/1.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/02/database-index-principle/2.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/02/database-index-principle/3.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/02/database-index-principle/4.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/02/database-index-principle/5.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/02/database-index-principle/6.jpg">
+<meta property="og:updated_time" content="2019-07-02T02:10:49.727Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="database_index_principle">
+<meta name="twitter:title" content="数据库索引原理">
+<meta name="twitter:description" content="本文转载自：深入浅出数据库索引原理  使用索引很简单，只要能写创建表的语句，就肯定能写创建索引的语句，要知道这个世界上是不存在不会创建表的服务器端程序员的。然而， 会使用索引是一回事， 而深入理解索引原理又能恰到好处使用索引又是另一回事，这完全是两个天差地别的境界（我自己也还没有达到这层境界）。很大一部份程序员对索引的了解仅限于到“加索引能使查询变快”这个概念为止。 为什么要给表加上主键？ 为什">
+<meta name="twitter:image" content="http://changsk.top/2019/07/02/database-index-principle/1.jpg">
 
 
 
@@ -134,7 +144,7 @@
   };
 </script>
 
-  <title>database_index_principle | changsk's blogs</title>
+  <title>数据库索引原理 | changsk's blogs</title>
   
 
 
@@ -426,7 +436,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">database_index_principle
+          <h1 class="post-title" itemprop="name headline">数据库索引原理
 
               
             
@@ -452,12 +462,34 @@
                 
               
 
-              <time title="创建时间：2019-07-02 01:13:29" itemprop="dateCreated datePublished" datetime="2019-07-02T01:13:29+08:00">2019-07-02</time>
+              <time title="创建时间：2019-07-02 01:13:29 / 修改时间：10:10:49" itemprop="dateCreated datePublished" datetime="2019-07-02T01:13:29+08:00">2019-07-02</time>
             
 
+            
+              
+
+              
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -488,7 +520,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">0</span>
+                <span title="本文字数">4.9k</span>
               
 
               
@@ -502,7 +534,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">4 分钟</span>
               
             </div>
           
@@ -522,7 +554,67 @@
       
 
       
-        
+        <blockquote>
+<p>本文转载自：<a href="https://www.cnblogs.com/aspwebchh/p/6652855.html" target="_blank" rel="noopener">深入浅出数据库索引原理</a></p>
+</blockquote>
+<p>使用索引很简单，只要能写创建表的语句，就肯定能写创建索引的语句，要知道这个世界上是不存在不会创建表的服务器端程序员的。然而， <strong>会使用索引是一回事， 而深入理解索引原理又能恰到好处使用索引又是另一回事</strong>，这完全是两个天差地别的境界（我自己也还没有达到这层境界）。很大一部份程序员对索引的了解仅限于到“加索引能使查询变快”这个概念为止。</p>
+<p><strong>为什么要给表加上主键？</strong></p>
+<p><strong>为什么加索引后会使查询变快？</strong></p>
+<p><strong>为什么加索引后会使写入、修改、删除变慢</strong>？</p>
+<p><strong>什么情况下要同时在两个字段上建索引？</strong></p>
+<a id="more"></a>
+
+<p>这些问题他们可能不一定能说出答案。知道这些问题的答案有什么好处呢？如果开发的应用使用的数据库表中只有1万条数据，那么了解与不了解真的没有差别， 然而， 如果开发的应用有几百上千万甚至亿级别的数据，那么不深入了解索引的原理， 写出来程序就根本跑不动，就好比如果给货车装个轿车的引擎，这货车还能拉的动货吗？</p>
+<p>接下来就讲解一下上面提出的几个问题，希望对阅读者有帮助。</p>
+<p>网上很多讲解索引的文章对索引的描述是这样的「<strong>索引就像书的目录， 通过书的目录就准确的定位到了书籍具体的内容</strong>」，这句话描述的非常正确， 但就像脱了裤子放屁，说了跟没说一样，通过目录查找书的内容自然是要比一页一页的翻书找来的快，同样使用的索引的人难到会不知道，通过索引定位到数据比直接一条一条的查询来的快，不然他们为什么要建索引。</p>
+<p>想要理解索引原理必须清楚一种数据结构「<strong>平衡树</strong>」(非二叉)，也就是<strong>b tree</strong>或者 <strong>b+ tree</strong>，重要的事情说三遍：“<code>平衡树，平衡树，平衡树</code>”。当然， 有的数据库也使用<strong>哈希桶</strong>作用索引的数据结构 ， 然而， 主流的<code>RDBMS</code>都是把平衡树当做数据表默认的索引数据结构的。</p>
+<p>我们平时建表的时候都会为表加上主键， 在某些关系数据库中， <strong>如果建表时不指定主键，数据库会拒绝建表的语句执行</strong>。 事实上， 一个没加主键的表，并不能被称之为「表」。一个没加主键的表，它的数据无序的放置在磁盘存储器上，一行一行的排列的很整齐， 跟我认知中的「表」很接近。如果给表加上了主键，<strong>那么表在磁盘上的存储结构就由整齐排列的结构转变成了树状结构</strong>，也就是上面说的「平衡树」结构，换句话说，<strong>就是整个表就变成了一个索引</strong>。没错， 再说一遍， <code>整个表变成了一个索引</code>，也就是所谓的「<strong>聚集索引</strong>」。 这就是为什么一个表只能有一个主键， 一个表只能有一个「聚集索引」，因为<strong>主键的作用就是把「表」的数据格式转换成「索引（平衡树）」的格式放置。</strong><br><img src="1.jpg" alt="这里写图片描述"></p>
+<p>上图就是带有主键的表（聚集索引）的结构图。图画的不是很好， 将就着看。<strong>其中树的所有结点（底部除外）的数据都是由主键字段中的数据构成</strong>，也就是通常我们指定主键的id字段。<strong>最下面部分是真正表中的数据</strong>。 假如我们执行一个SQL语句：</p>
+<blockquote>
+<p>select * from table where id = 1256;</p>
+</blockquote>
+<p>首先根据索引定位到1256这个值所在的叶结点，然后再通过叶结点取到id等于1256的数据行。 这里不讲解平衡树的运行细节， 但是从上图能看出，树一共有三层， 从根节点至叶节点只需要经过三次查找就能得到结果。如下图<br><img src="2.jpg" alt="这里写图片描述"></p>
+<p>假如一张表有一亿条数据 ，需要查找其中某一条数据，按照常规逻辑， 一条一条的去匹配的话， 最坏的情况下需要匹配一亿次才能得到结果，用大O标记法就是O(n)最坏时间复杂度，这是无法接受的，而且这一亿条数据显然不能一次性读入内存供程序使用， 因此， 这一亿次匹配<strong>在不经缓存优化的情况下就是一亿次IO开销</strong>，以现在磁盘的IO能力和CPU的运算能力， 有可能需要几个月才能得出结果 。如果把这张表转换成平衡树结构（一棵非常茂盛和节点非常多的树），假设这棵树有10层，那么只需要10次IO开销就能查找到所需要的数据， 速度以指数级别提升，用大O标记法就是<strong>O(log n)</strong>，n是记录总树，底数是树的分叉数，结果就是树的层次数。换言之，查找次数是以树的分叉数为底，记录总数的对数，用公式来表示就是<br><img src="3.jpg" alt="这里写图片描述"></p>
+<p>用程序来表示就是Math.Log(100000000,10)，100000000是记录数，10是树的分叉数（真实环境下分叉数远不止10）， 结果就是查找次数，这里的结果从亿降到了个位数。因此，利用索引会使数据库查询有惊人的性能提升。</p>
+<p>然而， 事物都是有两面的， <strong>索引能让数据库查询数据的速度上升， 而使写入数据的速度下降</strong>，原因很简单的， 因为<strong>平衡树这个结构必须一直维持在一个正确的状态</strong>， 增删改数据都会改变平衡树各节点中的索引数据内容，破坏树结构， <strong>因此，在每次数据改变时， DBMS必须去重新梳理树（索引）的结构以确保它的正确，这会带来不小的性能开销，也就是为什么索引会给查询以外的操作带来副作用的原因。</strong></p>
+<p>讲完聚集索引 ， 接下来聊一下<strong>非聚集索引</strong>， 也就是我们平时经常提起和使用的常规索引。</p>
+<p>非聚集索引和聚集索引一样， 同样是采用平衡树作为索引的数据结构。<strong>索引树结构中各节点的值来自于表中的索引字段</strong>， 假如给user表的name字段加上索引 ， 那么索引就是由name字段中的值构成，<strong>在数据改变时， DBMS需要一直维护索引结构的正确性</strong>。如果给表中多个字段加上索引 ， 那么就会出现多个独立的索引结构，每个索引（非聚集索引）互相之间不存在关联。 如下图</p>
+<p><img src="4.jpg" alt="这里写图片描述"></p>
+<p><strong>每次给字段建一个新索引， 字段中的数据就会被复制一份出来， 用于生成索引。 因此， 给表添加索引，会增加表的体积， 占用磁盘存储空间。</strong></p>
+<p><strong>非聚集索引和聚集索引的区别在于， 通过聚集索引可以查到需要查找的数据， 而通过非聚集索引可以查到记录对应的主键值 ， 再使用主键的值通过聚集索引查找到需要的数据</strong>，如下图</p>
+<p><img src="5.jpg" alt="这里写图片描述"></p>
+<p>不管以任何方式查询表， <strong>最终都会利用主键通过聚集索引来定位到数据</strong>， 聚集索引（主键）是通往真实数据所在的唯一路径。</p>
+<p>然而， 有一种例外可以不使用聚集索引就能查询出所需要的数据， 这种非主流的方法 称之为「<strong>覆盖索引</strong>」查询， 也就是平时所说的<strong>复合索引</strong>或者<strong>多字段索引查询</strong>。 文章上面的内容已经指出， <strong>当为字段建立索引以后， 字段中的内容会被同步到索引之中</strong>， <strong>如果为一个索引指定两个字段， 那么这个两个字段的内容都会被同步至索引之中。</strong></p>
+<p>先看下面这个SQL语句</p>
+<blockquote>
+<p>//建立索引<br>create index index_birthday on user_info(birthday);<br>//查询生日在1991年11月1日出生用户的用户名<br>select user_name from user_info where birthday = ‘1991-11-1’</p>
+</blockquote>
+<p>这句SQL语句的执行过程如下</p>
+<p>首先，通过非聚集索引index_birthday查找birthday等于1991-11-1的所有记录的主键ID值</p>
+<p>然后，通过得到的主键ID值执行聚集索引查找，找到主键ID值对就的真实数据（数据行）存储的位置</p>
+<p>最后， 从得到的真实数据中取得user_name字段的值返回， 也就是取得最终的结果</p>
+<p>我们把birthday字段上的索引改成双字段的覆盖索引</p>
+<blockquote>
+<p>create index index_birthday_and_user_name on user_info(birthday, user_name);</p>
+</blockquote>
+<p>这句SQL语句的执行过程就会变为</p>
+<p>通过非聚集索引index_birthday_and_user_name查找birthday等于1991-11-1的叶节点的内容，然而， 叶节点中除了有user_name表主键ID的值以外， user_name字段的值也在里面， 因此不需要通过主键ID值的查找数据行的真实所在， 直接取得叶节点中user_name的值返回即可。 通过这种覆盖索引直接查找的方式， 可以省略不使用覆盖索引查找的后面两个步骤， 大大的提高了查询性能，如下图</p>
+<p><img src="6.jpg" alt="这里写图片描述"></p>
+<p>数据库索引的大致工作原理就是像文中所述， 然而细节方面可能会略有偏差，这但并不会对概念阐述的结果产生影响 。</p>
+<p>最后， 推荐三本关系数据库方面的书籍， 文中所讲解的概念内容都是来自于此。</p>
+<ol>
+<li>《SQL Server2005技术内幕之T-SQL查询》</li>
+</ol>
+<p>这本书虽然是针对SQL Server写的， 但是里面的大部份内容同样适用于其它关系数据库，此书对查询编写的技巧和优化讲解的非常透彻。</p>
+<ol start="2">
+<li>《关系数据库系统概论》第四版</li>
+</ol>
+<p>王珊和萨师煊写的那本， 是大学计算机教材， 讲的通俗易懂， 在国内计算机书图书出版领域质量是排的上号的。</p>
+<ol start="3">
+<li>《数据库系统概念》</li>
+</ol>
+<p>这本书在数据库领域非常出名， 被称之为帆船书， 书中内容博大精深，非一朝一夕可参透的。</p>
+
       
     </div>
 
@@ -579,7 +671,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="http://changsk.top/2019/07/02/database-index-principle/" title="database_index_principle">http://changsk.top/2019/07/02/database-index-principle/</a>
+    <a href="http://changsk.top/2019/07/02/database-index-principle/" title="数据库索引原理">http://changsk.top/2019/07/02/database-index-principle/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -590,6 +682,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库索引/" rel="tag"><i class="fa fa-tag"></i> 数据库索引</a>
+          
+        </div>
       
 
       
@@ -629,6 +727,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/02/jianzhioffer-flip-word-order/" rel="prev" title="剑指offer-翻转单词顺序列">
+                剑指offer-翻转单词顺序列 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -691,7 +793,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-count">70</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -742,7 +844,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -881,7 +985,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">63</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -987,7 +1099,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">363k</span>
+    <span title="站点总字数">379k</span>
   
 
   
@@ -998,7 +1110,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">5:30</span>
+    <span title="站点阅读时长">5:44</span>
   
 </div>
 

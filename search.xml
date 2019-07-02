@@ -1,9 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[database_index_principle]]></title>
+    <title><![CDATA[leetcode-236:Lowest Common Ancestor of a Binary Tree（LCA，最近公共祖先节点）]]></title>
+    <url>%2F2019%2F07%2F02%2Fleetcode-236%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/ 题目描述 题目难度：Medium Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree. According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).” Given the following binary tree: root = [3,5,1,6,2,0,8,null,null,7,4] Example 1Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1Output: 3Explanation: The LCA of nodes 5 and 1 is 3. Example 2Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4Output: 5Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition. NoteAll of the nodes’ values will be unique.p and q are different and both values will exist in the binary tree. AC代码1最简单粗暴的解法：从下往上依次遍历树中每个节点，第一次出现子树(包括节点本身)既有p又有q的结点为LCA所求结点。时间复杂度：O(n * n) 123456789101112131415161718192021222324class Solution &#123; private TreeNode resNode = null;public TreeNode findCommonNode(TreeNode root, TreeNode p, TreeNode q)&#123; if(root == null) return null; if(p == null &amp;&amp; q == null) return null; if(root.left != null) findCommonNode(root.left, p, q); if(root.right != null) findCommonNode(root.right, p, q); if(hasNode(root, p) &amp;&amp; hasNode(root, q)) if(resNode == null) resNode = root; return resNode;&#125;private boolean hasNode(TreeNode root, TreeNode node)&#123; if(root == null) return false; if(root == node) return true; if(root.left == node || root.right == node) return true; return hasNode(root.left, node) || hasNode(root.right, node);&#125; public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) &#123; return findCommonNode(root, p, q); &#125;&#125; AC代码2leetcode大神的解法，以递归的方式解决LCA问题。时间复杂度：O(n)空间复杂度：O(n)。主要是递归栈的深度。 12345678910111213141516171819202122232425262728293031/** * Definition for a binary tree node. * public class TreeNode &#123; * int val; * TreeNode left; * TreeNode right; * TreeNode(int x) &#123; val = x; &#125; * &#125; */class Solution &#123; public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) &#123; /** 以下三种情况会返回： 1. root == null，return null 2. root 只等于 p 或者 q 其中一个结点 3. q 和 p 相等的情况下，root == q == p */ if(root == null || root == p || root == q) &#123; return root; &#125; TreeNode left = lowestCommonAncestor(root.left, p , q); TreeNode right = lowestCommonAncestor(root.right, p , q); /** 1. 如果 left == null，返回 right(不管right是否为null) 2. left != null，right == null，返回 left 3. left 和 right 都不等于null，说明 left 和 right 只和 q 或者 p 其中一个结点相等，root为p和q的最近公共子节点，返回root */ return left == null ? right: right == null ? left: root;&#125;&#125; AC代码3建立两队列，一个队列保存从根节点到p的路径，另一个队列保存从根节点到q的路径。两个路径中第一个不相同的节点的前一个节点即为LCA所求。 1234567891011121314151617181920212223242526272829303132333435363738394041424344/** * Definition for a binary tree node. * public class TreeNode &#123; * int val; * TreeNode left; * TreeNode right; * TreeNode(int x) &#123; val = x; &#125; * &#125; */class Solution &#123; public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) &#123; if(root == null || root == p || root == q) &#123; return root; &#125; LinkedList&lt;TreeNode&gt; q1 = new LinkedList&lt;&gt;(); LinkedList&lt;TreeNode&gt; q2 = new LinkedList&lt;&gt;(); getTrace(root, q1, p); getTrace(root, q2, q); return LCA(q1, q2);&#125; private boolean getTrace(TreeNode root, LinkedList&lt;TreeNode&gt; queue, TreeNode node)&#123; if(root == null) return false; if(root == node)&#123; queue.offer(root); return true; &#125; queue.offer(root); if(getTrace(root.left, queue, node) || getTrace(root.right, queue, node)) return true; queue.pollLast(); return false; &#125; private TreeNode LCA(Queue&lt;TreeNode&gt; q1, Queue&lt;TreeNode&gt; q2)&#123; TreeNode node = null; while(true)&#123; TreeNode n1 = q1.poll(); TreeNode n2 = q2.poll(); if(n1 == n2) node = n1; else break; &#125; return node; &#125;&#125; AC代码4离线Tarjan算法 后续有时间再研究。]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-23:Merge k Sorted Lists(合并k个有序链表)]]></title>
+    <url>%2F2019%2F07%2F02%2Fleetcode-23%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/merge-k-sorted-lists/ 题目描述 题目难度：Hard Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity. ExampleInput: [1-&gt;4-&gt;5,1-&gt;3-&gt;4,2-&gt;6] Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6 AC代码leetcode 优秀的解法：灵活运用二路归并排序的思想。 时间复杂度：O(log(k) * n) ,k为链表长度，n为单个链表长度 12345678910111213141516171819202122232425262728293031323334353637383940/** * Definition for singly-linked list. * public class ListNode &#123; * int val; * ListNode next; * ListNode(int x) &#123; val = x; &#125; * &#125; */class Solution &#123; public ListNode mergeKLists(ListNode[] lists) &#123; return partition(lists, 0, lists.length - 1); &#125; private ListNode partition(ListNode[] lists, int start, int end)&#123; if(start == end) return lists[start]; if(start &lt; end)&#123; int mid = (start + end) &gt;&gt; 1; ListNode l1 = partition(lists, start, mid); ListNode l2 = partition(lists, mid + 1, end); return mergeCore(l1, l2); &#125; else return null; &#125; //合并两个链表，返回合并后的头结点 private ListNode mergeCore(ListNode l1, ListNode l2)&#123; if(l1 != null &amp;&amp; l2 != null)&#123; if(l1.val &lt; l2.val)&#123; l1.next = mergeCore(l1.next, l2); return l1; &#125; else&#123; l2.next = mergeCore(l1, l2.next); return l2; &#125; &#125; if(l1 != null) return l1; else return l2; &#125;&#125;]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[剑指offer-不用加减乘除做加法]]></title>
+    <url>%2F2019%2F07%2F02%2Fjianzhioffer-addition2%2F</url>
+    <content type="text"><![CDATA[题目描述写一个函数，求两个整数之和，要求在函数体内不得使用+、-、*、/四则运算符号。 AC代码用位运算 1234567891011121314public class Solution &#123; public int Add(int num1,int num2) &#123; int row_sum = 0; // 不含进位的和 int carry = 0; // 进位 while(num2 != 0)&#123; // 当进位为 0 时停止循环，条件row_sum + carry == num1 + num2 始终成立 row_sum = num1 ^ num2; // 不含进位的和可以用异或 ^ 实现 carry = (num1 &amp; num2) &lt;&lt; 1; // 通过 &amp; ，可以确定哪里有进位，然后左移一位表示进位 //计算 row_sum 和进位的和 num1 = row_sum; num2 = carry; &#125; return num1; &#125;&#125;]]></content>
+      <categories>
+        <category>剑指offer</category>
+      </categories>
+      <tags>
+        <tag>剑指offer</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[剑指offer-求1+2+3+...+n]]></title>
+    <url>%2F2019%2F07%2F02%2Fjianzhioffer-addition%2F</url>
+    <content type="text"><![CDATA[题目描述求1+2+3+…+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。 AC代码利用递归的思想 短路与&amp;&amp;可以充当if else的功能 1234567public class Solution &#123; public int Sum_Solution(int n) &#123; int sum = n; boolean ans = (n &gt; 0) &amp;&amp; ((sum += Sum_Solution(n - 1)) &gt; 0); return sum; &#125;&#125;]]></content>
+      <categories>
+        <category>剑指offer</category>
+      </categories>
+      <tags>
+        <tag>剑指offer</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[剑指offer-孩子们的游戏(圆圈中最后剩下的数)]]></title>
+    <url>%2F2019%2F07%2F02%2Fjianzhioffer-Joseph-ring%2F</url>
+    <content type="text"><![CDATA[题目描述每年六一儿童节,牛客都会准备一些小礼物去看望孤儿院的小朋友,今年亦是如此。HF作为牛客的资深元老,自然也准备了一些小游戏。其中,有个游戏是这样的:首先,让小朋友们围成一个大圈。然后,他随机指定一个数m,让编号为0的小朋友开始报数。每次喊到m-1的那个小朋友要出列唱首歌,然后可以在礼品箱中任意的挑选礼物,并且不再回到圈中,从他的下一个小朋友开始,继续0…m-1报数….这样下去….直到剩下最后一个小朋友,可以不用表演,并且拿到牛客名贵的“名侦探柯南”典藏版(名额有限哦!!^_^)。请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1) AC代码1这道题其实就是一个约瑟夫环。 1234567891011121314151617181920public class Solution &#123; public int LastRemaining_Solution(int n, int m) &#123; if(n == 0 || m == 0) return -1; boolean[] selected = new boolean[n]; int count = 0; int cur = -1; //循环次数为 n - 1次，会把selected中n-1个数置为true，剩下的最后一个false即为所求 while(count != n - 1)&#123; for(int i = 0;i &lt; m;i++)&#123; cur = (cur + 1) % n; while(selected[cur] == true) cur = (cur + 1) % n; &#125; selected[cur] = true; count++; &#125; for(int i = 0;i &lt; n;i++) if(selected[i] == false) return i; return -1; &#125;&#125; AC代码2原理请看：https://blog.csdn.net/crazy__chen/article/details/45115911 12345678910111213public class Solution&#123; public int LastRemaining_Solution(int n, int m) &#123; if(n==0||m==0)return -1; int s=0; for(int i=2;i&lt;=n;i++) &#123; s=(s+m)%i; &#125; return s ; &#125;&#125;]]></content>
+      <categories>
+        <category>剑指offer</category>
+      </categories>
+      <tags>
+        <tag>剑指offer</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[剑指offer-扑克牌顺子]]></title>
+    <url>%2F2019%2F07%2F02%2Fjianzhioffer-Playing-cards%2F</url>
+    <content type="text"><![CDATA[题目描述LL今天心情特别好,因为他去买了一副扑克牌,发现里面居然有2个大王,2个小王(一副牌原本是54张^_^)…他随机从中抽出了5张牌,想测测自己的手气,看看能不能抽到顺子,如果抽到的话,他决定去买体育彩票,嘿嘿！！“红心A,黑桃3,小王,大王,方片5”,“Oh My God!”不是顺子…..LL不高兴了,他想了想,决定大\小 王可以看成任何数字,并且A看作1,J为11,Q为12,K为13。上面的5张牌就可以变成“1,2,3,4,5”(大小王分别看作2和4),“So Lucky!”。LL决定去买体育彩票啦。 现在,要求你使用这幅牌模拟上面的过程,然后告诉我们LL的运气如何， 如果牌能组成顺子就输出true，否则就输出false。为了方便起见,你可以认为大小王是0。 解题思路 将原数组升序排序 计算0的个数zeros 计算两两非0元素之间的间隔之和gaps（1和3之间的间隔为3 - 1 - 1 = 1，代表数字1和3之间插入一个数字2，可形成顺子），如果出现两个非0元素相等，直接返回false（不可能形成顺子） 计算zeros和gaps的差值。如果zeros大于等于gaps，表示zeros可以填补形成顺子所需的数字，返回true；否则返回false。 AC代码12345678910111213141516171819import java.util.Arrays; public class Solution &#123; public boolean isContinuous(int [] numbers) &#123; if(numbers == null || numbers.length == 0) return false; Arrays.sort(numbers); //升序排序 int numsOfZero = 0;//0的个数 int gaps = 0;//间隔的个数 for(int i = 0;i &lt; numbers.length;i++)&#123; //两相邻数字相等，不可能形成顺子 if(i != 0 &amp;&amp; numbers[i] != 0 &amp;&amp; numbers[i - 1] == numbers[i]) return false; //间隔的计算，两相邻数字都不为0，且相差要大于1 if(i != 0 &amp;&amp; numbers[i - 1] != 0 &amp;&amp; numbers[i] - numbers[i - 1] != 1) gaps += numbers[i] - numbers[i - 1] - 1; if(numbers[i] == 0) numsOfZero++; &#125; if(gaps &lt;= numsOfZero) return true; return false; &#125;&#125;]]></content>
+      <categories>
+        <category>剑指offer</category>
+      </categories>
+      <tags>
+        <tag>剑指offer</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据库中聚集索引和非聚集索引的区别]]></title>
+    <url>%2F2019%2F07%2F02%2Fdatabase-Clustered-index-Nonclustered-index%2F</url>
+    <content type="text"><![CDATA[本文转载自：聚集索引和非聚集索引 索引简介众所周知，索引是关系型数据库中给数据库表中一列或多列的值排序后的存储结构，SQL的主流索引结构有B+树以及Hash结构，聚集索引以及非聚集索引用的是B+树索引。 SQL Sever索引类型有：唯一索引，主键索引，聚集索引，非聚集索引。 MySQL 索引类型有：唯一索引，主键（聚集）索引，非聚集索引，全文索引。 聚集索引聚集（clustered）索引，也叫聚簇索引。 定义：数据行的物理顺序与列值（一般是主键的那一列）的逻辑顺序相同，一个表中只能拥有一个聚集索引。 由于聚集索引规定数据在表中的物理存储顺序，因此一个表只能包含一个聚集索引 单单从定义来看是不是显得有点抽象，打个比方，一个表就像是我们以前用的新华字典，聚集索引就像是拼音目录，而每个字存放的页码就是我们的数据物理地址，我们如果要查询一个“哇”字，我们只需要查询“哇”字对应在新华字典拼音目录对应的页码，就可以查询到对应的“哇”字所在的位置，而拼音目录对应的A-Z的字顺序，和新华字典实际存储的字的顺序A-Z也是一样的，如果我们中文新出了一个字，拼音开头第一个是B，那么他插入的时候也要按照拼音目录顺序插入到A字的后面。 非聚集索引非聚集（unclustered）索引。 定义：该索引中索引的逻辑顺序与磁盘上行的物理存储顺序不同，一个表中可以拥有多个非聚集索引。 其实按照定义，除了聚集索引以外的索引都是非聚集索引，只是人们想细分一下非聚集索引，分成普通索引，唯一索引，全文索引。如果非要把非聚集索引类比成现实生活中的东西，那么非聚集索引就像新华字典的偏旁字典，他结构顺序与实际存放顺序不一定一致。 聚集索引和非聚集索引的区别 聚集索引一个表只能有一个，而非聚集索引一个表可以存在多个 聚集索引存储记录是物理上连续存在，而非聚集索引是逻辑上的连续，物理存储并不连续 聚集索引和非聚集索引的根本区别是表记录的排列顺序和与索引的排列顺序是否一致。 聚集索引表记录的排列顺序与索引的排列顺序一致 优点是查询速度快，可以进行范围查找，因为一旦具有第一个索引值的纪录被找到，具有连续索引值的记录也一定物理的紧跟其后。 缺点是对表进行修改速度较慢，这是为了保持表中的记录的物理顺序与索引的顺序一致，而把记录插入到数据页的相应位置，必须在数据页中进行数据重排， 降低了执行速度。 建议使用聚集索引的场合为：a. 此列包含有限数目的不同值；b. 查询的结果返回一个区间的值；c. 查询的结果返回某值相同的大量结果集。 非聚集索引指定了表中记录的逻辑顺序，但记录的物理顺序和索引的顺序不一致 聚集索引和非聚集索引都采用了B+（平衡树）树的结构，但非聚集索引的叶子层并不与实际的数据页相重叠，而采用叶子层包含一个指向表中的记录在数据页中的指针的方式。非聚集索引比聚集索引层次多，添加记录不会引起数据顺序的重组。建议使用非聚集索引的场合为：a. 此列包含了大量数目不同的值；b. 查询的结束返回的是少量的结果集；c. order by 子句中使用了该列。 表中经常有一个列或列的组合，其值能唯一地标识表中的每一行。这样的一列或多列称为表的主键.(默认为聚集索引) 聚集索引确定表中数据的物理顺序。聚集索引类似于电话簿，后者按姓氏排列数据。但该索引可以包含多个列（组合索引），就像电话簿按姓氏和名字进行组织一样。 聚集索引相当于我们书本上前面的目录的一样，它可以方便快速的找到你想找的内容，而非聚集索引就相当于书最后几页的解释，它是对书中某个语句或者是生词的解释，就像我们上学时候的地理说一样，书后面都有各种地理名称的英文解释；《数据库原理》里面的解释：聚集索引的顺序就是数据的物理存储顺序，而非聚集索引的顺序和数据物理排列无关。因为数据在物理存放时只能有一种排列方式，所以一个表只能有一个聚集索引。在SQL SERVER中，索引是通过二叉树的数据结构来描述的；我们可以如此理解这个两种索引：聚集索引的叶节点就是数据节点，而非聚集索引的叶节点仍然是索引节点，只不过其包含一个指向对应数据块的指针。聚集索引会降低 insert，和update操作的性能，所以，是否使用聚集索引要全面衡量。 参考文章：https://www.jianshu.com/p/5681ebd5b0efhttps://www.cnblogs.com/weixing/p/4317774.htmlhttps://www.cnblogs.com/s-b-b/p/8334593.html]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>聚集索引</tag>
+        <tag>非聚集索引</tag>
+        <tag>数据库索引</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[剑指offer-翻转单词顺序列]]></title>
+    <url>%2F2019%2F07%2F02%2Fjianzhioffer-flip-word-order%2F</url>
+    <content type="text"><![CDATA[题目描述牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？ AC代码123456789101112131415161718192021222324252627282930public class Solution &#123; public String ReverseSentence(String str) &#123; if(str == null || str.length() == 0) return str; char[] chars = str.toCharArray(); int start = -1, end = -1; if(chars[0] != ' ') start = 0; for(int i = 0;i &lt; chars.length;i++)&#123; if(i &gt; 0 &amp;&amp; chars[i] != ' ' &amp;&amp; chars[i - 1] == ' ') start = i; if(chars[i] != ' ')&#123; if((i + 1 &lt; chars.length &amp;&amp; chars[i + 1] == ' ') || i + 1 == chars.length)&#123; end = i; reverse(chars, start, end); &#125; &#125; &#125; reverse(chars, 0, chars.length - 1); return new String(chars); &#125; //翻转chars数组中start至end(包括start和end)之间的字符 private void reverse(char[] chars, int start, int end)&#123; while(start &lt; end)&#123; char c = chars[start]; chars[start] = chars[end]; chars[end] = c; start++; end--; &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>剑指offer</category>
+      </categories>
+      <tags>
+        <tag>剑指offer</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据库索引原理]]></title>
     <url>%2F2019%2F07%2F02%2Fdatabase-index-principle%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[本文转载自：深入浅出数据库索引原理 使用索引很简单，只要能写创建表的语句，就肯定能写创建索引的语句，要知道这个世界上是不存在不会创建表的服务器端程序员的。然而， 会使用索引是一回事， 而深入理解索引原理又能恰到好处使用索引又是另一回事，这完全是两个天差地别的境界（我自己也还没有达到这层境界）。很大一部份程序员对索引的了解仅限于到“加索引能使查询变快”这个概念为止。 为什么要给表加上主键？ 为什么加索引后会使查询变快？ 为什么加索引后会使写入、修改、删除变慢？ 什么情况下要同时在两个字段上建索引？ 这些问题他们可能不一定能说出答案。知道这些问题的答案有什么好处呢？如果开发的应用使用的数据库表中只有1万条数据，那么了解与不了解真的没有差别， 然而， 如果开发的应用有几百上千万甚至亿级别的数据，那么不深入了解索引的原理， 写出来程序就根本跑不动，就好比如果给货车装个轿车的引擎，这货车还能拉的动货吗？ 接下来就讲解一下上面提出的几个问题，希望对阅读者有帮助。 网上很多讲解索引的文章对索引的描述是这样的「索引就像书的目录， 通过书的目录就准确的定位到了书籍具体的内容」，这句话描述的非常正确， 但就像脱了裤子放屁，说了跟没说一样，通过目录查找书的内容自然是要比一页一页的翻书找来的快，同样使用的索引的人难到会不知道，通过索引定位到数据比直接一条一条的查询来的快，不然他们为什么要建索引。 想要理解索引原理必须清楚一种数据结构「平衡树」(非二叉)，也就是b tree或者 b+ tree，重要的事情说三遍：“平衡树，平衡树，平衡树”。当然， 有的数据库也使用哈希桶作用索引的数据结构 ， 然而， 主流的RDBMS都是把平衡树当做数据表默认的索引数据结构的。 我们平时建表的时候都会为表加上主键， 在某些关系数据库中， 如果建表时不指定主键，数据库会拒绝建表的语句执行。 事实上， 一个没加主键的表，并不能被称之为「表」。一个没加主键的表，它的数据无序的放置在磁盘存储器上，一行一行的排列的很整齐， 跟我认知中的「表」很接近。如果给表加上了主键，那么表在磁盘上的存储结构就由整齐排列的结构转变成了树状结构，也就是上面说的「平衡树」结构，换句话说，就是整个表就变成了一个索引。没错， 再说一遍， 整个表变成了一个索引，也就是所谓的「聚集索引」。 这就是为什么一个表只能有一个主键， 一个表只能有一个「聚集索引」，因为主键的作用就是把「表」的数据格式转换成「索引（平衡树）」的格式放置。 上图就是带有主键的表（聚集索引）的结构图。图画的不是很好， 将就着看。其中树的所有结点（底部除外）的数据都是由主键字段中的数据构成，也就是通常我们指定主键的id字段。最下面部分是真正表中的数据。 假如我们执行一个SQL语句： select * from table where id = 1256; 首先根据索引定位到1256这个值所在的叶结点，然后再通过叶结点取到id等于1256的数据行。 这里不讲解平衡树的运行细节， 但是从上图能看出，树一共有三层， 从根节点至叶节点只需要经过三次查找就能得到结果。如下图 假如一张表有一亿条数据 ，需要查找其中某一条数据，按照常规逻辑， 一条一条的去匹配的话， 最坏的情况下需要匹配一亿次才能得到结果，用大O标记法就是O(n)最坏时间复杂度，这是无法接受的，而且这一亿条数据显然不能一次性读入内存供程序使用， 因此， 这一亿次匹配在不经缓存优化的情况下就是一亿次IO开销，以现在磁盘的IO能力和CPU的运算能力， 有可能需要几个月才能得出结果 。如果把这张表转换成平衡树结构（一棵非常茂盛和节点非常多的树），假设这棵树有10层，那么只需要10次IO开销就能查找到所需要的数据， 速度以指数级别提升，用大O标记法就是O(log n)，n是记录总树，底数是树的分叉数，结果就是树的层次数。换言之，查找次数是以树的分叉数为底，记录总数的对数，用公式来表示就是 用程序来表示就是Math.Log(100000000,10)，100000000是记录数，10是树的分叉数（真实环境下分叉数远不止10）， 结果就是查找次数，这里的结果从亿降到了个位数。因此，利用索引会使数据库查询有惊人的性能提升。 然而， 事物都是有两面的， 索引能让数据库查询数据的速度上升， 而使写入数据的速度下降，原因很简单的， 因为平衡树这个结构必须一直维持在一个正确的状态， 增删改数据都会改变平衡树各节点中的索引数据内容，破坏树结构， 因此，在每次数据改变时， DBMS必须去重新梳理树（索引）的结构以确保它的正确，这会带来不小的性能开销，也就是为什么索引会给查询以外的操作带来副作用的原因。 讲完聚集索引 ， 接下来聊一下非聚集索引， 也就是我们平时经常提起和使用的常规索引。 非聚集索引和聚集索引一样， 同样是采用平衡树作为索引的数据结构。索引树结构中各节点的值来自于表中的索引字段， 假如给user表的name字段加上索引 ， 那么索引就是由name字段中的值构成，在数据改变时， DBMS需要一直维护索引结构的正确性。如果给表中多个字段加上索引 ， 那么就会出现多个独立的索引结构，每个索引（非聚集索引）互相之间不存在关联。 如下图 每次给字段建一个新索引， 字段中的数据就会被复制一份出来， 用于生成索引。 因此， 给表添加索引，会增加表的体积， 占用磁盘存储空间。 非聚集索引和聚集索引的区别在于， 通过聚集索引可以查到需要查找的数据， 而通过非聚集索引可以查到记录对应的主键值 ， 再使用主键的值通过聚集索引查找到需要的数据，如下图 不管以任何方式查询表， 最终都会利用主键通过聚集索引来定位到数据， 聚集索引（主键）是通往真实数据所在的唯一路径。 然而， 有一种例外可以不使用聚集索引就能查询出所需要的数据， 这种非主流的方法 称之为「覆盖索引」查询， 也就是平时所说的复合索引或者多字段索引查询。 文章上面的内容已经指出， 当为字段建立索引以后， 字段中的内容会被同步到索引之中， 如果为一个索引指定两个字段， 那么这个两个字段的内容都会被同步至索引之中。 先看下面这个SQL语句 //建立索引create index index_birthday on user_info(birthday);//查询生日在1991年11月1日出生用户的用户名select user_name from user_info where birthday = ‘1991-11-1’ 这句SQL语句的执行过程如下 首先，通过非聚集索引index_birthday查找birthday等于1991-11-1的所有记录的主键ID值 然后，通过得到的主键ID值执行聚集索引查找，找到主键ID值对就的真实数据（数据行）存储的位置 最后， 从得到的真实数据中取得user_name字段的值返回， 也就是取得最终的结果 我们把birthday字段上的索引改成双字段的覆盖索引 create index index_birthday_and_user_name on user_info(birthday, user_name); 这句SQL语句的执行过程就会变为 通过非聚集索引index_birthday_and_user_name查找birthday等于1991-11-1的叶节点的内容，然而， 叶节点中除了有user_name表主键ID的值以外， user_name字段的值也在里面， 因此不需要通过主键ID值的查找数据行的真实所在， 直接取得叶节点中user_name的值返回即可。 通过这种覆盖索引直接查找的方式， 可以省略不使用覆盖索引查找的后面两个步骤， 大大的提高了查询性能，如下图 数据库索引的大致工作原理就是像文中所述， 然而细节方面可能会略有偏差，这但并不会对概念阐述的结果产生影响 。 最后， 推荐三本关系数据库方面的书籍， 文中所讲解的概念内容都是来自于此。 《SQL Server2005技术内幕之T-SQL查询》 这本书虽然是针对SQL Server写的， 但是里面的大部份内容同样适用于其它关系数据库，此书对查询编写的技巧和优化讲解的非常透彻。 《关系数据库系统概论》第四版 王珊和萨师煊写的那本， 是大学计算机教材， 讲的通俗易懂， 在国内计算机书图书出版领域质量是排的上号的。 《数据库系统概念》 这本书在数据库领域非常出名， 被称之为帆船书， 书中内容博大精深，非一朝一夕可参透的。]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库索引</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[leetcode_416:Partition Equal Subset Sum]]></title>

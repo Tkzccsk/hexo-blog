@@ -116,7 +116,7 @@
 <meta property="og:description" content="本文转载自：SpringMVC执行流程及源码解析  在SpringMVC中主要是围绕着DispatcherServlet来设计，可以把它当做指挥中心。这里先说明一下SpringMVC文档给出的执行流程，然后是我们稍微具体的执行流程，最后是流程大致的源码跟踪。关于很很很详细的源码解析，这里暂先不做。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://changsk.top/2019/07/09/spring-mvc/1.jpg">
-<meta property="og:updated_time" content="2019-07-09T13:16:41.263Z">
+<meta property="og:updated_time" content="2019-07-10T01:37:53.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC执行流程及源码解析">
 <meta name="twitter:description" content="本文转载自：SpringMVC执行流程及源码解析  在SpringMVC中主要是围绕着DispatcherServlet来设计，可以把它当做指挥中心。这里先说明一下SpringMVC文档给出的执行流程，然后是我们稍微具体的执行流程，最后是流程大致的源码跟踪。关于很很很详细的源码解析，这里暂先不做。">
@@ -457,12 +457,24 @@
                 
               
 
-              <time title="创建时间：2019-07-09 21:02:51 / 修改时间：21:16:41" itemprop="dateCreated datePublished" datetime="2019-07-09T21:02:51+08:00">2019-07-09</time>
+              <time title="创建时间：2019-07-09 21:02:51" itemprop="dateCreated datePublished" datetime="2019-07-09T21:02:51+08:00">2019-07-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-10 09:37:53" itemprop="dateModified" datetime="2019-07-10T09:37:53+08:00">2019-07-10</time>
               
             
           </span>
@@ -568,7 +580,7 @@
 <ol>
 <li>用户请求发送到前端控制器DispatcherServlet。</li>
 <li>前端控制器DispatcherServlet接收到请求后，DispatcherServlet会使用<code>HandlerMapping</code>来处理，<strong>HandlerMapping会查找到具体进行处理请求的Handler对象。</strong></li>
-<li>HandlerMapping找到对应的Handler之后，并不是返回一个Handler原始对象，而是一个<strong>Handler执行链</strong>，在这个执行链中包括了拦截器和处理请求的Handler。HandlerMapping返回一个执行链给DispatcherServlet。</li>
+<li>HandlerMapping找到对应的Handler之后，并不是返回一个Handler原始对象，而是一个<strong>Handler执行链</strong>，在这个执行链中包括了<strong>拦截器和处理请求的Handler</strong>。HandlerMapping返回一个执行链给DispatcherServlet。</li>
 <li>DispatcherServlet接收到执行链之后，<strong>会调用Handler适配器去执行Handler。</strong></li>
 <li>Handler适配器执行完成Handler（也就是我们写的Controller）之后会得到一个ModelAndView，并返回给DispatcherServlet。</li>
 <li>DispatcherServlet接收到<strong>Handler适配器</strong>返回的ModelAndView之后，<strong>会根据其中的视图名调用视图解析器。</strong></li>
@@ -816,7 +828,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">109</span>
+                    <span class="site-state-item-count">118</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1050,7 +1062,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">82</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">86</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1173,7 +1193,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">515k</span>
+    <span title="站点总字数">596k</span>
   
 
   
@@ -1184,7 +1204,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">7:48</span>
+    <span title="站点阅读时长">9:02</span>
   
 </div>
 

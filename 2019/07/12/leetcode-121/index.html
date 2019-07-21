@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="changsk&#39;s blogs">
 <meta property="og:description" content="题目链接：https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-13T14:39:18.684Z">
+<meta property="og:updated_time" content="2019-07-21T12:29:05.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode-121:Best Time to Buy and Sell Stock">
 <meta name="twitter:description" content="题目链接：https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">
@@ -472,7 +472,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-13 22:39:18" itemprop="dateModified" datetime="2019-07-13T22:39:18+08:00">2019-07-13</time>
+                <time title="修改时间：2019-07-21 20:29:05" itemprop="dateModified" datetime="2019-07-21T20:29:05+08:00">2019-07-21</time>
               
             
           </span>
@@ -525,7 +525,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5k</span>
+                <span title="本文字数">10k</span>
               
 
               
@@ -539,7 +539,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 分钟</span>
+                <span title="阅读时长">10 分钟</span>
               
             </div>
           
@@ -571,7 +571,14 @@
 <p><strong>Example 2:</strong></p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">Input:</span> [<span class="number">7</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>]</span><br><span class="line"><span class="string">Output:</span> <span class="number">0</span></span><br><span class="line"><span class="string">Explanation:</span> In <span class="keyword">this</span> <span class="keyword">case</span>, no transaction is done, i.e. max profit = <span class="number">0.</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices == <span class="keyword">null</span> || prices.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> len = prices.length;</span><br><span class="line">        <span class="keyword">int</span> maxPrice = prices[len - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">int</span> i = len - <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            max = Math.max(max, maxPrice - prices[i]);</span><br><span class="line">            maxPrice = Math.max(maxPrice, prices[i]);</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="AC代码1"><a href="#AC代码1" class="headerlink" title="AC代码1"></a>AC代码1</h2><p>从后往前遍历，记录当前所有元素中的最大价格<code>maxPrice</code>，然后计算从当前元素<code>prices[i]</code> 开始到结尾的最大利润<code>prices[i] - max</code>，更新最大利润<code>max</code>，最大价格<code>maxPrice</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices == <span class="keyword">null</span> || prices.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> len = prices.length;</span><br><span class="line">        <span class="keyword">int</span> maxPrice = prices[len - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">int</span> i = len - <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            max = Math.max(max, maxPrice - prices[i]);</span><br><span class="line">            maxPrice = Math.max(maxPrice, prices[i]);</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="AC代码2"><a href="#AC代码2" class="headerlink" title="AC代码2"></a>AC代码2</h2><p>引入数组<code>maxPrices</code>，<code>maxPrices[i]</code>表示从0到i为止的最大利润。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices == <span class="keyword">null</span> || prices.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> len = prices.length;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> minPrice = prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span>[] maxPrices = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; len)&#123;</span><br><span class="line">            max = Math.max(max, prices[i] - minPrice);</span><br><span class="line">            minPrice = Math.min(minPrice, prices[i]);</span><br><span class="line">            maxPrices[i] = max;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxPrices[len - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="AC代码3"><a href="#AC代码3" class="headerlink" title="AC代码3"></a>AC代码3</h2><p>引入数组<code>maxPrices</code>，<code>maxPrices[i]</code>表示从i到结尾的最大利润。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices == <span class="keyword">null</span> || prices.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> len = prices.length;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> maxPrice = prices[len - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">int</span>[] maxPrices = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        <span class="keyword">int</span> i = len - <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            max = Math.max(max, maxPrice - prices[i]);</span><br><span class="line">            maxPrices[i] = max;</span><br><span class="line">            maxPrice = Math.max(maxPrice, prices[i]);</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxPrices[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -763,7 +770,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">152</span>
+                    <span class="site-state-item-count">154</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1116,7 +1123,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试用例"><span class="nav-number">2.</span> <span class="nav-text">测试用例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC代码"><span class="nav-number">3.</span> <span class="nav-text">AC代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试用例"><span class="nav-number">2.</span> <span class="nav-text">测试用例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC代码1"><span class="nav-number">3.</span> <span class="nav-text">AC代码1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC代码2"><span class="nav-number">4.</span> <span class="nav-text">AC代码2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC代码3"><span class="nav-number">5.</span> <span class="nav-text">AC代码3</span></a></li></ol></div>
             
 
           </div>
@@ -1150,7 +1157,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">704k</span>
+    <span title="站点总字数">710k</span>
   
 
   
@@ -1161,7 +1168,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">10:40</span>
+    <span title="站点阅读时长">10:45</span>
   
 </div>
 

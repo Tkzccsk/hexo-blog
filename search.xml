@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-152:Maximum Product Subarray]]></title>
+    <url>%2F2019%2F07%2F22%2Fleetcode-152%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/maximum-product-subarray/ 题目描述 题目难度：Medium Given an integer array nums, find the contiguous subarray within an array (containing at least one number) which has the largest product. Example 1: 123Input: [2,3,-2,4]Output: 6Explanation: [2,3] has the largest product 6. Example 2: 123Input: [-2,0,-1]Output: 0Explanation: The result cannot be 2, because [-2,-1] is not a subarray. Solution1数组maxArr中第i个元素表示的是从0到i中以i结尾的连续子数组中最大的乘积。 数组minArr中第i个元素表示的是从0到i中以i结尾的连续子数组中最小的乘积。 1234567891011121314151617181920212223class Solution &#123; public int maxProduct(int[] nums) &#123; if(nums == null || nums.length == 0) return 0; int len = nums.length; int[] minArr = new int[len]; int[] maxArr = new int[len]; maxArr[0] = nums[0]; minArr[0] = nums[0]; int max = nums[0]; for(int i = 1;i &lt; nums.length;i++)&#123; if(nums[i] &lt; 0)&#123; maxArr[i] = Math.max(nums[i], minArr[i - 1] * nums[i]); minArr[i] = Math.min(nums[i], maxArr[i - 1] * nums[i]); &#125; else&#123; maxArr[i] = Math.max(nums[i], maxArr[i - 1] * nums[i]); minArr[i] = Math.min(nums[i], minArr[i - 1] * nums[i]); &#125; max = Math.max(max, maxArr[i]); &#125; return max; &#125;&#125; Solution2maxArr[i]的值只和maxArr[i - 1]、minArr[i - 1]和nums[i]有关，minArr[i]类似，所以可以对Solution1的解法进行内存上的优化。 1234567891011121314151617class Solution &#123; public int maxProduct(int[] nums) &#123; if(nums == null || nums.length == 0) return 0; int res = nums[0], max = nums[0], min = nums[0]; for(int i = 1;i &lt; nums.length;i++)&#123; if(nums[i] &lt; 0)&#123; int temp = max; max = min; min = temp; &#125; max = Math.max(nums[i], max * nums[i]); min = Math.min(nums[i], min * nums[i]); res = Math.max(res, max); &#125; return res; &#125;&#125;]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-714:Best Time to Buy and Sell Stock with Transaction Fee]]></title>
+    <url>%2F2019%2F07%2F22%2Fleetcode-714%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/ 题目描述 题目难度：Medium Your are given an array of integers prices, for which the i-th element is the price of a given stock on day i; and a non-negative integer fee representing a transaction fee. You may complete as many transactions as you like, but you need to pay the transaction fee for each transaction. You may not buy more than 1 share of a stock at a time (ie. you must sell the stock share before you buy again.) Return the maximum profit you can make. Example 1: 1234Input: prices = [1, 3, 2, 8, 4, 9], fee = 2Output: 8Explanation: The maximum profit can be achieved by:Buying at prices[0] = 1Selling at prices[3] = 8Buying at prices[4] = 4Selling at prices[5] = 9The total profit is ((8 - 1) - 2) + ((9 - 4) - 2) = 8. Note: 0 &lt; prices.length &lt;= 50000. 0 &lt; prices[i] &lt; 50000. 0 &lt;= fee &lt; 50000. 问题解析： 给定数组，其中的元素代表当天的股票价格，不限制股票的购售次数，但要求在购买新股之前要售出之前的股票，求股票交易的最大利润。每次股票交易都要支付固定的交易费。 Solution1可以用DP来做。 与之前的LeetCode-121：Best Time to Buy and Sell Stock (一次股票交易最大利润)和LeetCode-122：Best Time to Buy and Sell Stock II (多次股票交易最大利润)相似，均为股票交易题目，但本题增加了交易费的条件。 分析每天的行为，我们可以知道，主要的行为就是售出和购入。所以我们建立两个动态规划数组：sold和hold，其中sold[i]保存的是第i天出售股票后的最大利润，hold[i]保存的是第i天持有股票的最大利润。 sold[i]有两个状态，一个是在i天售出的利润，或者保持前一天也就是sold[i-1]的售出利润，选择其中的最大利润。 hold[i]也有两个状态，一个是在i天购入的利润，或者保持前一天也就是hold[i-1]的持有利润，选择其中的最大利润。 写为动态规划式为：Soldi=Max(Soldi−1,Holdi−1+Pricesi−fee); Holdi=Max(Holdi,Soldi−1−Pricesi) 1234567891011121314151617class Solution &#123; public int maxProfit(int[] prices, int fee) &#123; int n = prices.length; if (n &lt; 2) return 0; int[] sold = new int[n]; int[] hold = new int[n]; hold[0] = -prices[0]; //拥有的初始金额为0，然后买了第一天的股票，所以拥有的金额为 -prices[0] for (int i = 1; i &lt; n; i++)&#123; sold[i] = Math.max(sold[i-1], hold[i-1] + prices[i] - fee); hold[i] = Math.max(hold[i-1], sold[i-1] - prices[i]); &#125; return sold[n-1]; &#125;&#125; 时间复杂度：O(n)，空间复杂度：O(n) Solution2DP优化。 同样，与LeetCode-152：Maximum Product Subarray (乘积最大连续子数组)相同，Solution 1 的解法可以做空间上的优化。因为动态规划公式中每次计算使用的只有上一次的结果，所以，我们将前一次的结果做临时的保存即可实现空间上的优化。 1234567891011121314151617class Solution &#123; public int maxProfit(int[] prices, int fee) &#123; int n = prices.length; if (n &lt; 2) return 0; int sold = 0; int hold = -prices[0]; for (int i = 1; i &lt; n; i++)&#123; int soldpre = sold; sold = Math.max(soldpre, hold + prices[i] - fee); hold = Math.max(hold, soldpre - prices[i]); &#125; return sold; &#125;&#125; 时间复杂度：O(n)，空间复杂度：O(1) 参考： LeetCode-714：Best Time to Buy and Sell Stock with Transaction Fee (带有抛售费用的股票最大利润) – medium]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-123:Best Time to Buy and Sell Stock III]]></title>
     <url>%2F2019%2F07%2F21%2Fleetcode-123%2F</url>
     <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/ 题目描述Say you have an array for which the ith element is the price of a given stock on day i. Design an algorithm to find the maximum profit. You may complete at most two transactions. Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again). 测试用例Example 1: 1234Input: [3,3,5,0,0,3,1,4]Output: 6Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3. Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3. Example 2: 12345Input: [1,2,3,4,5]Output: 4Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4. Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are engaging multiple transactions at the same time. You must sell before buying again. Example 3: 123Input: [7,6,4,3,1]Output: 0Explanation: In this case, no transaction is done, i.e. max profit = 0. 解题思路把价钱数组prices一分为二，分别计算[0, i]和(i, prices.length - 1]的最大利润，然后加起来，在所有和中求最大值，即为最多交易两次的最大利润。 AC代码array1数组中下标为i元素表示从i到结尾的最大利润。 array2数组中下标为i元素表示从0到1的最大利润。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748class Solution &#123; //3,3,5,0,0,3,1,4 //2 2 0 4 4 1 3 0 //0 0 2 2 2 3 1 4 public int maxProfit(int[] prices) &#123; if(prices == null || prices.length == 0) return 0; int[] array1 = getMaxPrices1(prices); int[] array2 = getMaxPrices2(prices); int max = 0, sum = 0; for(int i = 0;i &lt; prices.length;i++)&#123; sum = array1[i] + array2[i]; max = Math.max(max, sum); &#125; return max; &#125; public int[] getMaxPrices1(int[] prices)&#123; if(prices == null || prices.length == 0) return null; int len = prices.length; int max = 0; int maxPrice = prices[len - 1]; int[] maxPrices = new int[len]; int i = len - 2; while(i &gt;= 0)&#123; max = Math.max(max, maxPrice - prices[i]); maxPrices[i] = max; maxPrice = Math.max(maxPrice, prices[i]); i--; &#125; return maxPrices; &#125; public int[] getMaxPrices2(int[] prices)&#123; if(prices == null || prices.length == 0) return null; int len = prices.length; int max = 0; int minPrice = prices[0]; int[] maxPrices = new int[len]; int i = 1; while(i &lt; len)&#123; max = Math.max(max, prices[i] - minPrice); minPrice = Math.min(minPrice, prices[i]); maxPrices[i] = max; i++; &#125; return maxPrices; &#125; &#125; 最优方法代码来自Leetcode 123456789101112class Solution &#123; public int maxProfit(int[] prices) &#123; int sell1 = 0, sell2 = 0, buy1 = Integer.MIN_VALUE, buy2 = Integer.MIN_VALUE; for (int i : prices) &#123; sell2 = Math.max(sell2, i + buy2); buy2 = Math.max(buy2, sell1 - i); sell1 = Math.max(sell1, i + buy1); buy1 = Math.max(buy1, -i); &#125; return sell2; &#125;&#125;]]></content>
@@ -1171,8 +1195,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>HashMap</tag>
         <tag>java</tag>
+        <tag>HashMap</tag>
       </tags>
   </entry>
   <entry>
@@ -1326,8 +1350,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>HashMap</tag>
         <tag>java</tag>
+        <tag>HashMap</tag>
       </tags>
   </entry>
   <entry>
@@ -1723,6 +1747,11 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Error JAVA_HOME is incorrectly set]]></title>
+    <url>%2F2019%2F06%2F11%2FError_JAVA_HOME_is%20_incorrectly_set%2F</url>
+    <content type="text"><![CDATA[在安装、调试、运行Hexo的过程中，出现了以下错误： Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd 然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的： 然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量： 发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图： 或者也可以将jdk装到其他不存在空格的目录下。]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[hexo 的常用命令]]></title>
     <url>%2F2019%2F06%2F11%2Fhexo-command%2F</url>
     <content type="text"><![CDATA[常用 hexo 命令hexo new “postName” #新建文章hexo new page “pageName” #新建页面hexo generate #生成静态页面至public目录hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）hexo deploy #将.deploy目录部署到GitHubhexo help #查看帮助hexo version #查看Hexo的版本 缩写hexo n == hexo newhexo g == hexo generatehexo s == hexo serverhexo d == hexo deploy 组合命令：hexo s -g #生成并本地预览hexo d -g #生成并上传hexo clear # 删除无用 tags 和 categorieshexo clean &amp; hexo d -g # 清除缓存 生成静态页面并发布 给文章添加标签和分类1234567title: hexo 的常用命令date: 2019-06-11 11:43:56tags: - hexo # 文章标签- aaa- bbbcategories: hexo # 该文章类别为 categories\hexo 效果图：]]></content>
@@ -1732,11 +1761,6 @@
       <tags>
         <tag>hexo</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Error JAVA_HOME is incorrectly set]]></title>
-    <url>%2F2019%2F06%2F11%2FError_JAVA_HOME_is%20_incorrectly_set%2F</url>
-    <content type="text"><![CDATA[在安装、调试、运行Hexo的过程中，出现了以下错误： Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd 然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的： 然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量： 发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图： 或者也可以将jdk装到其他不存在空格的目录下。]]></content>
   </entry>
   <entry>
     <title><![CDATA[Hello World]]></title>

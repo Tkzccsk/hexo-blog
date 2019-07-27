@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="changsk&#39;s blogs">
 <meta property="og:description" content="本文转载自公众号:苦逼的码农 作者：帅地  说实话，这个问题可以涉及到 MySQL 的很多核心知识，可以扯出一大堆，就像要考你计算机网络的知识时，问你“输入URL回车之后，究竟发生了什么”一样，看看你能说出多少了。 之前腾讯面试的实话，也问到这个问题了，不过答的很不好，之前没去想过相关原因，导致一时之间扯不出来。所以今天，我带大家来详细扯一下有哪些原因，相信你看完之后一定会有所收获，不然你打我。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-09T08:51:14.393Z">
+<meta property="og:updated_time" content="2019-07-27T01:18:28.759Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一条SQL语句执行得很慢的原因有哪些？">
 <meta name="twitter:description" content="本文转载自公众号:苦逼的码农 作者：帅地  说实话，这个问题可以涉及到 MySQL 的很多核心知识，可以扯出一大堆，就像要考你计算机网络的知识时，问你“输入URL回车之后，究竟发生了什么”一样，看看你能说出多少了。 之前腾讯面试的实话，也问到这个问题了，不过答的很不好，之前没去想过相关原因，导致一时之间扯不出来。所以今天，我带大家来详细扯一下有哪些原因，相信你看完之后一定会有所收获，不然你打我。">
@@ -455,12 +455,24 @@
                 
               
 
-              <time title="创建时间：2019-07-09 16:34:18 / 修改时间：16:51:14" itemprop="dateCreated datePublished" datetime="2019-07-09T16:34:18+08:00">2019-07-09</time>
+              <time title="创建时间：2019-07-09 16:34:18" itemprop="dateCreated datePublished" datetime="2019-07-09T16:34:18+08:00">2019-07-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-27 09:18:28" itemprop="dateModified" datetime="2019-07-27T09:18:28+08:00">2019-07-27</time>
               
             
           </span>
@@ -573,7 +585,7 @@
 <h3 id="拿不到锁我能怎么办"><a href="#拿不到锁我能怎么办" class="headerlink" title="拿不到锁我能怎么办"></a>拿不到锁我能怎么办</h3><p>这个就比较容易想到了，我们要执行的这条语句，刚好这条语句涉及到的<strong>表</strong>，别人在用，并且加锁了，我们拿不到锁，只能慢慢等待别人释放锁了。或者，表没有加锁，但要使用到的某个一行被加锁了，这个时候，我也没办法啊。</p>
 <p>如果要判断是否真的在等待锁，我们可以用 <strong>show processlist</strong>这个命令来查看当前的状态哦，这里我要提醒一下，有些命令最好记录一下，反正，我被问了好几个命令，都不知道怎么写，呵呵。</p>
 <p>下来我们来访分析下第二种情况，我觉得第二种情况的分析才是最重要的</p>
-<h2 id="针对一直都这么慢的情况"><a href="#针对一直都这么慢的情况" class="headerlink" title="针对一直都这么慢的情况"></a>针对一直都这么慢的情况</h2><p>如果在数据量一样大的情况下，这条 SQL 语句每次都执行的这么慢，那就就要好好考虑下你的 <code>SQL</code> 书写了，下面我们来分析下哪些原因会导致我们的 SQL 语句执行的很不理想。</p>
+<h2 id="针对一直都这么慢的情况"><a href="#针对一直都这么慢的情况" class="headerlink" title="针对一直都这么慢的情况"></a>针对一直都这么慢的情况</h2><p>如果在数据量一样大的情况下，这条 SQL 语句每次都执行的这么慢，那就要好好考虑下你的 <code>SQL</code> 书写了，下面我们来分析下哪些原因会导致我们的 SQL 语句执行的很不理想。</p>
 <p>我们先来假设我们有一个表，表里有下面两个字段,分别是主键 id，和两个普通字段 c 和 d。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE `t` (</span><br><span class="line">  `id` int(11) NOT NULL,</span><br><span class="line">  `c` int(11) DEFAULT NULL,</span><br><span class="line">  `d` int(11) DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`id`)</span><br><span class="line">) ENGINE=InnoDB;</span><br></pre></td></tr></table></figure>
 
@@ -581,7 +593,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t <span class="keyword">where</span> <span class="number">100</span> &lt;c <span class="keyword">and</span> c &lt; <span class="number">100000</span>;</span><br></pre></td></tr></table></figure>
 
 <p><strong>（1）、字段没有索引</strong></p>
-<p>刚好你的 c 字段上没有索引，那么抱歉，只能走<strong>全表扫描</strong>了，你就体验不会索引带来的乐趣了，所以，这回导致这条查询语句很慢。</p>
+<p>刚好你的 c 字段上没有索引，那么抱歉，只能走<strong>全表扫描</strong>了，你就体验不会索引带来的乐趣了，所以，这会导致这条查询语句很慢。</p>
 <p><strong>（2）、字段有索引，但却没有用索引</strong></p>
 <p>好吧，这个时候你给 c 这个字段加上了索引，然后又查询了一条语句</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t <span class="keyword">where</span> c - <span class="number">1</span> = <span class="number">1000</span>;</span><br></pre></td></tr></table></figure>
@@ -602,7 +614,7 @@
 <h3 id="呵呵，数据库自己选错索引了"><a href="#呵呵，数据库自己选错索引了" class="headerlink" title="呵呵，数据库自己选错索引了"></a>呵呵，数据库自己选错索引了</h3><p>我们在进行查询操作的时候，例如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from t where 100 &lt; c and c &lt; 100000;</span><br></pre></td></tr></table></figure>
 
-<p>我们知道，主键索引和非主键索引是有区别的，主键索引存放的值是<strong>整行字段的数据</strong>，而非主键索引上存放的值不是整行字段的数据，而且存放<strong>主键字段的值</strong>。不大懂的可以看这篇文章：  <a href="https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247484848&idx=1&sn=77a0e6e82944ec385f5df17e91ce3bf2&chksm=cea24a7bf9d5c36d4b289cccb017292f9f36da9f3c887fd2b93ecd6af021fcf30121ba09799f&token=1082669959&lang=zh_CN&scene=21#wechat_redirect" target="_blank" rel="noopener">【思维导图-索引篇】搞定数据库索引就是这么简单</a>  里面有说到主键索引和非主键索引的区别</p>
+<p>我们知道，主键索引和非主键索引是有区别的，主键索引存放的值是<strong>整行字段的数据</strong>，而非主键索引上存放的值不是整行字段的数据，而且存放<strong>主键字段的值</strong>。不大懂的可以看这篇文章：  <a href="https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247484848&idx=1&sn=77a0e6e82944ec385f5df17e91ce3bf2&chksm=cea24a7bf9d5c36d4b289cccb017292f9f36da9f3c887fd2b93ecd6af021fcf30121ba09799f&token=1082669959&lang=zh_CN&scene=21#wechat_redirect" target="_blank" rel="noopener">【思维导图-索引篇】搞定数据库索引就是这么简单</a>  里面有说到主键索引和非主键索引的区别。</p>
 <p>也就是说，我们如果走 c 这个字段的索引的话，最后会查询到对应主键的值，然后，再根据主键的值走主键索引，查询到整行数据返回。</p>
 <p>好吧扯了这么多，其实我就是想告诉你，就算你在 c 字段上有索引，系统也并不一定会走 c 这个字段上的索引，而是有可能会直接扫描扫描全表，找出所有符合 100 &lt; c and c &lt; 100000 的数据。</p>
 <p><strong>为什么会这样呢？</strong></p>
@@ -823,7 +835,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">156</span>
+                    <span class="site-state-item-count">166</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -882,7 +894,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1087,7 +1101,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">96</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">98</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1210,7 +1228,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">715k</span>
+    <span title="站点总字数">763k</span>
   
 
   
@@ -1221,7 +1239,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">10:50</span>
+    <span title="站点阅读时长">11:34</span>
   
 </div>
 

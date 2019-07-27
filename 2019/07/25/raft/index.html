@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文转载自：Raft算法原理  简介关于Raft算法，有两篇经典的论文，一篇是《In search of an Understandable Consensus Algorithm》，这是作者最开始讲述Raft算法原理的论文，但是这篇论文太简单了，很多算法的细节没有涉及到。更详细的论文是《CONSENSUS: BRIDGING THEORY AND PRACTICE》，除了包括第一篇论文的内容以">
+<meta name="keywords" content="Raft">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raft算法原理">
+<meta property="og:url" content="http://changsk.top/2019/07/25/raft/index.html">
+<meta property="og:site_name" content="changsk&#39;s blogs">
+<meta property="og:description" content="本文转载自：Raft算法原理  简介关于Raft算法，有两篇经典的论文，一篇是《In search of an Understandable Consensus Algorithm》，这是作者最开始讲述Raft算法原理的论文，但是这篇论文太简单了，很多算法的细节没有涉及到。更详细的论文是《CONSENSUS: BRIDGING THEORY AND PRACTICE》，除了包括第一篇论文的内容以">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://changsk.top/2019/07/25/raft/1.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/25/raft/2.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/25/raft/3.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/25/raft/4.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/25/raft/5.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/25/raft/6.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/25/raft/7.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/25/raft/8.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/25/raft/9.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/25/raft/10.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/25/raft/11.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/25/raft/12.jpg">
+<meta property="og:updated_time" content="2019-07-25T02:18:23.923Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Raft算法原理">
+<meta name="twitter:description" content="本文转载自：Raft算法原理  简介关于Raft算法，有两篇经典的论文，一篇是《In search of an Understandable Consensus Algorithm》，这是作者最开始讲述Raft算法原理的论文，但是这篇论文太简单了，很多算法的细节没有涉及到。更详细的论文是《CONSENSUS: BRIDGING THEORY AND PRACTICE》，除了包括第一篇论文的内容以">
+<meta name="twitter:image" content="http://changsk.top/2019/07/25/raft/1.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="changsk's blogs" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://changsk.top/2019/07/25/raft/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Raft算法原理 | changsk's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">changsk's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">chang.sk@foxmail.com</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-collection">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/collection/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>收藏</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/Tkzccsk" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/07/25/raft/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Raft算法原理
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-25 10:04:46 / 修改时间：10:18:23" itemprop="dateCreated datePublished" datetime="2019-07-25T10:04:46+08:00">2019-07-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">19k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">17 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文转载自：<a href="https://www.codedump.info/post/20180921-raft/" target="_blank" rel="noopener">Raft算法原理</a></p>
+</blockquote>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>关于Raft算法，有两篇经典的论文，一篇是《In search of an Understandable Consensus Algorithm》，这是作者最开始讲述Raft算法原理的论文，但是这篇论文太简单了，很多算法的细节没有涉及到。更详细的论文是《CONSENSUS: BRIDGING THEORY AND PRACTICE》，除了包括第一篇论文的内容以外，还加上了很多细节的描述。在我阅读完etcd raft算法库的实现之后，发现这个库的代码基本就是按照后一篇论文来写的，甚至有部分测试用例的注释里也写明了是针对这篇论文的某一个小节的情况做验证。</p>
+<p>这篇文章做为我后续分析etcd raft算法的前导文章，将结合后一篇论文加上一些自己的演绎和理解来讲解Raft算法的原理。</p>
+<a id="more"></a>
+
+<h1 id="算法的基本流程"><a href="#算法的基本流程" class="headerlink" title="算法的基本流程"></a>算法的基本流程</h1><h2 id="Raft算法概述"><a href="#Raft算法概述" class="headerlink" title="Raft算法概述"></a>Raft算法概述</h2><p>Raft算法由leader节点来处理一致性问题。leader节点接收来自客户端的请求日志数据，然后同步到集群中其它节点进行复制，当日志已经同步到超过半数以上节点的时候，leader节点再通知集群中其它节点哪些日志已经被复制成功，可以提交到raft状态机中执行。</p>
+<p>通过以上方式，Raft算法将要解决的一致性问题分为了以下几个子问题。</p>
+<ul>
+<li>leader选举：集群中必须存在一个leader节点。</li>
+<li>日志复制：leader节点接收来自客户端的请求然后将这些请求序列化成日志数据再同步到集群中其它节点。</li>
+<li>安全性：如果某个节点已经将一条提交过的数据输入raft状态机执行了，那么其它节点不可能再将相同索引 的另一条日志数据输入到raft状态机中执行。</li>
+</ul>
+<p>Raft算法需要一直保持的三个属性。</p>
+<ul>
+<li>选举安全性（Election Safety）：在一个任期内只能存在最多一个leader节点。</li>
+<li>Leader节点上的日志为只添加（Leader Append-Only）：leader节点永远不会删除或者覆盖本节点上面的日志数据。</li>
+<li>日志匹配性（Log Matching）：如果两个节点上的日志，在日志的某个索引上的日志数据其对应的任期号相同，那么在两个节点在这条日志之前的日志数据完全匹配。</li>
+<li>leader完备性（Leader Completeness）：如果一条日志在某个任期被提交，那么这条日志数据在leader节点上更高任期号的日志数据中都存在。</li>
+<li>状态机安全性（State Machine Safety）：如果某个节点已经将一条提交过的数据输入raft状态机执行了，那么其它节点不可能再将相同索引的另一条日志数据输入到raft状态机中执行。</li>
+</ul>
+<h2 id="Raft算法基础"><a href="#Raft算法基础" class="headerlink" title="Raft算法基础"></a>Raft算法基础</h2><p>在Raft算法中，一个集群里面的所有节点有以下三种状态：</p>
+<ul>
+<li>Leader：领导者，一个集群里只能存在一个Leader。</li>
+<li>Follower：跟随者，follower是被动的，一个客户端的修改数据请求如果发送到Follower上面时，会首先由Follower重定向到Leader上，</li>
+<li>Candidate：参与者，一个节点切换到这个状态时，将开始进行一次新的选举。</li>
+</ul>
+<p>每一次开始一次新的选举时，称为一个“任期”。每个任期都有一个对应的整数与之关联，称为“任期号”，任期号用单词“Term”表示，这个值是一个严格递增的整数值。</p>
+<p>节点的状态切换状态机如下图所示。</p>
+<p><img src="1.jpg" alt="raft states"></p>
+<p>上图中标记了状态切换的6种路径，下面做一个简单介绍，后续都会展开来详细讨论。</p>
+<ol>
+<li>start up：起始状态，节点刚启动的时候自动进入的是follower状态。</li>
+<li>times out, starts election：follower在启动之后，将开启一个选举超时的定时器，当这个定时器到期时，将切换到candidate状态发起选举。</li>
+<li>times out, new election：进入candidate 状态之后就开始进行选举，但是如果在下一次选举超时到来之前，都还没有选出一个新的leade，那么还会保持在candidate状态重新开始一次新的选举。</li>
+<li>receives votes from majority of servers：当candidate状态的节点，收到了超过半数的节点选票，那么将切换状态成为新的leader。</li>
+<li>discovers current leader or new term：candidate状态的节点，如果收到了来自leader的消息，或者更高任期号的消息，都表示已经有leader了，将切换回到follower状态。</li>
+<li>discovers server with higher term：leader状态下如果收到来自更高任期号的消息，将切换到follower状态。这种情况大多数发生在有网络分区的状态下。</li>
+</ol>
+<p>如果一个candidate在一次选举中赢得leader，那么这个节点将在这个任期中担任leader的角色。但并不是每个任期号都一定对应有一个leader的，比如上面的情况3中，可能在选举超时到来之前都没有产生一个新的leader，那么此时将递增任期号开始一次新的选举。</p>
+<p>从以上的描述可以看出，任期号在raft算法中更像一个“逻辑时钟（logic clock）”的作用，有了这个值，集群可以发现有哪些节点的状态已经过期了。每一个节点状态中都保存一个当前任期号（current term），节点在进行通信时都会带上本节点的当前任期号。如果一个节点的当前任期号小于其他节点的当前任期号，将更新其当前任期号到最新的任期号。如果一个candidate或者leader状态的节点发现自己的当前任期号已经小于其他节点了，那么将切换到follower状态。反之，如果一个节点收到的消息中带上的发送者的任期号已经过期，将拒绝这个请求。</p>
+<p>raft节点之间通过RPC请求来互相通信，主要有以下两类RPC请求。RequestVote RPC用于candidate状态的节点进行选举之用，而AppendEntries RPC由leader节点向其他节点复制日志数据以及同步心跳数据的。</p>
+<h2 id="leader选举"><a href="#leader选举" class="headerlink" title="leader选举"></a>leader选举</h2><p>现在来讲解leader选举的流程。</p>
+<p>raft算法是使用心跳机制来触发leader选举的。</p>
+<p>在节点刚开始启动时，初始状态是follower状态。一个follower状态的节点，只要一直收到来自leader或者candidate的正确RPC消息的话，将一直保持在follower状态。leader节点通过周期性的发送心跳请求（一般使用带有空数据的AppendEntries RPC来进行心跳）来维持着leader节点状态。每个follower同时还有一个选举超时（election timeout）定时器，如果在这个定时器超时之前都没有收到来自leader的心跳请求，那么follower将认为当前集群中没有leader了，将发起一次新的选举。</p>
+<p>发起选举时，follower将递增它的任期号然后切换到candidate状态。然后通过向集群中其它节点发送RequestVote RPC请求来发起一次新的选举。一个节点将保持在该任期内的candidate状态下，直到以下情况之一发生。</p>
+<ul>
+<li>该candidate节点赢得选举，即收到超过半数以上集群中其它节点的投票。</li>
+<li>另一个节点成为了leader。</li>
+<li>选举超时到来时没有任何一个节点成为leader。</li>
+</ul>
+<p>下面来逐个分析以上几种情况。</p>
+<p>第一种情况，如果收到了集群中半数以上节点的投票，那么此时candidate节点将成为新的leader。每个节点在一个任期中只能给一个节点投票，而且遵守“先来后到”的原则。这样就保证了，每个任期最多只有一个节点会赢得选举成为leader。但并不是每个进行选举的candidate节点都会给它投票，在后续的“选举安全性”一节中将展开讨论这个问题。当一个candidate节点赢得选举成为leader后，它将发送心跳消息给其他节点来宣告它的权威性以阻止其它节点再发起新的选举。</p>
+<p>第二种情况，当candidate节点等待其他节点时，如果收到了来自其它节点的AppendEntries RPC请求，同时做个请求中带上的任期号不比candidate节点的小，那么说明集群中已经存在leader了，此时candidate节点将切换到follower状态；但是，如果该RPC请求的任期号比candidate节点的小，那么将拒绝该RPC请求继续保持在candidate状态。</p>
+<p>第三种情况，一个candidate节点在选举超时到来的时候，既没有赢得也没有输掉这次选举。这种情况发生在集群节点数量为偶数个，同时有两个candidate节点进行选举，而两个节点获得的选票数量都是一样时。当选举超时到来时，如果集群中还没有一个leader存在，那么candidate节点将继续递增任期号再次发起一次新的选举。这种情况理论上可以一直无限发生下去。</p>
+<p>为了减少第三种情况发生的概率，每个节点的选举超时时间都是随机决定的，一般在150~300毫秒之间，这样两个节点同时超时的情况就很罕见了。</p>
+<p>以上过程用伪代码来表示如下。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">节点刚启动，进入follower状态，同时创建一个超时时间在<span class="number">150</span><span class="number">-300</span>毫秒之间的选举超时定时器。</span><br><span class="line">follower状态节点主循环：</span><br><span class="line">  如果收到leader节点心跳：</span><br><span class="line">    心跳标志位置<span class="number">1</span></span><br><span class="line">  如果选举超时到期：</span><br><span class="line">    没有收到leader节点心跳：</span><br><span class="line">      任期号term+<span class="number">1</span>，换到candidate状态。</span><br><span class="line">    如果收到leader节点心跳：</span><br><span class="line">      心跳标志位置空</span><br><span class="line">  如果收到选举消息：</span><br><span class="line">    如果当前没有给任何节点投票过 或者 消息的任期号大于当前任期号：</span><br><span class="line">      投票给该节点</span><br><span class="line">    否则：</span><br><span class="line">      拒绝投票给该节点</span><br><span class="line">candidate状态节点主循环：</span><br><span class="line">  向集群中其他节点发送RequestVote请求，请求中带上当前任期号term</span><br><span class="line">  收到AppendEntries消息：</span><br><span class="line">    如果该消息的任期号 &gt;= 本节点任期号term：</span><br><span class="line">      说明已经有leader，切换到follower状态</span><br><span class="line">    否则：</span><br><span class="line">      拒绝该消息</span><br><span class="line">  收到其他节点应答RequestVote消息：</span><br><span class="line">    如果数量超过集群半数以上，切换到leader状态</span><br><span class="line">    </span><br><span class="line">  如果选举超时到期：</span><br><span class="line">    term+<span class="number">1</span>，进行下一次的选举</span><br></pre></td></tr></table></figure>
+
+<h2 id="日志复制"><a href="#日志复制" class="headerlink" title="日志复制"></a>日志复制</h2><p>日志复制的流程大体如下：</p>
+<ol>
+<li>每个客户端的请求都会被重定向发送给leader，这些请求最后都会被输入到raft算法状态机中去执行。</li>
+<li>leader在收到这些请求之后，会首先在自己的日志中添加一条新的日志条目。</li>
+<li>在本地添加完日志之后，leader将向集群中其他节点发送AppendEntries RPC请求同步这个日志条目，当这个日志条目被成功复制之后（什么是成功复制，下面会谈到），leader节点将会将这条日志输入到raft状态机中，然后应答客户端。</li>
+</ol>
+<p>Raft日志的组织形式如下图所示。</p>
+<p><img src="2.jpg" alt></p>
+<p>每个日志条目包含以下成员。</p>
+<ol>
+<li>index：日志索引号，即图中最上方的数字，是严格递增的。</li>
+<li>term：日志任期号，就是在每个日志条目中上方的数字，表示这条日志在哪个任期生成的。</li>
+<li>command：日志条目中对数据进行修改的操作。</li>
+</ol>
+<p>一条日志如果被leader同步到集群中超过半数的节点，那么被称为“成功复制”，这个日志条目就是“已被提交（committed）”。如果一条日志已被提交，那么在这条日志之前的所有日志条目也是被提交的，包括之前其他任期内的leader提交的日志。如上图中索引为7的日志条目之前的所有日志都是已被提交的日志。</p>
+<p>以下面的图示来说明日志复制的流程。</p>
+<p><img src="3.jpg" alt></p>
+<ul>
+<li><ol>
+<li>客户端发送SET a=1的命令到leader节点上。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>leader节点在本地添加一条日志，其对应的命令为SET a=1。这里涉及到两个索引值，committedIndex存储的最后一条提交（commit）日志的索引，appliedIndex存储的是最后一条应用到状态机中的日志索引值，一条日志只有被提交了才能应用到状态机中，因此总有 committedIndex &gt;= appliedIndex不等式成立。在这里只是添加一条日志还并没有提交，两个索引值还指向上一条日志。</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>leader节点向集群中其他节点广播AppendEntries消息，带上SET a=1命令。</li>
+</ol>
+</li>
+</ul>
+<p><img src="4.jpg" alt></p>
+<ul>
+<li><ol start="4">
+<li>收到AppendEntries请求的follower节点，同样在本地添加了一条新的日志，也还并没有提交。</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>follower节点向leader节点应答AppendEntries消息。</li>
+</ol>
+</li>
+<li><ol start="6">
+<li>当leader节点收到集群半数以上节点的AppendEntries请求的应答消息时，认为SET a=1命令成功复制，可以进行提交，于是修改了本地committed日志的索引指向最新的存储SET a=1的日志，而appliedIndex还是保持着上一次的值，因为还没有应用该命令到状态机中。</li>
+</ol>
+</li>
+</ul>
+<p><img src="5.jpg" alt></p>
+<ul>
+<li><ol start="7">
+<li>提交命令完成，给应用层说明这条命令已经提交。此时修改appliedIndex与committedIndex一样了。</li>
+</ol>
+</li>
+<li><ol start="8">
+<li>leader节点在下一次给follower的AppendEntries请求中，会带上当前最新的committedIndex索引值，follower收到之后同样会修改本地日志的committedIndex索引。</li>
+</ol>
+</li>
+</ul>
+<p>需要说明的是，7和8这两个操作并没有严格的先后顺序，谁在前在后都没关系。</p>
+<p>leader上保存着已被提交的最大日志索引信息，在每次向follower节点发送的AppendEntries RPC请求中都会带上这个索引信息，这样follower节点就知道哪个日志已经被提交了，被提交的日志将会输入Raft状态机中执行。</p>
+<p>Raft算法保持着以下两个属性，这两个属性共同作用满足前面提到的日志匹配（LogMatch）属性：</p>
+<ul>
+<li>如果两个日志条目有相同的索引号和任期号，那么这两条日志存储的是同一个指令。</li>
+<li>如果在两个不同的日志数据中，包含有相同索引和任期号的日志条目，那么在这两个不同的日志中，位于这条日志之前的日志数据是相同的。</li>
+</ul>
+<p>在正常的情况下，follower节点和leader节点的日志一直保持一致，此时AppendEntries RPC请求将不会失败。但是，当leader节点宕机时日志就可能出现不一致的情况，比如在这个leader节点宕机之前同步的数据并没有得到超过半数以上节点都复制成功了。如下图所示就是一种出现前后日志不一致的情况。</p>
+<p><img src="6.jpg" alt></p>
+<p>在上图中，最上面的一排数字是日志的索引，盒子中的数据是该日志对应的任期号，左边的字母表示的是a-f这几个不同的节点。图中演示了好几种节点日志与leader节点日志不一致的情况，下面说明中以二元组&lt;任期号，索引号&gt;来说明各个节点的日志数据情况：</p>
+<ul>
+<li>leader节点：&lt;6, 10&gt;。</li>
+<li>a节点：&lt;6,9&gt;，缺少日志。</li>
+<li>b节点：&lt;4,4&gt;，任期号比leader小，因此缺少日志。</li>
+<li>c节点：&lt;6,11&gt;，任期号与leader相同，但是有比leader日志索引更大的日志，这部分日志是未提交的日志。</li>
+<li>d节点：&lt;7,12&gt;，任期号比leader大，这部分日志是未提交的日志。</li>
+<li>e节点：&lt;4,7&gt;，任期号与索引都比leader小，因此既缺少日志，也有未提交的日志。</li>
+<li>f节点：&lt;3,11&gt;，任期号比leader小，所以缺少日志，而索引比leader大，这部分日志又是未提交的日志。</li>
+</ul>
+<p>在Raft算法中，解决日志数据不一致的方式是Leader节点同步日志数据到follower上，覆盖follower上与leader不一致的数据。</p>
+<p>为了解决与follower节点同步日志的问题，leader节点中存储着两个与每个follower节点日志相关的数据。</p>
+<ul>
+<li>nextIndex存储的是下一次给该节点同步日志时的日志索引。</li>
+<li>matchIndex存储的是该节点的最大日志索引。</li>
+</ul>
+<p>从以上两个索引的定义可知，在follower与leader节点之间日志复制正常的情况下，nextIndex = matchIndex + 1。但是如果出现不一致的情况，则这个等式可能不成立。每个leader节点被选举出来时，将初始化nextIndex为leader节点最后一条日志，而matchIndex为0，这么做的原因在于：leader节点将从后往前探索follower节点当前存储的日志位置，而在不知道follower节点日志位置的情况下只能置空matchIndex了。</p>
+<p>leader节点通过AppendEntries消息来与follower之间进行日志同步的，每次给follower带过去的日志就是以nextIndex来决定，如果follower节点的日志与这个值匹配，将返回成功；否则将返回失败，同时带上本节点当前的最大日志ID，方便leader节点快速定位到follower的日志位置以下一次同步正确的日志数据，而leader节点在收到返回失败的情况下，将置nextIndex = matchIndex + 1。从上面的分析可知，在leader当前之后第一次向follower同步日志失败时，nextIndex = matchIndex + 1 = 1。</p>
+<p>以上图的几个节点为例来说明情况。</p>
+<ul>
+<li>初始状态下，leader节点将存储每个folower节点的nextIndex为10，matchIndex为0。因此在成为leader节点之后首次向follower节点同步日志数据时，将复制索引位置在10以后的日志数据，同时带上日志二元组&lt;6,10&gt;告知follower节点当前leader保存的follower日志状态。</li>
+<li>a节点：由于节点的最大日志数据二元组是&lt;6,9&gt;，正好与leader发过来的日志&lt;6,10&gt;紧挨着，因此返回复制成功。</li>
+<li>b节点：由于节点的最大日志数据二元组是&lt;4,4&gt;，与leader发送过来的日志数据&lt;6,10&gt;不匹配，将返回失败同时带上自己最后的日志索引4，leader节点在收到该拒绝消息之后，将修改保存该节点的nextIndex为matchIndex + 1即1，所以下一次leader节点将同步从索引1到10的数据给b节点。</li>
+<li>c节点：由于节点的最大日志数据二元组是&lt;6,11&gt;，与leader发送过来的日志数据&lt;6,10&gt;不匹配，将返回失败同时带上自己最后的日志索 引11，leader节点在收到该拒绝消息之后，将修改保存该节点的nextIndex为matchIndex + 1即1，所以下一次leader节点将同步从索引1到10的数据给c节点，由于c节点上有未提交的数据，所以在第二次与leader同步完成之后，这些未提交的数据被清除。</li>
+<li>d节点：由于节点的最大日志数据二元组是&lt;7,12&gt;，与leader发送过来的日志数据&lt;6,10&gt;不匹配，将返回失败同时带上自己最后的日志索 引11，leader节点在收到该拒绝消息之后，将修改保存该节点的nextIndex为matchIndex + 1即1，所以下一次leader节点将同步从索引1到10的数据给d节点，由于d节点上有未提交的数据，所以在第二次与leader同步完成之后，这些未提交的数据被清除。</li>
+<li>e节点：由于节点的最大日志数据二元组是&lt;4,7&gt;，与leader发送过来的日志数据&lt;6,10&gt;不匹配，将返回失败同时带上自己最后的日志索 引11，leader节点在收到该拒绝消息之后，将修改保存该节点的nextIndex为matchIndex + 1即1，所以下一次leader节点将同步从索引1到10的数据给e节点，由于e节点上缺少的日志数据将被补齐，而多出来的未提交数据将被清除。</li>
+<li>f节点：由于节点的最大日志数据二元组是&lt;4,7&gt;，与leader发送过来的日志数据&lt;6,10&gt;不匹配，将返回失败同时带上自己最后的日志索 引11，leader节点在收到该拒绝消息之后，将修改保存该节点的nextIndex为matchIndex + 1即1，所以下一次leader节点将同步从索引1到10的数据给f节点，由于f节点上缺少的日志数据将被补齐，而多出来的未提交数据将被清除。</li>
+</ul>
+<h2 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h2><p>前面章节已经将leader选举以及日志同步的机制介绍了，这一小节讲解安全性相关的内容。</p>
+<h3 id="选举限制"><a href="#选举限制" class="headerlink" title="选举限制"></a>选举限制</h3><p>raft算法中，并不是所有节点都能成为leader。一个节点要成为leader，需要得到集群中半数以上节点的投票，而一个节点会投票给一个节点，其中一个充分条件是：这个进行选举的节点的日志，比本节点的日志更新。之所以要求这个条件，是为了保证每个当选的节点都有当前最新的数据。为了达到这个检查日志的目的，RequestVote RPC请求中需要带上参加选举节点的日志信息，如果节点发现选举节点的日志信息并不比自己更新，将拒绝给这个节点投票。</p>
+<p>如果判断日志的新旧？这通过对比日志的最后一个日志条目数据来决定，首先将对比条目的任期号，任期号更大的日志数据更新；如果任期号相同，那么索引号更大的数据更新。</p>
+<p>以上处理RequestVote请求的流程伪代码表示如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">follower节点收到RequestVote请求：  对比RequestVote请求中带上的最后一条日志数据：    如果任期号比节点的最后一条数据任期号小：      拒绝投票给该节点    如果索引号比节点的最后一条数据索引小：      拒绝投票给该节点    其他情况：      说明选举节点的日志信息比本节点更新，投票给该节点。</span><br></pre></td></tr></table></figure>
+
+<h3 id="提交前面任期的日志条目"><a href="#提交前面任期的日志条目" class="headerlink" title="提交前面任期的日志条目"></a>提交前面任期的日志条目</h3><p>如果leader在写入但是还没有提交一条日志之前崩溃，那么这条没有提交的日志是否能提交？有几种情况需要考虑，如下图所示。</p>
+<p><img src="7.jpg" alt></p>
+<p>在上图中，有以下的场景变更。</p>
+<ul>
+<li>情况a：s1是leader，index 2位置写入了数据2，该值只写在了s1，s2上，但是还没有被提交。</li>
+<li>情况b: s1崩溃，s5成为新的leader，该节点在index 2上面提交了另外一个值3，但是这个值只写在了s5上面，并没有被提交。</li>
+<li>情况c: s5崩溃，s1重新成为leader，这一次，index 2的值2写到了集群的大多数节点上。</li>
+</ul>
+<p>此时可能存在以下两种情况：</p>
+<ul>
+<li>情况d1: s1崩溃，s5重新成为leader（投票给s5的是s4，s2和s5自身），那么index 2上的值3这一次成功的写入到集群的半数以上节点之上，并成功提交。</li>
+<li>情况d2: s1不崩溃，而是将index 2为2的值成功提交。</li>
+</ul>
+<p>从情况d的两种场景可以看出，在index 2值为2，且已经被写入到半数以上节点的情况下，同样存在被新的leader覆盖的可能性。</p>
+<p>由于以上的原因，对于当前任期之前任期提交的日志，并不通过判断是否已经在半数以上集群节点写入成功来作为能否提交的依据。只有当前leader任期内的日志是通过比较写入数量是否超过半数来决定是否可以提交的。</p>
+<p>对于任期之前的日志，Raft采用的方式，是只要提交成功了当前任期的日志，那么在日志之前的日志就认为提交成功了。这也是为什么etcd-Raft代码中，在成为leader之后，需要再提交一条dummy的日志的原因–只要该日志提交成功，leader上该日志之前的日志就可以提交成功。</p>
+<h1 id="集群成员变更"><a href="#集群成员变更" class="headerlink" title="集群成员变更"></a>集群成员变更</h1><p>在上面描述Raft基本算法流程中，都假设集群中的节点是稳定不变的。但是在某些情况下，需要手动改变集群的配置。</p>
+<h2 id="安全性-1"><a href="#安全性-1" class="headerlink" title="安全性"></a>安全性</h2><p>安全性是变更集群成员时首先需要考虑到的问题，任何时候都不能出现集群中存在一个以上leader的情况。为了避免出现这种情况，每次变更成员时不能一次添加或者修改超过一个节点，集群不能直接切换到新的状态，如下图所示。</p>
+<p><img src="8.jpg" alt></p>
+<p>在上图中，server 1、2、3组成的是旧集群，server 4、5是准备新加入集群的节点。注意到如果直接尝试切换到新的状态，在某些时间点里，如图中所示，由于server 1、2上的配置还是旧的集群配置，那么可能这两个节点已经选定了一个leader；而server 3、4、5又是新的配置，它们也可能选定了一个leader，而这两个leader不是同一个，这就出现了集群中存在一个以上leader的情况了。</p>
+<p>反之，下图所示是分别往奇数个以及偶数个集群节点中添加删除单个节点的场景。</p>
+<p><img src="9.jpg" alt></p>
+<p>可以看到，不论旧集群节点数量是奇数还是偶数个，都不会出现同时有两个超过半数以上子集群的存在，也就不可能选出超过一个leader。</p>
+<p>raft采用将修改集群配置的命令放在日志条目中来处理，这样做的好处是：</p>
+<ul>
+<li>可以继续沿用原来的AppendEntries命令来同步日志数据，只要把修改集群的命令做为一种特殊的命令就可以了。</li>
+<li>在这个过程中，可以继续处理客户端请求。</li>
+</ul>
+<h2 id="可用性"><a href="#可用性" class="headerlink" title="可用性"></a>可用性</h2><h3 id="添加新节点到集群中"><a href="#添加新节点到集群中" class="headerlink" title="添加新节点到集群中"></a>添加新节点到集群中</h3><p>添加一个新的节点到集群时，需要考虑一种情况，即新节点可能落后当前集群日志很多的情况，在这种情况下集群出现故障的概率会大大提高，如下图所示。</p>
+<p><img src="10.jpg" alt></p>
+<p>上图中的情况a中，s1、s2、s3是原有的集群节点，这时把节点s4添加进来，而s4上又什么数据都没有。如果此时s3发生故障，在集群中原来有三个节点的情况下，本来可以容忍一个节点的失败的；但是当变成四个节点的集群时，s3和s4同时不可用整个集群就不可用了。</p>
+<p>因此Raft算法针对这种新添加进来的节点，是如下处理的。</p>
+<ul>
+<li>添加进来的新节点首先将不加入到集群中，而是等待数据追上集群的进度。</li>
+<li>leader同步数据给新节点的流程是，划分为多个轮次，每一轮同步一部分数据，而在同步的时候，leader仍然可以写入新的数据，只要等新的轮次到来继续同步就好。</li>
+</ul>
+<p>以下图来说明同步数据的流程。</p>
+<p><img src="11.jpg" alt></p>
+<p>如上图中，划分为多个轮次来同步数据。比如，在第一轮同步数据时，leader的最大数据索引为10，那么第一轮就同步10之前的数据。而在同步第一轮数据的同时，leader还能继续接收新的数据，假设当同步第一轮完毕时，最大数据索引变成了20，那么第二轮将继续同步从10到20的数据。以此类推。</p>
+<p>这个同步的轮次并不能一直持续下去，一般会有一个限制的轮次数量，比如最多同步10轮。</p>
+<h3 id="删除当前集群的leader节点"><a href="#删除当前集群的leader节点" class="headerlink" title="删除当前集群的leader节点"></a>删除当前集群的leader节点</h3><p>当需要下线当前集群的leader节点时，leader节点将发出一个变更节点配置的命令，只有在该命令被提交之后，原先的leader节点才下线，然后集群会自然有一个节点选举超时而进行新的一轮选举。</p>
+<h3 id="处理移出集群的节点"><a href="#处理移出集群的节点" class="headerlink" title="处理移出集群的节点"></a>处理移出集群的节点</h3><p>如果某个节点在一次配置更新之后，被移出了新的集群，但是这个节点又不知道这个情况，那么按照前面描述的Raft算法流程来说，它应该在选举超时之后，将任期号递增1，发起一次新的选举。虽然最终这个节点不会赢得选举，但是毕竟对集群运行的状态造成了干扰。而且如果这个节点一直不下线，那么上面这个发起新选举的流程就会一直持续下去。</p>
+<p>为了解决这个问题，Raft引入了一个成为“PreVote”的流程，在这个流程中，如果一个节点要发起一次新的选举，那么首先会广播给集群中的其它所有节点，询问下当前该节点上的日志是否足以赢下选举。只有在这个PreVote阶段赢得超过半数节点肯定的情况下，才真正发起一次新的选举。</p>
+<p>然而，PreVote并不能解决所有的问题，因为很有可能该被移除节点上的日志也是最新的。</p>
+<p>由于以上的原因，所以不能完全依靠判断日志的方式来决定是否允许一个节点发起新一轮的选举。</p>
+<p>Raft采用了另一种机制。如果leader节点一直保持着与其它节点的心跳消息，那么就认为leader节点是存活的，此时不允许发起一轮新的选举。这样follower节点处理RequestVote请求时，就需要加上判断，除了判断请求进行选举的节点日志是否最新以外，如果当前在一段时间内还收到过来自leader节点的心跳消息，那么也不允许发起新的选举。然而这种情况与前面描述的leader迁移的情况相悖，在leader迁移时是强制要求发起新的选举的，因此RequestVote请求的处理还要加上这种情况的判断。</p>
+<p>总结来说，RequestVote请求的处理逻辑大致是这样的。</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">follower处理RequestVote请求：</span><br><span class="line">  如果请求节点的日志不是最新的：</span><br><span class="line">    拒绝该请求，返回</span><br><span class="line">  如果此时是<span class="built_in">leader</span>迁移的情况：</span><br><span class="line">    接收该请求，返回</span><br><span class="line">  如果最近一段时间还有收到来自<span class="built_in">leader</span>节点的心跳消息：</span><br><span class="line">    拒绝该请求，返回</span><br><span class="line">  接收该请求</span><br></pre></td></tr></table></figure>
+
+<h1 id="日志压缩"><a href="#日志压缩" class="headerlink" title="日志压缩"></a>日志压缩</h1><p>日志数据如果不进行压缩处理掉的话，会一直增长下去。为此Raft使用快照数据来进行日志压缩，比如针对键值a的几次操作日志a=1、删除a、a=3最后可以被压缩成为最后的结果数据即a=3。</p>
+<p>快照数据和日志数据的组织形式如下图。</p>
+<p><img src="12.jpg" alt></p>
+<p>在上图中：</p>
+<ul>
+<li>未压缩日志前，日志数据保存到了&lt;3,5&gt;的位置，而在&lt;2,3&gt;的位置之前的数据都已经进行提交了，所以可以针对这部分数据进行压缩。</li>
+<li>压缩日志之后，快照文件中存放了几个值：压缩时最后一条日志的二元数据是&lt;2,3&gt;，而针对a的几次操作最后的值为a=3，b的值为2。</li>
+</ul>
+<h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><h2 id="高效处理只读请求"><a href="#高效处理只读请求" class="headerlink" title="高效处理只读请求"></a>高效处理只读请求</h2><p>前面已经提到过，处理一个命令时，需要经历以下流程：leader向集群中其它节点广播日志，在日志被超过半数节点应答之后，leader提交该日志，最后才应答客户端。这样的流程对于一个只读请求而言太久了，而且还涉及到日志落盘的操作，对于只读请求而言这些操作是不必要的。</p>
+<p>但是如果不经过上面的流程，leader节点在收到一个只读请求时就直接将本节点上保存的数据应答客户端，也是不安全的，因为这可能返回已经过期的数据。一方面leader节点可能已经发生了变化，只是这个节点并不知道；另一方面可能数据也发生了改变。返回过期的数据不符合一致性要求，因此这样的做法也是不允许的。</p>
+<p>Raft中针对只读请求是这样做处理的。</p>
+<ol>
+<li>leader节点需要有当前已提交日志的信息。在前面提到过不能提交前面任期的日志条目，因此一个新leader产生之后，需要提交一条空日志，这样来确保上一个任期内的日志全部提交。</li>
+<li>leader节点保存该只读请求到来时的commit日志索引为readIndex，</li>
+<li>leader需要确认自己当前还是集群的leader，因为可能会由于有网络分区的原因导致leader已经被隔离出集群而不自知。为了达到这个目的，leader节点将广播一个heartbeat心跳消息给集群中其它节点，当收到半数以上节点的应答时，leader节点知道自己当前还是leader，同时readIndex索引也是当前集群日志提交的最大索引。</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="changsk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>changsk</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="http://changsk.top/2019/07/25/raft/" title="Raft算法原理">http://changsk.top/2019/07/25/raft/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Raft/" rel="tag"><i class="fa fa-tag"></i> Raft</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/24/leetcode-215/" rel="next" title="leetcode-215:Kth Largest Element in an Array(数组中第K大的数)">
+                <i class="fa fa-chevron-left"></i> leetcode-215:Kth Largest Element in an Array(数组中第K大的数)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/25/os-memory-management/" rel="prev" title="操作系统之内存管理">
+                操作系统之内存管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/me/me.jpg" alt="changsk">
+            
+              <p class="site-author-name" itemprop="name">changsk</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">166</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">98</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Tkzccsk" title="GitHub &rarr; https://github.com/Tkzccsk" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:2486623255@qq.com" title="E-Mail &rarr; mailto:2486623255@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/tkzc_csk" title="CSDN &rarr; https://blog.csdn.net/tkzc_csk" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法的基本流程"><span class="nav-number">2.</span> <span class="nav-text">算法的基本流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Raft算法概述"><span class="nav-number">2.1.</span> <span class="nav-text">Raft算法概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Raft算法基础"><span class="nav-number">2.2.</span> <span class="nav-text">Raft算法基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leader选举"><span class="nav-number">2.3.</span> <span class="nav-text">leader选举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志复制"><span class="nav-number">2.4.</span> <span class="nav-text">日志复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全性"><span class="nav-number">2.5.</span> <span class="nav-text">安全性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选举限制"><span class="nav-number">2.5.1.</span> <span class="nav-text">选举限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交前面任期的日志条目"><span class="nav-number">2.5.2.</span> <span class="nav-text">提交前面任期的日志条目</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集群成员变更"><span class="nav-number">3.</span> <span class="nav-text">集群成员变更</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安全性-1"><span class="nav-number">3.1.</span> <span class="nav-text">安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可用性"><span class="nav-number">3.2.</span> <span class="nav-text">可用性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加新节点到集群中"><span class="nav-number">3.2.1.</span> <span class="nav-text">添加新节点到集群中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除当前集群的leader节点"><span class="nav-number">3.2.2.</span> <span class="nav-text">删除当前集群的leader节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理移出集群的节点"><span class="nav-number">3.2.3.</span> <span class="nav-text">处理移出集群的节点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#日志压缩"><span class="nav-number">4.</span> <span class="nav-text">日志压缩</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#杂项"><span class="nav-number">5.</span> <span class="nav-text">杂项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#高效处理只读请求"><span class="nav-number">5.1.</span> <span class="nav-text">高效处理只读请求</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changsk</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">763k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">11:34</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+        pbOptions.iconStyle = "box";
+      
+        pbOptions.boxForm = "horizontal";
+      
+        pbOptions.position = "bottomCenter";
+      
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+        flOptions.iconStyle = "box";
+      
+        flOptions.boxForm = "horizontal";
+      
+        flOptions.position = "middleRight";
+      
+        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

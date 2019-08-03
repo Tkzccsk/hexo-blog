@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://changsk.top/"/>
-  <updated>2019-07-27T13:34:07.582Z</updated>
+  <updated>2019-08-01T15:04:52.326Z</updated>
   <id>http://changsk.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL中where子句中不能出现聚合函数的原因</title>
+    <link href="http://changsk.top/2019/08/01/sql-where-no-agg/"/>
+    <id>http://changsk.top/2019/08/01/sql-where-no-agg/</id>
+    <published>2019-08-01T12:43:35.000Z</published>
+    <updated>2019-08-01T15:04:52.326Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>本文转载自：<a href="https://blog.csdn.net/zhaomengszu/article/details/80784096" target="_blank" rel="noopener">SQL中where子句中不能出现聚合函数的原因</a></p></blockquote><p>首先我们应该熟悉什么聚合函数：</p><p>例如<code>SUM()</code>,<code>MIN()</code>,<code>Max()</code>这类的，我们称作是<strong>聚合函数</strong>。</p><p>那么我们<strong>不能在where子句中使用这些函数</strong>，为什么呢？</p><p>聚集函数也叫列函数，它们都是<strong>基于整列数据进行计算</strong>的，而where子句则是<strong>对数据行进行过滤的</strong>，在筛选过程中依赖“基于已经筛选完毕的数据得出的计算结果”是一种悖论，这是行不通的。更简单地说，<strong>因为聚集函数要对全列数据进行计算，因而使用它的前提是：结果集已经确定！</strong></p><p><strong>而where子句还处于“确定”结果集的过程中，因而不能使用聚集函数。</strong></p><a id="more"></a><p>与where子句不能出现聚集函数正相反的是，我们几乎看不到不使用聚集函数的having子句（<strong>在 SQL 中增加 HAVING 子句原因是，WHERE 关键字无法与聚合函数一起使用</strong>）。为什么？因为在水平方向上根据外部指定条件的筛选（也就是对行的筛选），where子句可以独立完成，剩下的往往都是需要根据结果集自身的统计数据进一步筛选了，这时，几乎都需要通过<code>having</code>子句配合聚集函数来完成。</p><p>按照下面这个就是错误的，会报一个错误：<strong>Group function is not allowed here</strong></p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> department_id,<span class="keyword">avg</span>(salary)  </span><br><span class="line"><span class="keyword">from</span> employees  </span><br><span class="line"><span class="keyword">where</span>  <span class="keyword">avg</span>(salary)&gt;<span class="number">6000</span>  </span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> department_id  </span><br><span class="line"><span class="comment">--having  avg(salary)&gt;6000</span></span><br></pre></td></tr></table></figure><p>原因。</p><p>sql语句的执行顺序为</p><p> <strong>from子句</strong></p><p><strong>where 子句</strong></p><p><strong>group by 子句</strong></p><p><strong>having 子句</strong></p><p><strong>order by 子句</strong></p><p><strong>select 子句</strong></p><p>首先得知道<strong>聚合函数是对结果集运算的</strong>，当在where子句使用聚合函数时，此时根据group by 分割结果集的子句还没有执行，此时只有from 后的结果集。</p><p>所以无法在where子句中使用聚合函数。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本文转载自：&lt;a href=&quot;https://blog.csdn.net/zhaomengszu/article/details/80784096&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;SQL中where子句中不能出现聚合函数的原因&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;首先我们应该熟悉什么聚合函数：&lt;/p&gt;
+&lt;p&gt;例如&lt;code&gt;SUM()&lt;/code&gt;,&lt;code&gt;MIN()&lt;/code&gt;,&lt;code&gt;Max()&lt;/code&gt;这类的，我们称作是&lt;strong&gt;聚合函数&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;那么我们&lt;strong&gt;不能在where子句中使用这些函数&lt;/strong&gt;，为什么呢？&lt;/p&gt;
+&lt;p&gt;聚集函数也叫列函数，它们都是&lt;strong&gt;基于整列数据进行计算&lt;/strong&gt;的，而where子句则是&lt;strong&gt;对数据行进行过滤的&lt;/strong&gt;，在筛选过程中依赖“基于已经筛选完毕的数据得出的计算结果”是一种悖论，这是行不通的。更简单地说，&lt;strong&gt;因为聚集函数要对全列数据进行计算，因而使用它的前提是：结果集已经确定！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;而where子句还处于“确定”结果集的过程中，因而不能使用聚集函数。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>数据库两大神器【索引和锁】</title>
@@ -482,30 +507,6 @@
     
     
       <category term="排序" scheme="http://changsk.top/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>剑指offer-机器人的运动范围</title>
-    <link href="http://changsk.top/2019/07/19/jianzhioffer-robot-motion-range/"/>
-    <id>http://changsk.top/2019/07/19/jianzhioffer-robot-motion-range/</id>
-    <published>2019-07-19T10:21:02.000Z</published>
-    <updated>2019-07-19T10:32:02.883Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>地上有一个m行和n列的方格。一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，但是不能进入行坐标和列坐标的数位之和大于k的格子。 例如，当k为18时，机器人能够进入方格（35,37），因为3+5+3+7 = 18。但是，它不能进入方格（35,38），因为3+5+3+8 = 19。请问该机器人能够达到多少个格子？</p><a id="more"></a><h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><p>典型的<code>BFS</code>就可以解决</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;  <span class="comment">//保存最终的结果，即可以到达多少个格子</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">movingCount</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span>[][] seen = <span class="keyword">new</span> <span class="keyword">boolean</span>[rows][cols];  <span class="comment">//判断是否被遍历过</span></span><br><span class="line">        backtrack(threshold, rows, cols, seen, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">//从 [0][0] 开始遍历</span></span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//direction</span></span><br><span class="line">    <span class="keyword">int</span>[] dirx = &#123;<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span>[] diry = &#123;<span class="number">1</span>, -<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">boolean</span>[][] seen, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i &lt; <span class="number">0</span> || i &gt;= rows || j &lt; <span class="number">0</span> || j &gt;= cols || seen[i][j] || (sumBit(i) + sumBit(j)) &gt; threshold) <span class="keyword">return</span>;</span><br><span class="line">        seen[i][j] = <span class="keyword">true</span>;</span><br><span class="line">        count++;</span><br><span class="line">        <span class="comment">//从当前节点开始，依次遍历上下左右四个方向（方向的顺序对结果没有影响）</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>;k &lt; <span class="number">4</span>;k++)</span><br><span class="line">            backtrack(threshold, rows, cols, seen, i + dirx[k], j + diry[k]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">sumBit</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i != <span class="number">0</span>)&#123;</span><br><span class="line">            sum += i % <span class="number">10</span>;</span><br><span class="line">            i /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;地上有一个m行和n列的方格。一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，但是不能进入行坐标和列坐标的数位之和大于k的格子。 例如，当k为18时，机器人能够进入方格（35,37），因为3+5+3+7 = 18。但是，它不能进入方格（35,38），因为3+5+3+8 = 19。请问该机器人能够达到多少个格子？&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="剑指offer" scheme="http://changsk.top/categories/%E5%89%91%E6%8C%87offer/"/>
-    
-    
-      <category term="剑指offer" scheme="http://changsk.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-      <category term="Algorithm" scheme="http://changsk.top/tags/Algorithm/"/>
     
   </entry>
   

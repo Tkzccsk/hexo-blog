@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="changsk&#39;s blogs">
 <meta property="og:description" content="本文转载自：MySQL存储引擎－－MyISAM与InnoDB区别  MyISAM是MySQL的默认数据库引擎（5.5版之前），由早期的ISAM（Indexed Sequential Access Method：有索引的顺序访问方法）所改良。虽然性能极佳，但却有一个缺点：不支持事务处理（transaction）。不过，在这几年的发展下，MySQL也导入了InnoDB（另一种数据库引擎），以强化参考">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-09T12:20:19.394Z">
+<meta property="og:updated_time" content="2019-08-05T07:05:40.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL存储引擎-InnoDB与MyISAM的区别">
 <meta name="twitter:description" content="本文转载自：MySQL存储引擎－－MyISAM与InnoDB区别  MyISAM是MySQL的默认数据库引擎（5.5版之前），由早期的ISAM（Indexed Sequential Access Method：有索引的顺序访问方法）所改良。虽然性能极佳，但却有一个缺点：不支持事务处理（transaction）。不过，在这几年的发展下，MySQL也导入了InnoDB（另一种数据库引擎），以强化参考">
@@ -455,12 +455,24 @@
                 
               
 
-              <time title="创建时间：2019-07-09 19:46:02 / 修改时间：20:20:19" itemprop="dateCreated datePublished" datetime="2019-07-09T19:46:02+08:00">2019-07-09</time>
+              <time title="创建时间：2019-07-09 19:46:02" itemprop="dateCreated datePublished" datetime="2019-07-09T19:46:02+08:00">2019-07-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-05 15:05:40" itemprop="dateModified" datetime="2019-08-05T15:05:40+08:00">2019-08-05</time>
               
             
           </span>
@@ -558,7 +570,7 @@
 <h3 id="存储空间"><a href="#存储空间" class="headerlink" title="存储空间"></a>存储空间</h3><p>MyISAM：<strong>可被压缩，存储空间较小</strong>。支持三种不同的存储格式：<strong>静态表</strong>(默认，但是注意数据末尾不能有空格，会被去掉)、<strong>动态表</strong>、<strong>压缩表</strong>。
 InnoDB：需要更多的内存和存储，<strong>它会在主内存中建立其专用的缓冲池用于高速缓冲数据和索引。</strong></p>
 <h3 id="可移植性、备份及恢复"><a href="#可移植性、备份及恢复" class="headerlink" title="可移植性、备份及恢复"></a>可移植性、备份及恢复</h3><p>MyISAM：数据是以文件的形式存储，所以在跨平台的数据转移中会很方便。在备份和恢复时可单独针对某个表进行操作。<br>InnoDB：免费的方案可以是拷贝数据文件、备份 binlog，或者用 <strong>mysqldump</strong>，在数据量达到几十G的时候就相对痛苦了。</p>
-<h3 id="事务支持"><a href="#事务支持" class="headerlink" title="事务支持"></a>事务支持</h3><p>MyISAM：<strong>强调的是性能</strong>，每次查询具有原子性,其执行数度比InnoDB类型更快，但是不提供事务支持。<br>InnoDB：<strong>提供事务支持事务</strong>，<strong>外部键</strong>等高级数据库功能。 <strong>具有事务(commit)、回滚(rollback)和崩溃修复能力</strong>(crash recovery capabilities)的事务安全(transaction-safe (ACID compliant))型表。</p>
+<h3 id="事务支持"><a href="#事务支持" class="headerlink" title="事务支持"></a>事务支持</h3><p>MyISAM：<strong>强调的是性能</strong>，每次查询具有原子性,其执行速度比InnoDB类型更快，但是不提供事务支持。<br>InnoDB：<strong>提供事务，支持事务</strong>，<strong>外部键</strong>等高级数据库功能。 <strong>具有事务(commit)、回滚(rollback)和崩溃修复能力</strong>(crash recovery capabilities)的事务安全(transaction-safe (ACID compliant))型表。</p>
 <h3 id="AUTO-INCREMENT"><a href="#AUTO-INCREMENT" class="headerlink" title="AUTO_INCREMENT"></a>AUTO_INCREMENT</h3><p>MyISAM：可以和其他字段一起建立联合索引。引擎的自动增长列必须是索引，如果是组合索引，自动增长可以不是第一列，他可以根据前面几列进行排序后递增。<br>InnoDB：InnoDB中必须包含只有该字段的索引。引擎的自动增长列必须是索引，如果是组合索引也必须是组合索引的第一列。</p>
 <h3 id="表锁差异"><a href="#表锁差异" class="headerlink" title="表锁差异"></a>表锁差异</h3><p>MyISAM：<strong>只支持表级锁</strong>，用户在操作myisam表时，<strong>select，update，delete，insert语句都会给表自动加锁</strong>，如果加锁以后的表满足insert并发的情况下，可以在表的尾部插入新的数据。<br>InnoDB：<strong>支持事务和行级锁</strong>，是innodb的最大特色。行锁大幅度提高了多用户并发操作的新能。但是InnoDB的行锁，<strong>只是在WHERE的主键是有效的</strong>，非主键的WHERE都会锁全表的。</p>
 <h3 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h3><p>MyISAM：支持 FULLTEXT类型的全文索引<br>InnoDB：不支持FULLTEXT类型的全文索引，但是innodb可以使用sphinx插件支持全文索引，并且效果更好。</p>
@@ -566,7 +578,7 @@ InnoDB：需要更多的内存和存储，<strong>它会在主内存中建立其
 <h3 id="表的具体行数"><a href="#表的具体行数" class="headerlink" title="表的具体行数"></a>表的具体行数</h3><p>MyISAM：保存有表的总行数，如果select count(<em>) from table;会直接取出出该值。<br>InnoDB：没有保存表的总行数，如果使用select count(</em>) from table；就会遍历整个表，消耗相当大，但是在加了wehre条件后，myisam和innodb处理的方式都一样。</p>
 <h3 id="CURD操作"><a href="#CURD操作" class="headerlink" title="CURD操作"></a>CURD操作</h3><p>MyISAM：<strong>如果执行大量的SELECT</strong>，MyISAM是更好的选择。<br>InnoDB：如果你的数据执行大量的INSERT或UPDATE，出于性能方面的考虑，应该使用InnoDB表。DELETE 从性能上InnoDB更优，但DELETE FROM table时，InnoDB不会重新建立表，而是一行一行的删除，<strong>在innodb上如果要清空保存有大量数据的表，最好使用truncate table这个命令。</strong></p>
 <h3 id="外键"><a href="#外键" class="headerlink" title="外键"></a>外键</h3><p>MyISAM：不支持<br>InnoDB：支持</p>
-<p>通过上述的分析，基本上可以考虑使用InnoDB来替代MyISAM引擎了，原因是InnoDB自身很多良好的特点，比如<strong>事务支持</strong>、存储 过程、视图、<strong>行级锁定</strong>等等，在并发很多的情况下，相信InnoDB的表现肯定要比MyISAM强很多。另外，任何一种表都不是万能的，<strong>只用恰当的针对业务类型来选择合适的表类型</strong>，才能最大的发挥MySQL的性能优势。如果不是很复杂的Web应用，非关键应用，还是可以继续考虑MyISAM的，这个具体情况可以自己斟酌。</p>
+<p>通过上述的分析，基本上可以考虑使用InnoDB来替代MyISAM引擎了，原因是InnoDB自身很多良好的特点，比如<strong>事务支持</strong>、存储过程、视图、<strong>行级锁定</strong>等等，在并发很多的情况下，相信InnoDB的表现肯定要比MyISAM强很多。另外，任何一种表都不是万能的，<strong>只用恰当的针对业务类型来选择合适的表类型</strong>，才能最大的发挥MySQL的性能优势。如果不是很复杂的Web应用，非关键应用，还是可以继续考虑MyISAM的，这个具体情况可以自己斟酌。</p>
 <p>存储引擎选择的基本原则</p>
 <p>采用MyISAM引擎</p>
 <ul>
@@ -780,7 +792,7 @@ InnoDB：需要更多的内存和存储，<strong>它会在主内存中建立其
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">169</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1173,7 +1185,7 @@ InnoDB：需要更多的内存和存储，<strong>它会在主内存中建立其
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">776k</span>
+    <span title="站点总字数">782k</span>
   
 
   
@@ -1184,7 +1196,7 @@ InnoDB：需要更多的内存和存储，<strong>它会在主内存中建立其
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:46</span>
+    <span title="站点阅读时长">11:51</span>
   
 </div>
 

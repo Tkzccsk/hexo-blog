@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[问题 1004-[递归]母牛的故事]]></title>
+    <url>%2F2019%2F08%2F15%2Fstories-of-cows%2F</url>
+    <content type="text"><![CDATA[题目链接：https://www.dotcpp.com/oj/problem1004.html?sid=1076912&amp;lang=1#editor 题目描述有一头母牛，它每年年初生一头小母牛。每头小母牛从第四个年头开始，每年年初也生一头小母牛。请编程实现在第n年的时候，共有多少头母牛？ 输入输入数据由多个测试实例组成，每个测试实例占一行，包括一个整数n(0&lt;n&lt;55)，n的含义如题目中描述。n=0表示输入数据的结束，不做处理。 输出对于每个测试实例，输出在第n年的时候母牛的数量。每个输出占一行。 样例输入12342450 样例输出123246 Solution12345678910111213141516171819202122232425#include&lt;iostream&gt;using namespace std;int main()&#123;int n;int fn;while(cin&gt;&gt;n&amp;&amp;n!=0)&#123; int f1=1,f2=2,f3=3,f4=4;if(n==1) cout&lt;&lt;f1&lt;&lt;endl;else if(n==2) cout&lt;&lt;f2&lt;&lt;endl;else if(n==3) cout&lt;&lt;f3&lt;&lt;endl;else if(n==4) cout&lt;&lt;f4&lt;&lt;endl;else&#123;for(int i=5;i&lt;=n;i++)&#123;fn=f2+f4;f2=f3;f3=f4;f4=fn;&#125;cout&lt;&lt;fn&lt;&lt;endl;;&#125;&#125;return 0;&#125;]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-674:Longest Continuous Increasing Subsequence(最长连续递增子串)]]></title>
+    <url>%2F2019%2F08%2F15%2Fleetcode-674%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/longest-continuous-increasing-subsequence/ 题目描述题目难度：Easy Given an unsorted array of integers, find the length of longest continuous increasing subsequence (subarray). Example 1: 1234Input: [1,3,5,4,7]Output: 3Explanation: The longest continuous increasing subsequence is [1,3,5], its length is 3. Even though [1,3,5,7] is also an increasing subsequence, it's not a continuous one where 5 and 7 are separated by 4. Example 2: 123Input: [2,2,2,2,2]Output: 1Explanation: The longest continuous increasing subsequence is [2], its length is 1. Note: Length of the array will not exceed 10,000. Solution12345678910111213class Solution &#123; public int findLengthOfLCIS(int[] nums) &#123; if(nums == null || nums.length == 0) return 0; int res = 1; int max = 1; for(int i = 1;i &lt; nums.length;i++)&#123; if(nums[i] &gt; nums[i - 1]) max++; else max = 1; res = Math.max(max, res); &#125; return res; &#125;&#125;]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[最长严格上升子序列]]></title>
+    <url>%2F2019%2F08%2F11%2FLongest-strictly-rising-subsequence%2F</url>
+    <content type="text"><![CDATA[题目描述给一个数组a1, a2 … an，找到最长的严格上升子序列。 输出长度即可。 输入描述第一行，一个整数N。 第二行 ，N个整数（N &lt; = 5000） 输出描述输出最长不上升子序列的长度 测试用例输入：9 3 6 6 2 7 输出：3 解析：最长的严格上升子序列为 [3, 6, 7] 注意：[3, 6, 6, 7]不算严格上升子序列 Solution1234567891011121314151617181920212223242526package com.csk.beike;import java.util.Scanner;public class Main &#123; public static void main(String[] args) &#123; Scanner scanner = new Scanner(System.in); while(scanner.hasNext())&#123; int n = scanner.nextInt(); int[] arr = new int[n]; for(int i = 0;i &lt; n;i++) arr[i] = scanner.nextInt(); int[] dp = new int[n]; int max = 0; for(int i = 0;i &lt; n;i++) &#123; for (int j = 0; j &lt; i; j++) &#123; if(arr[j] &lt; arr[i])&#123; dp[i] = Math.max(dp[i], dp[j] + 1); max = Math.max(max, dp[i]); &#125; &#125; &#125; System.out.println(max + 1); &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[剑指offer-和为S的连续正数序列]]></title>
+    <url>%2F2019%2F08%2F05%2Fjianzhioffer-continuous-positive-sequence%2F</url>
+    <content type="text"><![CDATA[题目描述小明很喜欢数学,有一天他在做数学作业时,要求计算出9~16的和,他马上就写出了正确答案是100。但是他并不满足于此,他在想究竟有多少种连续的正数序列的和为100(至少包括两个数)。没多久,他就得到另一组连续正数和为100的序列:18,19,20,21,22。现在把问题交给你,你能不能也很快的找出所有和为S的连续正数序列? Good Luck! Solution123456789101112131415161718192021222324252627282930313233343536import java.util.ArrayList;public class Solution &#123; ArrayList&lt;ArrayList&lt;Integer&gt; &gt; resList = new ArrayList&lt;&gt;(); public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; FindContinuousSequence(int sum) &#123; int start = 1; int end = 2; int curSum = start + end; if(sum &lt; 3) return resList; int max = (sum + 1) &gt;&gt; 1; while(start &lt; end &amp;&amp; end &lt;= max)&#123; if(curSum == sum) &#123; addList(start, end, new ArrayList&lt;Integer&gt;(end - start + 1)); curSum -= start; start++; &#125; else if(curSum &lt; sum) &#123; end++; curSum += end; &#125; else&#123; curSum -= start; start++; &#125; &#125; return resList; &#125; private void addList(int start, int end, ArrayList&lt;Integer&gt; list)&#123; if(start &gt; end) return; for(int i = start;i &lt;= end;i++)&#123; list.add(i); &#125; resList.add(list); &#125;&#125;]]></content>
+      <categories>
+        <category>剑指offer</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-76:Minimum Window Substring]]></title>
+    <url>%2F2019%2F08%2F05%2Fleetcode-76%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/minimum-window-substring/ 题目描述Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n). Example: 12Input: S = "ADOBECODEBANC", T = "ABC"Output: "BANC" Note: If there is no such window in S that covers all characters in T, return the empty string &quot;&quot;. If there is such window, you are guaranteed that there will always be only one unique minimum window in S. Solution代码来自Leetcode 12345678910111213141516171819202122232425262728293031class Solution &#123; public String minWindow(String s, String t) &#123; int sLen = s.length(), tLen = t.length(), count = t.length(), start = 0, minLen = Integer.MAX_VALUE; int[] freq = new int[128]; char[] sc = s.toCharArray(); char[] tc = t.toCharArray(); for(char c: tc) &#123; freq[c]++; &#125; int l=0,r=0; while(r&lt;sLen) &#123; if(freq[sc[r++]]-- &gt; 0) &#123; count--; &#125; while(count == 0) &#123; if(minLen &gt; r-l) &#123; minLen = r-l; start = l; &#125; if(freq[sc[l++]]++ == 0) count++; &#125; &#125; return minLen == Integer.MAX_VALUE ? "" : s.substring(start,start+minLen); &#125;&#125;]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[基于java的生产者和消费者三种实现方式]]></title>
     <url>%2F2019%2F08%2F04%2Fjava-producer-consumer%2F</url>
     <content type="text"><![CDATA[本文转载自：基于java的生产者和消费者三种实现方式 概述生产者和消费者问题是一个经典的线程同步问题。生产者（Producer）生产产品（Product），放入仓库（Repertory）；消费者（Consumer）消费产品，从仓库里获取。仓库爆满时生产者等待消费者消费，仓库为空时消费者等待生产者生产。 实现synchronized生产者Producer： 1234567891011121314public class Producer implements Runnable &#123; private static final String TAG = "Producer"; private Repertory mRepertory; Producer(Repertory repertory) &#123; mRepertory = repertory; &#125; @Override public void run() &#123; Object product = new Object(); mRepertory.produce(product); &#125;&#125; 消费者Consumer： 12345678910111213public class Consumer implements Runnable &#123; private static final String TAG = "Consumer"; private Repertory mRepertory; Consumer(Repertory repertory) &#123; mRepertory = repertory; &#125; @Override public void run() &#123; mRepertory.consume(); &#125;&#125; 仓库Repertory1： 123456789101112131415161718192021222324252627282930313233343536373839404142434445public class Repertory1 implements Repertory &#123; private static final String TAG = "Repertory1"; private static final int MAX_SIZE = 100; private LinkedList&lt;Object&gt; list = new LinkedList&lt;&gt;(); @Override public synchronized void produce(Object product) &#123; while (isFull()) &#123; try &#123; wait(); &#125; catch (InterruptedException e) &#123; e.printStackTrace(); &#125; &#125; list.add(product); Log.e(TAG, Thread.currentThread().getName() + "生产了: " + product + "，还剩余：" + size()); notifyAll(); &#125; @Override public synchronized void consume() &#123; while (isEmpty()) &#123; try &#123; wait(); &#125; catch (InterruptedException e) &#123; e.printStackTrace(); &#125; &#125; Object product = list.remove(); Log.e(TAG, Thread.currentThread().getName() + "消费了: " + product + "，还剩余：" + size()); notifyAll(); &#125; public boolean isEmpty() &#123; return list.isEmpty(); &#125; public boolean isFull() &#123; return size() == MAX_SIZE; &#125; public int size() &#123; return list.size(); &#125;&#125; Lock/Condition仓库Repertory2： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061public class Repertory2 implements Repertory &#123; private static final String TAG = "Repertory2"; private static final int MAX_SIZE = 100; private LinkedList&lt;Object&gt; list = new LinkedList&lt;&gt;(); private final Lock mLock = new ReentrantLock(); private final Condition mEmptyCondition = mLock.newCondition(); private final Condition mFullCondition = mLock.newCondition(); @Override public void produce(Object product) &#123; mLock.lock(); try &#123; while (isFull()) &#123; try &#123; mFullCondition.await(); &#125; catch (InterruptedException e) &#123; e.printStackTrace(); &#125; &#125; list.add(product); Log.e(TAG, Thread.currentThread().getName() + "生产了: " + product + "，还剩余：" + size()); mEmptyCondition.signalAll(); &#125; finally &#123; mLock.unlock(); &#125; &#125; @Override public void consume() &#123; mLock.lock(); try &#123; while (isEmpty()) &#123; try &#123; mEmptyCondition.await(); &#125; catch (InterruptedException e) &#123; e.printStackTrace(); &#125; &#125; Object product = list.remove(); Log.e(TAG, Thread.currentThread().getName() + "消费了: " + product + "，还剩余：" + size()); mFullCondition.signalAll(); &#125; finally &#123; mLock.unlock(); &#125; &#125; public boolean isEmpty() &#123; return list.isEmpty(); &#125; public boolean isFull() &#123; return size() == MAX_SIZE; &#125; public int size() &#123; return list.size(); &#125; &#125; BlockingDeque仓库Reprotory3： 12345678910111213141516171819202122232425262728293031323334353637383940public class Repertory3 implements Repertory &#123; private static final String TAG = "Repertory3"; private static final int MAX_SIZE = 100; private BlockingDeque&lt;Object&gt; list = new LinkedBlockingDeque&lt;&gt;(MAX_SIZE); @Override public void produce(Object product) &#123; try &#123; list.put(product); &#125; catch (InterruptedException e) &#123; e.printStackTrace(); &#125; Log.e(TAG, Thread.currentThread().getName() + "生产了: " + product); &#125; @Override public void consume() &#123; Object product = null; try &#123; product = list.take(); &#125; catch (InterruptedException e) &#123; e.printStackTrace(); &#125; Log.e(TAG, Thread.currentThread().getName() + "消费了: " + product); &#125; public boolean isEmpty() &#123; return list.isEmpty(); &#125; public boolean isFull() &#123; return size() == MAX_SIZE; &#125; public int size() &#123; return list.size(); &#125; &#125;]]></content>
@@ -247,8 +305,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -259,8 +317,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -271,8 +329,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -295,8 +353,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -307,8 +365,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -493,8 +551,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -505,8 +563,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -529,8 +587,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -671,8 +729,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -708,7 +766,7 @@
   <entry>
     <title><![CDATA[MySQL存储引擎-InnoDB与MyISAM的区别]]></title>
     <url>%2F2019%2F07%2F09%2Fmysql-innodb-myisam%2F</url>
-    <content type="text"><![CDATA[本文转载自：MySQL存储引擎－－MyISAM与InnoDB区别 MyISAM是MySQL的默认数据库引擎（5.5版之前），由早期的ISAM（Indexed Sequential Access Method：有索引的顺序访问方法）所改良。虽然性能极佳，但却有一个缺点：不支持事务处理（transaction）。不过，在这几年的发展下，MySQL也导入了InnoDB（另一种数据库引擎），以强化参考完整性与并发违规处理机制，后来就逐渐取代MyISAM。 InnoDB，是MySQL的数据库引擎之一，为MySQL AB发布binary的标准之一。InnoDB由Innobase Oy公司所开发，2006年五月时由甲骨文公司并购。与传统的ISAM与MyISAM相比，InnoDB的最大特色就是支持了ACID兼容的事务（Transaction）功能，类似于PostgreSQL。目前InnoDB采用双轨制授权，一是GPL授权，另一是专有软件授权。 MyISAM与InnoDB的区别是什么？存储结构MyISAM：每个MyISAM在磁盘上存储成三个文件。第一个文件的名字以表的名字开始，扩展名指出文件类型。.frm文件存储表定义。数据文件的扩展名为.MYD (MYData)。索引文件的扩展名是.MYI (MYIndex)。InnoDB：所有的表都保存在同一个数据文件中（也可能是多个文件，或者是独立的表空间文件），InnoDB表的大小只受限于操作系统文件的大小，一般为2GB。 存储空间MyISAM：可被压缩，存储空间较小。支持三种不同的存储格式：静态表(默认，但是注意数据末尾不能有空格，会被去掉)、动态表、压缩表。 InnoDB：需要更多的内存和存储，它会在主内存中建立其专用的缓冲池用于高速缓冲数据和索引。 可移植性、备份及恢复MyISAM：数据是以文件的形式存储，所以在跨平台的数据转移中会很方便。在备份和恢复时可单独针对某个表进行操作。InnoDB：免费的方案可以是拷贝数据文件、备份 binlog，或者用 mysqldump，在数据量达到几十G的时候就相对痛苦了。 事务支持MyISAM：强调的是性能，每次查询具有原子性,其执行数度比InnoDB类型更快，但是不提供事务支持。InnoDB：提供事务支持事务，外部键等高级数据库功能。 具有事务(commit)、回滚(rollback)和崩溃修复能力(crash recovery capabilities)的事务安全(transaction-safe (ACID compliant))型表。 AUTO_INCREMENTMyISAM：可以和其他字段一起建立联合索引。引擎的自动增长列必须是索引，如果是组合索引，自动增长可以不是第一列，他可以根据前面几列进行排序后递增。InnoDB：InnoDB中必须包含只有该字段的索引。引擎的自动增长列必须是索引，如果是组合索引也必须是组合索引的第一列。 表锁差异MyISAM：只支持表级锁，用户在操作myisam表时，select，update，delete，insert语句都会给表自动加锁，如果加锁以后的表满足insert并发的情况下，可以在表的尾部插入新的数据。InnoDB：支持事务和行级锁，是innodb的最大特色。行锁大幅度提高了多用户并发操作的新能。但是InnoDB的行锁，只是在WHERE的主键是有效的，非主键的WHERE都会锁全表的。 全文索引MyISAM：支持 FULLTEXT类型的全文索引InnoDB：不支持FULLTEXT类型的全文索引，但是innodb可以使用sphinx插件支持全文索引，并且效果更好。 表主键MyISAM：允许没有任何索引和主键的表存在，索引都是保存行的地址。InnoDB：如果没有设定主键或者非空唯一索引，就会自动生成一个6字节的主键(用户不可见)，数据是主索引的一部分，附加索引保存的是主索引的值。 表的具体行数MyISAM：保存有表的总行数，如果select count() from table;会直接取出出该值。InnoDB：没有保存表的总行数，如果使用select count() from table；就会遍历整个表，消耗相当大，但是在加了wehre条件后，myisam和innodb处理的方式都一样。 CURD操作MyISAM：如果执行大量的SELECT，MyISAM是更好的选择。InnoDB：如果你的数据执行大量的INSERT或UPDATE，出于性能方面的考虑，应该使用InnoDB表。DELETE 从性能上InnoDB更优，但DELETE FROM table时，InnoDB不会重新建立表，而是一行一行的删除，在innodb上如果要清空保存有大量数据的表，最好使用truncate table这个命令。 外键MyISAM：不支持InnoDB：支持 通过上述的分析，基本上可以考虑使用InnoDB来替代MyISAM引擎了，原因是InnoDB自身很多良好的特点，比如事务支持、存储 过程、视图、行级锁定等等，在并发很多的情况下，相信InnoDB的表现肯定要比MyISAM强很多。另外，任何一种表都不是万能的，只用恰当的针对业务类型来选择合适的表类型，才能最大的发挥MySQL的性能优势。如果不是很复杂的Web应用，非关键应用，还是可以继续考虑MyISAM的，这个具体情况可以自己斟酌。 存储引擎选择的基本原则 采用MyISAM引擎 R/W &gt; 100:1 且update相对较少(读多写少) 并发不高 表数据量小 硬件资源有限 采用InnoDB引擎 R/W比较小，频繁更新大字段 表数据量超过1000万，并发高 安全性和可用性要求高 采用Memory引擎 有足够的内存 对数据一致性要求不高，如在线人数和session等应用 需要定期归档数据 1摘自：《PHP核心技术与最佳实践》]]></content>
+    <content type="text"><![CDATA[本文转载自：MySQL存储引擎－－MyISAM与InnoDB区别 MyISAM是MySQL的默认数据库引擎（5.5版之前），由早期的ISAM（Indexed Sequential Access Method：有索引的顺序访问方法）所改良。虽然性能极佳，但却有一个缺点：不支持事务处理（transaction）。不过，在这几年的发展下，MySQL也导入了InnoDB（另一种数据库引擎），以强化参考完整性与并发违规处理机制，后来就逐渐取代MyISAM。 InnoDB，是MySQL的数据库引擎之一，为MySQL AB发布binary的标准之一。InnoDB由Innobase Oy公司所开发，2006年五月时由甲骨文公司并购。与传统的ISAM与MyISAM相比，InnoDB的最大特色就是支持了ACID兼容的事务（Transaction）功能，类似于PostgreSQL。目前InnoDB采用双轨制授权，一是GPL授权，另一是专有软件授权。 MyISAM与InnoDB的区别是什么？存储结构MyISAM：每个MyISAM在磁盘上存储成三个文件。第一个文件的名字以表的名字开始，扩展名指出文件类型。.frm文件存储表定义。数据文件的扩展名为.MYD (MYData)。索引文件的扩展名是.MYI (MYIndex)。InnoDB：所有的表都保存在同一个数据文件中（也可能是多个文件，或者是独立的表空间文件），InnoDB表的大小只受限于操作系统文件的大小，一般为2GB。 存储空间MyISAM：可被压缩，存储空间较小。支持三种不同的存储格式：静态表(默认，但是注意数据末尾不能有空格，会被去掉)、动态表、压缩表。 InnoDB：需要更多的内存和存储，它会在主内存中建立其专用的缓冲池用于高速缓冲数据和索引。 可移植性、备份及恢复MyISAM：数据是以文件的形式存储，所以在跨平台的数据转移中会很方便。在备份和恢复时可单独针对某个表进行操作。InnoDB：免费的方案可以是拷贝数据文件、备份 binlog，或者用 mysqldump，在数据量达到几十G的时候就相对痛苦了。 事务支持MyISAM：强调的是性能，每次查询具有原子性,其执行速度比InnoDB类型更快，但是不提供事务支持。InnoDB：提供事务，支持事务，外部键等高级数据库功能。 具有事务(commit)、回滚(rollback)和崩溃修复能力(crash recovery capabilities)的事务安全(transaction-safe (ACID compliant))型表。 AUTO_INCREMENTMyISAM：可以和其他字段一起建立联合索引。引擎的自动增长列必须是索引，如果是组合索引，自动增长可以不是第一列，他可以根据前面几列进行排序后递增。InnoDB：InnoDB中必须包含只有该字段的索引。引擎的自动增长列必须是索引，如果是组合索引也必须是组合索引的第一列。 表锁差异MyISAM：只支持表级锁，用户在操作myisam表时，select，update，delete，insert语句都会给表自动加锁，如果加锁以后的表满足insert并发的情况下，可以在表的尾部插入新的数据。InnoDB：支持事务和行级锁，是innodb的最大特色。行锁大幅度提高了多用户并发操作的新能。但是InnoDB的行锁，只是在WHERE的主键是有效的，非主键的WHERE都会锁全表的。 全文索引MyISAM：支持 FULLTEXT类型的全文索引InnoDB：不支持FULLTEXT类型的全文索引，但是innodb可以使用sphinx插件支持全文索引，并且效果更好。 表主键MyISAM：允许没有任何索引和主键的表存在，索引都是保存行的地址。InnoDB：如果没有设定主键或者非空唯一索引，就会自动生成一个6字节的主键(用户不可见)，数据是主索引的一部分，附加索引保存的是主索引的值。 表的具体行数MyISAM：保存有表的总行数，如果select count() from table;会直接取出出该值。InnoDB：没有保存表的总行数，如果使用select count() from table；就会遍历整个表，消耗相当大，但是在加了wehre条件后，myisam和innodb处理的方式都一样。 CURD操作MyISAM：如果执行大量的SELECT，MyISAM是更好的选择。InnoDB：如果你的数据执行大量的INSERT或UPDATE，出于性能方面的考虑，应该使用InnoDB表。DELETE 从性能上InnoDB更优，但DELETE FROM table时，InnoDB不会重新建立表，而是一行一行的删除，在innodb上如果要清空保存有大量数据的表，最好使用truncate table这个命令。 外键MyISAM：不支持InnoDB：支持 通过上述的分析，基本上可以考虑使用InnoDB来替代MyISAM引擎了，原因是InnoDB自身很多良好的特点，比如事务支持、存储过程、视图、行级锁定等等，在并发很多的情况下，相信InnoDB的表现肯定要比MyISAM强很多。另外，任何一种表都不是万能的，只用恰当的针对业务类型来选择合适的表类型，才能最大的发挥MySQL的性能优势。如果不是很复杂的Web应用，非关键应用，还是可以继续考虑MyISAM的，这个具体情况可以自己斟酌。 存储引擎选择的基本原则 采用MyISAM引擎 R/W &gt; 100:1 且update相对较少(读多写少) 并发不高 表数据量小 硬件资源有限 采用InnoDB引擎 R/W比较小，频繁更新大字段 表数据量超过1000万，并发高 安全性和可用性要求高 采用Memory引擎 有足够的内存 对数据一致性要求不高，如在线人数和session等应用 需要定期归档数据 1摘自：《PHP核心技术与最佳实践》]]></content>
       <categories>
         <category>数据库</category>
       </categories>
@@ -744,8 +802,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -864,8 +922,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -876,8 +934,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -888,8 +946,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -920,8 +978,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -943,8 +1001,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -955,8 +1013,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -967,8 +1025,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -979,8 +1037,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -991,8 +1049,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1003,8 +1061,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1062,8 +1120,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1132,8 +1190,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1144,8 +1202,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1156,8 +1214,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1168,8 +1226,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1193,8 +1251,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1328,8 +1386,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>HashMap</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -1432,7 +1490,7 @@
   <entry>
     <title><![CDATA[HTTP方法GET和POST的区别]]></title>
     <url>%2F2019%2F06%2F24%2Fget-post%2F</url>
-    <content type="text"><![CDATA[当第一次面试的时候被问到说一说get和post有什么区别。当时就说了一大堆很普遍很基础的答案，什么post比get安全，get比post传的少什么的。然而，面试官问，还有呢？ 好家伙，面试完回去百度，整理了网上一堆的get和post的区别。整理如下： 从http标准来看，get比post安全，这里的安全是针对服务器而言的，get用于获取数据，不会引起数据的变化，并且是安全和幂等(多次请求，效果一致)的。而post是有可能引起数据的变化。 从应用角度来看，get参数是放在URL后面(通过URL传递)，参数直接暴露在URL上，所以不能用来传递敏感信息，而post提交的数据会放置在Request body中 get请求会被浏览器主动缓存post不会，除非手动设置。从这里看，post安全性比get高。 GET请求只能进行url编码，而POST支持多种编码方式。 GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。 GET在浏览器回退时是无害的，而POST会再次提交请求。 GET产生的URL地址可以被Bookmark，而POST不可以。 对参数的数据类型，GET只接受ASCII字符，而POST没有限制。 Get方式的提交顶多是1024字节，理论上post没有限制，可以传较大量的数据。 Get一般是获取数据，post是向服务器提交修改的数据。 再然后呢，去面试的时候自然自信满满。结果，还有没有点别的，感觉有种答非所问的赶脚。好吧，回去继续百度深造。结果是这样的： GET和POST是什么?HTTP协议中的两种发送请求的方法。HTTP是什么?HTTP是基于TCP/IP的关于数据如何在万维网中如何通信的协议。HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接 。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。 那所谓的区别呢？ 运输快递需要车辆，而TCP就像车辆，但如果车辆全部按自己的想法走，交通就会瘫痪，所以交通规则HTTP诞生了。HTTP规定了运输方式：get、post、head、options、put、delete等。当执行get请求时，车上贴get标签，货物放在上层运输。如果是post请求，车上贴post标签，货物放在下层运输。当然，get方式也可以把货物放在下层，但是这样是算get还是post呢？所以，HTTP只是个行为准则，而TCP才是GET和POST怎么实现的基本。 而关于传递的参数大小问题，是这样的。 过大的数据量会增加运输成本，超出的部分，概不处理，那还不如乖按照规定走。所以，浏览器通常都会限制url长度在2K个字节，而(大多数)服务器最多处理64K大小的url。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。 GET和POST还有一个重大区别，简单的说： GET产生一个TCP数据包;POST产生两个TCP数据包。对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200(返回数据);而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok(返回数据) 总结： 语义不同：get获取数据；post提交数据 GET是用来向获取服务器信息的，请求报文传输的信息只是用于描述所需资源的参数，返回的信息才是数据本身；POST是用来向服务器传递数据的，其请求报文传递的信息就是数据本身，返回的报文只是操作的结果。这是GET和POST最重要的区别，没有之一。 get在浏览器回退时是无害的，而post会再次请求 get产生的url地址可以被收藏，而post不会 get请求会被浏览器主动缓存，而post不会，除非手动设置 使用GET，你可能会有意无意就享受到从浏览器到代理到网络服务商再到服务器各个网络组件一层一层的透明缓存；而POST默认是不可缓存的,需要你显式使用缓存相关Header。 get请求只能进行url编码，而post支持多种编码方式 get请求参数会被完整保留在浏览历史记录里，而post中的参数不会被保留 get 请求在url中传送的参数有长度限制，而post没有 使用载荷的POST比使用URI的GET可以传递更多数据。HTTP协议本身没有限制传递信息的最大值，但具体的限制受各个网络组件的实现影响，一般而言，GET的长度限制更短。当然用来获取数据的GET方式，绝大多数情况也用不着传递那么多的数据。 对参数的数据类型，get只接受ascll字符，而post没有限制 get比post更安全，因为参数直接暴露在url上，所以不能用来传递敏感信息 简单来说HTTP的安全(Safe)指的是是否改变服务器资源的状态，即是我们平常说的有无副作用。因为提交数据的目的往往是为了改变服务器状态，所以POST不是安全的(Safe)；而GET是为了获取数据，所以它不应该改变服务器的状态，是安全的(Safe)。HTTP中的安全Safe(副作用)和大多数人平时想的安全Security(例如数据安全)，仅仅是共用一个中文词汇，实质上就是雷峰和雷峰塔的关系，从这个角度上来说GET反而比POST安全多了。为此我建议大家把安全留给更加常用的Security,中文使用一个更加少歧义的说法来描述GET和POST的第二个区别:POST是一个可能有副作用的方法，但GET应是没有副作用的的。如果要保证传输的安全，请使用HTTPS。 get参数通过url传递，poet放在request body中 GET产生一个TCP数据包;POST产生两个TCP数据包。 有些浏览器在发送POST的Ajax请求时会在发送POST请求前先发送一个HEAD，而GET请求则是直接发送。 get是幂等的，post是非幂等的 ‘POST是非幂等的‘就是你提交完表单后，按F5后浏览器会弹框要求你重复确认是否刷新的原因。 参考：关于面试被问到post和get的区别？？？[原][经典面试题]带你深入理解HTTP中GET和POST的区别]]></content>
+    <content type="text"><![CDATA[当第一次面试的时候被问到说一说get和post有什么区别。当时就说了一大堆很普遍很基础的答案，什么post比get安全，get比post传的少什么的。然而，面试官问，还有呢？ 好家伙，面试完回去百度，整理了网上一堆的get和post的区别。整理如下： 从http标准来看，get比post安全，这里的安全是针对服务器而言的，get用于获取数据，不会引起数据的变化，并且是安全和幂等(多次请求，效果一致)的。而post是有可能引起数据的变化。 从应用角度来看，get参数是放在URL后面(通过URL传递)，参数直接暴露在URL上，所以不能用来传递敏感信息，而post提交的数据会放置在Request body中 get请求会被浏览器主动缓存post不会，除非手动设置。从这里看，post安全性比get高。 GET请求只能进行url编码，而POST支持多种编码方式。 GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。 GET在浏览器回退时是无害的，而POST会再次提交请求。 GET产生的URL地址可以被Bookmark，而POST不可以。 对参数的数据类型，GET只接受ASCII字符，而POST没有限制。 Get方式的提交顶多是1024字节，理论上post没有限制，可以传较大量的数据。 Get一般是获取数据，post是向服务器提交修改的数据。 再然后呢，去面试的时候自然自信满满。结果，还有没有点别的，感觉有种答非所问的赶脚。好吧，回去继续百度深造。结果是这样的： GET和POST是什么?HTTP协议中的两种发送请求的方法。HTTP是什么?HTTP是基于TCP/IP的关于数据如何在万维网中如何通信的协议。HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接 。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。 那所谓的区别呢？ 运输快递需要车辆，而TCP就像车辆，但如果车辆全部按自己的想法走，交通就会瘫痪，所以交通规则HTTP诞生了。HTTP规定了运输方式：get、post、head、options、put、delete等。当执行get请求时，车上贴get标签，货物放在上层运输。如果是post请求，车上贴post标签，货物放在下层运输。当然，get方式也可以把货物放在下层，但是这样是算get还是post呢？所以，HTTP只是个行为准则，而TCP才是GET和POST怎么实现的基本。 而关于传递的参数大小问题，是这样的。 过大的数据量会增加运输成本，超出的部分，概不处理，那还不如乖按照规定走。所以，浏览器通常都会限制url长度在2K个字节，而(大多数)服务器最多处理64K大小的url。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。 GET和POST还有一个重大区别，简单的说： GET产生一个TCP数据包;POST产生两个TCP数据包。对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200(返回数据);而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok(返回数据) 总结： 语义不同：get获取数据；post提交数据 GET是用来向获取服务器信息的，请求报文传输的信息只是用于描述所需资源的参数，返回的信息才是数据本身；POST是用来向服务器传递数据的，其请求报文传递的信息就是数据本身，返回的报文只是操作的结果。这是GET和POST最重要的区别，没有之一。 get在浏览器回退时是无害的，而post会再次请求 get产生的url地址可以被收藏，而post不会 get请求会被浏览器主动缓存，而post不会，除非手动设置 使用GET，你可能会有意无意就享受到从浏览器到代理到网络服务商再到服务器各个网络组件一层一层的透明缓存；而POST默认是不可缓存的,需要你显式使用缓存相关Header。 get请求只能进行url编码，而post支持多种编码方式 get请求参数会被完整保留在浏览历史记录里，而post中的参数不会被保留 get 请求在url中传送的参数有长度限制，而post没有 使用载荷的POST比使用URI的GET可以传递更多数据。HTTP协议本身没有限制传递信息的最大值，但具体的限制受各个网络组件的实现影响，一般而言，GET的长度限制更短。当然用来获取数据的GET方式，绝大多数情况也用不着传递那么多的数据。 对参数的数据类型，get只接受ascll字符，而post没有限制 get比post更安全，因为参数直接暴露在url上，所以不能用来传递敏感信息 简单来说HTTP的安全(Safe)指的是是否改变服务器资源的状态，即是我们平常说的有无副作用。因为提交数据的目的往往是为了改变服务器状态，所以POST不是安全的(Safe)；而GET是为了获取数据，所以它不应该改变服务器的状态，是安全的(Safe)。HTTP中的安全Safe(副作用)和大多数人平时想的安全Security(例如数据安全)，仅仅是共用一个中文词汇，实质上就是雷峰和雷峰塔的关系，从这个角度上来说GET反而比POST安全多了。为此我建议大家把安全留给更加常用的Security,中文使用一个更加少歧义的说法来描述GET和POST的第二个区别:POST是一个可能有副作用的方法，但GET应是没有副作用的的。如果要保证传输的安全，请使用HTTPS。 get参数通过url传递，post放在request body中 GET产生一个TCP数据包;POST产生两个TCP数据包。 有些浏览器在发送POST的Ajax请求时会在发送POST请求前先发送一个HEAD，而GET请求则是直接发送。 get是幂等的，post是非幂等的 ‘POST是非幂等的‘就是你提交完表单后，按F5后浏览器会弹框要求你重复确认是否刷新的原因。 参考：关于面试被问到post和get的区别？？？[原][经典面试题]带你深入理解HTTP中GET和POST的区别]]></content>
       <categories>
         <category>计算机网络</category>
       </categories>
@@ -1483,8 +1541,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>HashMap</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>

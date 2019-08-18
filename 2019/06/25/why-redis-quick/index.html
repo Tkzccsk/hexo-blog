@@ -515,7 +515,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.7k</span>
+                <span title="本文字数">1.5k</span>
               
 
               
@@ -529,7 +529,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">1 分钟</span>
               
             </div>
           
@@ -559,7 +559,7 @@
 <p><img src="1.jpg" alt="img"></p>
 </li>
 </ol>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">多路<span class="keyword">I</span>/<span class="keyword">O</span>复用模型是利用 select、poll、epoll 可以同时监察多个流的 <span class="keyword">I</span>/<span class="keyword">O</span> 事件的能力，在空闲的时候，会把当前线程阻塞掉，当有一个或多个流有 <span class="keyword">I</span>/<span class="keyword">O</span> 事件时，就从阻塞态中唤醒，于是程序就会轮询一遍所有的流（epoll 是只轮询那些真正发出了事件的流），并且只依次顺序的处理就绪的流，这种做法就避免了大量的无用操作。</span><br><span class="line"></span><br><span class="line">这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程。采用多路 <span class="keyword">I</span>/<span class="keyword">O</span> 复用技术可以让单个线程高效的处理多个连接请求（尽量减少网络 IO 的时间消耗），且 Redis 在内存中操作数据的速度非常快。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">多路I/O复用模型是利用 select、poll、epoll 可以同时监察多个流的 I/O 事件的能力，在空闲的时候，会把当前线程阻塞掉，当有一个或多个流有 I/O 事件时，就从阻塞态中唤醒，于是程序就会轮询一遍所有的流（epoll 是只轮询那些真正发出了事件的流），并且只依次顺序的处理就绪的流，这种做法就避免了大量的无用操作。</span><br><span class="line"></span><br><span class="line">这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程。采用多路 I/O 复用技术可以让单个线程高效的处理多个连接请求（尽量减少网络 IO 的时间消耗），且 Redis 在内存中操作数据的速度非常快。</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li>单线程避免了线程切换和竟态产生的消耗。避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗 CPU，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗；<br>1.单线程简化数据结构和算法的实现。<br>2.单线程避免线程切换和竟态产生的消耗。<br>缺点：如果命令执行时间过程，会导致其它命令阻塞。</li>
@@ -747,7 +747,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1123,7 +1123,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1134,7 +1134,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

@@ -525,7 +525,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">25k</span>
+                <span title="本文字数">23k</span>
               
 
               
@@ -539,7 +539,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">23 分钟</span>
+                <span title="阅读时长">21 分钟</span>
               
             </div>
           
@@ -614,10 +614,10 @@
 <li>节点最大的层数不允许超过一个最大值，记为<strong>MaxLevel</strong>。</li>
 </ul>
 <p>这个计算随机层数的伪码如下所示：</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">randomLevel()</span><br><span class="line">    level := <span class="number">1</span></span><br><span class="line">    <span class="comment">// random()返回一个[0...1)的随机数</span></span><br><span class="line">    <span class="built_in">while</span> <span class="built_in">random</span>() &lt; p <span class="keyword">and</span> level &lt; MaxLevel <span class="built_in">do</span></span><br><span class="line">        level := level + <span class="number">1</span></span><br><span class="line">    <span class="built_in">return</span> level</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">randomLevel()</span><br><span class="line">    level := 1</span><br><span class="line">    // random()返回一个[0...1)的随机数</span><br><span class="line">    while random() &lt; p and level &lt; MaxLevel do</span><br><span class="line">        level := level + 1</span><br><span class="line">    return level</span><br></pre></td></tr></table></figure>
 
 <p><code>randomLevel()</code>的伪码中包含两个参数，一个是p，一个是MaxLevel。在Redis的skiplist实现中，这两个参数的取值为：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">p</span> = <span class="number">1</span>/<span class="number">4</span></span><br><span class="line"><span class="attr">MaxLevel</span> = <span class="number">32</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = 1/4</span><br><span class="line">MaxLevel = 32</span><br></pre></td></tr></table></figure>
 
 <h3 id="skiplist的算法性能分析"><a href="#skiplist的算法性能分析" class="headerlink" title="skiplist的算法性能分析"></a>skiplist的算法性能分析</h3><p>在这一部分，我们来简单分析一下<code>skiplist</code>的时间复杂度和空间复杂度，以便对于<code>skiplist</code>的性能有一个直观的了解。如果你不是特别偏执于算法的性能分析，那么可以暂时跳过这一小节的内容。</p>
 <p>我们先来计算一下每个节点所包含的平均指针数目（概率期望）。节点包含的指针数目，相当于这个算法在空间上的额外开销(overhead)，可以用来度量空间复杂度。</p>
@@ -648,10 +648,10 @@
 <p>这两种情形如下图所示：</p>
 <p><img src="8.jpg" alt="skiplist沿查找路径回溯"></p>
 <p>用C(k)表示向上攀爬k个层级所需要走过的平均查找路径长度（概率期望），那么：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">C</span><span class="params">(<span class="number">0</span>)</span></span>=<span class="number">0</span></span><br><span class="line"><span class="function"><span class="title">C</span><span class="params">(k)</span></span>=(<span class="number">1</span>-p)×(上图中情况b的查找长度) + p×(上图中情况c的查找长度)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C(0)=0</span><br><span class="line">C(k)=(1-p)×(上图中情况b的查找长度) + p×(上图中情况c的查找长度)</span><br></pre></td></tr></table></figure>
 
 <p>代入，得到一个差分方程并化简：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C(<span class="name">k</span>)=(<span class="number">1</span>-p)(<span class="name">C</span>(<span class="name">k</span>)<span class="number">+1</span>) + p(<span class="name">C</span>(<span class="name">k-1</span>)<span class="number">+1</span>)</span><br><span class="line">C(<span class="name">k</span>)=1/p+C(<span class="name">k-1</span>)</span><br><span class="line">C(<span class="name">k</span>)=k/p</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C(k)=(1-p)(C(k)+1) + p(C(k-1)+1)</span><br><span class="line">C(k)=1/p+C(k-1)</span><br><span class="line">C(k)=k/p</span><br></pre></td></tr></table></figure>
 
 <p>这个结果的意思是，我们每爬升1个层级，需要在查找路径上走1/p步。而我们总共需要攀爬的层级数等于整个skiplist的总层数-1。</p>
 <p>那么接下来我们需要分析一下当skiplist中有n个节点的时候，它的总层数的概率均值是多少。这个问题直观上比较好理解。根据节点的层数随机算法，容易得出：</p>
@@ -735,7 +735,7 @@
 <li>第1层链表不是一个单向链表，而是一个<strong>双向链表</strong>。这是为了方便<strong>以倒序方式获取一个范围内的元素。</strong></li>
 <li>在skiplist中可以很方便地计算出每个元素的排名(rank)。</li>
 </ul>
-<h4 id="skiplist的数据结构定义"><a href="#skiplist的数据结构定义" class="headerlink" title="skiplist的数据结构定义"></a>skiplist的数据结构定义</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ZSKIPLIST_MAXLEVEL 32</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ZSKIPLIST_P 0.25</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">zskiplistNode</span> &#123;</span></span><br><span class="line">    robj *obj;</span><br><span class="line">    <span class="keyword">double</span> score;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">zskiplistNode</span> *<span class="title">backward</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">zskiplistLevel</span> &#123;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">zskiplistNode</span> *<span class="title">forward</span>;</span></span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> span;</span><br><span class="line">    &#125; level[];</span><br><span class="line">&#125; zskiplistNode;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">zskiplist</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">zskiplistNode</span> *<span class="title">header</span>, *<span class="title">tail</span>;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> length;</span><br><span class="line">    <span class="keyword">int</span> level;</span><br><span class="line">&#125; zskiplist;</span><br></pre></td></tr></table></figure>
+<h4 id="skiplist的数据结构定义"><a href="#skiplist的数据结构定义" class="headerlink" title="skiplist的数据结构定义"></a>skiplist的数据结构定义</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#define ZSKIPLIST_MAXLEVEL 32</span><br><span class="line">#define ZSKIPLIST_P 0.25</span><br><span class="line">typedef struct zskiplistNode &#123;</span><br><span class="line">    robj *obj;</span><br><span class="line">    double score;</span><br><span class="line">    struct zskiplistNode *backward;</span><br><span class="line">    struct zskiplistLevel &#123;</span><br><span class="line">        struct zskiplistNode *forward;</span><br><span class="line">        unsigned int span;</span><br><span class="line">    &#125; level[];</span><br><span class="line">&#125; zskiplistNode;</span><br><span class="line"> </span><br><span class="line">typedef struct zskiplist &#123;</span><br><span class="line">    struct zskiplistNode *header, *tail;</span><br><span class="line">    unsigned long length;</span><br><span class="line">    int level;</span><br><span class="line">&#125; zskiplist;</span><br></pre></td></tr></table></figure>
 
 <p>这段代码出自server.h，我们来简要分析一下：</p>
 <ul>
@@ -768,7 +768,7 @@
 <p><strong>ziplist的主要优点是节省内存</strong>，但它上面的查找操作只能<strong>按顺序查找</strong>（可以正序也可以倒序）。因此，sorted set的各个查询操作，就是在ziplist上从前向后（或从后向前）一步步查找，每一步前进两个数据项，跨域一个(数据, score)对。</p>
 <p>随着数据的插入，sorted set底层的这个ziplist就可能会转成zset的实现（转换过程详见t_zset.c的zsetConvert）。那么到底插入多少才会转呢？</p>
 <p>还记得本文开头提到的两个Redis配置吗？</p>
-<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zset-<span class="built_in">max</span>-ziplist-entries <span class="number">128</span></span><br><span class="line">zset-<span class="built_in">max</span>-ziplist-<span class="built_in">value</span> <span class="number">64</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zset-max-ziplist-entries 128</span><br><span class="line">zset-max-ziplist-value 64</span><br></pre></td></tr></table></figure>
 
 <p>这个配置的意思是说，在如下两个条件之一满足的时候，ziplist会转成zset（具体的触发条件参见t_zset.c中的zaddGenericCommand相关代码）：</p>
 <ul>
@@ -776,7 +776,7 @@
 <li>当sorted set中插入的任意一个数据的长度超过了64的时候。</li>
 </ul>
 <p>最后，zset结构的代码定义如下：</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">typedef struct zset &#123;</span><br><span class="line">    <span class="keyword">dict </span>*<span class="keyword">dict;</span></span><br><span class="line"><span class="keyword"> </span>   zskiplist *zsl<span class="comment">;</span></span><br><span class="line">&#125; zset<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">typedef struct zset &#123;</span><br><span class="line">    dict *dict;</span><br><span class="line">    zskiplist *zsl;</span><br><span class="line">&#125; zset;</span><br></pre></td></tr></table></figure>
 
 <h3 id="Redis为什么用skiplist而不用平衡树？"><a href="#Redis为什么用skiplist而不用平衡树？" class="headerlink" title="Redis为什么用skiplist而不用平衡树？"></a>Redis为什么用skiplist而不用平衡树？</h3><p>在前面我们对于skiplist和平衡树、哈希表的比较中，其实已经不难看出Redis里使用skiplist而不用平衡树的原因了。现在我们看看，对于这个问题，Redis的作者 @antirez 是怎么说的：</p>
 <blockquote>
@@ -997,7 +997,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1390,7 +1390,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1401,7 +1401,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

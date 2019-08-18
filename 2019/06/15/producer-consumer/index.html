@@ -525,7 +525,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">12k</span>
+                <span title="本文字数">10k</span>
               
 
               
@@ -539,7 +539,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">11 分钟</span>
+                <span title="阅读时长">9 分钟</span>
               
             </div>
           
@@ -567,31 +567,31 @@
 <li>P（S）：①将信号量S的值减1，即S=S-1；</li>
 </ul>
 <p>​                       ②如果S&gt;=0，则该进程继续执行；否则该进程置为等待状态，排入等待队列。</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解读：P操作可以理解为申请资源。P操作每次申请一个资源（S = S - <span class="number">1</span>，可用资源个数减少<span class="number">1</span>），如果可用资源的个数大于等于<span class="number">0</span>（S&gt;=<span class="number">0</span>），那么说明本次申请资源操作成功，继续执行后续程序。否则说明没有足够的资源供该进程使用，该进程置为等待状态，加入等待该资源的等待队列。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解读：P操作可以理解为申请资源。P操作每次申请一个资源（S = S - 1，可用资源个数减少1），如果可用资源的个数大于等于0（S&gt;=0），那么说明本次申请资源操作成功，继续执行后续程序。否则说明没有足够的资源供该进程使用，该进程置为等待状态，加入等待该资源的等待队列。</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>V（S）：①将信号量S的值加1，即S=S+1；</li>
 </ul>
 <p>​                       ②如果S&gt;0，则该进程继续执行；否则释放队列中第一个等待信号量的进程。</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解读：V操作可以理解为释放资源。V操作每次释放一个资源（S = S + <span class="number">1</span>，可用资源个数增加<span class="number">1</span>），如果可用资源的个数大于<span class="number">0</span>（S &gt; <span class="number">0</span>），说明本次释放资源操作成功，继续执行后续程序。否则释放该资源的等待队列中第一个等待信号量的进程。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解读：V操作可以理解为释放资源。V操作每次释放一个资源（S = S + 1，可用资源个数增加1），如果可用资源的个数大于0（S &gt; 0），说明本次释放资源操作成功，继续执行后续程序。否则释放该资源的等待队列中第一个等待信号量的进程。</span><br></pre></td></tr></table></figure>
 
 <p>这只是书本的定义，对于这部分内容，老师先不要急于解释上面的程序流程，而是应该让学生首先知道P操作与V操作到底有什么作用。</p>
 <p>P操作相当于申请资源，而V操作相当于释放资源。所以要学生记住以下几个关键字：</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">P操作<span class="comment">-----&gt;申请资源</span></span><br><span class="line"></span><br><span class="line">V操作<span class="comment">-----&gt;释放资源</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">P操作-----&gt;申请资源</span><br><span class="line"></span><br><span class="line">V操作-----&gt;释放资源</span><br></pre></td></tr></table></figure>
 
 <h3 id="二、形象启发"><a href="#二、形象启发" class="headerlink" title="二、形象启发"></a>二、形象启发</h3><p>为此举两个生活中的例子：</p>
 <p>例一：在公共电话厅打电话</p>
 <p>公共电话厅里有多个电话，如某人要打电话，首先要进行申请，看是否有电话空闲，若有，则可以使用电话，如果电话亭里所有电话都有人正在使用，那后来的人只有排队等候。当某人用完电话后，则有空电话腾出，正在排队的第一个人就可以使用电话。这就相当于PV操作：</p>
-<figure class="highlight tp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">某人要打电话，首先要进行申请，相当于执行一次<span class="keyword">P</span>操作，申请一个可用资源（电话）；</span><br><span class="line"></span><br><span class="line">某人用完电话，则有空电话腾出，相当于执行一次V操作，释放一个可用资源（电话）。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">某人要打电话，首先要进行申请，相当于执行一次P操作，申请一个可用资源（电话）；</span><br><span class="line"></span><br><span class="line">某人用完电话，则有空电话腾出，相当于执行一次V操作，释放一个可用资源（电话）。</span><br></pre></td></tr></table></figure>
 
 <h3 id="三、分层解剖"><a href="#三、分层解剖" class="headerlink" title="三、分层解剖"></a>三、分层解剖</h3><p>在理解了PV操作的的含义后，就必须讲解利用PV操作可以实现进程的两种情况：<strong>互斥和同步</strong>。根据互斥和同步不同的特点，<strong>就有利用PV操作实现互斥与同步相对固定的结构模式</strong>。这里就不详细讲解了。但生产者-消费者问题是一个有代表性的进程同步问题。但是如果我们将问题细分成三种情况进行讲解，理解难度将大大降低。</p>
 <h4 id="1）一个生产者，一个消费者，公用一个缓冲区。"><a href="#1）一个生产者，一个消费者，公用一个缓冲区。" class="headerlink" title="1）一个生产者，一个消费者，公用一个缓冲区。"></a><strong>1）一个生产者，一个消费者，公用一个缓冲区。</strong></h4><p>可以作以下比喻：将一个生产者比喻为一个生产厂家，如伊利牛奶厂家，而一个消费者，比喻是学生小明，而一个缓冲区则比喻成一间好又多(类似于商店)。第一种情况，可以理解成伊利牛奶生产厂家生产一盒牛奶，把它放在好又多一分店进行销售，而小明则可以从那里买到这盒牛奶。只有当厂家把牛奶放在商店里面后，小明才可以从商店里买到牛奶。所以很明显这是最简单的同步问题。</p>
 <p>解题如下：</p>
 <p>定义两个同步信号量：</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">empty——表示缓冲区是否为空，初值为<span class="number">1</span>。</span><br><span class="line"></span><br><span class="line">full——表示缓冲区中是否为满，初值为<span class="number">0</span>。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">empty——表示缓冲区是否为空，初值为1。</span><br><span class="line"></span><br><span class="line">full——表示缓冲区中是否为满，初值为0。</span><br></pre></td></tr></table></figure>
 
 <p><strong>生产者进程</strong></p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while(TRUE)&#123;</span><br><span class="line">	生产一个产品<span class="comment">;</span></span><br><span class="line">    P(empty)<span class="comment">;</span></span><br><span class="line">    产品送往Buffer<span class="comment">;</span></span><br><span class="line">    V(full)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while(TRUE)&#123;</span><br><span class="line">	生产一个产品;</span><br><span class="line">    P(empty);</span><br><span class="line">    产品送往Buffer;</span><br><span class="line">    V(full);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>生产者行为：</p>
 <ol>
@@ -601,7 +601,7 @@
 <li>拿到 full 同步信号量，执行V操作（full += 1，full现在等于1，表示满），表示缓冲区有数据</li>
 </ol>
 <p><strong>消费者进程</strong></p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while(TRUE)&#123;</span><br><span class="line">	P(full)<span class="comment">;</span></span><br><span class="line">   从Buffer取出一个产品<span class="comment">;</span></span><br><span class="line">   V(empty)<span class="comment">;</span></span><br><span class="line">   消费该产品<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while(TRUE)&#123;</span><br><span class="line">	P(full);</span><br><span class="line">   从Buffer取出一个产品;</span><br><span class="line">   V(empty);</span><br><span class="line">   消费该产品;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>消费者行为：</p>
 <ol>
@@ -615,28 +615,28 @@
 <h4 id="2）一个生产者，一个消费者，公用n个环形缓冲区。"><a href="#2）一个生产者，一个消费者，公用n个环形缓冲区。" class="headerlink" title="2）一个生产者，一个消费者，公用n个环形缓冲区。"></a><strong>2）一个生产者，一个消费者，公用n个环形缓冲区。</strong></h4><p>第二种情况可以理解为伊利牛奶生产厂家可以生产好多牛奶，并将它们放在多个好又多分店进行销售，而小明可以从任一间好又多分店中购买到牛奶。同样，只有当厂家把牛奶放在某一分店里，小明才可以从这间分店中买到牛奶。不同于第一种情况的是，第二种情况有N个分店（即<strong>N个缓冲区形成一个环形缓冲区</strong>），所以要利用指针，要求厂家必须按一定的顺序将商品依次放到每一个分店中。<strong>缓冲区的指向则通过模运算得到。</strong></p>
 <p>解题如下：</p>
 <p>定义两个同步信号量：</p>
-<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">empty——表示缓冲区是否为空，初值为<span class="built_in">n</span>。</span><br><span class="line"></span><br><span class="line">full——表示缓冲区中是否为满，初值为<span class="number">0</span>。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">empty——表示缓冲区是否为空，初值为n。</span><br><span class="line"></span><br><span class="line">full——表示缓冲区中是否为满，初值为0。</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
 <p>设缓冲区的编号为1～n-1，定义两个指针in和out，分别是生产者进程和消费者进程使用的指针，指向下一个可用的缓冲区。</p>
 <p><strong>生产者进程</strong></p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">TRUE</span>)&#123;</span><br><span class="line">     生产一个产品;</span><br><span class="line">     P(empty);</span><br><span class="line">     产品送往buffer（<span class="keyword">in</span>）；</span><br><span class="line">     <span class="keyword">in</span>=(<span class="keyword">in</span>+<span class="number">1</span>)<span class="keyword">mod</span> n；</span><br><span class="line">     V(full);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">while(TRUE)&#123;</span><br><span class="line">     生产一个产品;</span><br><span class="line">     P(empty);</span><br><span class="line">     产品送往buffer（in）；</span><br><span class="line">     in=(in+1)mod n；</span><br><span class="line">     V(full);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>消费者进程</strong></p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">TRUE</span>)&#123;</span><br><span class="line">    P(full); </span><br><span class="line">    从buffer（<span class="keyword">out</span>）中取出产品；</span><br><span class="line">    <span class="keyword">out</span>=(<span class="keyword">out</span>+<span class="number">1</span>)<span class="keyword">mod</span> n；</span><br><span class="line">    V(empty);</span><br><span class="line">    消费该产品;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">while(TRUE)&#123;</span><br><span class="line">    P(full); </span><br><span class="line">    从buffer（out）中取出产品；</span><br><span class="line">    out=(out+1)mod n；</span><br><span class="line">    V(empty);</span><br><span class="line">    消费该产品;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="3）一组生产者，一组消费者，公用n个环形缓冲区"><a href="#3）一组生产者，一组消费者，公用n个环形缓冲区" class="headerlink" title="3）一组生产者，一组消费者，公用n个环形缓冲区"></a><strong>3）一组生产者，一组消费者，公用n个环形缓冲区</strong></h4><p>第三种情况，可以理解成有多间牛奶生产厂家，如蒙牛，达能，光明等，消费者也不只小明一人，有许许多多消费者。不同的牛奶生产厂家生产的商品可以放在不同的好又多分店中销售，而不同的消费者可以去不同的分店中购买。当某一分店已放满某个厂家的商品时，下一个厂家只能把商品放在下一间分店。<strong>所以在这种情况中，生产者与消费者存在同步关系，而且各个生产者之间、各个消费者之间存在互斥关系</strong>,<strong>他们必须互斥地访问缓冲区</strong>。（<strong><em>得好好揣摩这句话</em></strong>）</p>
 <p>解题如下：</p>
 <p>定义四个信号量：</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">empty——表示缓冲区是否为空，初值为n。</span><br><span class="line"></span><br><span class="line">full——表示缓冲区中是否为满，初值为<span class="number">0</span>。</span><br><span class="line"></span><br><span class="line">mutex1——生产者之间的互斥信号量，初值为<span class="number">1</span>。</span><br><span class="line"></span><br><span class="line">mutex2——消费者之间的互斥信号量，初值为<span class="number">1</span>。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">empty——表示缓冲区是否为空，初值为n。</span><br><span class="line"></span><br><span class="line">full——表示缓冲区中是否为满，初值为0。</span><br><span class="line"></span><br><span class="line">mutex1——生产者之间的互斥信号量，初值为1。</span><br><span class="line"></span><br><span class="line">mutex2——消费者之间的互斥信号量，初值为1。</span><br></pre></td></tr></table></figure>
 
 <p>设缓冲区的编号为1～n-1，定义两个指针in和out，分别是生产者进程和消费者进程使用的指针，指向下一个可用的缓冲区。</p>
 <p><strong>生产者进程</strong></p>
-<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(TRUE)&#123;</span><br><span class="line">    生产一个产品;</span><br><span class="line">    P(empty); <span class="comment">//生成产品，那么缓冲区一定不为空</span></span><br><span class="line">    P(mutex1)；<span class="comment">//同一时间只能有一个生产者生成商品</span></span><br><span class="line">    产品送往<span class="keyword">buffer</span>（<span class="keyword">in</span>）；</span><br><span class="line">    <span class="keyword">in</span>=(<span class="keyword">in</span>+<span class="number">1</span>)<span class="built_in">mod</span> n；</span><br><span class="line">    V(mutex1);</span><br><span class="line">    V(full);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while(TRUE)&#123;</span><br><span class="line">    生产一个产品;</span><br><span class="line">    P(empty); //生成产品，那么缓冲区一定不为空</span><br><span class="line">    P(mutex1)；//同一时间只能有一个生产者生成商品</span><br><span class="line">    产品送往buffer（in）；</span><br><span class="line">    in=(in+1)mod n；</span><br><span class="line">    V(mutex1);</span><br><span class="line">    V(full);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>消费者进程</strong></p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">TRUE</span>)&#123;</span><br><span class="line">    P(full);</span><br><span class="line">    P(mutex2)；</span><br><span class="line">    从buffer（<span class="keyword">out</span>）中取出产品；</span><br><span class="line">    <span class="keyword">out</span>=(<span class="keyword">out</span>+<span class="number">1</span>)<span class="keyword">mod</span> n；</span><br><span class="line">    V（mutex2）；</span><br><span class="line">    V(empty);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">while(TRUE)&#123;</span><br><span class="line">    P(full);</span><br><span class="line">    P(mutex2)；</span><br><span class="line">    从buffer（out）中取出产品；</span><br><span class="line">    out=(out+1)mod n；</span><br><span class="line">    V（mutex2）；</span><br><span class="line">    V(empty);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -826,7 +826,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1219,7 +1219,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1230,7 +1230,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

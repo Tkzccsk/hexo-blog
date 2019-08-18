@@ -528,7 +528,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">11k</span>
+                <span title="本文字数">9.6k</span>
               
 
               
@@ -542,7 +542,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">10 分钟</span>
+                <span title="阅读时长">9 分钟</span>
               
             </div>
           
@@ -580,7 +580,7 @@
 <p><strong>MySql的Sharding策略包括垂直切分和水平切分两种</strong>。</p>
 <h3 id="垂直-纵向-拆分"><a href="#垂直-纵向-拆分" class="headerlink" title="垂直(纵向)拆分"></a>垂直(纵向)拆分</h3><p><strong>垂直(纵向)拆分：</strong>是指<strong>按功能模块拆分</strong>，以解决表与表之间的io竞争。即将表按照<strong>功能模块</strong>、<strong>关系密切程度</strong>划分出来，<strong>部署到不同的库上</strong>。例如，我们会建立定义数据库workDB、商品数据库payDB、用户数据库userDB、日志数据库logDB等，分别用于存储项目数据定义表、商品定义表、用户数据表、日志数据表等。</p>
 <p>如userid,name,addr一个表，为了防止表过大，分成2个表。</p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">userid,</span>name</span><br><span class="line"></span><br><span class="line"><span class="built_in">userid,</span>addr</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userid,name</span><br><span class="line"></span><br><span class="line">userid,addr</span><br></pre></td></tr></table></figure>
 
 <p>表结构设计垂直切分。常见的一些场景包括:</p>
 <ol>
@@ -616,12 +616,12 @@
 <li>实现的难易度上<br>分表的方法有很多，用merge来分表，是最简单的一种方式。这种方式和分区难易度差不多，并且对程序代码来说可以做到透明的。如果是用其他分表方式就比分区麻烦了。 分区实现是比较简单的，建立分区表，跟建平常的表没什么区别，并且对代码端来说是透明的。 </li>
 </ol>
 <p>分区的适用场景:</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1. </span>一张表的查询速度已经慢到影响使用的时候。</span><br><span class="line"><span class="bullet">2. </span>表中的数据是分段的</span><br><span class="line"><span class="bullet">3. </span>对数据的操作往往只涉及一部分数据，而不是所有的数据</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 一张表的查询速度已经慢到影响使用的时候。</span><br><span class="line">2. 表中的数据是分段的</span><br><span class="line">3. 对数据的操作往往只涉及一部分数据，而不是所有的数据</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> sales (  </span><br><span class="line">        <span class="keyword">id</span> <span class="built_in">INT</span> AUTO_INCREMENT,  </span><br><span class="line">        amount <span class="keyword">DOUBLE</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,  </span><br><span class="line">        order_day DATETIME <span class="keyword">NOT</span> <span class="literal">NULL</span>,  </span><br><span class="line">        PRIMARY <span class="keyword">KEY</span>(<span class="keyword">id</span>, order_day)  </span><br><span class="line">    ) <span class="keyword">ENGINE</span>=<span class="keyword">Innodb</span>   </span><br><span class="line">    <span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span>(<span class="keyword">YEAR</span>(order_day)) (  </span><br><span class="line">        <span class="keyword">PARTITION</span> p_2010 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">2010</span>),  </span><br><span class="line">        <span class="keyword">PARTITION</span> p_2011 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">2011</span>),  </span><br><span class="line">        <span class="keyword">PARTITION</span> p_2012 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">2012</span>),  </span><br><span class="line">    <span class="keyword">PARTITION</span> p_catchall <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> MAXVALUE);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    CREATE TABLE sales (  </span><br><span class="line">        id INT AUTO_INCREMENT,  </span><br><span class="line">        amount DOUBLE NOT NULL,  </span><br><span class="line">        order_day DATETIME NOT NULL,  </span><br><span class="line">        PRIMARY KEY(id, order_day)  </span><br><span class="line">    ) ENGINE=Innodb   </span><br><span class="line">    PARTITION BY RANGE(YEAR(order_day)) (  </span><br><span class="line">        PARTITION p_2010 VALUES LESS THAN (2010),  </span><br><span class="line">        PARTITION p_2011 VALUES LESS THAN (2011),  </span><br><span class="line">        PARTITION p_2012 VALUES LESS THAN (2012),  </span><br><span class="line">    PARTITION p_catchall VALUES LESS THAN MAXVALUE);</span><br></pre></td></tr></table></figure>
 
 <p>分表的适用场景</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1. </span>一张表的查询速度已经慢到影响使用的时候。</span><br><span class="line"><span class="bullet">2. </span>当频繁插入或者联合查询时，速度变慢。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 一张表的查询速度已经慢到影响使用的时候。</span><br><span class="line">2. 当频繁插入或者联合查询时，速度变慢。</span><br></pre></td></tr></table></figure>
 
 <p>分表的实现需要业务结合实现和迁移，较为复杂。</p>
 <h3 id="如何选择？"><a href="#如何选择？" class="headerlink" title="如何选择？"></a>如何选择？</h3><p>应该使用哪一种方式来实施数据库分库分表，这要看数据库中<strong>数据量的瓶颈</strong>所在，并综合项目的业务类型进行考虑。</p>
@@ -839,7 +839,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1232,7 +1232,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1243,7 +1243,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

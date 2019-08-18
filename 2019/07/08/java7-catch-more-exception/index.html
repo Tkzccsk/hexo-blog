@@ -513,7 +513,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.8k</span>
+                <span title="本文字数">2.7k</span>
               
 
               
@@ -527,7 +527,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -555,7 +555,7 @@
 
 <p>正如上面看到的，SQLException 和IOException 这两个异常都是以相同的方式来处理的，但是你仍然要为这两个异常写两个独立的catch语句块。</p>
 <p>java 7中你可以像下面这样捕获多个异常：</p>
-<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line"></span><br><span class="line">    //<span class="built_in"> execute </span>code that may<span class="built_in"> throw </span>1 of the 3 exceptions below.</span><br><span class="line"></span><br><span class="line">&#125; catch(&lt;strong&gt;SQLException | IOException e&lt;/strong&gt;) &#123;</span><br><span class="line">    logger.log(e);</span><br><span class="line"></span><br><span class="line">&#125; catch(Exception e) &#123;</span><br><span class="line">    logger.severe(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line"></span><br><span class="line">    // execute code that may throw 1 of the 3 exceptions below.</span><br><span class="line"></span><br><span class="line">&#125; catch(&lt;strong&gt;SQLException | IOException e&lt;/strong&gt;) &#123;</span><br><span class="line">    logger.log(e);</span><br><span class="line"></span><br><span class="line">&#125; catch(Exception e) &#123;</span><br><span class="line">    logger.severe(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>注意，第一个catch语句块中的两个异常名字是被管道字符|分割的。两个异常类名之间的管道字符就是在同一个catch语句块中声明多个异常的方法。</p>
 <blockquote>
@@ -734,7 +734,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1110,7 +1110,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1121,7 +1121,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

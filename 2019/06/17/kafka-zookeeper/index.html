@@ -539,7 +539,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">29 分钟</span>
+                <span title="阅读时长">28 分钟</span>
               
             </div>
           
@@ -609,21 +609,21 @@
 
 <p>前已述及，<strong>Topic 只是逻辑概念</strong>，面向的是 producer 和 consumer；而 <strong>Partition 则是物理概念</strong>。可以想象，如果 Topic 不进行分区，而将 Topic 内的消息存储于一个 broker，那么关于该 Topic 的所有读写请求都将由这一个 broker 处理，<strong>吞吐量很容易陷入瓶颈</strong>，这显然是不符合高吞吐量应用场景的。有了 Partition 概念以后，假设一个 Topic 被分为 10 个 Partitions，Kafka 会根据一定的算法将 10 个 Partition 尽可能均匀的分布到不同的 broker（服务器）上，当 producer 发布消息时，producer 客户端可以采用 <code>random</code>、<code>key-hash</code> 及 <code>轮询</code> 等算法选定目标 partition，若不指定，Kafka 也将根据一定算法将其置于某一分区上。<strong>Partiton 机制可以极大的提高吞吐量，并且使得系统具备良好的水平扩展能力。</strong></p>
 <p>在创建 topic 时可以在 <code>$KAFKA_HOME/config/server.properties</code> 中指定这个 partition 的数量（如下所示），当然可以在 topic 创建之后去修改 partition 的数量。</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The default number of log partitions per topic. More partitions allow greater</span></span><br><span class="line"><span class="comment"># parallelism for consumption, but this will also result in more files across</span></span><br><span class="line"><span class="comment"># the brokers.</span></span><br><span class="line"><span class="attr">num.partitions</span>=<span class="number">3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># The default number of log partitions per topic. More partitions allow greater</span><br><span class="line"># parallelism for consumption, but this will also result in more files across</span><br><span class="line"># the brokers.</span><br><span class="line">num.partitions=3</span><br></pre></td></tr></table></figure>
 
 <p>在发送一条消息时，可以<strong>指定这个消息的 key</strong>，producer 根据这个 key 和 partition 机制来判断这个消息发送到哪个partition。partition 机制可以通过指定 producer 的 partition.class 这一参数来指定（即支持自定义），该 class 必须实现 kafka.producer.Partitioner 接口。</p>
 <p>有关 topic 与 partition 的更多细节，可以参考下面的“Kafka 文件存储机制”这一节。</p>
 <h3 id="2-Kafka-高可靠性实现基础解读"><a href="#2-Kafka-高可靠性实现基础解读" class="headerlink" title="2. Kafka 高可靠性实现基础解读"></a>2. Kafka 高可靠性实现基础解读</h3><p>谈及可靠性，最常规、最有效的策略就是 “<strong>副本（replication）机制</strong>” ，Kafka 实现高可靠性同样采用了该策略。通过调节副本相关参数，可使 Kafka 在性能和可靠性之间取得平衡。本节先从 Kafka 文件存储机制入手，从最底层了解 Kafka 的存储细节，进而对消息的存储有个微观的认知。之后通过介绍 Kafka 的<strong>复制原理</strong>和<strong>同步方式</strong>来阐述宏观层面的概念。最后介绍 <strong>ISR</strong>，<strong>HW</strong> 和 <strong>leader</strong> 选举。</p>
 <h4 id="2-1-Kafka-文件存储机制"><a href="#2-1-Kafka-文件存储机制" class="headerlink" title="2.1 Kafka 文件存储机制"></a>2.1 Kafka 文件存储机制</h4><p>Kafka 中消息是以 topic 进行分类的，生产者通过 topic 向 Kafka broker 发送消息，消费者通过 topic 读取数据。然而 <strong>topic 在物理层面又能以 partition 为分组</strong>，一个 topic 可以分成若干个 partition。事实上，partition 并不是最终的存储粒度，<strong>partition 还可以细分为 segment</strong>，<strong>一个 partition 物理上由多个 segment 组成</strong>，那么这些 segment 又是什么呢？</p>
 <p>为了便于说明问题，假设这里只有一个 Kafka 集群，且这个集群只有一个 Kafka broker，即只有一台物理机。在这个 Kafka broker 中配置 <code>log.dirs=/tmp/kafka-logs</code>，以此来设置 Kafka 消息文件存储目录；与此同时，通过命令创建一个 topic：mytopic_test，partition 的数量配置为 4（创建 topic 的命令请见上一课）。之后，可以在 <code>/tmp/kafka-logs</code> 目录中可以看到生成了 4 个目录：</p>
-<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x<span class="number"> 2 </span>root root<span class="number"> 4096 </span>Apr<span class="number"> 15 </span>13:21 mytopic_test-0</span><br><span class="line">drwxr-xr-x<span class="number"> 2 </span>root root<span class="number"> 4096 </span>Apr<span class="number"> 15 </span>13:21 mytopic_test-1</span><br><span class="line">drwxr-xr-x<span class="number"> 2 </span>root root<span class="number"> 4096 </span>Apr<span class="number"> 15 </span>13:21 mytopic_test-2</span><br><span class="line">drwxr-xr-x<span class="number"> 2 </span>root root<span class="number"> 4096 </span>Apr<span class="number"> 15 </span>13:21 mytopic_test-3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x 2 root root 4096 Apr 15 13:21 mytopic_test-0</span><br><span class="line">drwxr-xr-x 2 root root 4096 Apr 15 13:21 mytopic_test-1</span><br><span class="line">drwxr-xr-x 2 root root 4096 Apr 15 13:21 mytopic_test-2</span><br><span class="line">drwxr-xr-x 2 root root 4096 Apr 15 13:21 mytopic_test-3</span><br></pre></td></tr></table></figure>
 
 <p>在 Kafka 文件存储中，同一个 topic 下有多个不同的 partition，每个 partiton 为一个目录，partition 的名称规则为：topic 名称 + 有序序号，第一个序号从 0 开始计，最大的序号为 partition 数量减 1，<strong>partition 是实际物理上的概念，而 topic 是逻辑上的概念。</strong></p>
 <p><strong>问题 1：为什么不能以 partition 作为存储单位？</strong></p>
 <p>上面提到 partition 还可以细分为 segment，这个 segment 又是什么？如果就以 partition 为最小存储单位，可以想象，当 Kafka producer 不断发送消息，必然会引起 <strong>partition 文件的无限扩张</strong>，将对消息文件的维护以及已消费的消息的清理带来严重的影响，因此，需以 segment 为单位将 partition 进一步细分。<strong>每个 partition（目录）相当于一个巨型文件被平均分配到多个大小相等的 segment（段）数据文件中</strong>（每个 segment 文件中消息数量不一定相等）这种特性也方便 old segment 的删除，即方便已被消费的消息的清理，提高磁盘的利用率。每个 partition 只需要支持顺序读写就行，segment 的文件生命周期由服务端配置参数（log.segment.bytes，log.roll.{ms,hours} 等若干参数）决定。</p>
 <p><strong>问题 2：segment 的工作原理是怎样的？</strong></p>
 <p>segment 文件由两部分组成，分别为 “<strong>.index</strong>” 文件和 “<strong>.log</strong>” 文件，分别表示为 <strong>segment 索引文件和数据文件。</strong>这两个文件的命令规则为：partition 全局的第一个 segment 从 0 开始，后续每个 segment 文件名为上一个 segment 文件最后一条消息的 offset 值，数值大小为 64 位，20 位数字字符长度，没有数字用 0 填充，如下：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">00000000000000000000</span>.index</span><br><span class="line"><span class="number">00000000000000000000</span>.log</span><br><span class="line"><span class="number">00000000000000170410</span>.index</span><br><span class="line"><span class="number">00000000000000170410</span>.log</span><br><span class="line"><span class="number">00000000000000239430</span>.index</span><br><span class="line"><span class="number">00000000000000239430</span>.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">00000000000000000000.index</span><br><span class="line">00000000000000000000.log</span><br><span class="line">00000000000000170410.index</span><br><span class="line">00000000000000170410.log</span><br><span class="line">00000000000000239430.index</span><br><span class="line">00000000000000239430.log</span><br></pre></td></tr></table></figure>
 
 <p>以上面的 segment 文件为例，展示出 segment：00000000000000170410 的 “.index” 文件和 “.log” 文件的对应的关系，如下图：</p>
 <p><img src="4.jpg" alt="enter image description here"></p>
@@ -641,14 +641,14 @@
 <p><strong>如何确保新选举出的 leader 是优选呢？</strong></p>
 <p>一个 partition 有多个副本（replicas），为了提高可靠性，<strong>这些副本分散在不同的 broker 上</strong>，由于带宽、读写性能、网络延迟等因素，同一时刻，这些<strong>副本的状态通常是不一致的</strong>：即 <strong>followers 与 leader 的状态不一致</strong>。那么，如何保证新选举出的 leader 是优选呢？ Kafka 机制中，leader 将负责维护和跟踪一个 <strong>ISR（In-Sync Replicas</strong>）列表，即<strong>同步副本队列</strong>，这个<strong>列表里面的副本与 leader 保持同步，状态一致</strong>。如果新的 leader 从 ISR 列表中的副本中选出，那么就可以保证新 leader 为优选。当然，这不是唯一的策略，下文将继续解读。</p>
 <h4 id="2-3-同步副本-ISR"><a href="#2-3-同步副本-ISR" class="headerlink" title="2.3 同步副本 ISR"></a>2.3 同步副本 ISR</h4><p>上一节中讲到了<strong>同步副本队列 ISR（In-Sync Replicas）</strong>。虽然副本极大的增强了可用性，但是副本数量对 Kafka 的吞吐率有一定影响。<strong>默认情况下 Kafka 的 replica 数量为 1，即每个 partition 都只有唯一的 leader，无 follower，没有容灾能力</strong>。为了确保消息的可靠性，生产环境中，通常将其值（由 broker 的参数 offsets.topic.replication.factor 指定）大小设置为大于 1，比如 3。 <strong>所有的副本（replicas）统称为 Assigned Replicas，即 AR</strong>。<strong>ISR 是 AR 中的一个子集</strong>，<strong>由 leader 维护 ISR 列表</strong>，follower 从 leader 同步数据有一些延迟（由参数 replica.lag.time.max.ms <strong>设置超时阈值</strong>），<strong>超过阈值的 follower 将被剔除出 ISR， 存入 OSR（Outof-Sync Replicas）</strong>列表，新加入的 follower 也会先存放在 OSR 中。<strong>AR=ISR+OSR。</strong></p>
-<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注：ISR中包括：<span class="built_in">leader</span> + 与<span class="built_in">leader</span>保持同步的followers。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注：ISR中包括：leader + 与leader保持同步的followers。</span><br></pre></td></tr></table></figure>
 
 <p>上面一节还涉及到一个概念，即 HW。<strong>HW 俗称高水位</strong>，HighWatermark 的缩写，<strong>取一个 partition 对应的 ISR 中最小的 LEO 作为 HW</strong>，<strong>consumer 最多只能消费到 HW 所在的位置</strong>。另外每个 replica 都有 HW，leader 和 follower 各自负责更新自己的 HW 的状态。<strong>对于 leader 新写入的消息，consumer 不能立刻消费，leader 会等待该消息被所有 ISR 中的 replicas 同步后更新 HW，此时消息才能被 consumer 消费。这样就保证了如果 leader 所在的 broker 失效，该消息仍然可以从新选举的 leader 中获取。对于来自内部 broker 的读取请求，没有 HW 的限制。</strong></p>
 <p>下图详细的说明了当 producer 生产消息至 broker 后，ISR 以及 HW 和 LEO 的流转过程：</p>
 <p><img src="7.jpg" alt="enter image description here"></p>
 <p>由此可见，Kafka 的复制机制<strong>既不是完全的同步复制</strong>，<strong>也不是单纯的异步复制</strong>。事实上，<strong>同步复制要求所有能工作的 follower 都复制完，这条消息才会被 commit</strong>，这种复制方式受限于复制最慢的 follower，会极大的影响吞吐率。而<strong>异步复制方式下，follower 异步的从 leader 复制数据，数据只要被 leader 写入 log 就被认为已经 commit</strong>，这种情况下如果 follower 都还没有复制完，落后于 leader 时，突然 leader 宕机，则会丢失数据，降低可靠性。而 Kafka 使用 <strong>ISR</strong> 的策略则在可靠性和吞吐率方面取得了较好的平衡。</p>
 <p>Kafka 的 ISR 的管理最终都会反馈到 ZooKeeper 节点上，具体位置为：</p>
-<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/brokers/topics/[topic]/partitions/[partition]/<span class="keyword">state</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/brokers/topics/[topic]/partitions/[partition]/state</span><br></pre></td></tr></table></figure>
 
 <p>目前，有两个地方会对这个 ZooKeeper 的节点进行维护。</p>
 <ol>
@@ -726,15 +726,15 @@
 <p>关于负载均衡，对于某些低级别的 API，consumer 消费时必须指定 topic 和 partition，这显然不是一种友好的均衡策略。基于高级别的 API，<strong>consumer 消费时只需制定 topic，借助 ZooKeeper 可以根据 partition 的数量和 consumer 的数量做到均衡的动态配置。</strong></p>
 <p><strong>consumers 在启动时会到 ZooKeeper 下以自己的 conusmer-id 创建临时节点</strong> <code>/consumer/[group-id]/ids/[conusmer-id]</code>，并对 <code>/consumer/[group-id]/ids</code> <strong>注册监听事件</strong>，当消费者发生变化时，同一 group 的其余消费者会得到通知。当然，<strong>消费者还要监听 broker 列表的变化</strong>。librdkafka 通常会将 partition 进行排序后，根据消费者列表，进行轮流的分配。</p>
 <h4 id="3-6-记录消费进度-Offset"><a href="#3-6-记录消费进度-Offset" class="headerlink" title="3.6 记录消费进度 Offset"></a>3.6 记录消费进度 Offset</h4><p>在 consumer 对指定消息 partition 的消息进行消费的过程中，需要定时地将 <strong>partition 消息的消费进度 Offset 记录到 ZooKeeper</strong>上，以便在<strong>该 consumer 进行重启或者其它 consumer 重新接管该消息分区的消息消费权后，能够从之前的进度开始继续进行消息消费</strong>。<strong>Offset 在 ZooKeeper 中由一个专门节点进行记录</strong>，其节点路径为：</p>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#节点内容就是Offset的值。</span><br><span class="line">/consumers/<span class="string">[group_id]</span>/offsets/<span class="string">[topic]</span>/<span class="string">[broker_id-partition_id]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#节点内容就是Offset的值。</span><br><span class="line">/consumers/[group_id]/offsets/[topic]/[broker_id-partition_id]</span><br></pre></td></tr></table></figure>
 
 <p>PS：<strong>Kafka 已推荐将 consumer 的 Offset 信息保存在 Kafka 内部的 topic 中</strong>，即：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__consumer_offsets(<span class="name">/brokers/topics/__consumer_offsets</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__consumer_offsets(/brokers/topics/__consumer_offsets)</span><br></pre></td></tr></table></figure>
 
 <p>并且默认提供了 <code>kafka_consumer_groups.sh</code> 脚本<strong>供用户查看consumer 信息</strong>（命令：<code>sh kafka-consumer-groups.sh –bootstrap-server * –describe –group *</code>）。在当前版本中，offset 存储方式要么存储在本地文件中，要么存储在 broker 端，具体的存储方式取决 <code>offset.store.method</code> 的配置，默认是存储在 broker 端。</p>
 <h4 id="3-7-记录-Partition-与-Consumer-的关系"><a href="#3-7-记录-Partition-与-Consumer-的关系" class="headerlink" title="3.7 记录 Partition 与 Consumer 的关系"></a>3.7 记录 Partition 与 Consumer 的关系</h4><p>consumer group 下有多个 consumer（消费者），对于每个消费者组（consumer group），Kafka都会为其分配一个全局唯一的 group ID，group 内部的所有消费者共享该 ID。<strong>订阅的 topic 下的每个分区只能分配给某个 group 下的一个consumer</strong>（<strong>当然该分区还可以被分配给其它 group</strong>）。同时，Kafka 为每个消费者分配一个 consumer ID，通常采用 <code>hostname:UUID</code> 形式表示。</p>
 <p>在Kafka中，规定了<strong>每个 partition 只能被同组的一个消费者进行消费</strong>，因此，<strong>需要在 ZooKeeper 上记录下 partition 与 consumer 之间的关系</strong>，<strong>每个 consumer 一旦确定了对一个 partition 的消费权力，需要将其 consumer ID 写入到 ZooKeeper 对应消息分区的临时节点</strong>上，例如：</p>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/consumers/<span class="string">[group_id]</span>/owners/<span class="string">[topic]</span>/<span class="string">[broker_id-partition_id]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/consumers/[group_id]/owners/[topic]/[broker_id-partition_id]</span><br></pre></td></tr></table></figure>
 
 <p>其中，[<code>broker_id-partition_id</code>] 就是一个消息分区的标识，节点内容就是该消息分区 消费者的 consumer ID。</p>
 <h3 id="4-全程解析（Producer-kafka-consumer）"><a href="#4-全程解析（Producer-kafka-consumer）" class="headerlink" title="4. 全程解析（Producer-kafka-consumer）"></a>4. 全程解析（Producer-kafka-consumer）</h3><h4 id="4-1-producer-发布消息"><a href="#4-1-producer-发布消息" class="headerlink" title="4.1 producer 发布消息"></a>4.1 producer 发布消息</h4><p><strong>producer 采用 push 模式将消息发布到 broker</strong>，<strong>每条消息都被 append 到 patition</strong> 中，属于顺序写磁盘（顺序写磁盘效率比随机写内存要高，保障 kafka 吞吐率）。producer 发送消息到 broker 时，<strong>会根据分区算法选择将其存储到哪一个 partition。</strong></p>
@@ -956,7 +956,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1349,7 +1349,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1360,7 +1360,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

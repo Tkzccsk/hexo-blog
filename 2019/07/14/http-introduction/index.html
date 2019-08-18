@@ -526,7 +526,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">14k</span>
+                <span title="本文字数">13k</span>
               
 
               
@@ -540,7 +540,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">13 分钟</span>
+                <span title="阅读时长">12 分钟</span>
               
             </div>
           
@@ -583,7 +583,7 @@
 <li>用户在浏览器中键入需要访问网页的URL或者点击某个网页中链接；</li>
 <li>浏览器根据URL中的域名，<strong>通过DNS解析出目标网页的IP地址</strong>；</li>
 </ol>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">浏览器请求这个页面：http://hackr.ip/index.html</span><br><span class="line">在这一步，需要域名系统DNS解析域名hackr.ip,得主机的<span class="built_in">IP</span>地址 20X<span class="meta">.189</span><span class="meta">.105</span><span class="meta">.112</span>。</span><br><span class="line">然后将上面结合本机自己的信息，封装成一个http请求数据包</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">浏览器请求这个页面：http://hackr.ip/index.html</span><br><span class="line">在这一步，需要域名系统DNS解析域名hackr.ip,得主机的IP地址 20X.189.105.112。</span><br><span class="line">然后将上面结合本机自己的信息，封装成一个http请求数据包</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>在HTTP开始工作前，<strong>客户端首先会通过TCP/IP协议来和服务端建立链接（TCP三次握手）</strong></li>
@@ -591,7 +591,7 @@
 <li>服务器接到请求后，给予相应的响应信息，其格式为一个状态行，包括信息的协议版本号、一个成功或错误的代码，后边是MIME信息包括服务器信息、实体信息和可能的内容。</li>
 <li>一般情况下，一旦Web服务器向浏览器发送了请求数据，它就要关闭TCP连接，然后如果浏览器或者服务器在其头信息加入了这行代码： </li>
 </ol>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">Connection</span>:<span class="meta">keep</span>-alive</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection:keep-alive</span><br></pre></td></tr></table></figure>
 
 <p>，<strong>TCP连接在发送后将仍然保持打开状态</strong>，于是，浏览器可以继续通过相同的连接发送请求。<strong>保持连接节省了为每个请求建立新连接所需的时间，还节约了网络带宽。</strong> </p>
 <p><img src="2.jpg" alt="http链接步骤"></p>
@@ -611,7 +611,7 @@
 <h3 id="Http请求报文"><a href="#Http请求报文" class="headerlink" title="Http请求报文"></a>Http请求报文</h3><p>客户端发送一个HTTP请求到服务器的请求消息包括以下格式：</p>
 <p>请求行（request line）、请求头部（header）、请求体组成，下图给出了请求报文的一般格式。 </p>
 <p><img src="7.jpg" alt="HTTP请求"></p>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">请求行:</span><br><span class="line">    方法:</span><br><span class="line">        GET 获取资源</span><br><span class="line">        POST 向服务器端发送数据，传输实体主体</span><br><span class="line">        PUT 传输文件</span><br><span class="line">        HEAD 获取报文首部</span><br><span class="line">        <span class="keyword">DELETE</span> 删除文件</span><br><span class="line">        OPTIONS 询问支持的方法</span><br><span class="line">        <span class="keyword">TRACE</span> 追踪路径</span><br><span class="line">    URL</span><br><span class="line">    协议/版本号</span><br><span class="line">    </span><br><span class="line">请求头:</span><br><span class="line">    通用首部(General <span class="built_in">Header</span>)</span><br><span class="line">    请求首部(Request <span class="built_in">Header</span>)</span><br><span class="line">    响应首部(Response <span class="built_in">Header</span>)</span><br><span class="line">    实体首部(Entity <span class="built_in">Header</span> Fields)</span><br><span class="line">    </span><br><span class="line">请求体</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">请求行:</span><br><span class="line">    方法:</span><br><span class="line">        GET 获取资源</span><br><span class="line">        POST 向服务器端发送数据，传输实体主体</span><br><span class="line">        PUT 传输文件</span><br><span class="line">        HEAD 获取报文首部</span><br><span class="line">        DELETE 删除文件</span><br><span class="line">        OPTIONS 询问支持的方法</span><br><span class="line">        TRACE 追踪路径</span><br><span class="line">    URL</span><br><span class="line">    协议/版本号</span><br><span class="line">    </span><br><span class="line">请求头:</span><br><span class="line">    通用首部(General Header)</span><br><span class="line">    请求首部(Request Header)</span><br><span class="line">    响应首部(Response Header)</span><br><span class="line">    实体首部(Entity Header Fields)</span><br><span class="line">    </span><br><span class="line">请求体</span><br></pre></td></tr></table></figure>
 
 <p>请求报文拆解： </p>
 <p><img src="8.jpg" alt="http请求报文"></p>
@@ -619,7 +619,7 @@
 <h4 id="post请求"><a href="#post请求" class="headerlink" title="post请求"></a>post请求</h4><p><img src="10.jpg" alt="post请求"></p>
 <h3 id="Http响应报文"><a href="#Http响应报文" class="headerlink" title="Http响应报文"></a>Http响应报文</h3><p>HTTP响应组成：响应行、响应头、响应体。</p>
 <p><img src="11.jpg" alt="http响应"></p>
-<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">响应行</span><br><span class="line">    （HTTP/<span class="number">1.1</span>）表明HTTP版本为<span class="number">1.1</span>版本，状态码为<span class="number">200</span>，状态消息为（ok）</span><br><span class="line">响应头</span><br><span class="line">    <span class="built_in">Date</span>:生成响应的日期和时间；</span><br><span class="line">    Content-<span class="built_in">Type</span>:指定了MIME类型的HTML(<span class="built_in">text</span>/html),编码类型是ISO-<span class="number">8859</span>-<span class="number">1</span></span><br><span class="line">响应体</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">响应行</span><br><span class="line">    （HTTP/1.1）表明HTTP版本为1.1版本，状态码为200，状态消息为（ok）</span><br><span class="line">响应头</span><br><span class="line">    Date:生成响应的日期和时间；</span><br><span class="line">    Content-Type:指定了MIME类型的HTML(text/html),编码类型是ISO-8859-1</span><br><span class="line">响应体</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
 <p>响应报文拆解： </p>
 <p><img src="12.jpg" alt="http响应报文"></p>
@@ -651,13 +651,13 @@
 <td>Server Error(服务器错误状态吗)</td>
 </tr>
 </tbody></table>
-<h4 id="2XX-成功"><a href="#2XX-成功" class="headerlink" title="2XX 成功"></a>2XX 成功</h4><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">200</span>(<span class="name">OK</span> 客户端发过来的数据被正常处理</span><br><span class="line"><span class="number">204</span>(<span class="name">Not</span> Content 正常响应，没有实体</span><br><span class="line"><span class="number">206</span>(<span class="name">Partial</span> Content 范围请求，返回部分数据，响应报文中由Content-Range指定实体内容</span><br></pre></td></tr></table></figure>
+<h4 id="2XX-成功"><a href="#2XX-成功" class="headerlink" title="2XX 成功"></a>2XX 成功</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">200(OK 客户端发过来的数据被正常处理</span><br><span class="line">204(Not Content 正常响应，没有实体</span><br><span class="line">206(Partial Content 范围请求，返回部分数据，响应报文中由Content-Range指定实体内容</span><br></pre></td></tr></table></figure>
 
-<h4 id="3XX-重定向"><a href="#3XX-重定向" class="headerlink" title="3XX 重定向"></a>3XX 重定向</h4><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">301</span>(Moved Permanently) 永久重定向</span><br><span class="line"><span class="number">302</span>(Found) 临时重定向，规范要求，方法名不变，但是都会改变</span><br><span class="line"><span class="number">303</span>(See Other) 和<span class="number">302</span>类似，但必须用GET方法</span><br><span class="line"><span class="number">304</span>(<span class="keyword">Not</span> Modified) 状态未改变， 配合(<span class="keyword">If</span>-Match、<span class="keyword">If</span>-Modified-Since、<span class="keyword">If</span>-None_Match、<span class="keyword">If</span>-<span class="keyword">Range</span>、<span class="keyword">If</span>-Unmodified-Since)</span><br><span class="line"><span class="number">307</span>(<span class="keyword">Temporary</span> Redirect) 临时重定向，不该改变请求方法</span><br></pre></td></tr></table></figure>
+<h4 id="3XX-重定向"><a href="#3XX-重定向" class="headerlink" title="3XX 重定向"></a>3XX 重定向</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">301(Moved Permanently) 永久重定向</span><br><span class="line">302(Found) 临时重定向，规范要求，方法名不变，但是都会改变</span><br><span class="line">303(See Other) 和302类似，但必须用GET方法</span><br><span class="line">304(Not Modified) 状态未改变， 配合(If-Match、If-Modified-Since、If-None_Match、If-Range、If-Unmodified-Since)</span><br><span class="line">307(Temporary Redirect) 临时重定向，不该改变请求方法</span><br></pre></td></tr></table></figure>
 
-<h4 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a>4XX 客户端错误</h4><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">400</span>(Bad Request) 请求报文语法错误</span><br><span class="line"><span class="symbol">401 </span>(unauthorized) 需要认证</span><br><span class="line"><span class="number">403</span>(Forbidden) 服务器拒绝访问对应的资源</span><br><span class="line"><span class="number">404</span>(<span class="keyword">Not</span> Found) 服务器上无法找到资源</span><br></pre></td></tr></table></figure>
+<h4 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a>4XX 客户端错误</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">400(Bad Request) 请求报文语法错误</span><br><span class="line">401 (unauthorized) 需要认证</span><br><span class="line">403(Forbidden) 服务器拒绝访问对应的资源</span><br><span class="line">404(Not Found) 服务器上无法找到资源</span><br></pre></td></tr></table></figure>
 
-<h4 id="5XX-服务器端错误"><a href="#5XX-服务器端错误" class="headerlink" title="5XX 服务器端错误"></a>5XX 服务器端错误</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">500(Internal<span class="built_in"> Server </span>Error)服务器故障</span><br><span class="line">503(Service Unavailable) 服务器处于超负载或正在停机维护</span><br></pre></td></tr></table></figure>
+<h4 id="5XX-服务器端错误"><a href="#5XX-服务器端错误" class="headerlink" title="5XX 服务器端错误"></a>5XX 服务器端错误</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">500(Internal Server Error)服务器故障</span><br><span class="line">503(Service Unavailable) 服务器处于超负载或正在停机维护</span><br></pre></td></tr></table></figure>
 
 <h3 id="首部"><a href="#首部" class="headerlink" title="首部"></a>首部</h3><h4 id="首部字段"><a href="#首部字段" class="headerlink" title="首部字段"></a>首部字段</h4><table>
 <thead>
@@ -1074,7 +1074,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1467,7 +1467,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1478,7 +1478,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

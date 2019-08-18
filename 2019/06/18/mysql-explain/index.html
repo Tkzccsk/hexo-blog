@@ -671,7 +671,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; EXPLAIN SELECT * FROM order_info WHERE user_id &lt; 3 AND product_name = &apos;p1&apos; AND productor = &apos;WHH&apos; \G</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">           id: 1</span><br><span class="line">  select_type: SIMPLE</span><br><span class="line">        table: order_info</span><br><span class="line">   partitions: NULL</span><br><span class="line">         type: range</span><br><span class="line">possible_keys: user_product_detail_index</span><br><span class="line">          key: user_product_detail_index</span><br><span class="line">      key_len: 9</span><br><span class="line">          ref: NULL</span><br><span class="line">         rows: 5</span><br><span class="line">     filtered: 11.11</span><br><span class="line">        Extra: Using where; Using index</span><br><span class="line">1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
 
 <p>上面的例子是从表 order_info 中查询指定的内容, 而我们从此表的建表语句中可以知道, 表 <code>order_info</code> 有一个联合索引:</p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KEY `user_product_detail_index` (`user_id`, `product_name`, `productor`)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KEY `user_product_detail_index` (`user_id`, `product_name`, `productor`)</span><br></pre></td></tr></table></figure>
 
 <p>不过此查询语句 <code>WHERE user_id &lt; 3 AND product_name = &#39;p1&#39; AND productor = &#39;WHH&#39;</code> 中, 因为先进行 user_id 的范围查询, 而根据 <code>最左前缀匹配</code> 原则, <strong>当遇到范围查询时, 就停止索引的匹配</strong>, 因此实际上我们使用到的索引的字段只有 <code>user_id</code>, 因此在 <code>EXPLAIN</code> 中, 显示的 key_len 为 9. 因为 user_id 字段是 BIGINT, 占用 8 字节, 而 NULL 属性占用一个字节, 因此总共是 9 个字节. 若我们将user_id 字段改为 <code>BIGINT(20) NOT NULL DEFAULT &#39;0&#39;</code>, 则 key_length 应该是8.</p>
 <p>上面因为 <code>最左前缀匹配</code> 原则, 我们的查询仅仅使用到了联合索引的 <code>user_id</code> 字段, 因此效率不算高.</p>
@@ -688,7 +688,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; EXPLAIN SELECT * FROM order_info ORDER BY product_name \G</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">           id: 1</span><br><span class="line">  select_type: SIMPLE</span><br><span class="line">        table: order_info</span><br><span class="line">   partitions: NULL</span><br><span class="line">         type: index</span><br><span class="line">possible_keys: NULL</span><br><span class="line">          key: user_product_detail_index</span><br><span class="line">      key_len: 253</span><br><span class="line">          ref: NULL</span><br><span class="line">         rows: 9</span><br><span class="line">     filtered: 100.00</span><br><span class="line">        Extra: Using index; Using filesort</span><br><span class="line">1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
 
 <p>我们的索引是</p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KEY `user_product_detail_index` (`user_id`, `product_name`, `productor`)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KEY `user_product_detail_index` (`user_id`, `product_name`, `productor`)</span><br></pre></td></tr></table></figure>
 
 <p>但是上面的查询中根据 <code>product_name</code> 来排序, 因此不能使用索引进行优化, 进而会产生 <code>Using filesort</code>.
 如果我们将排序依据改为 <code>ORDER BY user_id, product_name</code>, 那么就不会出现 <code>Using filesort</code> 了. 例如:</p>
@@ -886,7 +886,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1279,7 +1279,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1290,7 +1290,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">24k</span>
+                <span title="本文字数">23k</span>
               
 
               
@@ -531,7 +531,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">22 分钟</span>
+                <span title="阅读时长">21 分钟</span>
               
             </div>
           
@@ -563,7 +563,7 @@
 <p><img src="2.jpg" alt="img"></p>
 <p><code>LRU</code> 存储是基于双向链表实现的，下面的图演示了它的原理。其中<code>head</code> 代表双向链表的表头，<code>tail</code> 代表尾部。首先预先设置 <code>LRU</code> 的容量，如果存储满了，可以通过 O(1) 的时间淘汰掉双向链表的尾部，每次新增和访问数据，都可以通过 O(1)的效率把新的节点增加到对头，或者把已经存在的节点移动到队头。</p>
 <p>下面展示了，预设大小是 3 的，LRU存储的在存储和访问过程中的变化。为了简化图复杂度，图中没有展示 <code>HashMap</code>部分的变化，仅仅演示了上图<code>LRU</code>双向链表的变化。我们对这个LRU缓存的操作序列如下：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">save</span><span class="params">(<span class="string">"key1"</span>, <span class="number">7</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(<span class="string">"key2"</span>, <span class="number">0</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(<span class="string">"key3"</span>, <span class="number">1</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(<span class="string">"key4"</span>, <span class="number">2</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">get</span><span class="params">(<span class="string">"key2"</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(<span class="string">"key5"</span>, <span class="number">3</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">get</span><span class="params">(<span class="string">"key2"</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">save</span><span class="params">(<span class="string">"key6"</span>, <span class="number">4</span>)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">save(&quot;key1&quot;, 7)</span><br><span class="line"></span><br><span class="line">save(&quot;key2&quot;, 0)</span><br><span class="line"></span><br><span class="line">save(&quot;key3&quot;, 1)</span><br><span class="line"></span><br><span class="line">save(&quot;key4&quot;, 2)</span><br><span class="line"></span><br><span class="line">get(&quot;key2&quot;)</span><br><span class="line"></span><br><span class="line">save(&quot;key5&quot;, 3)</span><br><span class="line"></span><br><span class="line">get(&quot;key2&quot;)</span><br><span class="line"></span><br><span class="line">save(&quot;key6&quot;, 4)</span><br></pre></td></tr></table></figure>
 
 <p>相应的 LRU 双向链表部分变化如下：</p>
 <p><img src="3.jpg" alt="img"><br>s = save, g = get</p>
@@ -789,7 +789,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1182,7 +1182,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1193,7 +1193,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

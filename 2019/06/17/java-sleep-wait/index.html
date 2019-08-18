@@ -513,7 +513,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.6k</span>
+                <span title="本文字数">3k</span>
               
 
               
@@ -573,11 +573,11 @@
 <td></td>
 </tr>
 <tr>
-<td><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sleep</span>（）和<span class="built_in">wait</span>()这两个函数被调用之后线程都应该放弃执行权，不同的是<span class="built_in">sleep</span>（）不释放锁而<span class="built_in">wait</span>（）的话是释放锁。直白的意思是一个线程调用<span class="built_in">Sleep</span>（）之后进入了阻塞状态，它的意思就是当<span class="built_in">sleep</span>()状态超时，线程重新转入可运行(runnable)状态。而<span class="built_in">Wait</span>（）在释放执行权之后也把锁释放了,通过<span class="built_in">notify</span>()或者<span class="built_in">notifyAll</span>()或者指定睡眠时间来唤醒后，它要运行的话还是要和其他的线程去竞争锁，之后才可以获得执行权。</span><br></pre></td></tr></table></figure></td>
+<td><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sleep（）和wait()这两个函数被调用之后线程都应该放弃执行权，不同的是sleep（）不释放锁而wait（）的话是释放锁。直白的意思是一个线程调用Sleep（）之后进入了阻塞状态，它的意思就是当sleep()状态超时，线程重新转入可运行(runnable)状态。而Wait（）在释放执行权之后也把锁释放了,通过notify()或者notifyAll()或者指定睡眠时间来唤醒后，它要运行的话还是要和其他的线程去竞争锁，之后才可以获得执行权。</span><br></pre></td></tr></table></figure></td>
 <td></td>
 </tr>
 </tbody></table>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">所以<span class="selector-tag">sleep</span>()和<span class="selector-tag">wait</span>()方法的最大区别是： </span><br><span class="line">　<span class="selector-tag">sleep</span>()睡眠时，保持对象锁，仍然占有该锁； </span><br><span class="line">　而<span class="selector-tag">wait</span>()睡眠时，释放对象锁。 </span><br><span class="line">　但是<span class="selector-tag">wait</span>()和<span class="selector-tag">sleep</span>()都可以通过<span class="selector-tag">interrupt</span>()方法打断线程的暂停状态，从而使线程立刻抛出<span class="selector-tag">InterruptedException</span>（但不建议使用该方法）。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">所以sleep()和wait()方法的最大区别是： </span><br><span class="line">　sleep()睡眠时，保持对象锁，仍然占有该锁； </span><br><span class="line">　而wait()睡眠时，释放对象锁。 </span><br><span class="line">　但是wait()和sleep()都可以通过interrupt()方法打断线程的暂停状态，从而使线程立刻抛出InterruptedException（但不建议使用该方法）。</span><br></pre></td></tr></table></figure>
 
 <h2 id="Java中sleep方法的几个注意点"><a href="#Java中sleep方法的几个注意点" class="headerlink" title="Java中sleep方法的几个注意点"></a>Java中sleep方法的几个注意点</h2><ul>
 <li>Thread.sleep()方法用来暂停线程的执行，将CPU放给线程调度器。</li>
@@ -789,7 +789,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1182,7 +1182,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1193,7 +1193,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

@@ -521,7 +521,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.8k</span>
+                <span title="本文字数">3.7k</span>
               
 
               
@@ -562,7 +562,7 @@
 
 <p><img src="1.jpg" alt="img"></p>
 <p>其中角色说明如下:</p>
-<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Abstraction 抽象化角色</span>: 它的主要职责是定义出该角色的行为, 同时保存一个对实现化角色的引用, 一般是抽象类</span><br><span class="line"></span><br><span class="line"><span class="attribute">Implementor 实现化角色</span>: 接口或抽象类, 定义角色必须的行为和属性</span><br><span class="line"></span><br><span class="line"><span class="attribute">RefinedAbstraction 修正抽象化角色</span>: 它引用实现化角色对抽象化角色进行修正</span><br><span class="line"></span><br><span class="line"><span class="attribute">ConcreteImplementor 具体实现化角色</span>: 它实现接口或抽象类定义的方法和属性</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Abstraction 抽象化角色: 它的主要职责是定义出该角色的行为, 同时保存一个对实现化角色的引用, 一般是抽象类</span><br><span class="line"></span><br><span class="line">Implementor 实现化角色: 接口或抽象类, 定义角色必须的行为和属性</span><br><span class="line"></span><br><span class="line">RefinedAbstraction 修正抽象化角色: 它引用实现化角色对抽象化角色进行修正</span><br><span class="line"></span><br><span class="line">ConcreteImplementor 具体实现化角色: 它实现接口或抽象类定义的方法和属性</span><br></pre></td></tr></table></figure>
 
 <h2 id="桥梁模式实现"><a href="#桥梁模式实现" class="headerlink" title="桥梁模式实现"></a>桥梁模式实现</h2><p>抽象角色的部分实现是由实现角色完成的</p>
 <p>实现化角色代码:</p>
@@ -577,9 +577,9 @@
 <p><img src="6.jpg" alt="img"></p>
 <h2 id="桥梁模式优点"><a href="#桥梁模式优点" class="headerlink" title="桥梁模式优点"></a>桥梁模式优点</h2><p>桥梁模式是一个很简单的模式, 它只是使用了类间的<strong>聚合关系</strong>、<strong>继承</strong>、<strong>覆写</strong>等常用功能, 但是它却提供了一个非常清晰、稳定的架构。</p>
 <p>桥梁模式的优点:</p>
-<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">抽象和实现分离. 这是桥梁模式的主要特点, 它完全是为了解决继承的缺点而提出的设计模式. 在该模式下,实现可以不受抽象的约束,不用再绑定在一个固定的抽象层次上,具有优秀的扩充能力.</span><br><span class="line"></span><br><span class="line">实现细节对客户透明. 客户不用关心细节的实现, 它已经由抽象层通过聚合关系完成了封装</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">抽象和实现分离. 这是桥梁模式的主要特点, 它完全是为了解决继承的缺点而提出的设计模式. 在该模式下,实现可以不受抽象的约束,不用再绑定在一个固定的抽象层次上,具有优秀的扩充能力.</span><br><span class="line"></span><br><span class="line">实现细节对客户透明. 客户不用关心细节的实现, 它已经由抽象层通过聚合关系完成了封装</span><br></pre></td></tr></table></figure>
 
-<h2 id="桥梁模式的使用场景"><a href="#桥梁模式的使用场景" class="headerlink" title="桥梁模式的使用场景:"></a>桥梁模式的使用场景:</h2><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">不希望或不适用使用继承的场景. 例如继承层次过滤、无法更细化设计颗粒等场景</span><br><span class="line"></span><br><span class="line">接口或抽象类不稳定的场景.</span><br><span class="line"></span><br><span class="line">重用性要求较高的场景. 设计的颗粒度越细,则被重用的可能性就越大, 而采用继承则受父类的限制, 不可能出现太细的颗粒度</span><br></pre></td></tr></table></figure>
+<h2 id="桥梁模式的使用场景"><a href="#桥梁模式的使用场景" class="headerlink" title="桥梁模式的使用场景:"></a>桥梁模式的使用场景:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">不希望或不适用使用继承的场景. 例如继承层次过滤、无法更细化设计颗粒等场景</span><br><span class="line"></span><br><span class="line">接口或抽象类不稳定的场景.</span><br><span class="line"></span><br><span class="line">重用性要求较高的场景. 设计的颗粒度越细,则被重用的可能性就越大, 而采用继承则受父类的限制, 不可能出现太细的颗粒度</span><br></pre></td></tr></table></figure>
 
 <p>使用桥梁模式主要考虑如何拆分抽象和实现,并不是一设计继承就要考虑使用该模式. 桥梁模式的意图还是对变化的封装, 尽量把可能变化的因素封装到最细、最小的逻辑单元中,避免风险扩散.因此在进行系统设计时,<strong>发现类的继承有N层时,可以考虑使用桥梁模式</strong>.</p>
 <p><strong>桥梁模式在Java应用中的一个非常典型的例子就是JDBC驱动器</strong>。JDBC为所有的关系型数据库提供一个通用的界面。一个应用系统动态地选择一个合适的驱动器，然后通过驱动器向数据库引擎发出指令。这个过程就是将抽象角色的行为委派给实现角色的过程。</p>
@@ -778,7 +778,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1171,7 +1171,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1182,7 +1182,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

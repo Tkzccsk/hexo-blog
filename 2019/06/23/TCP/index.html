@@ -537,7 +537,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">22k</span>
+                <span title="本文字数">21k</span>
               
 
               
@@ -669,10 +669,10 @@
 <h1 id="连接的建立与释放"><a href="#连接的建立与释放" class="headerlink" title="连接的建立与释放"></a>连接的建立与释放</h1><h2 id="连接建立的“三次握手”"><a href="#连接建立的“三次握手”" class="headerlink" title="连接建立的“三次握手”"></a>连接建立的“三次握手”</h2><h3 id="三次握手流程"><a href="#三次握手流程" class="headerlink" title="三次握手流程"></a>三次握手流程</h3><p><img src="4.jpg" alt="img"><br>TCP协议中，主动发起请求的一端称为『<strong>客户端</strong>』，被动连接的一端称为『<strong>服务端</strong>』。不管是客户端还是服务端，TCP连接建立完后都能发送和接收数据。<br>起初，服务器和客户端都为<code>CLOSED</code>状态。在通信开始前，<code>双方都得创建各自的传输控制块（TCB）</code>。
 服务器创建完TCB后遍进入<code>LISTEN</code>状态，此时准备接收客户端发来的连接请求。</p>
 <h4 id="第一次握手"><a href="#第一次握手" class="headerlink" title="第一次握手"></a>第一次握手</h4><p>客户端向服务端发送连接请求报文段。该报文段的头部中SYN=1，ACK=0，seq=x。请求发送后，客户端便进入<code>SYN-SENT</code>状态。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PS1：<span class="attribute">SYN</span>=1，ACK=0表示该报文段为连接请求报文。</span><br><span class="line">PS2：x为本次TCP通信的字节流的初始序号。</span><br><span class="line">TCP规定：<span class="attribute">SYN</span>=1的报文段不能有数据部分，但要消耗掉一个序号。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PS1：SYN=1，ACK=0表示该报文段为连接请求报文。</span><br><span class="line">PS2：x为本次TCP通信的字节流的初始序号。</span><br><span class="line">TCP规定：SYN=1的报文段不能有数据部分，但要消耗掉一个序号。</span><br></pre></td></tr></table></figure>
 
 <h4 id="第二次握手"><a href="#第二次握手" class="headerlink" title="第二次握手"></a>第二次握手</h4><p>服务端收到连接请求报文段后，如果同意连接，则会发送一个应答：SYN=1，ACK=1，seq=y，ack=x+1。<br>该应答发送完成后便进入<code>SYN-RCVD</code>状态。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PS1：<span class="attribute">SYN</span>=1，ACK=1表示该报文段为连接同意的应答报文，ACK为1表示ack字段有效。</span><br><span class="line">PS2：<span class="attribute">seq</span>=y表示服务端作为发送者时，发送字节流的初始序号。</span><br><span class="line">PS3：<span class="attribute">ack</span>=x+1表示服务端希望下一个数据报发送序号从x+1开始的字节。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PS1：SYN=1，ACK=1表示该报文段为连接同意的应答报文，ACK为1表示ack字段有效。</span><br><span class="line">PS2：seq=y表示服务端作为发送者时，发送字节流的初始序号。</span><br><span class="line">PS3：ack=x+1表示服务端希望下一个数据报发送序号从x+1开始的字节。</span><br></pre></td></tr></table></figure>
 
 <h4 id="第三次握手"><a href="#第三次握手" class="headerlink" title="第三次握手"></a>第三次握手</h4><p>当客户端收到连接同意的应答后，还要向服务端发送一个确认报文段，表示：服务端发来的连接同意应答已经成功收到。<br>该报文段的头部为：ACK=1，seq=x+1，ack=y+1。<br>客户端发完这个报文段后便进入<code>ESTABLISHED</code>状态，服务端收到这个应答后也进入<code>ESTABLISHED</code>状态，此时连接的建立完成！</p>
 <h3 id="为什么连接建立需要三次握手，而不是两次握手？"><a href="#为什么连接建立需要三次握手，而不是两次握手？" class="headerlink" title="为什么连接建立需要三次握手，而不是两次握手？"></a>为什么连接建立需要三次握手，而不是两次握手？</h3><p>防止失效的连接请求报文段被服务端接收，从而产生错误。</p>
@@ -684,10 +684,10 @@
 <h2 id="连接关闭的“四次挥手”"><a href="#连接关闭的“四次挥手”" class="headerlink" title="连接关闭的“四次挥手”"></a>连接关闭的“四次挥手”</h2><h3 id="四次挥手流程"><a href="#四次挥手流程" class="headerlink" title="四次挥手流程"></a>四次挥手流程</h3><p><img src="5.jpg" alt></p>
 <p>TCP连接的释放一共需要四步，因此称为『四次挥手』。<br>我们知道，TCP连接是<code>双向</code>的，因此在四次挥手中，前两次挥手用于断开一个方向的连接，后两次挥手用于断开另一方向的连接。</p>
 <h4 id="第一次挥手"><a href="#第一次挥手" class="headerlink" title="第一次挥手"></a>第一次挥手</h4><p>若A认为数据发送完成，则它需要向B发送连接释放请求。该请求只有报文头，头中携带的主要参数为：<br>FIN=1，seq=u。此时，A将进入<code>FIN-WAIT-1</code>状态。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PS1：<span class="attribute">FIN</span>=1表示该报文段是一个连接释放请求。</span><br><span class="line">PS2：<span class="attribute">seq</span>=u，u-1是A向B发送的最后一个字节的序号。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PS1：FIN=1表示该报文段是一个连接释放请求。</span><br><span class="line">PS2：seq=u，u-1是A向B发送的最后一个字节的序号。</span><br></pre></td></tr></table></figure>
 
 <h4 id="第二次挥手"><a href="#第二次挥手" class="headerlink" title="第二次挥手"></a>第二次挥手</h4><p>B收到连接释放请求后，会通知相应的应用程序，告诉它A向B这个方向的连接已经释放。此时B进入<code>CLOSE-WAIT</code>状态，并向A发送连接释放的应答，其报文头包含：<br>ACK=1，seq=v，ack=u+1。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PS1：<span class="attribute">ACK</span>=1：除TCP连接请求报文段以外，TCP通信过程中所有数据报的ACK都为1，表示应答。</span><br><span class="line">PS2：<span class="attribute">seq</span>=v，v-1是B向A发送的最后一个字节的序号。</span><br><span class="line">PS3：<span class="attribute">ack</span>=u+1表示希望收到从第u+1个字节开始的报文段，并且已经成功接收了前u个字节。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PS1：ACK=1：除TCP连接请求报文段以外，TCP通信过程中所有数据报的ACK都为1，表示应答。</span><br><span class="line">PS2：seq=v，v-1是B向A发送的最后一个字节的序号。</span><br><span class="line">PS3：ack=u+1表示希望收到从第u+1个字节开始的报文段，并且已经成功接收了前u个字节。</span><br></pre></td></tr></table></figure>
 
 <p>A收到该应答，进入<code>FIN-WAIT-2</code>状态，等待B发送连接释放请求。</p>
 <p>第二次挥手完成后，A到B方向的连接已经释放，B不会再接收数据，A也不会再发送数据。但B到A方向的连接仍然存在，B可以继续向A发送数据。</p>
@@ -697,7 +697,7 @@
 <h3 id="time-wait状态"><a href="#time-wait状态" class="headerlink" title="time_wait状态"></a>time_wait状态</h3><ul>
 <li>也称为<code>2MSL</code>等待状态，<code>MSL=Maximum Segment LifetIme</code>，报文段最大生存时间，根据不同的tcp实现自行设定。常用值为30s，1min，2min。linux一般为30s。</li>
 </ul>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MSL是Maximum Segment Lifetime英文的缩写，中文可以译为“报文最大生存时间”，他是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。因为tcp报文（segment）是ip数据报（datagram）的数据部分，具体称谓请参见《数据在网络各层中的称呼》一文，而ip头中有一个TTL域，TTL是time to live的缩写，中文可以译为“生存时间”，这个生存时间是由源主机设置初始值但不是存的具体时间，而是存储了一个ip数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减<span class="number">1</span>，当此值为<span class="number">0</span>则数据报将被丢弃，同时发送ICMP报文通知源主机。RFC <span class="number">793</span>中规定MSL为<span class="number">2</span>分钟，实际应用中常用的是<span class="number">30</span>秒，<span class="number">1</span>分钟和<span class="number">2</span>分钟等。</span><br><span class="line"></span><br><span class="line">    <span class="number">2</span>MSL即两倍的MSL，TCP的TIME_WAIT状态也称为<span class="number">2</span>MSL等待状态，当TCP的一端发起主动关闭，在发出最后一个ACK包后，即第<span class="number">3</span>次握手完成后发送了第四次握手的ACK包后就进入了TIME_WAIT状态，必须在此状态上停留两倍的MSL时间，等待<span class="number">2</span>MSL时间主要目的是怕最后一个ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后可以再发一个ACK应答包。在TIME_WAIT状态时两端的端口不能使用，要等到<span class="number">2</span>MSL时间结束才可继续使用。当连接处于<span class="number">2</span>MSL等待阶段时任何迟到的报文段都将被丢弃。不过在实际应用中可以通过设置SO_REUSEADDR选项达到不必等待<span class="number">2</span>MSL时间结束再使用此端口。</span><br><span class="line"></span><br><span class="line">TTL与MSL是有关系的但不是简单的相等的关系，MSL要大于等于TTL。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MSL是Maximum Segment Lifetime英文的缩写，中文可以译为“报文最大生存时间”，他是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。因为tcp报文（segment）是ip数据报（datagram）的数据部分，具体称谓请参见《数据在网络各层中的称呼》一文，而ip头中有一个TTL域，TTL是time to live的缩写，中文可以译为“生存时间”，这个生存时间是由源主机设置初始值但不是存的具体时间，而是存储了一个ip数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减1，当此值为0则数据报将被丢弃，同时发送ICMP报文通知源主机。RFC 793中规定MSL为2分钟，实际应用中常用的是30秒，1分钟和2分钟等。</span><br><span class="line"></span><br><span class="line">    2MSL即两倍的MSL，TCP的TIME_WAIT状态也称为2MSL等待状态，当TCP的一端发起主动关闭，在发出最后一个ACK包后，即第3次握手完成后发送了第四次握手的ACK包后就进入了TIME_WAIT状态，必须在此状态上停留两倍的MSL时间，等待2MSL时间主要目的是怕最后一个ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后可以再发一个ACK应答包。在TIME_WAIT状态时两端的端口不能使用，要等到2MSL时间结束才可继续使用。当连接处于2MSL等待阶段时任何迟到的报文段都将被丢弃。不过在实际应用中可以通过设置SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。</span><br><span class="line"></span><br><span class="line">TTL与MSL是有关系的但不是简单的相等的关系，MSL要大于等于TTL。</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>主动关闭的一方发送最后一个ack所处的状态</li>
@@ -1113,7 +1113,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1506,7 +1506,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1517,7 +1517,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

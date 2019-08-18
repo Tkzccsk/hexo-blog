@@ -527,7 +527,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.7k</span>
+                <span title="本文字数">4.4k</span>
               
 
               
@@ -575,7 +575,7 @@
 <p>题外话，这个头域还有一个作用是可以控制不再转发给代理。<br> 他的根源是控制tcp的链接状态。</p>
 </blockquote>
 <p>一个详细的HTTP请求：</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">浏览器与服务器之间使用持续链接方式，将出现下列情况：</span><br><span class="line">（<span class="number">1</span>）HTTP客户机进程发起一个到服务器URL的TCP连接，连接服务器端口是<span class="number">80</span>，这使客户机和服务器上分别有一</span><br><span class="line">个套接字与该链接相关联。</span><br><span class="line">（<span class="number">2</span>）HTTP客户机经过它的套接字接受该请求报文，请求报文中包含了路径名/home.index。</span><br><span class="line">（<span class="number">3</span>）HTTP服务器进程经过他的套接字接受该请求报文，从其存储器（RAM或磁盘）中检索出对象/home.index；</span><br><span class="line">在一个HTTP响应报文中封装该对象，并通过其套接字向客户姐发送响应报文。</span><br><span class="line">（<span class="number">4</span>）HTTP客户机接收响应报文，分析该报文并指出封装的对象是一个HTML文件，并得到对<span class="number">8</span>个JPEG图形和<span class="number">5</span>个视</span><br><span class="line">频的共<span class="number">13</span>个引用。</span><br><span class="line">（<span class="number">5</span>）先传送基本的HTML文件，然后这<span class="number">13</span>个引用对象通过相同的TCP连接一个接一个地传送（流水线技术），直至</span><br><span class="line">该页面上的对象全部传输完毕。其中若传输每个JPEG图形文件用时tj,传输每个视频用时tv，并且忽略了HTML文</span><br><span class="line">件的传输时间，则共用时<span class="number">8</span>tj+<span class="number">5</span>tv,  且tv&gt;&gt;tj。</span><br><span class="line">（<span class="number">6</span>）若一条连接经过一定时间间隔（一个可配置的超时间隔）仍未被使用，则HTTP服务器进程通知TCP断开。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">浏览器与服务器之间使用持续链接方式，将出现下列情况：</span><br><span class="line">（1）HTTP客户机进程发起一个到服务器URL的TCP连接，连接服务器端口是80，这使客户机和服务器上分别有一</span><br><span class="line">个套接字与该链接相关联。</span><br><span class="line">（2）HTTP客户机经过它的套接字接受该请求报文，请求报文中包含了路径名/home.index。</span><br><span class="line">（3）HTTP服务器进程经过他的套接字接受该请求报文，从其存储器（RAM或磁盘）中检索出对象/home.index；</span><br><span class="line">在一个HTTP响应报文中封装该对象，并通过其套接字向客户姐发送响应报文。</span><br><span class="line">（4）HTTP客户机接收响应报文，分析该报文并指出封装的对象是一个HTML文件，并得到对8个JPEG图形和5个视</span><br><span class="line">频的共13个引用。</span><br><span class="line">（5）先传送基本的HTML文件，然后这13个引用对象通过相同的TCP连接一个接一个地传送（流水线技术），直至</span><br><span class="line">该页面上的对象全部传输完毕。其中若传输每个JPEG图形文件用时tj,传输每个视频用时tv，并且忽略了HTML文</span><br><span class="line">件的传输时间，则共用时8tj+5tv,  且tv&gt;&gt;tj。</span><br><span class="line">（6）若一条连接经过一定时间间隔（一个可配置的超时间隔）仍未被使用，则HTTP服务器进程通知TCP断开。</span><br></pre></td></tr></table></figure>
 
 <p>在上述例子中，如果使用了非持续性连接方式，那么每个TCP连接在服务器发送一个对象后关闭，即该连接并不为其他的对象持续下来。这样一共产生了14个TCP连接。</p>
 <blockquote>
@@ -777,7 +777,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1170,7 +1170,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">782k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -1181,7 +1181,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:51</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

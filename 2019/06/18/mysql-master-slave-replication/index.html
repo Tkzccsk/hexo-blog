@@ -111,22 +111,22 @@
 <meta name="keywords" content="Mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql主从复制和读写分离">
-<meta property="og:url" content="http://changsk.top/2019/06/18/mysql-master-slave-replication/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/06/18/mysql-master-slave-replication/index.html">
 <meta property="og:site_name" content="changsk&#39;s blogs">
 <meta property="og:description" content="以下文章参考自：：MySql 主从复制及配置实现  Mysql 主从复制的原理和kafka的partition的replication机制很类似，原理互通，大概是因为这种做法确实可以保证分布式系统的可靠性。  一、什么是Mysql主从复制MySQL主从复制是其最重要的功能之一。主从复制是指一台服务器充当主数据库服务器，另一台或多台服务器充当从数据库服务器，主服务器中的数据自动复制到从服务器之中。对">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://changsk.top/2019/06/18/mysql-master-slave-replication/1.jpg">
-<meta property="og:image" content="http://changsk.top/2019/06/18/mysql-master-slave-replication/2.jpg">
-<meta property="og:image" content="http://changsk.top/2019/06/18/mysql-master-slave-replication/3.jpg">
-<meta property="og:image" content="http://changsk.top/2019/06/18/mysql-master-slave-replication/4.jpg">
-<meta property="og:image" content="http://changsk.top/2019/06/18/mysql-master-slave-replication/5.jpg">
-<meta property="og:image" content="http://changsk.top/2019/06/18/mysql-master-slave-replication/6.jpg">
-<meta property="og:image" content="http://changsk.top/2019/06/18/mysql-master-slave-replication/7.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/mysql-master-slave-replication/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/mysql-master-slave-replication/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/mysql-master-slave-replication/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/mysql-master-slave-replication/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/mysql-master-slave-replication/5.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/mysql-master-slave-replication/6.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/mysql-master-slave-replication/7.jpg">
 <meta property="og:updated_time" content="2019-06-26T14:06:34.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql主从复制和读写分离">
 <meta name="twitter:description" content="以下文章参考自：：MySql 主从复制及配置实现  Mysql 主从复制的原理和kafka的partition的replication机制很类似，原理互通，大概是因为这种做法确实可以保证分布式系统的可靠性。  一、什么是Mysql主从复制MySQL主从复制是其最重要的功能之一。主从复制是指一台服务器充当主数据库服务器，另一台或多台服务器充当从数据库服务器，主服务器中的数据自动复制到从服务器之中。对">
-<meta name="twitter:image" content="http://changsk.top/2019/06/18/mysql-master-slave-replication/1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/18/mysql-master-slave-replication/1.jpg">
 
 
 
@@ -135,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="http://changsk.top/2019/06/18/mysql-master-slave-replication/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/18/mysql-master-slave-replication/">
 
 
 
@@ -420,7 +420,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/18/mysql-master-slave-replication/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/18/mysql-master-slave-replication/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -738,7 +738,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="http://changsk.top/2019/06/18/mysql-master-slave-replication/" title="mysql主从复制和读写分离">http://changsk.top/2019/06/18/mysql-master-slave-replication/</a>
+    <a href="http://yoursite.com/2019/06/18/mysql-master-slave-replication/" title="mysql主从复制和读写分离">http://yoursite.com/2019/06/18/mysql-master-slave-replication/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -869,7 +869,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">176</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -930,7 +930,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">24</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1139,7 +1143,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">98</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">100</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1262,7 +1270,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">787k</span>
+    <span title="站点总字数">800k</span>
   
 
   
@@ -1273,7 +1281,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11:55</span>
+    <span title="站点阅读时长">12:07</span>
   
 </div>
 

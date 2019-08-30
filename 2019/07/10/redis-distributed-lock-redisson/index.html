@@ -111,21 +111,21 @@
 <meta name="keywords" content="Redisson">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis分布式锁之redisson">
-<meta property="og:url" content="http://yoursite.com/2019/07/10/redis-distributed-lock-redisson/index.html">
+<meta property="og:url" content="http://changsk.top/2019/07/10/redis-distributed-lock-redisson/index.html">
 <meta property="og:site_name" content="changsk&#39;s blogs">
 <meta property="og:description" content="原文链接：拜托，面试请不要再问我Redis分布式锁的实现原理【石杉的架构笔记】  写在前面现在面试，一般都会聊聊分布式系统这块的东西。通常面试官都会从服务框架（Spring Cloud、Dubbo）聊起，一路聊到分布式事务、分布式锁、ZooKeeper等知识。 所以咱们这篇文章就来聊聊分布式锁这块知识，具体的来看看Redis分布式锁的实现原理。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/07/10/redis-distributed-lock-redisson/1.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/07/10/redis-distributed-lock-redisson/2.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/07/10/redis-distributed-lock-redisson/3.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/07/10/redis-distributed-lock-redisson/4.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/07/10/redis-distributed-lock-redisson/5.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/07/10/redis-distributed-lock-redisson/6.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/10/redis-distributed-lock-redisson/1.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/10/redis-distributed-lock-redisson/2.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/10/redis-distributed-lock-redisson/3.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/10/redis-distributed-lock-redisson/4.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/10/redis-distributed-lock-redisson/5.jpg">
+<meta property="og:image" content="http://changsk.top/2019/07/10/redis-distributed-lock-redisson/6.jpg">
 <meta property="og:updated_time" content="2019-07-10T02:33:58.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis分布式锁之redisson">
 <meta name="twitter:description" content="原文链接：拜托，面试请不要再问我Redis分布式锁的实现原理【石杉的架构笔记】  写在前面现在面试，一般都会聊聊分布式系统这块的东西。通常面试官都会从服务框架（Spring Cloud、Dubbo）聊起，一路聊到分布式事务、分布式锁、ZooKeeper等知识。 所以咱们这篇文章就来聊聊分布式锁这块知识，具体的来看看Redis分布式锁的实现原理。">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/10/redis-distributed-lock-redisson/1.jpg">
+<meta name="twitter:image" content="http://changsk.top/2019/07/10/redis-distributed-lock-redisson/1.jpg">
 
 
 
@@ -134,7 +134,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/10/redis-distributed-lock-redisson/">
+  <link rel="canonical" href="http://changsk.top/2019/07/10/redis-distributed-lock-redisson/">
 
 
 
@@ -419,7 +419,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/redis-distributed-lock-redisson/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/07/10/redis-distributed-lock-redisson/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -689,7 +689,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="http://yoursite.com/2019/07/10/redis-distributed-lock-redisson/" title="redis分布式锁之redisson">http://yoursite.com/2019/07/10/redis-distributed-lock-redisson/</a>
+    <a href="http://changsk.top/2019/07/10/redis-distributed-lock-redisson/" title="redis分布式锁之redisson">http://changsk.top/2019/07/10/redis-distributed-lock-redisson/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -820,7 +820,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">185</span>
+                    <span class="site-state-item-count">188</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -885,7 +885,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1098,7 +1100,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">100</span>
+                      
+                    
+                    <span class="site-state-item-count">101</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1221,7 +1225,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">800k</span>
+    <span title="站点总字数">807k</span>
   
 
   
@@ -1232,7 +1236,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">12:07</span>
+    <span title="站点阅读时长">12:14</span>
   
 </div>
 

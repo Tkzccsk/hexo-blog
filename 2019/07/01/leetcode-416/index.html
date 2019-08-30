@@ -111,7 +111,7 @@
 <meta name="keywords" content="Algorithm,Leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode_416:Partition Equal Subset Sum">
-<meta property="og:url" content="http://yoursite.com/2019/07/01/leetcode-416/index.html">
+<meta property="og:url" content="http://changsk.top/2019/07/01/leetcode-416/index.html">
 <meta property="og:site_name" content="changsk&#39;s blogs">
 <meta property="og:description" content="Partition Equal Subset Sum 题目链接：https://leetcode.com/problems/partition-equal-subset-sum/">
 <meta property="og:locale" content="zh-CN">
@@ -127,7 +127,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/01/leetcode-416/">
+  <link rel="canonical" href="http://changsk.top/2019/07/01/leetcode-416/">
 
 
 
@@ -412,7 +412,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/01/leetcode-416/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/07/01/leetcode-416/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -584,7 +584,7 @@
 <h2 id="AC代码1"><a href="#AC代码1" class="headerlink" title="AC代码1"></a>AC代码1</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canPartition</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            sum += num;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//和为奇数，直接返回false</span></span><br><span class="line">        <span class="keyword">if</span> ((sum &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        </span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> dfs(nums, sum/<span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    function: 判断在nums数组中，下标从 start开始到数组结束，是否存在和为 target 的子集（可以不连续）</span></span><br><span class="line"><span class="comment">    nums: 原始数组</span></span><br><span class="line"><span class="comment">    target: 目标值，即nums数组中选择子集，使其和为target,</span></span><br><span class="line"><span class="comment">    start: 数目遍历的开始索引</span></span><br><span class="line"><span class="comment">    return: nums数组中存在子集，使其和为target,返回true;否则返回false</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target, <span class="keyword">int</span> start)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(target == <span class="number">0</span>)</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">         </span><br><span class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt; nums.length; i++) &#123;</span><br><span class="line">             <span class="keyword">if</span>(target - nums[i] &lt; <span class="number">0</span>) <span class="keyword">break</span>; <span class="comment">//提前结束</span></span><br><span class="line">             <span class="keyword">if</span>(i != start &amp;&amp; nums[i] == nums[i-<span class="number">1</span>])  <span class="comment">//很关键的一步判断，防止做多余的操作</span></span><br><span class="line">                 <span class="keyword">continue</span>;</span><br><span class="line">             </span><br><span class="line">             <span class="keyword">if</span>(dfs(nums, target - nums[i], i+<span class="number">1</span>)) </span><br><span class="line">                 <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         </span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="AC代码2"><a href="#AC代码2" class="headerlink" title="AC代码2"></a>AC代码2</h2><p>该问题我们可以利用<strong>0-1背包问题</strong>的思想进行求解。</p>
-<p>0-1背包问题请看这里：<a href="http://changsk.top/2019/07/01/0-1-Backpack-problem/" target="_blank" rel="noopener">0-1背包问题</a></p>
+<p>0-1背包问题请看这里：<a href="http://changsk.top/2019/07/01/0-1-Backpack-problem/">0-1背包问题</a></p>
 <p>假设给定元素个数为n的数组nums，数组元素的和为sum，对应于背包问题，等价于有n个物品，每个物品的重量和价值均为nums[i]，背包的限重为sum/2，求解背包中的物品价值是否可以为sum/2？</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">knapSack</span><span class="params">(<span class="keyword">int</span>[] nums,<span class="keyword">int</span> sum)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size = nums.length;</span><br><span class="line">        <span class="comment">//dp[i] 表示下标从0到i(包括i)的所有数中是否存在和为i的子集。</span></span><br><span class="line">        <span class="keyword">boolean</span>[] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[sum + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt;= sum;i ++)&#123;</span><br><span class="line">           dp[i] = i == nums[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; size;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = sum;j &gt;= nums[i];j--)&#123;</span><br><span class="line">                dp[j] = dp[j] || dp[j-nums[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[sum];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canPartition</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> item : nums)&#123;</span><br><span class="line">            sum += item;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//如果数组元素和不是2的倍数，直接返回false</span></span><br><span class="line">        <span class="keyword">if</span> ((sum &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> knapSack(nums,sum/<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -645,7 +645,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="http://yoursite.com/2019/07/01/leetcode-416/" title="leetcode_416:Partition Equal Subset Sum">http://yoursite.com/2019/07/01/leetcode-416/</a>
+    <a href="http://changsk.top/2019/07/01/leetcode-416/" title="leetcode_416:Partition Equal Subset Sum">http://changsk.top/2019/07/01/leetcode-416/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -778,7 +778,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">185</span>
+                    <span class="site-state-item-count">188</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -843,7 +843,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1056,7 +1058,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">100</span>
+                      
+                    
+                    <span class="site-state-item-count">101</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1179,7 +1183,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">800k</span>
+    <span title="站点总字数">807k</span>
   
 
   
@@ -1190,7 +1194,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">12:07</span>
+    <span title="站点阅读时长">12:14</span>
   
 </div>
 

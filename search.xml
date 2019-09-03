@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-51:N-Queens(N-皇后问题)]]></title>
+    <url>%2F2019%2F09%2F03%2Fleetcode-51%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/n-queens/ 题目描述题目难度：Hard The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. Given an integer n, return all distinct solutions to the n-queens puzzle. Each solution contains a distinct board configuration of the n-queens’ placement, where &#39;Q&#39; and &#39;.&#39; both indicate a queen and an empty space respectively. Example: 12345678910111213Input: 4Output: [ [&quot;.Q..&quot;, // Solution 1 &quot;...Q&quot;, &quot;Q...&quot;, &quot;..Q.&quot;], [&quot;..Q.&quot;, // Solution 2 &quot;Q...&quot;, &quot;...Q&quot;, &quot;.Q..&quot;]]Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above. Solution代码来源于Leetcode 123456789101112131415161718192021222324252627282930313233343536public class _51SolveNQueens &#123; int total = 0; //n皇后问题共有多少种可能性 int[] sol; //每一行哪一列可以放皇后 public List&lt;List&lt;String&gt;&gt; solveNQueens(int n) &#123; sol = new int[n]; List&lt;List&lt;String&gt;&gt; res = new ArrayList(); DFS(res, n, 0, 0, 0, 0); return res; &#125; //col，d1，d2 分别表示 row 行中列，右斜对角线，左斜对角线不能放置皇后的位置 private void DFS(List&lt;List&lt;String&gt;&gt; res, int N, int row, int col, int d1, int d2) &#123; int avl = ((1 &lt;&lt; N) - 1) &amp; ~(col | d1 | d2); //available positions, bitmask while (avl != 0) &#123; int p = avl &amp; -avl; //取出p从右往左第一个1的位置 avl ^= p; //相当于 avl = avl - p sol[row] = p; if (row == N - 1) &#123; List&lt;String&gt; list = new ArrayList(); for (int i = 0; i &lt; N; i++) &#123; StringBuilder sb = new StringBuilder(); for (int c = 0; c &lt; N; c++) &#123; if ((1 &lt;&lt; c) == sol[i]) sb.append("Q"); else sb.append("."); &#125; list.add(sb.toString()); &#125; total++; res.add(list); &#125; else &#123; DFS(res, N, row + 1, col | p, (d1 | p) &gt;&gt; 1, (d2 | p) &lt;&lt; 1); &#125; &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[剑指offer:二进制中1的个数]]></title>
+    <url>%2F2019%2F09%2F03%2Fjianzhioffer-num-of-1-binary%2F</url>
+    <content type="text"><![CDATA[题目描述输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。 Solution1JDK 自带的实现 12345public class Solution &#123; public int NumberOf1(int n) &#123; return Integer.bitCount(n); &#125;&#125; 其源码 12345678910111213141516171819/** * Returns the number of one-bits in the two's complement binary * representation of the specified &#123;@code int&#125; value. This function is * sometimes referred to as the &lt;i&gt;population count&lt;/i&gt;. * * @param i the value whose bits are to be counted * @return the number of one-bits in the two's complement binary * representation of the specified &#123;@code int&#125; value. * @since 1.5 */ public static int bitCount(int i) &#123; // HD, Figure 5-2 i = i - ((i &gt;&gt;&gt; 1) &amp; 0x55555555); i = (i &amp; 0x33333333) + ((i &gt;&gt;&gt; 2) &amp; 0x33333333); i = (i + (i &gt;&gt;&gt; 4)) &amp; 0x0f0f0f0f; i = i + (i &gt;&gt;&gt; 8); i = i + (i &gt;&gt;&gt; 16); return i &amp; 0x3f; &#125; Solution2链接：https://www.nowcoder.com/questionTerminal/8ee967e43c2c4ec193b040ea7fbb10b8来源：牛客网 12345678910public class Solution &#123; public int NumberOf1(int n) &#123; int count = 0; while(n!= 0)&#123; count++; n = n &amp; (n - 1); &#125; return count; &#125;&#125; 解释：如果一个整数不为0，那么这个整数至少有一位是1。如果我们把这个整数减1，那么原来处在整数最右边的1就会变为0，原来在1后面的所有的0都会变成1(如果最右边的1后面还有0的话)。其余所有位将不会受到影响。举个例子：一个二进制数1100，从右边数起第三位是处于最右边的一个1。减去1后，第三位变成0，它后面的两位0变成了1，而前面的1保持不变，因此得到的结果是1011.我们发现减1的结果是把最右边的一个1开始的所有位都取反了。这个时候如果我们再把原来的整数和减去1之后的结果做与运算，从原来整数最右边一个1那一位开始所有位都会变成0。如1100&amp;1011=1000.也就是说，把一个整数减去1，再和原整数做与运算，会把该整数最右边一个1变成0.那么一个整数的二进制有多少个1，就可以进行多少次这样的操作。 Solution3n 每次都是无符号右移一位，可避免当n为负数时，最高位总是1，从而引发死循环。 123456789101112public class Solution &#123; public int NumberOf1(int n) &#123; int count = 0; while(n != 0)&#123; if((n &amp; 1) != 0)&#123; count++; &#125; n = n &gt;&gt;&gt; 1; &#125; return count; &#125;&#125;]]></content>
+      <categories>
+        <category>剑指offer</category>
+      </categories>
+      <tags>
+        <tag>剑指offer</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-300:Longest Increasing Subsequence(LIS,最长上升子序列)]]></title>
     <url>%2F2019%2F08%2F29%2Fleetcode-300%2F</url>
     <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/longest-increasing-subsequence/ 题目描述题目难度：Medium Given an unsorted array of integers, find the length of longest increasing subsequence. Example: 123Input: [10,9,2,5,3,7,101,18]Output: 4 Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4. Note: There may be more than one LIS combination, it is only necessary for you to return the length. Your algorithm should run in O(n2) complexity. Follow up: Could you improve it to O(n log n) time complexity? Solution1:动态规划法（时间复杂度O(N^2))设长度为N的数组为{a0，a1, a2, …an-1)，则假定以aj结尾的数组序列的最长递增子序列长度为L(j)，则L(j)={ max(L(i))+1, i&lt;j且a[i]&lt;a[j] }。也就是说，我们需要遍历在j之前的所有位置i(从0到j-1)，找出满足条件a[i]&lt;a[j]的L(i)，求出max(L(i))+1即为L(j)的值。最后，我们遍历所有的L(j)（从0到N-1），找出最大值即为最大递增子序列。时间复杂度为O(N^2)。 例如给定的数组为{5，6，7，1，2，8}，则L(0)=1, L(1)=2, L(2)=3, L(3)=1, L(4)=2, L(5)=4。所以该数组最长递增子序列长度为4，序列为{5，6，7，8}。 1234567891011121314151617class Solution &#123; public int lengthOfLIS(int[] nums) &#123; int max = 0; if(nums == null || nums.length == 0) return max; int len = nums.length; int[] dp = new int[len]; for(int i = 1;i &lt; len;i++) &#123; for (int j = 0; j &lt; i; j++) &#123; if(nums[j] &lt; nums[i])&#123; dp[i] = Math.max(dp[i], dp[j] + 1); max = Math.max(max, dp[i]); &#125; &#125; &#125; return max + 1; &#125;&#125; Solution2:O(NlgN）算法 假设存在一个序列d[1..9] ={ 2，1 ，5 ，3 ，6，4， 8 ，9， 7}，可以看出来它的LIS长度为5。下面一步一步试着找出它。我们定义一个序列B，然后令 i = 1 to 9 逐个考察这个序列。此外，我们用一个变量Len来记录现在最长算到多少了 首先，把d[1]有序地放到B里，令B[1] = 2，就是说当只有1一个数字2的时候，长度为1的LIS的最小末尾是2。这时Len=1 然后，把d[2]有序地放到B里，令B[1] = 1，就是说长度为1的LIS的最小末尾是1，d[1]=2已经没用了，很容易理解吧。这时Len=1 接着，d[3] = 5，d[3]&gt;B[1]，所以令B[1+1]=B[2]=d[3]=5，就是说长度为2的LIS的最小末尾是5，很容易理解吧。这时候B[1..2] = 1, 5，Len＝2 再来，d[4] = 3，它正好加在1,5之间，放在1的位置显然不合适，因为1小于3，长度为1的LIS最小末尾应该是1，这样很容易推知，长度为2的LIS最小末尾是3，于是可以把5淘汰掉，这时候B[1..2] = 1, 3，Len = 2 继续，d[5] = 6，它在3后面，因为B[2] = 3, 而6在3后面，于是很容易可以推知B[3] = 6, 这时B[1..3] = 1, 3, 6，还是很容易理解吧？ Len = 3 了噢。 第6个, d[6] = 4，你看它在3和6之间，于是我们就可以把6替换掉，得到B[3] = 4。B[1..3] = 1, 3, 4， Len继续等于3 第7个, d[7] = 8，它很大，比4大，嗯。于是B[4] = 8。Len变成4了 第8个, d[8] = 9，得到B[5] = 9，嗯。Len继续增大，到5了。 最后一个, d[9] = 7，它在B[3] = 4和B[4] = 8之间，所以我们知道，最新的B[4] =7，B[1..5] = 1, 3, 4, 7, 9，Len = 5。 于是我们知道了LIS的长度为5。 注意，这个1,3,4,7,9不是LIS，它只是存储的对应长度LIS的最小末尾。有了这个末尾，我们就可以一个一个地插入数据。虽然最后一个d[9] = 7更新进去对于这组数据没有什么意义，但是如果后面再出现两个数字 8 和 9，那么就可以把8更新到d[5], 9更新到d[6]，得出LIS的长度为6。 然后应该发现一件事情了：在B中插入数据是有序的，而且是进行替换而不需要挪动——也就是说，我们可以使用二分查找，将每一个数字的插入时间优化到O(logN)~于是算法的时间复杂度就降低到了O(NlogN)～！ 12345678910111213141516171819202122232425262728293031323334class Solution &#123; public static int lengthOfLIS(int[] nums) &#123; int max = 0; if(nums == null || nums.length == 0) return max; int[] arr = new int[nums.length]; int index; arr[0] = nums[0]; int len = 1; for(int i = 1;i &lt; nums.length;i++) &#123; if(arr[len - 1] &lt; nums[i]) arr[len++] = nums[i]; else&#123; index = insertLocation(arr, len - 1,nums[i]); arr[index] = nums[i]; &#125; &#125; return len; &#125; /** * 返回 target 在 arr 数组[0, end]中的插入位置 */ private static int insertLocation(int[] arr, int end, int target)&#123; int left = 0; int right = end; int mid; while(left &lt;= right)&#123; mid = left + ((right - left) &gt;&gt; 1); if(arr[mid] &gt; target) right = mid - 1; else if(arr[mid] &lt; target) left = mid + 1; else return mid; &#125; return left; &#125;&#125; 参考：最长递增子序列]]></content>
@@ -1557,8 +1581,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>HashMap</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -1712,8 +1736,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>HashMap</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -2109,11 +2133,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Error JAVA_HOME is incorrectly set]]></title>
-    <url>%2F2019%2F06%2F11%2FError_JAVA_HOME_is%20_incorrectly_set%2F</url>
-    <content type="text"><![CDATA[在安装、调试、运行Hexo的过程中，出现了以下错误： Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd 然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的： 然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量： 发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图： 或者也可以将jdk装到其他不存在空格的目录下。]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[hexo 的常用命令]]></title>
     <url>%2F2019%2F06%2F11%2Fhexo-command%2F</url>
     <content type="text"><![CDATA[常用 hexo 命令hexo new “postName” #新建文章hexo new page “pageName” #新建页面hexo generate #生成静态页面至public目录hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）hexo deploy #将.deploy目录部署到GitHubhexo help #查看帮助hexo version #查看Hexo的版本 缩写hexo n == hexo newhexo g == hexo generatehexo s == hexo serverhexo d == hexo deploy 组合命令：hexo s -g #生成并本地预览hexo d -g #生成并上传hexo clear # 删除无用 tags 和 categorieshexo clean &amp; hexo d -g # 清除缓存 生成静态页面并发布 给文章添加标签和分类1234567title: hexo 的常用命令date: 2019-06-11 11:43:56tags: - hexo # 文章标签- aaa- bbbcategories: hexo # 该文章类别为 categories\hexo 效果图：]]></content>
@@ -2123,6 +2142,11 @@
       <tags>
         <tag>hexo</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Error JAVA_HOME is incorrectly set]]></title>
+    <url>%2F2019%2F06%2F11%2FError_JAVA_HOME_is%20_incorrectly_set%2F</url>
+    <content type="text"><![CDATA[在安装、调试、运行Hexo的过程中，出现了以下错误： Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd 然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的： 然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量： 发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图： 或者也可以将jdk装到其他不存在空格的目录下。]]></content>
   </entry>
   <entry>
     <title><![CDATA[Hello World]]></title>

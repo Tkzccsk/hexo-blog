@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[小船过河]]></title>
+    <url>%2F2019%2F09%2F11%2FBoat-crossing-the-river%2F</url>
+    <content type="text"><![CDATA[本文转载自：小船过河问题 小船过河问题POJ1700是一道经典的贪心算法例题。 题目大意是只有一艘船，能乘2人，船的运行速度为2人中较慢一人的速度，过去后还需一个人把船划回来，问把n个人运到对岸，最少需要多久。 先将所有人过河所需的时间按照升序排序，我们考虑把单独过河所需要时间最多的两个旅行者送到对岸去，有两种方式： 最快的和次快的过河，然后最快的将船划回来；次慢的和最慢的过河，然后次快的将船划回来，所需时间为：t[0]+2*t[1]+t[n-1]; 最快的和最慢的过河，然后最快的将船划回来，最快的和次慢的过河，然后最快的将船划回来，所需时间为：2*t[0]+t[n-2]+t[n-1]。 算一下就知道，除此之外的其它情况用的时间一定更多。每次都运送耗时最长的两人而不影响其它人，问题具有贪心子结构的性质。 1234567891011121314151617181920212223242526272829303132#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;bool cmp(int const &amp;x, int const &amp;y)&#123; return x &lt; y;//由小到大排列&#125;int main()&#123; int N = 8;//一共N个人要过河 int spendTime[8] = &#123; 3,7,5,9,4,2,6,1 &#125;;//每个人过河的速度 int sum = 0; sort(spendTime, spendTime + 8, cmp); while (N&gt;3) &#123; sum = min(sum + spendTime[1]* 2 + spendTime[0] + spendTime[N - 1],//第一种过河方式 sum + spendTime[0] * 2 + spendTime[N - 1] + spendTime[N - 2]);//第二种过河方式 N -= 2;//两个两个的运人 &#125; if (N == 3) sum += spendTime[0] + spendTime[1] + spendTime[2]; else if (N == 2)sum += spendTime[1]; else sum += spendTime[0]; cout &lt;&lt; "一共用时：" &lt;&lt; sum &lt;&lt; endl; system("pause"); return 0;&#125;]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-230:Kth Smallest Element in a BST(二叉搜索树中第k小的结点)]]></title>
     <url>%2F2019%2F09%2F11%2Fleetcode-230%2F</url>
     <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/kth-smallest-element-in-a-bst/ 题目描述题目难度：Medium Given a binary search tree, write a function kthSmallest to find the kth smallest element in it. Note:You may assume k is always valid, 1 ≤ k ≤ BST’s total elements. Example 1: 1234567Input: root = [3,1,4,null,2], k = 1 3 / \ 1 4 \ 2Output: 1 Example 2: 123456789Input: root = [5,3,6,2,4,null,null,1], k = 3 5 / \ 3 6 / \ 2 4 / 1Output: 3 Follow up:What if the BST is modified (insert/delete operations) often and you need to find the kth smallest frequently? How would you optimize the kthSmallest routine? Solution112345678910111213141516171819202122232425262728/** * Definition for a binary tree node. * public class TreeNode &#123; * int val; * TreeNode left; * TreeNode right; * TreeNode(int x) &#123; val = x; &#125; * &#125; */class Solution &#123; int res = 0; int cur = 0; public int kthSmallest(TreeNode root, int k) &#123; helper(root, k); return res; &#125; public void helper(TreeNode root, int k) &#123; if(root == null) return; helper(root.left, k); cur++; if(cur == k) &#123; res = root.val; return; &#125; helper(root.right, k); &#125;&#125;]]></content>
@@ -92,8 +103,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -139,8 +150,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -305,8 +316,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -568,8 +579,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -580,8 +591,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -592,8 +603,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -616,8 +627,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -628,8 +639,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -814,8 +825,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -826,8 +837,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -850,8 +861,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -993,8 +1004,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1066,8 +1077,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1186,8 +1197,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1198,8 +1209,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1210,8 +1221,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1242,8 +1253,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1265,8 +1276,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1277,8 +1288,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1289,8 +1300,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1301,8 +1312,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1313,8 +1324,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1325,8 +1336,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1384,8 +1395,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1454,8 +1465,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1466,8 +1477,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1478,8 +1489,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1490,8 +1501,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>
@@ -1515,8 +1526,8 @@
         <category>剑指offer</category>
       </categories>
       <tags>
-        <tag>剑指offer</tag>
         <tag>Algorithm</tag>
+        <tag>剑指offer</tag>
       </tags>
   </entry>
   <entry>

@@ -409,7 +409,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/20/java-four-reference/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/24/mss-mtu/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -429,7 +429,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/20/java-four-reference/" class="post-title-link" itemprop="url">java四种引用类型及其应用场景</a>
+                <a href="/2019/06/24/mss-mtu/" class="post-title-link" itemprop="url">MSS和MTU的关系</a>
               
             
           </h1>
@@ -454,7 +454,7 @@
                 
               
 
-              <time title="创建时间：2019-06-20 19:41:44" itemprop="dateCreated datePublished" datetime="2019-06-20T19:41:44+08:00">2019-06-20</time>
+              <time title="创建时间：2019-06-24 22:17:47" itemprop="dateCreated datePublished" datetime="2019-06-24T22:17:47+08:00">2019-06-24</time>
             
 
             
@@ -471,7 +471,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-21 11:03:41" itemprop="dateModified" datetime="2019-06-21T11:03:41+08:00">2019-06-21</time>
+                <time title="修改时间：2019-07-08 10:11:03" itemprop="dateModified" datetime="2019-07-08T10:11:03+08:00">2019-07-08</time>
               
             
           </span>
@@ -488,7 +488,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机网络/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a></span>
 
                 
                 
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">13k</span>
+                <span title="本文字数">568</span>
               
 
               
@@ -531,7 +531,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">12 分钟</span>
+                <span title="阅读时长">1 分钟</span>
               
             </div>
           
@@ -552,25 +552,17 @@
 
       
         
-          <p>java内存管理分为内存分配和内存回收，都不需要程序员负责，垃圾回收的机制主要是看对象是否有引用指向该对象。</p>
-<p>java对象的引用包括<code>强引用</code>，<code>软引用</code>，<code>弱引用</code>，<code>虚引用</code></p>
-<p>Java中提供这四种引用类型主要有两个目的：</p>
-<ul>
-<li><p>第一是可以让程序员通过代码的方式决定某些对象的生命周期；</p>
-</li>
-<li><p>第二是有利于JVM进行垃圾回收。</p>
-          <!--noindex-->
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/06/20/java-four-reference/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
+            <p><code>MTU</code>（Maximum Transmission Unit）最大传输单元，在TCP/IP协议族中，指的是<strong>IP数据报能经过一个物理网络的最大报文长度</strong>，其中包括了IP首部(从20个字节到60个字节不等)，一般以太网的MTU设为1500字节，加上以太帧首部的长度14字节，也就是一个以太帧不会超过1500+14 = 1514字节。</p>
+<p><code>MSS</code>（Maximum Segment Size)，最大报文段大小，指的是<strong>TCP报文（一种IP协议的上层协议）的最大数据报长度，其中不包括TCP首部长度</strong>。MSS由TCP链接的过程中由双方协商得出，其中SYN字段中的选项部分包括了这个信息。如果MSS+TCP首部+IP首部大于MTU，那么IP报文就会存在分片，如果小于，那么就可以不需要分片正常发送。</p>
+<blockquote>
+<p>参考: <a href="https://www.cnblogs.com/JenningsMao/p/9487252.html" target="_blank" rel="noopener">TCP 中的Sequence Number</a></p>
+</blockquote>
+
           
-          <!--/noindex-->
         
       
-    </li></ul></div>
+    </div>
 
     
 
@@ -623,7 +615,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/20/java-ThreadLocal/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/24/get-post/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -643,7 +635,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/20/java-ThreadLocal/" class="post-title-link" itemprop="url">java中ThreadLocal原理</a>
+                <a href="/2019/06/24/get-post/" class="post-title-link" itemprop="url">HTTP方法GET和POST的区别</a>
               
             
           </h1>
@@ -668,12 +660,24 @@
                 
               
 
-              <time title="创建时间：2019-06-20 16:12:55 / 修改时间：17:57:36" itemprop="dateCreated datePublished" datetime="2019-06-20T16:12:55+08:00">2019-06-20</time>
+              <time title="创建时间：2019-06-24 17:27:28" itemprop="dateCreated datePublished" datetime="2019-06-24T17:27:28+08:00">2019-06-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-15 15:02:15" itemprop="dateModified" datetime="2019-08-15T15:02:15+08:00">2019-08-15</time>
               
             
           </span>
@@ -690,7 +694,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机网络/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a></span>
 
                 
                 
@@ -719,7 +723,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">30k</span>
+                <span title="本文字数">3.6k</span>
               
 
               
@@ -733,7 +737,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">27 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -754,14 +758,11 @@
 
       
         
-          <blockquote>
-<p>本文转发自<a href="http://www.jasongj.com/" target="_blank" rel="noopener"><strong>技术世界</strong></a>，<a href="http://www.jasongj.com/java/threadlocal/" target="_blank" rel="noopener">原文链接</a>　<a href="http://www.jasongj.com/java/threadlocal/" target="_blank" rel="noopener">http://www.jasongj.com/java/threadlocal/</a></p>
-</blockquote>
-<h1 id="ThreadLocal解决什么问题"><a href="#ThreadLocal解决什么问题" class="headerlink" title="ThreadLocal解决什么问题"></a>ThreadLocal解决什么问题</h1><p>由于 ThreadLocal 支持范型，如 ThreadLocal&lt; StringBuilder &gt;，为表述方便，后文用 <strong>变量</strong> 代表 ThreadLocal 本身，而用 <strong>实例</strong> 代表具体类型（如 StringBuidler ）的实例。</p>
+          <p>当第一次面试的时候被问到说一说<code>get和post有什么区别</code>。当时就说了一大堆很普遍很基础的答案，什么post比get安全，get比post传的少什么的。然而，面试官问，还有呢？</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/06/20/java-ThreadLocal/#more" rel="contents">
+              <a class="btn" href="/2019/06/24/get-post/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -822,7 +823,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/20/java-synchronized/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/24/java-CopyOnWriteArraylist/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -842,7 +843,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/20/java-synchronized/" class="post-title-link" itemprop="url">java关键字synchronized</a>
+                <a href="/2019/06/24/java-CopyOnWriteArraylist/" class="post-title-link" itemprop="url">java中的CopyOnWriteArraylist</a>
               
             
           </h1>
@@ -867,7 +868,7 @@
                 
               
 
-              <time title="创建时间：2019-06-20 13:58:07" itemprop="dateCreated datePublished" datetime="2019-06-20T13:58:07+08:00">2019-06-20</time>
+              <time title="创建时间：2019-06-24 17:21:21" itemprop="dateCreated datePublished" datetime="2019-06-24T17:21:21+08:00">2019-06-24</time>
             
 
             
@@ -884,7 +885,621 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-04 08:50:27" itemprop="dateModified" datetime="2019-07-04T08:50:27+08:00">2019-07-04</time>
+                <time title="修改时间：2019-08-04 20:35:27" itemprop="dateModified" datetime="2019-08-04T20:35:27+08:00">2019-08-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">17k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">16 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>转载自：<a href="https://www.xttblog.com/?p=4006" target="_blank" rel="noopener">https://www.xttblog.com/?p=4006</a></p>
+<h2 id="CopyOnWriteArrayList简介"><a href="#CopyOnWriteArrayList简介" class="headerlink" title="CopyOnWriteArrayList简介"></a>CopyOnWriteArrayList简介</h2><p><code>CopyOnWriteArrayList</code>是一个并发容器。有很多人称它是线程安全的，我认为这句话不严谨，缺少一个前提条件，那就是非复合场景下操作它是线程安全的。</p>
+<p><code>Copy-On-Write 简称 COW</code>，是一种用于程序设计中的优化策略。其基本思路是，<code>从一开始大家都在共享同一个内容，当某个人想要修改这个内容的时候，才会真正把内容 Copy 出去形成一个新的内容然后再改，这是一种延时懒惰策略。</code></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/24/java-CopyOnWriteArraylist/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/24/java-Thread-safe-classes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/24/java-Thread-safe-classes/" class="post-title-link" itemprop="url">java中常用的线程安全的类</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-24 17:15:46 / 修改时间：17:20:25" itemprop="dateCreated datePublished" datetime="2019-06-24T17:15:46+08:00">2019-06-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">6.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><p>就是当多线程访问时，采用了<strong>加锁</strong>的机制；即当一个线程访问该类的某个数据时，会对这个数据进行保护，其他线程不能对其访问，直到该线程读取完之后，其他线程才可以使用。防止出现数据不一致或者数据被污染的情况。<br>线程不安全：就是不提供数据访问时的数据保护，多个线程能够同时操作某个数据，从而出现数据不一致或者数据污染的情况。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/24/java-Thread-safe-classes/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/23/TCP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/23/TCP/" class="post-title-link" itemprop="url">TCP协议详解</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-23 11:38:00" itemprop="dateCreated datePublished" datetime="2019-06-23T11:38:00+08:00">2019-06-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-08 10:12:58" itemprop="dateModified" datetime="2019-07-08T10:12:58+08:00">2019-07-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机网络/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">21k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">20 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>小到基于应用层做网络开发，大到生活中无处不在的网络。我们在享受这个便利的时候，没有人会关心它如此牢固的底层基石是如何搭建的。而这些基石中很重要的一环就是<code>tcp</code>协议。翻看一下“三次握手”和“四次挥手”，本以为这就是<code>tcp</code>了，其实不然。它仅仅解决了<code>连接和关闭</code>的问题，传输的问题才是<code>tcp</code>协议更重要，更难，更复杂的问题。回头看<code>tcp</code>协议的原理，会发现它为了承诺上层数据传输的“可靠”，不知要应对多少网络中复杂多变的情况。简单直白列举一下：</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/23/TCP/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/21/java8-HashMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/21/java8-HashMap/" class="post-title-link" itemprop="url">java8中的HashMap</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-21 23:29:32" itemprop="dateCreated datePublished" datetime="2019-06-21T23:29:32+08:00">2019-06-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 16:10:52" itemprop="dateModified" datetime="2019-07-09T16:10:52+08:00">2019-07-09</time>
               
             
           </span>
@@ -965,11 +1580,12 @@
 
       
         
-          <p><strong>线程安全</strong>是并发编程中的重要关注点，应该注意到的是，造成线程安全问题的主要诱因有两点，一是存在<strong>共享数据</strong>(也称<strong>临界资源</strong>)，二是<strong>存在多条线程共同操作共享数据</strong>。因此为了解决这个问题，我们可能需要这样一个方案，当存在多个线程操作共享数据时，需要<strong>保证同一时刻有且只有一个线程在操作共享数据</strong>，其他线程必须等到该线程处理完数据后再进行，这种方式有个高大上的名称叫<strong>互斥锁</strong>，即能达到互斥访问目的的锁，也就是说当一个共享数据被当前正在访问的线程加上互斥锁后，在同一个时刻，其他线程只能处于<strong>等待的状态</strong>，直到当前线程处理完毕释放该锁。在 Java 中，<strong>关键字 synchronized可以保证在同一个时刻，只有一个线程可以执行某个方法或者某个代码块</strong>(主要是对方法或者代码块中存在共享数据的操作)，同时我们还应该注意到synchronized另外一个重要的作用，<strong>synchronized可保证一个线程的变化(主要是共享数据的变化)被其他线程所看到（保证可见性，完全可以替代Volatile功能）</strong>，这点确实也是很重要的。</p>
+          <p>本文转载自：<a href="https://zhuanlan.zhihu.com/p/21673805" target="_blank" rel="noopener">Java 8系列之重新认识HashMap</a></p>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><strong>摘要</strong></h1><p>HashMap是Java程序员使用频率最高的用于映射(键值对)处理的数据类型。随着JDK（Java Developmet Kit）版本的更新，JDK1.8对HashMap底层的实现进行了优化，例如引入红黑树的数据结构和扩容的优化等。本文结合JDK1.7和JDK1.8的区别，深入探讨HashMap的结构实现和功能原理。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/06/20/java-synchronized/#more" rel="contents">
+              <a class="btn" href="/2019/06/21/java8-HashMap/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1030,7 +1646,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/20/java-AQS/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/21/page-replacement-algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -1050,7 +1666,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/20/java-AQS/" class="post-title-link" itemprop="url">java之AQS</a>
+                <a href="/2019/06/21/page-replacement-algorithm/" class="post-title-link" itemprop="url">操作系统之页面置换算法</a>
               
             
           </h1>
@@ -1075,24 +1691,208 @@
                 
               
 
-              <time title="创建时间：2019-06-20 10:04:45" itemprop="dateCreated datePublished" datetime="2019-06-20T10:04:45+08:00">2019-06-20</time>
+              <time title="创建时间：2019-06-21 20:28:40 / 修改时间：21:02:01" itemprop="dateCreated datePublished" datetime="2019-06-21T20:28:40+08:00">2019-06-21</time>
             
 
             
               
 
               
-                
-                <span class="post-meta-divider">|</span>
-                
+            
+          </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">更新于</span>
+                  <span class="post-meta-item-text">本文字数：</span>
                 
-                <time title="修改时间：2019-07-23 18:31:35" itemprop="dateModified" datetime="2019-07-23T18:31:35+08:00">2019-07-23</time>
+                <span title="本文字数">3.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>操作系统为何要进行页面置换呢？这是由于操作系统给<code>用户态</code>的应用程序提供了一个虚拟的“大容量”内存空间，而实际的物理内存空间又没有那么大。所以操作系统就就“瞒着”应用程序，只把应用程序中“常用”的数据和代码放在<code>物理内存</code>中，而不常用的数据和代码放在了<code>硬盘</code>这样的存储介质上。如果应用程序访问的是“常用”的数据和代码，那么操作系统已经放置在内存中了，不会出现什么问题。但当应用程序访问它认为应该在内存中的的数据或代码时，如果这些数据或代码不在内存中，会产生<code>缺页异常</code>。这时，操作系统必须能够应对这种缺页异常，即尽快把应用程序当前需要的数据或代码放到内存中来，然后重新执行应用程序产生异常的访存指令。如果在把硬盘中对应的数据或代码调入内存前，操作系统发现物理内存已经没有空闲空间了，这时操作系统必须把它认为“不常用”的页换出到磁盘上去，以腾出内存空闲空间给应用程序所需的数据或代码。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/21/page-replacement-algorithm/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/21/java-future-futuretask/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/21/java-future-futuretask/" class="post-title-link" itemprop="url">java中的Future和FutureTask</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-21 19:46:51 / 修改时间：20:09:49" itemprop="dateCreated datePublished" datetime="2019-06-21T19:46:51+08:00">2019-06-21</time>
+            
+
+            
+              
+
               
             
           </span>
@@ -1138,7 +1938,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">53k</span>
+                <span title="本文字数">20k</span>
               
 
               
@@ -1152,7 +1952,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">48 分钟</span>
+                <span title="阅读时长">18 分钟</span>
               
             </div>
           
@@ -1173,14 +1973,11 @@
 
       
         
-          <blockquote>
-<p>简单解释一下J.U.C，是JDK中提供的并发工具包,<code>java.util.concurrent</code>。里面提供了很多并发编程中很常用的实用工具类，比如<strong>atomic原子操作</strong>、比如<strong>lock同步锁</strong>、fork/join等。</p>
-</blockquote>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>谈到并发，不得不谈ReentrantLock；而谈到ReentrantLock，不得不<code>AbstractQueuedSynchronizer（AQS）</code>！</p>
+          <h2 id="Callable-接口"><a href="#Callable-接口" class="headerlink" title="Callable 接口"></a>Callable<v> 接口</v></h2><p>线程的创建方式中有两种，一种是实现<code>Runnable</code>接口，另一种是继承<code>Thread</code>，但是这两种方式都有个缺点，那就是在<strong>任务执行完成之后无法获取返回结果</strong>，于是就有了<code>Callable</code>接口，<code>Future</code>接口与<code>FutureTask</code>类的配和取得返回的结果。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/06/20/java-AQS/#more" rel="contents">
+              <a class="btn" href="/2019/06/21/java-future-futuretask/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1241,7 +2038,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/20/redis-data-type/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/21/lur-redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -1261,7 +2058,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/20/redis-data-type/" class="post-title-link" itemprop="url">Redis数据类型</a>
+                <a href="/2019/06/21/lur-redis/" class="post-title-link" itemprop="url">LRU原理和Redis实现</a>
               
             
           </h1>
@@ -1286,7 +2083,7 @@
                 
               
 
-              <time title="创建时间：2019-06-20 09:31:16 / 修改时间：16:11:31" itemprop="dateCreated datePublished" datetime="2019-06-20T09:31:16+08:00">2019-06-20</time>
+              <time title="创建时间：2019-06-21 18:15:19 / 修改时间：19:23:17" itemprop="dateCreated datePublished" datetime="2019-06-21T18:15:19+08:00">2019-06-21</time>
             
 
             
@@ -1337,7 +2134,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">8.5k</span>
+                <span title="本文字数">23k</span>
               
 
               
@@ -1351,7 +2148,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">8 分钟</span>
+                <span title="阅读时长">21 分钟</span>
               
             </div>
           
@@ -1372,11 +2169,12 @@
 
       
         
-          <p>Redis支持五种数据类型：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。</p>
+          <p>文章转载自：<a href="https://zhuanlan.zhihu.com/p/34133067" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34133067</a></p>
+<h2 id="LRU简介"><a href="#LRU简介" class="headerlink" title="LRU简介"></a>LRU简介</h2><p><code>LRU</code>是内存不够的场景下，淘汰旧内容的一种策略。<code>LRU</code> ,<code>Least Recent Used</code>，淘汰掉最不经常使用的。可以稍微多补充两句，因为计算机体系结构中，最大的最可靠的存储是硬盘，它容量很大，并且内容可以固化，但是访问速度很慢，所以需要把使用的内容载入内存中；内存速度很快，但是容量有限，并且断电后内容会丢失，并且为了进一步提升性能，还有CPU内部的 <code>L1 Cache</code>，<code>L2 Cache</code>等概念。因为速度越快的地方，它的单位成本越高，容量越小，新的内容不断被载入，旧的内容肯定要被淘汰，所以就有这样的使用背景。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/06/20/redis-data-type/#more" rel="contents">
+              <a class="btn" href="/2019/06/21/lur-redis/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1437,7 +2235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/19/redis-persistence/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/21/java-WeakHashMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -1457,7 +2255,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/19/redis-persistence/" class="post-title-link" itemprop="url">redis持久化</a>
+                <a href="/2019/06/21/java-WeakHashMap/" class="post-title-link" itemprop="url">java中的WeakHashMap</a>
               
             
           </h1>
@@ -1482,24 +2280,12 @@
                 
               
 
-              <time title="创建时间：2019-06-19 21:51:19" itemprop="dateCreated datePublished" datetime="2019-06-19T21:51:19+08:00">2019-06-19</time>
+              <time title="创建时间：2019-06-21 10:42:45 / 修改时间：11:30:54" itemprop="dateCreated datePublished" datetime="2019-06-21T10:42:45+08:00">2019-06-21</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-20 20:10:36" itemprop="dateModified" datetime="2019-08-20T20:10:36+08:00">2019-08-20</time>
               
             
           </span>
@@ -1516,7 +2302,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
@@ -1545,7 +2331,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">18k</span>
+                <span title="本文字数">19k</span>
               
 
               
@@ -1559,7 +2345,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">16 分钟</span>
+                <span title="阅读时长">17 分钟</span>
               
             </div>
           
@@ -1580,832 +2366,14 @@
 
       
         
-          <h1 id="Redis持久化概述"><a href="#Redis持久化概述" class="headerlink" title="Redis持久化概述"></a>Redis持久化概述</h1><p>Redis是一种高级key-value数据库。它跟memcached类似，不过<strong>数据可以持久化</strong>，而且<strong>支持的数据类型很丰富</strong>。有<strong>字符串</strong>，<strong>链表</strong>，<strong>集合</strong>和<strong>有序集合</strong>和<strong>map</strong>。支持<strong>在服务器端计算集合的并，交和补集(difference)</strong>等，还支持多种<strong>排序功能</strong>。所以Redis也可以被看成是一个数据结构服务器。</p>
-<p>Redis的所有数据都是保存在内存中，然后不定期的通过<strong>异步方式</strong>保存到磁盘上(这称为“<strong>半持久化模式</strong>”)；也可以把每一次数据变化都写入到一个append only file(aof)里面(这称为“<strong>全持久化模式</strong>”)。 </p>
-<p>由于Redis的数据都存放在内存中，如果没有配置持久化，redis重启后数据就全丢失了，于是需要开启redis的持久化功能，将数据保存到磁盘上，当redis重启后，可以从磁盘中恢复数据。redis提供两种方式进行持久化，一种是<strong>RDB持久化</strong>（<strong>原理是将Reids在内存中的数据库记录定时dump到磁盘上的RDB持久化</strong>），另外一种是<strong>AOF（append only file）</strong>持久化（<strong>原理是将Reids的操作日志以追加的方式写入文件</strong>）。</p>
-<p>持久化的功能：Redis是<strong>内存数据库</strong>，<strong>数据都是存储在内存</strong>中，为了避免进程退出导致数据的永久丢失，需要定期将Redis中的数据以某种形式(<strong>数据</strong>或<strong>命令</strong>)从内存保存到硬盘；当下次Redis重启时，利用持久化文件实现数据恢复。除此之外，为了进行<strong>灾难备份</strong>，可以将持久化文件拷贝到一个远程位置。</p>
-<p>Redis持久化分为RDB持久化和AOF持久化：<strong>前者将当前数据保存到硬盘，后者则是将每次执行的写命令保存到硬盘</strong>（类似于<strong>MySQL的binlog</strong>）；由于AOF持久化的实时性更好，即当进程意外退出时丢失的数据更少，因此AOF是目前主流的持久化方式，不过RDB持久化仍然有其用武之地。</p>
-<p>Redis持久化的两种方式：</p>
-<ul>
-<li><p>RDB：在<strong>指定的时间间隔</strong>能对数据进行<strong>快照存储</strong>。</p>
-</li>
-<li><p>AOF：<strong>记录每次对服务器写的操作</strong>,当服务器重启的时候会重新执行这些命令来恢复原始的数据。</p>
+          <h2 id="什么是WeakHashMap？"><a href="#什么是WeakHashMap？" class="headerlink" title="什么是WeakHashMap？"></a>什么是WeakHashMap？</h2><p><code>WeakHashMap</code> 继承于<code>AbstractMap</code>，实现了<code>Map</code>接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class WeakHashMap&lt;K,V&gt;extends AbstractMap&lt;K,V&gt;implements Map&lt;K,V&gt;</span><br></pre></td></tr></table></figure>
+
+<p>和<code>HashMap</code>一样，<code>WeakHashMap</code> 也是一个<strong>散列表</strong>，它存储的内容也是<strong>键值对(key-value)映射</strong>，而且<strong>键和值都可以是null</strong>。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/06/19/redis-persistence/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/19/udisk-capacity-small/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changsk">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="changsk's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/19/udisk-capacity-small/" class="post-title-link" itemprop="url">消失的U盘内存</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-19 20:57:42 / 修改时间：21:40:17" itemprop="dateCreated datePublished" datetime="2019-06-19T20:57:42+08:00">2019-06-19</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/others/" itemprop="url" rel="index"><span itemprop="name">others</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">677</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天为了给<code>mac book pro</code>安装双系统<code>ubuntu 16.04</code>，用U盘制作安装启动盘。安装的过程还算顺利，唯一让人难受的地方进入安装界面之后 <code>mbp</code>的触摸板不能用，只能用有线的鼠标和键盘。安装好了之后发现32G容量的U盘只有2M多了。应该是制作安装启动盘的时候，把很大一部分内存隐藏了起来，所以导致U盘可见容量减小。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/06/19/udisk-capacity-small/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/19/mysql-partition/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changsk">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="changsk's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/19/mysql-partition/" class="post-title-link" itemprop="url">mysql分片、分区、分表、分库</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-19 15:41:49" itemprop="dateCreated datePublished" datetime="2019-06-19T15:41:49+08:00">2019-06-19</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-26 22:06:51" itemprop="dateModified" datetime="2019-06-26T22:06:51+08:00">2019-06-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">9.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">9 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="一、Scale-Out（横向扩展）-Scale-Up（纵向扩展）"><a href="#一、Scale-Out（横向扩展）-Scale-Up（纵向扩展）" class="headerlink" title="一、Scale Out（横向扩展）/Scale Up（纵向扩展）"></a>一、Scale Out（横向扩展）/Scale Up（纵向扩展）</h2><p>Mysql的扩展方案包括<strong>Scale Out</strong>和<strong>Scale Up</strong>两种。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/06/19/mysql-partition/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/19/bridge/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changsk">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="changsk's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/19/bridge/" class="post-title-link" itemprop="url">桥梁模式bridge</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-19 14:54:11 / 修改时间：15:44:32" itemprop="dateCreated datePublished" datetime="2019-06-19T14:54:11+08:00">2019-06-19</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/设计模式/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">3.7k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="桥梁模式的定义"><a href="#桥梁模式的定义" class="headerlink" title="桥梁模式的定义"></a>桥梁模式的定义</h2><p>定义: <strong>将抽象和实现解耦, 使得两者可以独立的变化</strong></p>
-<p>通俗的说, 就是一个类调用另一个类中的方法, 需要一个桥梁, 通过<strong>聚合</strong>的关系调用</p>
-<p>其类图如下:</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/06/19/bridge/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/06/18/mysql-explain/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changsk">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="changsk's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/18/mysql-explain/" class="post-title-link" itemprop="url">mysql之explain详解</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-18 21:11:51" itemprop="dateCreated datePublished" datetime="2019-06-18T21:11:51+08:00">2019-06-18</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-27 10:07:20" itemprop="dateModified" datetime="2019-07-27T10:07:20+08:00">2019-07-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">35k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">32 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>原文：<a href="https://segmentfault.com/a/1190000008131735" target="_blank" rel="noopener">MySQL 性能优化神器 Explain 使用分析</a></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>MySQL 提供了一个 <strong>EXPLAIN</strong> 命令, 它可以对 <code>SELECT</code> 语句进行分析, 并输出 <code>SELECT</code> 执行的详细信息, 以供开发人员针对性优化.<br>EXPLAIN 命令用法十分简单, 在 SELECT 语句前加上 Explain 就可以了, 例如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN SELECT * from user_info WHERE id &lt; 300;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/06/18/mysql-explain/#more" rel="contents">
+              <a class="btn" href="/2019/06/21/java-WeakHashMap/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2455,7 +2423,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2500,7 +2468,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">202</span>
+                    <span class="site-state-item-count">212</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2900,7 +2868,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">835k</span>
+    <span title="站点总字数">863k</span>
   
 
   
@@ -2911,7 +2879,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">12:39</span>
+    <span title="站点阅读时长">13:04</span>
   
 </div>
 

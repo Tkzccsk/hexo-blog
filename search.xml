@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-129:Sum Root to Leaf Numbers]]></title>
+    <url>%2F2019%2F09%2F22%2Fleetcode-129%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/sum-root-to-leaf-numbers/ 题目描述题目难度：Medium Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number. An example is the root-to-leaf path 1-&gt;2-&gt;3 which represents the number 123. Find the total sum of all root-to-leaf numbers. Note: A leaf is a node with no children. Example: 123456789Input: [1,2,3] 1 / \ 2 3Output: 25Explanation:The root-to-leaf path 1-&gt;2 represents the number 12.The root-to-leaf path 1-&gt;3 represents the number 13.Therefore, sum = 12 + 13 = 25. Example 2: 123456789101112Input: [4,9,0,5,1] 4 / \ 9 0 / \5 1Output: 1026Explanation:The root-to-leaf path 4-&gt;9-&gt;5 represents the number 495.The root-to-leaf path 4-&gt;9-&gt;1 represents the number 491.The root-to-leaf path 4-&gt;0 represents the number 40.Therefore, sum = 495 + 491 + 40 = 1026. Solution1234567891011121314151617181920212223242526272829/** * Definition for a binary tree node. * public class TreeNode &#123; * int val; * TreeNode left; * TreeNode right; * TreeNode(int x) &#123; val = x; &#125; * &#125; */class Solution &#123; int res = 0; public int sumNumbers(TreeNode root) &#123; if(root == null) return res; sumNumbersCore(root, 0); return res; &#125; private void sumNumbersCore(TreeNode root, int cur)&#123; cur = cur * 10 + root.val; if(root.left == null &amp;&amp; root.right == null)&#123; res += cur; return; &#125; if(root.left != null) sumNumbersCore(root.left, cur); if(root.right != null) sumNumbersCore(root.right, cur); &#125;&#125;]]></content>
+      <categories>
+        <category>Algorithm</category>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-126:Word Ladder II]]></title>
     <url>%2F2019%2F09%2F18%2Fleetcode-126%2F</url>
     <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/word-ladder-ii/ 题目描述题目难度：Hard Given two words (beginWord and endWord), and a dictionary’s word list, find all shortest transformation sequence(s) from beginWord to endWord, such that: Only one letter can be changed at a time Each transformed word must exist in the word list. Note that beginWord is not a transformed word. Note: Return an empty list if there is no such transformation sequence. All words have the same length. All words contain only lowercase alphabetic characters. You may assume no duplicates in the word list. You may assume beginWord and endWord are non-empty and are not the same. Example 1: 12345678910Input:beginWord = &quot;hit&quot;,endWord = &quot;cog&quot;,wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]Output:[ [&quot;hit&quot;,&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;cog&quot;], [&quot;hit&quot;,&quot;hot&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]] Example 2: 12345678Input:beginWord = &quot;hit&quot;endWord = &quot;cog&quot;wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]Output: []Explanation: The endWord &quot;cog&quot; is not in wordList, therefore no possible transformation. Solution代码来自：LeetCode 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778class Solution &#123; public List&lt;List&lt;String&gt;&gt; findLadders(String beginWord, String endWord, List&lt;String&gt; wordList) &#123; List&lt;List&lt;String&gt;&gt; res = new ArrayList&lt;&gt;(); Set&lt;String&gt; dict = new HashSet&lt;&gt;(wordList); if(!dict.contains(endWord))&#123; return res; &#125; Set&lt;String&gt; begin = new HashSet&lt;&gt;(); Set&lt;String&gt; end = new HashSet&lt;&gt;(); begin.add(beginWord); end.add(endWord); Map&lt;String, List&lt;String&gt;&gt; map = new HashMap&lt;&gt;(); bfs(begin, end, dict, map, false); List&lt;String&gt; list = new ArrayList&lt;&gt;(); list.add(beginWord); dfs(beginWord, endWord, res, list, map); return res; &#125; //function: 从 begin 中的任意元素通过变换为 dict 中的任意元素可到达 end 中的任意元素 // map 表示从 key 变换一次可达的 list //reverse : false 表示从 begin 到达 end， true 表示从 end 到达 begin private void bfs(Set&lt;String&gt; begin, Set&lt;String&gt; end, Set&lt;String&gt; dict, Map&lt;String, List&lt;String&gt;&gt; map, boolean reverse)&#123; if(begin.isEmpty())&#123; return; &#125; if(begin.size() &gt; end.size())&#123; bfs(end, begin, dict, map, !reverse); return; &#125; boolean finish = false; Set&lt;String&gt; temp = new HashSet&lt;&gt;(); dict.removeAll(begin); for(String w : begin)&#123; char[] array = w.toCharArray(); for(int i = 0; i &lt; array.length; i++)&#123; char old = array[i]; for(char c = 'a'; c &lt;= 'z'; c++)&#123; array[i] = c; String newWord = new String(array); if(dict.contains(newWord))&#123; if(end.contains(newWord))&#123; finish = true; &#125;else&#123; temp.add(newWord); &#125; String key = reverse ? newWord : w; String val = reverse ? w : newWord; if(!map.containsKey(key))&#123; map.put(key, new ArrayList&lt;&gt;()); &#125; map.get(key).add(val); &#125; &#125; array[i] = old; &#125; &#125; if(!finish)&#123; bfs(temp, end, dict, map, reverse); &#125; &#125; //function: 求从 begin 到达 end 的所有路径 private void dfs(String begin, String end, List&lt;List&lt;String&gt;&gt; res, List&lt;String&gt; list, Map&lt;String, List&lt;String&gt;&gt; map)&#123; if(begin.equals(end))&#123; res.add(new ArrayList&lt;&gt;(list)); return; &#125; if(!map.containsKey(begin))&#123; return; &#125; for(String str : map.get(begin))&#123; list.add(str); dfs(str, end, res, list, map); list.remove(list.size() - 1); &#125; &#125;&#125;]]></content>
@@ -1857,8 +1870,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>HashMap</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -2012,8 +2025,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>HashMap</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -2409,11 +2422,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Error JAVA_HOME is incorrectly set]]></title>
-    <url>%2F2019%2F06%2F11%2FError_JAVA_HOME_is%20_incorrectly_set%2F</url>
-    <content type="text"><![CDATA[在安装、调试、运行Hexo的过程中，出现了以下错误： Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd 然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的： 然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量： 发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图： 或者也可以将jdk装到其他不存在空格的目录下。]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[hexo 的常用命令]]></title>
     <url>%2F2019%2F06%2F11%2Fhexo-command%2F</url>
     <content type="text"><![CDATA[常用 hexo 命令hexo new “postName” #新建文章hexo new page “pageName” #新建页面hexo generate #生成静态页面至public目录hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）hexo deploy #将.deploy目录部署到GitHubhexo help #查看帮助hexo version #查看Hexo的版本 缩写hexo n == hexo newhexo g == hexo generatehexo s == hexo serverhexo d == hexo deploy 组合命令：hexo s -g #生成并本地预览hexo d -g #生成并上传hexo clear # 删除无用 tags 和 categorieshexo clean &amp; hexo d -g # 清除缓存 生成静态页面并发布 给文章添加标签和分类1234567title: hexo 的常用命令date: 2019-06-11 11:43:56tags: - hexo # 文章标签- aaa- bbbcategories: hexo # 该文章类别为 categories\hexo 效果图：]]></content>
@@ -2423,6 +2431,11 @@
       <tags>
         <tag>hexo</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Error JAVA_HOME is incorrectly set]]></title>
+    <url>%2F2019%2F06%2F11%2FError_JAVA_HOME_is%20_incorrectly_set%2F</url>
+    <content type="text"><![CDATA[在安装、调试、运行Hexo的过程中，出现了以下错误： Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd 然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的： 然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量： 发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图： 或者也可以将jdk装到其他不存在空格的目录下。]]></content>
   </entry>
   <entry>
     <title><![CDATA[Hello World]]></title>

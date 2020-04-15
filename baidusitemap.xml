@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://changsk.top/2020/04/15/leetcode-54/</loc>
+    <lastmod>2020-04-15</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/zawu/d2l-AI-introduce.html</loc>
+    <lastmod>2020-03-14</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/10/01/leetcode-140/</loc>
+    <lastmod>2020-03-11</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/09/28/leetcode-139/</loc>
+    <lastmod>2019-09-29</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/09/28/leetcode-134/</loc>
+    <lastmod>2019-09-28</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/09/22/union-find/</loc>
+    <lastmod>2019-09-27</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/09/25/leetcode-132/</loc>
+    <lastmod>2019-09-27</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/09/26/leetcode-137/</loc>
+    <lastmod>2019-09-27</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/07/22/leetcode-714/</loc>
+    <lastmod>2019-09-25</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/09/22/leetcode-130/</loc>
+    <lastmod>2019-09-23</lastmod>
+  </url>  <url>
     <loc>http://changsk.top/2019/09/22/leetcode-129/</loc>
     <lastmod>2019-09-22</lastmod>
   </url>  <url>
@@ -227,9 +257,6 @@
     <lastmod>2019-07-22</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/07/22/leetcode-152/</loc>
-    <lastmod>2019-07-22</lastmod>
-  </url>  <url>
-    <loc>http://changsk.top/2019/07/22/leetcode-714/</loc>
     <lastmod>2019-07-22</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/07/12/leetcode-121/</loc>

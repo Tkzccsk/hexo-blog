@@ -1,6 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-54:Spiral Matrix(顺时针旋转打印矩阵)]]></title>
+    <url>%2F2020%2F04%2F15%2Fleetcode-54%2F</url>
+    <content type="text"><![CDATA[题目链接：Spiral Matrix 题目描述 题目难度：Medium Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order. Example 1: 1234567Input:[ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ]]Output: [1,2,3,6,9,8,7,4,5] Example 2: 1234567Input:[ [1, 2, 3, 4], [5, 6, 7, 8], [9,10,11,12]]Output: [1,2,3,4,8,12,11,10,9,5,6,7] AC代码11234567891011121314151617181920212223242526272829class Solution &#123; public List&lt;Integer&gt; spiralOrder(int[][] matrix) &#123; List&lt;Integer&gt; resList = new ArrayList&lt;&gt;(); if(matrix == null || matrix.length == 0) return resList; int n = matrix.length * matrix[0].length; int[] dr = new int[]&#123;0, 1, 0, -1&#125;; int[] dc = new int[]&#123;1, 0, -1, 0&#125;; boolean[][] seen = new boolean[matrix.length][matrix[0].length]; int i = 0; int r = 0, c = 0, di = 0; while(i &lt; n)&#123; seen[r][c] = true; resList.add(matrix[r][c]); int cr = r + dr[di]; int cc = c + dc[di]; if(cr &gt;= 0 &amp;&amp; cr &lt; matrix.length &amp;&amp; cc &gt;= 0 &amp;&amp; cc &lt; matrix[0].length &amp;&amp; seen[cr][cc] == false)&#123; r = cr; c = cc; &#125; else&#123; di = (di + 1) % 4; r += dr[di]; c += dc[di]; &#125; i++; &#125; return resList; &#125;&#125; AC代码212345678910111213141516171819202122232425262728class Solution &#123; List&lt;Integer&gt; resList = new ArrayList&lt;&gt;(); public List&lt;Integer&gt; spiralOrder(int[][] matrix) &#123; if(matrix == null || matrix.length == 0) return resList; printMatrixCore(matrix, 0, matrix.length - 1, 0, matrix[0].length - 1); return resList; &#125; private void printMatrixCore(int[][] matrix, int startRow, int endRow, int startCol, int endCol)&#123; int i = 0; if(startRow &lt; endRow &amp;&amp; startCol &lt; endCol)&#123; for(i = startCol;i &lt;= endCol;i++) resList.add(matrix[startRow][i]); for(i = startRow + 1;i &lt;= endRow;i++) resList.add(matrix[i][endCol]); for(i = endCol - 1;i &gt;= startCol;i--) resList.add(matrix[endRow][i]); for(i = endRow - 1;i &gt; startRow;i--) resList.add(matrix[i][startCol]); printMatrixCore(matrix, startRow + 1, endRow - 1, startCol + 1, endCol - 1); &#125; else if(startRow == endRow &amp;&amp; startCol == endCol) resList.add(matrix[startRow][startCol]); else if(startRow == endRow &amp;&amp; startCol &lt; endCol)&#123; for(i = startCol;i &lt;= endCol;i++) resList.add(matrix[startRow][i]); &#125; else if(startRow &lt; endRow &amp;&amp; startCol == endCol)&#123; for(i = startRow;i &lt;= endRow;i++) resList.add(matrix[i][startCol]); &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-140:Word Break II]]></title>
+    <url>%2F2019%2F10%2F01%2Fleetcode-140%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/word-break-ii/ 题目描述题目难度：Medium Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, add spaces in s to construct a sentence where each word is a valid dictionary word. Return all such possible sentences. Note: The same word in the dictionary may be reused multiple times in the segmentation. You may assume the dictionary does not contain duplicate words. Example 1: 12345678Input:s = &quot;catsanddog&quot;wordDict = [&quot;cat&quot;, &quot;cats&quot;, &quot;and&quot;, &quot;sand&quot;, &quot;dog&quot;]Output:[ &quot;cats and dog&quot;, &quot;cat sand dog&quot;] Example 2: 12345678910Input:s = &quot;pineapplepenapple&quot;wordDict = [&quot;apple&quot;, &quot;pen&quot;, &quot;applepen&quot;, &quot;pine&quot;, &quot;pineapple&quot;]Output:[ &quot;pine apple pen apple&quot;, &quot;pineapple pen apple&quot;, &quot;pine applepen apple&quot;]Explanation: Note that you are allowed to reuse a dictionary word. Example 3: 12345Input:s = &quot;catsandog&quot;wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]Output:[] Solution代码来自：https://leetcode.com/problems/word-break-ii/discuss/44167/My-concise-JAVA-solution-based-on-memorized-DFS 1234567891011121314151617181920212223242526class Solution &#123; public List&lt;String&gt; wordBreak(String s, List&lt;String&gt; wordDict) &#123; return DFS(s, wordDict, new HashMap&lt;String, LinkedList&lt;String&gt;&gt;()); &#125; // DFS function returns an array including all substrings derived from s.List&lt;String&gt; DFS(String s, List&lt;String&gt; wordDict, HashMap&lt;String, LinkedList&lt;String&gt;&gt;map) &#123; if (map.containsKey(s)) return map.get(s); LinkedList&lt;String&gt;res = new LinkedList&lt;String&gt;(); if (s.length() == 0) &#123; res.add(""); return res; &#125; for (String word : wordDict) &#123; if (s.startsWith(word)) &#123; List&lt;String&gt; sublist = DFS(s.substring(word.length()), wordDict, map); for (String sub : sublist) res.add(word + (sub.isEmpty() ? "" : " ") + sub); &#125; &#125; map.put(s, res); return res;&#125;&#125;]]></content>
+      <categories>
+        <category>Algorithm</category>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-139:Word Break]]></title>
+    <url>%2F2019%2F09%2F28%2Fleetcode-139%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/word-break/ 题目描述题目难度：Medium Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words. Note: The same word in the dictionary may be reused multiple times in the segmentation. You may assume the dictionary does not contain duplicate words. Example 1: 123Input: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]Output: trueExplanation: Return true because &quot;leetcode&quot; can be segmented as &quot;leet code&quot;. Example 2: 1234Input: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]Output: trueExplanation: Return true because &quot;applepenapple&quot; can be segmented as &quot;apple pen apple&quot;. Note that you are allowed to reuse a dictionary word. Example 3: 12Input: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]Output: false Solution112345678910111213141516public class Solution &#123; public boolean wordBreak(String s, List&lt;String&gt; dict) &#123; boolean[] f = new boolean[s.length() + 1]; f[0] = true; //填充数组 f 的 1 到 s.length() 的元素 for(int i=1; i &lt;= s.length(); i++)&#123; for(int j=0; j &lt; i; j++)&#123; if(f[j] &amp;&amp; dict.contains(s.substring(j, i)))&#123; f[i] = true; break; &#125; &#125; &#125; return f[s.length()]; &#125;&#125; Solution2123456789101112131415161718192021222324//Time: O(MN): N - wordDict length, M - s.length()//Space: O(M) class Solution &#123; public boolean wordBreak(String s, List&lt;String&gt; wordDict) &#123; return canBreak(s, 0, wordDict, new int[s.length()]); &#125; private boolean canBreak(String s, int index, List&lt;String&gt; wordDict, int[] memo)&#123; if(index == s.length()) return true; if(memo[index] != 0) return memo[index] &gt; 0 ? true : false; for(String word : wordDict)&#123; if(index + word.length() &lt;= s.length() &amp;&amp; s.substring(index, index+word.length()).equals(word))&#123; if(canBreak(s, index+word.length(), wordDict, memo)) &#123; memo[index] = 1; return true; &#125; &#125; &#125; memo[index] = -1; return false; &#125;&#125; 代码来自：Leetcode]]></content>
+      <categories>
+        <category>Algorithm</category>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-134:Gas Station(加油站)]]></title>
+    <url>%2F2019%2F09%2F28%2Fleetcode-134%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/gas-station/ 题目描述题目难度：Medium There are N gas stations along a circular route, where the amount of gas at station i is gas[i]. You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from station i to its next station (i+1). You begin the journey with an empty tank at one of the gas stations. Return the starting gas station’s index if you can travel around the circuit once in the clockwise direction, otherwise return -1. Note: If there exists a solution, it is guaranteed to be unique. Both input arrays are non-empty and have the same length. Each element in the input arrays is a non-negative integer. Example 1: 1234567891011121314Input: gas = [1,2,3,4,5]cost = [3,4,5,1,2]Output: 3Explanation:Start at station 3 (index 3) and fill up with 4 unit of gas. Your tank = 0 + 4 = 4Travel to station 4. Your tank = 4 - 1 + 5 = 8Travel to station 0. Your tank = 8 - 2 + 1 = 7Travel to station 1. Your tank = 7 - 3 + 2 = 6Travel to station 2. Your tank = 6 - 4 + 3 = 5Travel to station 3. The cost is 5. Your gas is just enough to travel back to station 3.Therefore, return 3 as the starting index. Example 2: 12345678910111213Input: gas = [2,3,4]cost = [3,4,3]Output: -1Explanation:You can&apos;t start at station 0 or 1, as there is not enough gas to travel to the next station.Let&apos;s start at station 2 and fill up with 4 unit of gas. Your tank = 0 + 4 = 4Travel to station 0. Your tank = 4 - 3 + 2 = 3Travel to station 1. Your tank = 3 - 3 + 3 = 3You cannot travel back to station 2, as it requires 4 unit of gas but you only have 3.Therefore, you can&apos;t travel around the circuit once no matter where you start. Solution非常经典的一道题。可以转换成求最大连续和做，但是有更简单的方法。基于一个数学定理： 1如果一个数组的总和非负，那么一定可以找到一个起始位置，从他开始绕数组一圈，累加和一直都是非负的 （证明貌似不难，以后有时间再补） 有了这个定理，判断到底是否存在这样的解非常容易，只需要把全部的油耗情况计算出来看看是否大于等于0即可。 那么如何求开始位置在哪？ 注意到这样一个现象： 假如从位置i开始，i+1，i+2…，一路开过来一路油箱都没有空。说明什么？说明从i到i+1，i+2，…肯定是正积累。 现在突然发现开往位置j时油箱空了。这说明什么？说明从位置i开始没法走完全程(废话)。那么，我们要从位置i+1开始重新尝试吗？不需要！为什么？因为前面已经知道，位置i肯定是正积累，那么，如果从位置i+1开始走更加没法走完全程了，因为没有位置i的正积累了。同理，也不用从i+2，i+3，…开始尝试。所以我们可以放心地从位置j+1开始尝试。 12345678910111213141516int canCompleteCircuit(vector&lt;int&gt; &amp;gas, vector&lt;int&gt; &amp;cost) &#123; int start = 0; // 起始位置 int remain = 0; // 当前剩余燃料 int debt = 0; // 前面没能走完的路上欠的债 for (int i = 0; i &lt; gas.size(); i++) &#123; remain += gas[i] - cost[i]; if (remain &lt; 0) &#123; debt += remain; start = i + 1; remain = 0; &#125; &#125; return remain + debt &gt;= 0 ? start : -1;&#125; 参考： Leetcode#134 Gas station]]></content>
+      <categories>
+        <category>Algorithm</category>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-137:Single Number II]]></title>
+    <url>%2F2019%2F09%2F26%2Fleetcode-137%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/single-number-ii/ 题目描述题目难度：Medium Given a non-empty array of integers, every element appears three times except for one, which appears exactly once. Find that single one. Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory? Example 1: 12Input: [2,2,3,2]Output: 3 Example 2: 12Input: [0,1,0,1,0,1,99]Output: 99 Solution代码来源：leetcode 12345678public int singleNumber(int[] A) &#123; int ones = 0, twos = 0; for(int i = 0; i &lt; A.length; i++)&#123; ones = (ones ^ A[i]) &amp; ~twos; twos = (twos ^ A[i]) &amp; ~ones; &#125; return ones;&#125; 核心思想：对一个相同的数字经过三次运算之后，ones 和 twos 的值保持不变 1234567891011int ones = 0, twos = 0;int a = 5;//第一次ones = (ones ^ a) &amp; ~twos; // 5twos = (twos ^ a) &amp; ~ones; // 0//第二次ones = (ones ^ a) &amp; ~twos; // 0twos = (twos ^ a) &amp; ~ones; // 5//第三次ones = (ones ^ a) &amp; ~twos; // 0twos = (twos ^ a) &amp; ~ones; // 0]]></content>
+      <categories>
+        <category>Algorithm</category>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-132:Palindrome Partitioning II]]></title>
+    <url>%2F2019%2F09%2F25%2Fleetcode-132%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/palindrome-partitioning-ii/ 题目描述题目难度：Hard Given a string s, partition s such that every substring of the partition is a palindrome. Return the minimum cuts needed for a palindrome partitioning of s. Example: 123Input: &quot;aab&quot;Output: 1Explanation: The palindrome partitioning [&quot;aa&quot;,&quot;b&quot;] could be produced using 1 cut. Solution1This can be solved by two points: cut[i] is the minimum of cut[j - 1] + 1 (j &lt;= i), if [j, i] is palindrome. If [j, i] is palindrome, [j + 1, i - 1] is palindrome, and c[j] == c[i]. The 2nd point reminds us of using dp (caching). 1234a b a | c c j i j-1 | [j, i] is palindrome cut(j-1) + 1 代码来自：Leetcode 12345678910111213141516171819202122class Solution &#123; public int minCut(String s) &#123; char[] c = s.toCharArray(); int n = c.length; // cut[i] 表示下标从 0 到 i 的元素组成的子数组的最小切割数（子问题） int[] cut = new int[n]; // pal[i][j] 表示下标从 0 到 i 的元素组成的子数组是否为回文序列 boolean[][] pal = new boolean[n][n]; for(int i = 0; i &lt; n; i++) &#123; int min = i; for(int j = 0; j &lt;= i; j++) &#123; //j + 1 &gt;= i - 1 相当于 i - j &lt;= 2，即 i 和 j 的距离不超过2 if(c[j] == c[i] &amp;&amp; (j + 1 &gt;= i - 1 || pal[j + 1][i - 1])) &#123; pal[j][i] = true; min = j == 0 ? 0 : Math.min(min, cut[j - 1] + 1); &#125; &#125; cut[i] = min; &#125; return cut[n - 1];&#125;&#125; Solution2123456789101112131415161718192021222324252627class Solution &#123; public int minCut(String s) &#123; if (s==null || s.length()&lt;=1) return 0; int n = s.length(); //每个位置的最小切割数 int[] dp = new int[n+1]; for (int i = 0; i&lt;dp.length; ++i) &#123; //初始化 dp 为每一个位置的最大切割数 dp[i] = i-1; &#125; for (int i = 0; i&lt;n; ++i) &#123; //回文串是奇数的情况 helper(i, i, dp, s); //回文串是偶数的情况 helper(i, i+1, dp, s); &#125; return dp[n]; &#125; private void helper(int l, int r, int[] dp, String s) &#123; while (l&gt;=0 &amp;&amp; r&lt;s.length() &amp;&amp; s.charAt(l) == s.charAt(r)) &#123; dp[r+1] = Math.min(dp[r+1], dp[l] + 1); l--; r++; &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>Algorithm</category>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[并查集]]></title>
+    <url>%2F2019%2F09%2F22%2Funion-find%2F</url>
+    <content type="text"><![CDATA[来看一个实例，杭电1232畅通工程 首先在地图上给你若干个城镇，这些城镇都可以看作点，然后告诉你哪些对城镇之间是有道路直接相连的。最后要解决的是整幅图的连通性问题。比如随意给你两个点，让你判断它们是否连通，或者问你整幅图一共有几个连通分支，也就是被分成了几个互相独立的块。像畅通工程这题，问还需要修几条路，实质就是求有几个连通分支。如果是1个连通分支，说明整幅图上的点都连起来了，不用再修路了；如果是2个连通分支，则只要再修1条路，从两个分支中各选一个点，把它们连起来，那么所有的点都是连起来的了；如果是3个连通分支，则只要再修两条路…… 以下面这组数据输入数据来说明 4 21 34 3 第一行告诉你，一共有4个点，2条路。下面两行告诉你，1、3之间有条路，4、3之间有条路。那么整幅图就被分成了1-3-4和2两部分。只要再加一条路，把2和其他任意一个点连起来，畅通工程就实现了，那么这个这组数据的输出结果就是1。好了，现在编程实现这个功能吧，城镇有几百个，路有不知道多少条，而且可能有回路。 这可如何是好？ 我以前也不会呀，自从用了并查集之后，嗨，效果还真好！我们全家都用它！ 并查集由一个整数型的数组和两个函数构成。数组pre[]记录了每个点的前导点是什么，函数find是查找，join是合并。 12345678910111213141516171819202122int pre[1000 ];int find(int x) //查找根节点&#123; int r=x; while ( pre[r] != r ) //返回根节点 r r=pre[r]; int i=x , j ; while( i != r ) //路径压缩 &#123; j = pre[ i ]; // 在改变上级之前用临时变量 j 记录下他的值 pre[ i ]= r ; //把上级改为根节点 i=j; &#125; return r ;&#125;void join(int x,int y) //判断x y是否连通， //如果已经连通，就不用管了 //如果不连通，就把它们所在的连通分支合并起,&#123; int fx=find(x),fy=find(y); if(fx!=fy) pre[fx ]=fy;&#125; 为了解释并查集的原理，我将举一个更有爱的例子。 话说江湖上散落着各式各样的大侠，有上千个之多。他们没有什么正当职业，整天背着剑在外面走来走去，碰到和自己不是一路人的，就免不了要打一架。但大侠们有一个优点就是讲义气，绝对不打自己的朋友。而且他们信奉“朋友的朋友就是我的朋友”，只要是能通过朋友关系串联起来的，不管拐了多少个弯，都认为是自己人。这样一来，江湖上就形成了一个一个的群落，通过两两之间的朋友关系串联起来。而不在同一个群落的人，无论如何都无法通过朋友关系连起来，于是就可以放心往死了打。但是两个原本互不相识的人，如何判断是否属于一个朋友圈呢？ 我们可以在每个朋友圈内推举出一个比较有名望的人，作为该圈子的代表人物，这样，每个圈子就可以这样命名“齐达内朋友之队”“罗纳尔多朋友之队”……两人只要互相对一下自己的队长是不是同一个人，就可以确定敌友关系了。 但是还有问题啊，大侠们只知道自己直接的朋友是谁，很多人压根就不认识队长，要判断自己的队长是谁，只能漫无目的的通过朋友的朋友关系问下去：“你是不是队长？你是不是队长？”这样一来，队长面子上挂不住了，而且效率太低，还有可能陷入无限循环中。于是队长下令，重新组队。队内所有人实行分等级制度，形成树状结构，我队长就是根节点，下面分别是二级队员、三级队员。每个人只要记住自己的上级是谁就行了。遇到判断敌友的时候，只要一层层向上问，直到最高层，就可以在短时间内确定队长是谁了。由于我们关心的只是两个人之间是否连通，至于他们是如何连通的，以及每个圈子内部的结构是怎样的，甚至队长是谁，并不重要。所以我们可以放任队长随意重新组队，只要不搞错敌友关系就好了。于是，门派产生了。 下面我们来看并查集的实现。 int pre[1000]; 这个数组，记录了每个大侠的上级是谁。大侠们从1或者0开始编号（依据题意而定），pre[15]=3就表示15号大侠的上级是3号大侠。如果一个人的上级就是他自己，那说明他就是掌门人了，查找到此为止。也有孤家寡人自成一派的，比如欧阳锋，那么他的上级就是他自己。每个人都只认自己的上级。比如胡青牛同学只知道自己的上级是杨左使。张无忌是谁？不认识！要想知道自己的掌门是谁，只能一级级查上去。 find这个函数就是找掌门用的，意义再清楚不过了（路径压缩算法先不论，后面再说）。 1234567int find(int x) //查找我（x）的掌门 &#123; int r=x; //委托 r 去找掌门 while (pre[r]!=r) //如果r的上级不是r自己（也就是说找到的大侠他不是掌门 = =） r=pre[r] ; // r 就接着找他的上级，直到找到掌门为止。 return r ; //掌门驾到~~~ &#125; 再来看看join函数，就是在两个点之间连一条线，这样一来，原先它们所在的两个板块的所有点就都可以互通了。这在图上很好办，画条线就行了。但我们现在是用并查集来描述武林中的状况的，一共只有一个pre[]数组，该如何实现呢？ 还是举江湖的例子，假设现在武林中的形势如图所示。虚竹小和尚与周芷若MM是我非常喜欢的两个人物，他们的终极boss分别是玄慈方丈和灭绝师太，那明显就是两个阵营了。我不希望他们互相打架，就对他俩说：“你们两位拉拉勾，做好朋友吧。”他们看在我的面子上，同意了。这一同意可非同小可，整个少林和峨眉派的人就不能打架了。这么重大的变化，可如何实现呀，要改动多少地方？其实非常简单，我对玄慈方丈说：“大师，麻烦你把你的上级改为灭绝师太吧。这样一来，两派原先的所有人员的终极boss都是师太，那还打个球啊！反正我们关心的只是连通性，门派内部的结构不要紧的。”玄慈一听肯定火大了：“我靠，凭什么是我变成她手下呀，怎么不反过来？我抗议！”抗议无效，上天安排的，最大。反正谁加入谁效果是一样的，我就随手指定了一个。这段函数的意思很明白了吧？ 123456void join(int x,int y) //我想让虚竹和周芷若做朋友 &#123; int fx=find(x),fy=find(y); //虚竹的老大是玄慈，芷若MM的老大是灭绝 if(fx!=fy) //玄慈和灭绝显然不是同一个人 pre[fx ]=fy; //方丈只好委委屈屈地当了师太的手下啦 &#125; 再来看看路径压缩算法。建立门派的过程是用join函数两个人两个人地连接起来的，谁当谁的手下完全随机。最后的树状结构会变成什么胎唇样，我也完全无法预计，一字长蛇阵也有可能。这样查找的效率就会比较低下。最理想的情况就是所有人的直接上级都是掌门，一共就两级结构，只要找一次就找到掌门了。哪怕不能完全做到，也最好尽量接近。这样就产生了路径压缩算法。 设想这样一个场景：两个互不相识的大侠碰面了，想知道能不能揍。 于是赶紧打电话问自己的上级：“你是不是掌门？” 上级说：“我不是呀，我的上级是谁谁谁，你问问他看看。” 一路问下去，原来两人的最终boss都是东厂曹公公。 “哎呀呀，原来是记己人，西礼西礼，在下三营六组白面葫芦娃!” “幸会幸会，在下九营十八组仙子狗尾巴花！” 两人高高兴兴地手拉手喝酒去了。 “等等等等，两位同学请留步，还有事情没完成呢！”我叫住他俩。 “哦，对了，还要做路径压缩。”两人醒悟。 白面葫芦娃打电话给他的上级六组长：“组长啊，我查过了，其习偶们的掌门是曹公公。不如偶们一起及接拜在曹公公手下吧，省得级别太低，以后查找掌门麻环。” “唔，有道理。” 白面葫芦娃接着打电话给刚才拜访过的三营长……仙子狗尾巴花也做了同样的事情。 这样，查询中所有涉及到的人物都聚集在曹公公的直接领导下。每次查询都做了优化处理，所以整个门派树的层数都会维持在比较低的水平上。路径压缩的代码，看得懂很好，看不懂也没关系，直接抄上用就行了。总之它所实现的功能就是这么个意思。]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>并查集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-130:Surrounded Regions]]></title>
+    <url>%2F2019%2F09%2F22%2Fleetcode-130%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/surrounded-regions/ 题目描述题目难度：Medium Given a 2D board containing &#39;X&#39; and &#39;O&#39; (the letter O), capture all regions surrounded by &#39;X&#39;. A region is captured by flipping all &#39;O&#39;s into &#39;X&#39;s in that surrounded region. Example: 1234X X X XX O O XX X O XX O X X After running your function, the board should be: 1234X X X XX X X XX X X XX O X X Explanation: Surrounded regions shouldn’t be on the border, which means that any &#39;O&#39; on the border of the board are not flipped to &#39;X&#39;. Any &#39;O&#39; that is not on the border and it is not connected to an &#39;O&#39; on the border will be flipped to &#39;X&#39;. Two cells are connected if they are adjacent cells connected horizontally or vertically. Solution思路：从最外围的四个方向当中的&#39;O&#39;出发，用dfs把遇到的&#39;O&#39;都置为true，最后把坐标为false且为&#39;O&#39;的元素置为&#39;X&#39;。 代码来自Leetcode 12345678910111213141516171819202122232425262728293031323334353637383940414243class Solution &#123; public void solve(char[][] board) &#123; if(board.length == 0) return; int rows = board.length; int cols = board[0].length; boolean[][] visited = new boolean[rows][cols]; for(int c=0; c&lt;cols; c++) &#123; if(board[0][c] == 'O' &amp;&amp; !visited[0][c]) bfs(board, 0, c, rows, cols, visited); if(board[rows-1][c] == 'O' &amp;&amp; !visited[rows - 1][c]) bfs(board, rows-1, c, rows, cols, visited); &#125; for(int r=0; r&lt;rows; r++) &#123; if(board[r][0] == 'O' &amp;&amp; !visited[r][0]) bfs(board, r, 0, rows, cols, visited); if(board[r][cols-1] == 'O' &amp;&amp; !visited[r][cols - 1]) bfs(board, r, cols-1, rows, cols, visited); &#125; for(int r=1; r&lt;rows-1; r++) &#123; for(int c=1; c&lt;cols-1; c++) &#123; if(!visited[r][c] &amp;&amp; board[r][c] == 'O') &#123; board[r][c] = 'X'; &#125; &#125; &#125; &#125; public void bfs(char[][] board, int r, int c, int rows, int cols, boolean[][] visited) &#123; visited[r][c] = true; if(r-1 &gt;= 0 &amp;&amp; !visited[r-1][c] &amp;&amp; board[r-1][c] == 'O') bfs(board, r-1, c, rows, cols, visited); if(r+1 &lt; rows &amp;&amp; !visited[r+1][c] &amp;&amp; board[r+1][c] == 'O') bfs(board, r+1, c, rows, cols, visited); if(c+1 &lt; cols &amp;&amp; !visited[r][c+1] &amp;&amp; board[r][c+1] == 'O') bfs(board, r, c+1, rows, cols, visited); if(c-1 &gt;= 0 &amp;&amp; !visited[r][c-1] &amp;&amp; board[r][c-1] == 'O') bfs(board, r, c-1, rows, cols, visited); &#125;&#125;]]></content>
+      <categories>
+        <category>Algorithm</category>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-129:Sum Root to Leaf Numbers]]></title>
     <url>%2F2019%2F09%2F22%2Fleetcode-129%2F</url>
     <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/sum-root-to-leaf-numbers/ 题目描述题目难度：Medium Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number. An example is the root-to-leaf path 1-&gt;2-&gt;3 which represents the number 123. Find the total sum of all root-to-leaf numbers. Note: A leaf is a node with no children. Example: 123456789Input: [1,2,3] 1 / \ 2 3Output: 25Explanation:The root-to-leaf path 1-&gt;2 represents the number 12.The root-to-leaf path 1-&gt;3 represents the number 13.Therefore, sum = 12 + 13 = 25. Example 2: 123456789101112Input: [4,9,0,5,1] 4 / \ 9 0 / \5 1Output: 1026Explanation:The root-to-leaf path 4-&gt;9-&gt;5 represents the number 495.The root-to-leaf path 4-&gt;9-&gt;1 represents the number 491.The root-to-leaf path 4-&gt;0 represents the number 40.Therefore, sum = 495 + 491 + 40 = 1026. Solution1234567891011121314151617181920212223242526272829/** * Definition for a binary tree node. * public class TreeNode &#123; * int val; * TreeNode left; * TreeNode right; * TreeNode(int x) &#123; val = x; &#125; * &#125; */class Solution &#123; int res = 0; public int sumNumbers(TreeNode root) &#123; if(root == null) return res; sumNumbersCore(root, 0); return res; &#125; private void sumNumbersCore(TreeNode root, int cur)&#123; cur = cur * 10 + root.val; if(root.left == null &amp;&amp; root.right == null)&#123; res += cur; return; &#125; if(root.left != null) sumNumbersCore(root.left, cur); if(root.right != null) sumNumbersCore(root.right, cur); &#125;&#125;]]></content>
@@ -686,6 +788,7 @@
     <url>%2F2019%2F07%2F22%2Fleetcode-714%2F</url>
     <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/ 题目描述 题目难度：Medium Your are given an array of integers prices, for which the i-th element is the price of a given stock on day i; and a non-negative integer fee representing a transaction fee. You may complete as many transactions as you like, but you need to pay the transaction fee for each transaction. You may not buy more than 1 share of a stock at a time (ie. you must sell the stock share before you buy again.) Return the maximum profit you can make. Example 1: 1234Input: prices = [1, 3, 2, 8, 4, 9], fee = 2Output: 8Explanation: The maximum profit can be achieved by:Buying at prices[0] = 1Selling at prices[3] = 8Buying at prices[4] = 4Selling at prices[5] = 9The total profit is ((8 - 1) - 2) + ((9 - 4) - 2) = 8. Note: 0 &lt; prices.length &lt;= 50000. 0 &lt; prices[i] &lt; 50000. 0 &lt;= fee &lt; 50000. 问题解析： 给定数组，其中的元素代表当天的股票价格，不限制股票的购售次数，但要求在购买新股之前要售出之前的股票，求股票交易的最大利润。每次股票交易都要支付固定的交易费。 Solution1可以用DP来做。 与之前的LeetCode-121：Best Time to Buy and Sell Stock (一次股票交易最大利润)和LeetCode-122：Best Time to Buy and Sell Stock II (多次股票交易最大利润)相似，均为股票交易题目，但本题增加了交易费的条件。 分析每天的行为，我们可以知道，主要的行为就是售出和购入。所以我们建立两个动态规划数组：sold和hold，其中sold[i]保存的是第i天出售股票后的最大利润，hold[i]保存的是第i天持有股票的最大利润。 sold[i]有两个状态，一个是在i天售出的利润，或者保持前一天也就是sold[i-1]的售出利润，选择其中的最大利润。 hold[i]也有两个状态，一个是在i天购入的利润，或者保持前一天也就是hold[i-1]的持有利润，选择其中的最大利润。 写为动态规划式为：Soldi=Max(Soldi−1,Holdi−1+Pricesi−fee); Holdi=Max(Holdi,Soldi−1−Pricesi) 1234567891011121314151617class Solution &#123; public int maxProfit(int[] prices, int fee) &#123; int n = prices.length; if (n &lt; 2) return 0; int[] sold = new int[n]; int[] hold = new int[n]; hold[0] = -prices[0]; //拥有的初始金额为0，然后买了第一天的股票，所以拥有的金额为 -prices[0] for (int i = 1; i &lt; n; i++)&#123; sold[i] = Math.max(sold[i-1], hold[i-1] + prices[i] - fee); hold[i] = Math.max(hold[i-1], sold[i-1] - prices[i]); &#125; return sold[n-1]; &#125;&#125; 时间复杂度：O(n)，空间复杂度：O(n) Solution2DP优化。 同样，与LeetCode-152：Maximum Product Subarray (乘积最大连续子数组)相同，Solution 1 的解法可以做空间上的优化。因为动态规划公式中每次计算使用的只有上一次的结果，所以，我们将前一次的结果做临时的保存即可实现空间上的优化。 1234567891011121314151617class Solution &#123; public int maxProfit(int[] prices, int fee) &#123; int n = prices.length; if (n &lt; 2) return 0; int sold = 0; int hold = -prices[0]; for (int i = 1; i &lt; n; i++)&#123; int soldpre = sold; sold = Math.max(soldpre, hold + prices[i] - fee); hold = Math.max(hold, soldpre - prices[i]); &#125; return sold; &#125;&#125; 时间复杂度：O(n)，空间复杂度：O(1) 参考： LeetCode-714：Best Time to Buy and Sell Stock with Transaction Fee (带有抛售费用的股票最大利润) – medium]]></content>
       <categories>
+        <category>Algorithm</category>
         <category>Leetcode</category>
       </categories>
       <tags>
@@ -2422,6 +2525,11 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Error JAVA_HOME is incorrectly set]]></title>
+    <url>%2F2019%2F06%2F11%2FError_JAVA_HOME_is%20_incorrectly_set%2F</url>
+    <content type="text"><![CDATA[在安装、调试、运行Hexo的过程中，出现了以下错误： Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd 然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的： 然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量： 发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图： 或者也可以将jdk装到其他不存在空格的目录下。]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[hexo 的常用命令]]></title>
     <url>%2F2019%2F06%2F11%2Fhexo-command%2F</url>
     <content type="text"><![CDATA[常用 hexo 命令hexo new “postName” #新建文章hexo new page “pageName” #新建页面hexo generate #生成静态页面至public目录hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）hexo deploy #将.deploy目录部署到GitHubhexo help #查看帮助hexo version #查看Hexo的版本 缩写hexo n == hexo newhexo g == hexo generatehexo s == hexo serverhexo d == hexo deploy 组合命令：hexo s -g #生成并本地预览hexo d -g #生成并上传hexo clear # 删除无用 tags 和 categorieshexo clean &amp; hexo d -g # 清除缓存 生成静态页面并发布 给文章添加标签和分类1234567title: hexo 的常用命令date: 2019-06-11 11:43:56tags: - hexo # 文章标签- aaa- bbbcategories: hexo # 该文章类别为 categories\hexo 效果图：]]></content>
@@ -2431,11 +2539,6 @@
       <tags>
         <tag>hexo</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Error JAVA_HOME is incorrectly set]]></title>
-    <url>%2F2019%2F06%2F11%2FError_JAVA_HOME_is%20_incorrectly_set%2F</url>
-    <content type="text"><![CDATA[在安装、调试、运行Hexo的过程中，出现了以下错误： Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd 然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的： 然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量： 发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图： 或者也可以将jdk装到其他不存在空格的目录下。]]></content>
   </entry>
   <entry>
     <title><![CDATA[Hello World]]></title>

@@ -1,0 +1,2097 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="对称加密1、什么是对称加密？对称加密就是指，加密和解密使用同一个密钥的加密方式。 2、对称加密的工作过程发送方使用密钥将明文数据加密成密文，然后发送出去，接收方收到密文后，使用同一个密钥将密文解密成明文读取。 3、对称加密的优点加密计算量小、速度块，适合对大量数据进行加密的场景。">
+<meta name="keywords" content="AES128">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AES加密算法的介绍与C实现">
+<meta property="og:url" content="http://changsk.top/2020/04/16/AES128/index.html">
+<meta property="og:site_name" content="changsk&#39;s blogs">
+<meta property="og:description" content="对称加密1、什么是对称加密？对称加密就是指，加密和解密使用同一个密钥的加密方式。 2、对称加密的工作过程发送方使用密钥将明文数据加密成密文，然后发送出去，接收方收到密文后，使用同一个密钥将密文解密成明文读取。 3、对称加密的优点加密计算量小、速度块，适合对大量数据进行加密的场景。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/1.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/2.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/3.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/4.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/5.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/6.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/7.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/8.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/9.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/10.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/11.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/12.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/13.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/14.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/15.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/16.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/17.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/18.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/19.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/20.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/21.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/22.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/23.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/24.jpg">
+<meta property="og:image" content="http://changsk.top/2020/04/16/AES128/25.jpg">
+<meta property="og:updated_time" content="2020-04-16T07:39:38.995Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AES加密算法的介绍与C实现">
+<meta name="twitter:description" content="对称加密1、什么是对称加密？对称加密就是指，加密和解密使用同一个密钥的加密方式。 2、对称加密的工作过程发送方使用密钥将明文数据加密成密文，然后发送出去，接收方收到密文后，使用同一个密钥将密文解密成明文读取。 3、对称加密的优点加密计算量小、速度块，适合对大量数据进行加密的场景。">
+<meta name="twitter:image" content="http://changsk.top/2020/04/16/AES128/1.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="changsk's blogs" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://changsk.top/2020/04/16/AES128/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>AES加密算法的介绍与C实现 | changsk's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">changsk's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">chang.sk@foxmail.com</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-collection">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/collection/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>收藏</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/Tkzccsk" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2020/04/16/AES128/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AES加密算法的介绍与C实现
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-16 09:37:08 / 修改时间：15:39:38" itemprop="dateCreated datePublished" datetime="2020-04-16T09:37:08+08:00">2020-04-16</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/密码学/" itemprop="url" rel="index"><span itemprop="name">密码学</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">15k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">13 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h1><h2 id="1、什么是对称加密？"><a href="#1、什么是对称加密？" class="headerlink" title="1、什么是对称加密？"></a>1、什么是对称加密？</h2><p>对称加密就是指，<strong>加密和解密使用同一个密钥的加密方式。</strong></p>
+<h2 id="2、对称加密的工作过程"><a href="#2、对称加密的工作过程" class="headerlink" title="2、对称加密的工作过程"></a>2、对称加密的工作过程</h2><p>发送方使用密钥将明文数据加密成密文，然后发送出去，接收方收到密文后，使用同一个密钥将密文解密成明文读取。</p>
+<h2 id="3、对称加密的优点"><a href="#3、对称加密的优点" class="headerlink" title="3、对称加密的优点"></a>3、对称加密的优点</h2><p><strong>加密计算量小、速度块，适合对大量数据进行加密的场景。</strong></p>
+<a id="more"></a>
+
+<h2 id="4、对称加密的两大不足"><a href="#4、对称加密的两大不足" class="headerlink" title="4、对称加密的两大不足"></a>4、对称加密的两大不足</h2><ul>
+<li><strong>密钥传输问题</strong>：如上所说，由于对称加密的加密和解密使用的是同一个密钥，所以对称加密的安全性就不仅仅取决于加密算法本身的强度，更取决于密钥是否被安全的保管，因此<strong>加密者如何把密钥安全的传递到解密者手里，就成了对称加密面临的关键问题。</strong>（比如，我们客户端肯定不能直接存储对称加密的密钥，因为被反编译之后，密钥就泄露了，数据安全性就得不到保障，所以<strong>实际中我们一般都是客户端向服务端请求对称加密的密钥，而且密钥还得用非对称加密算法加密后再传输。</strong>）</li>
+<li><strong>密钥管理问题</strong>：<strong>随着密钥数量的增多，密钥的管理问题会逐渐显现出来。</strong>比如我们在加密用户的信息时，不可能所有用户都用同一个密钥加密解密。这样一旦密钥泄漏，就相当于泄露了所有用户的信息，因此需要为每一个用户单独的生成一个密钥并且管理，这样密钥管理的代价也会非常大。</li>
+</ul>
+<h1 id="AES加密算法简介"><a href="#AES加密算法简介" class="headerlink" title="AES加密算法简介"></a>AES加密算法简介</h1><p>如今有很多的对称加密算法，如<strong>DES加密算法</strong>、<strong>3DES加密算法</strong>等，但是因为<strong>AES加密算法</strong>的安全性要高于DES和3DES，所以AES已经成为了主要的对称加密算法。</p>
+<p>AES加密算法就是众多对称加密算法中的一种，它的英文全称是<strong>Advanced Encryption Standard</strong>，翻译过来是高级加密标准，它是用来替代之前的DES加密算法的。AES算法是当前最流行的对称加密算法，也是一种分组加密算法，分组密码就是把明文分为固定长度的一组一组，每次加密一组数据，直到加密完整个明文数据。AES算法根据分组长度可以分为<strong>AES128, AES192，AES256</strong>，其所要求的秘钥长度和加密轮数也各不相同。</p>
+<p>对称加密算法也就是加密和解密用相同的密钥，具体的加密流程如下图：</p>
+<p><img src="1.jpg" alt="img"></p>
+<p>下面简单介绍下各个部分的作用与意义：</p>
+<ul>
+<li>明文P</li>
+</ul>
+<blockquote>
+<p>没有经过加密的数据。</p>
+</blockquote>
+<ul>
+<li>密钥K</li>
+</ul>
+<blockquote>
+<p>用来加密明文的密码，在对称加密算法中，加密与解密的密钥是相同的。密钥为接收方与发送方协商产生，但不可以直接在网络上传输，否则会导致密钥泄漏，通常是通过非对称加密算法加密密钥，然后再通过网络传输给对方，或者直接面对面商量密钥。密钥是绝对不可以泄漏的，否则会被攻击者还原密文，窃取机密数据。</p>
+</blockquote>
+<ul>
+<li>AES加密函数</li>
+</ul>
+<blockquote>
+<p>设AES加密函数为E，则 C = E(K, P),其中P为明文，K为密钥，C为密文。也就是说，把明文P和密钥K作为加密函数的参数输入，则加密函数E会输出密文C。</p>
+</blockquote>
+<ul>
+<li><p>密文C</p>
+<blockquote>
+<p>经加密函数处理后的数据</p>
+</blockquote>
+</li>
+<li><p>AES解密函数</p>
+<blockquote>
+<p>设AES解密函数为D，则 P = D(K, C),其中C为密文，K为密钥，P为明文。也就是说，把密文C和密钥K作为解密函数的参数输入，则解密函数会输出明文P。</p>
+</blockquote>
+</li>
+</ul>
+<p>在这里简单介绍下对称加密算法与非对称加密算法的区别。</p>
+<ul>
+<li><p>对称加密算法</p>
+<blockquote>
+<p>加密和解密用到的密钥是相同的，这种加密方式加密速度非常快，适合经常发送数据的场合。缺点是密钥的传输比较麻烦。</p>
+</blockquote>
+</li>
+<li><p>非对称加密算法</p>
+<blockquote>
+<p>加密和解密用的密钥是不同的，这种加密方式是用数学上的难解问题构造的，通常加密解密的速度比较慢，适合偶尔发送数据的场合。优点是密钥传输方便。常见的非对称加密算法为RSA、ECC和EIGamal。</p>
+</blockquote>
+</li>
+</ul>
+<p>实际中，一般是通过<strong>RSA</strong>加密AES的密钥，传输到接收方，接收方解密得到AES密钥，然后发送方和接收方用AES密钥来通信。</p>
+<h1 id="AES的基本结构"><a href="#AES的基本结构" class="headerlink" title="AES的基本结构"></a>AES的基本结构</h1><p>AES为分组密码，分组密码也就是把明文分成一组一组的，每组长度相等，每次加密一组数据，直到加密完整个明文。在AES标准规范中，<strong>分组长度只能是128位</strong>，也就是说，每个分组为16个字节（每个字节8位）。密钥的长度可以使用128位、192位或256位。密钥的长度不同，推荐加密轮数也不同，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>AES</th>
+<th>密钥长度（32位比特字)</th>
+<th>分组长度(32位比特字)</th>
+<th>加密轮数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AES-128</td>
+<td>4</td>
+<td>4</td>
+<td>10</td>
+</tr>
+<tr>
+<td>AES-192</td>
+<td>6</td>
+<td>4</td>
+<td>12</td>
+</tr>
+<tr>
+<td>AES-256</td>
+<td>8</td>
+<td>4</td>
+<td>14</td>
+</tr>
+</tbody></table>
+<p>轮数在下面介绍，这里实现的是AES-128，也就是密钥的长度为128位，加密轮数为10轮。</p>
+<p>AES算法主要可以分为<strong>秘钥扩展、字节替换、行移位、列混合和轮秘钥加</strong>这5个步骤。</p>
+<ul>
+<li>秘钥扩展（KeyExpansions：给定的初始秘钥一般比较短，比如16字节，而算法如果进行10轮运算的话就需要16x(10+1)字节长度的秘钥，需要对原始秘钥进行秘钥扩展。</li>
+<li>字节替换（SubBytes）：一个非线性的替换步骤，根据查表把一个字节替换为另一个字节。</li>
+<li>行移位（ShiftRows）：将数据矩阵的每一行循环移位一定长度。</li>
+<li>列混合（MixColumns）：将数据矩阵乘以一个固定的矩阵（不是普通的矩阵相乘，而是伽罗华域中的乘法运算），增加混淆程度。</li>
+<li>轮秘钥加（AddRoundKey）:将数据矩阵与秘钥矩阵进行异或操作。</li>
+</ul>
+<p>上面说到，AES的加密公式为C = E(K,P)，在加密函数E中，会执行一个轮函数，并且执行10次这个轮函数。这个轮函数的前9次执行的操作是一样的，只有第10次有所不同。也就是说，一个明文分组会被加密10轮。AES的核心就是实现一轮中的所有操作。</p>
+<p>AES的处理单位是字节，128位的输入明文分组P和输入密钥K都被分成16个字节，分别记为P = P0 P1 … P15 和 K = K0 K1 … K15。如，明文分组为P = abcdefghijklmnop,其中的字符a对应P0，p对应P15。一般地，明文分组用字节为单位的正方形矩阵描述，称为<strong>状态矩阵</strong>。在算法的每一轮中，状态矩阵的内容不断发生变化，最后的结果作为密文输出。该矩阵中字节的排列顺序为从上到下、从左至右依次排列，如下图所示：</p>
+<p><img src="2.jpg" alt="img"></p>
+<p>现在假设明文分组P为”abcdefghijklmnop”，则对应上面生成的状态矩阵图如下：</p>
+<p><img src="3.jpg" alt="img"></p>
+<p>上图中，0x61为字符a的十六进制表示。可以看到，明文经过AES加密后，已经面目全非。</p>
+<p>类似地，128位密钥也是用字节为单位的矩阵表示，矩阵的每一列被称为1个32位比特字。通过密钥编排函数该密钥矩阵被扩展成一个44个字组成的序列W[0],W[1], … ,W[43],该序列的前4个元素W[0],W[1],W[2],W[3]是原始密钥，用于加密运算中的初始密钥加;后面40个字分为10组，每组4个字（128比特）分别用于10轮加密运算中的轮密钥加，如下图所示：</p>
+<p><img src="4.jpg" alt="img"></p>
+<p>上图中，设K = “abcdefghijklmnop”，则K0 = a, K15 = p, W[0] = K0 K1 K2 K3 = “abcd”。</p>
+<p>AES的整体结构如下图所示，其中的W[0,3]是指W[0]、W[1]、W[2]和W[3]串联组成的128位密钥。加密的第1轮到第9轮的轮函数一样，包括4个操作：<strong>字节代换、行位移、列混合和轮密钥加</strong>。最后一轮迭代不执行列混合。另外，在第一轮迭代之前，先将明文和原始密钥进行一次异或加密操作。<br><img src="5.jpg" alt="img"></p>
+<p>上图也展示了AES解密过程，解密过程仍为10轮，<strong>每一轮的操作是加密操作的逆操作</strong>。由于AES的4个轮操作都是可逆的，因此，解密操作的一轮就是<strong>顺序执行逆行移位、逆字节代换、轮密钥加和逆列混合</strong>。同加密操作类似，最后一轮不执行逆列混合，在第1轮解密之前，要执行1次密钥加操作。</p>
+<p>下面分别介绍AES中一轮的4个操作阶段，这4分操作阶段使输入位得到充分的混淆。</p>
+<h2 id="一、字节代换"><a href="#一、字节代换" class="headerlink" title="一、字节代换"></a>一、字节代换</h2><h3 id="1-字节代换操作"><a href="#1-字节代换操作" class="headerlink" title="1.字节代换操作"></a>1.字节代换操作</h3><p>AES的字节代换其实就是一个简单的查表操作。AES定义了一个S盒和一个逆S盒。<br>AES的S盒：</p>
+<p><img src="6.jpg" alt="img"></p>
+<p>状态矩阵中的元素按照下面的方式映射为一个新的字节：把该字节的高4位作为行值，低4位作为列值，取出S盒或者逆S盒中对应的行的元素作为输出。例如，加密时，输出的字节S1为0x12,则查S盒的第0x01行和0x02列，得到值0xc9,然后替换S1原有的0x12为0xc9。状态矩阵经字节代换后的图如下：</p>
+<p><img src="7.jpg" alt="img"></p>
+<h3 id="2-字节代换逆操作"><a href="#2-字节代换逆操作" class="headerlink" title="2.字节代换逆操作"></a>2.字节代换逆操作</h3><p>逆字节代换也就是查逆S盒来变换，逆S盒如下：</p>
+<p><img src="8.jpg" alt="img"></p>
+<h2 id="二、行移位"><a href="#二、行移位" class="headerlink" title="二、行移位"></a>二、行移位</h2><h3 id="1-行移位操作"><a href="#1-行移位操作" class="headerlink" title="1.行移位操作"></a>1.行移位操作</h3><p>行移位是一个简单的左循环移位操作。当密钥长度为128比特时，状态矩阵的第0行左移0字节，第1行左移1字节，第2行左移2字节，第3行左移3字节，如下图所示：</p>
+<p><img src="9.jpg" alt="img"></p>
+<h3 id="2-行移位的逆变换"><a href="#2-行移位的逆变换" class="headerlink" title="2.行移位的逆变换"></a>2.行移位的逆变换</h3><p>行移位的逆变换是将状态矩阵中的每一行执行相反的移位操作，例如AES-128中，状态矩阵的第0行右移0字节，第1行右移1字节，第2行右移2字节，第3行右移3字节。</p>
+<h2 id="三、列混合"><a href="#三、列混合" class="headerlink" title="三、列混合"></a>三、列混合</h2><h3 id="1-列混合操作"><a href="#1-列混合操作" class="headerlink" title="1.列混合操作"></a>1.列混合操作</h3><p>列混合变换是通过<strong>矩阵相乘</strong>来实现的，经行移位后的状态矩阵与固定的矩阵相乘，得到混淆后的状态矩阵，如下图的公式所示：</p>
+<p><img src="10.jpg" alt="img"></p>
+<p>状态矩阵中的第j列(0 ≤j≤3)的列混合可以表示为下图所示：</p>
+<p><img src="11.jpg" alt="img"></p>
+<p>其中，矩阵元素的乘法和加法都是定义在基于伽罗华域GF(2^8)上的二元运算,并不是通常意义上的乘法和加法。有关伽罗华域请点击<a href="http://changsk.top/2020/04/16/Galois-Field/">这里</a>查看。这里涉及到一些信息安全上的数学知识，不过不懂这些知识也行。<strong>其实这种二元运算的加法等价于两个字节的异或，乘法则复杂一点。</strong>对于一个8位的二进制数来说，使用域上的乘法乘以(00000010)等价于左移1位(低位补0)后，再根据情况同(00011011)进行异或运算，设S1 = (a7 a6 a5 a4 a3 a2 a1 a0)，刚0x02 * S1如下图所示：<br><img src="12.jpg" alt="img"></p>
+<p>也就是说，如果a7为1，则进行异或运算，否则不进行。<br>类似地，乘以(00000100)可以拆分成两次乘以(00000010)的运算：</p>
+<p><img src="13.jpg" alt="img"></p>
+<p>乘以(0000 0011)可以拆分成先分别乘以(0000 0001)和(0000 0010)，再将两个乘积异或：</p>
+<p><img src="14.jpg" alt="img"></p>
+<p>因此，我们只需要实现乘以2的函数，其他数值的乘法都可以通过组合来实现。<br>下面举个具体的例子,输入的状态矩阵如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C9</td>
+<td>E5</td>
+<td>FD</td>
+<td>2B</td>
+</tr>
+<tr>
+<td>7A</td>
+<td>F2</td>
+<td>78</td>
+<td>6E</td>
+</tr>
+<tr>
+<td>63</td>
+<td>9C</td>
+<td>26</td>
+<td>67</td>
+</tr>
+<tr>
+<td>B0</td>
+<td>A7</td>
+<td>82</td>
+<td>E5</td>
+</tr>
+</tbody></table>
+<p>下面，进行列混合运算：<br>以第一列的运算为例：</p>
+<p><img src="15.jpg" alt="img"></p>
+<p>其它列的计算就不列举了，列混合后生成的新状态矩阵如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D4</td>
+<td>E7</td>
+<td>CD</td>
+<td>66</td>
+</tr>
+<tr>
+<td>28</td>
+<td>02</td>
+<td>E5</td>
+<td>BB</td>
+</tr>
+<tr>
+<td>BE</td>
+<td>C6</td>
+<td>D6</td>
+<td>BF</td>
+</tr>
+<tr>
+<td>22</td>
+<td>0F</td>
+<td>DF</td>
+<td>A5</td>
+</tr>
+</tbody></table>
+<h3 id="2-列混合逆运算"><a href="#2-列混合逆运算" class="headerlink" title="2.列混合逆运算"></a>2.列混合逆运算</h3><p>逆向列混合变换可由下图的矩阵乘法定义：<br><img src="16.jpg" alt="img"><br>可以验证，逆变换矩阵同正变换矩阵的乘积恰好为单位矩阵。</p>
+<h2 id="四、轮密钥加"><a href="#四、轮密钥加" class="headerlink" title="四、轮密钥加"></a>四、轮密钥加</h2><p>轮密钥加是将128位轮密钥Ki同状态矩阵中的数据进行逐位异或操作，如下图所示。其中，密钥Ki中每个字W[4i],W[4i+1],W[4i+2],W[4i+3]为32位比特字，包含4个字节，他们的生成算法下面在下面介绍。轮密钥加过程可以看成是字逐位异或的结果，也可以看成字节级别或者位级别的操作。也就是说，可以看成S0 S1 S2 S3 组成的32位字与W[4i]的异或运算。</p>
+<p><img src="17.jpg" alt="img"></p>
+<p>轮密钥加的逆运算同正向的轮密钥加运算完全一致，这是因为异或的逆操作是其自身。轮密钥加非常简单，但却能够影响S数组中的每一位。</p>
+<h2 id="密钥扩展"><a href="#密钥扩展" class="headerlink" title="密钥扩展"></a>密钥扩展</h2><p>AES首先将初始密钥输入到一个44的状态矩阵中，如下图所示。</p>
+<p><img src="18.jpg" alt="img"></p>
+<p>这个44矩阵的每一列的4个字节组成一个字，矩阵4列的4个字依次命名为W[0]、W[1]、W[2]和W[3]，它们构成一个以字为单位的数组W。例如，设密钥K为”abcdefghijklmnop”,则K0 = ‘a’,K1 = ‘b’, K2 = ‘c’,K3 = ‘d’,W[0] = “abcd”。<br>接着，对W数组扩充40个新列，构成总共44列的扩展密钥数组。新列以如下的递归方式产生：</p>
+<ol>
+<li>如果i不是4的倍数，那么第i列由如下等式确定：<br>W[i]=W[i-4]⨁W[i-1]</li>
+<li>如果i是4的倍数，那么第i列由如下等式确定：<br>W[i]=W[i-4]⨁T(W[i-1])<br>其中，T是一个有点复杂的函数。<br>函数T由3部分组成：<strong>字循环、字节代换和轮常量异或</strong>，这3部分的作用分别如下。<br>a. 字循环：将1个字中的4个字节循环左移1个字节。即将输入字[b0, b1, b2, b3]变换成[b1,b2,b3,b0]。<br>b. 字节代换：对字循环的结果使用S盒进行字节代换。<br>c. 轮常量异或：将前两步的结果同轮常量Rcon[j]进行异或，其中j表示轮数。<br>轮常量Rcon[j]是一个字，其值见下表。</li>
+</ol>
+<p><img src="19.jpg" alt="img"></p>
+<p>下面举个例子：<br>设初始的128位密钥为：<br>3C A1 0B 21 57 F0 19 16 90 2E 13 80 AC C1 07 BD<br>那么4个初始值为：<br>W[0] = 3C A1 0B 21<br>W[1] = 57 F0 19 16<br>W[2] = 90 2E 13 80<br>W[3] = AC C1 07 BD<br>下面求扩展的第1轮的子密钥(W[4],W[5],W[6],W[7])。<br>由于4是4的倍数，所以：<br>W[4] = W[0] ⨁ T(W[3])<br>T(W[3])的计算步骤如下：</p>
+<ol>
+<li>循环地将W[3]的元素移位：AC C1 07 BD变成C1 07 BD AC;</li>
+<li>将 C1 07 BD AC 作为S盒的输入，输出为78 C5 7A 91;</li>
+<li>将78 C5 7A 91与第一轮轮常量Rcon[1]进行异或运算，将得到79 C5 7A 91，因此，T(W[3])=79 C5 7A 91，故<br>W[4] = 3C A1 0B 21 ⨁ 79 C5 7A 91 = 45 64 71 B0<br>其余的3个子密钥段的计算如下：<br>W[5] = W[1] ⨁ W[4] = 57 F0 19 16 ⨁ 45 64 71 B0 = 12 94 68 A6<br>W[6] = W[2] ⨁ W[5] =90 2E 13 80 ⨁ 12 94 68 A6 = 82 BA 7B 26<br>W[7] = W[3] ⨁ W[6] = AC C1 07 BD ⨁ 82 BA 7B 26 = 2E 7B 7C 9B<br>所以，第一轮的密钥为 45 64 71 B0 12 94 68 A6 82 BA 7B 26 2E 7B 7C 9B。</li>
+</ol>
+<h1 id="AES解密"><a href="#AES解密" class="headerlink" title="AES解密"></a>AES解密</h1><p>在文章开始的图中，有AES解密的流程图，可以对应那个流程图来进行解密。下面介绍的是另一种等价的解密模式，流程图如下图所示。<strong>这种等价的解密模式使得解密过程各个变换的使用顺序同加密过程的顺序一致，只是用逆变换取代原来的变换。</strong></p>
+<p><img src="20.jpg" alt="img"></p>
+<h1 id="AES分组填充模式"><a href="#AES分组填充模式" class="headerlink" title="AES分组填充模式"></a>AES分组填充模式</h1><p>AES采用<strong>分组密码体制</strong>，即AES加密会首先把明文切成一段一段的，而且每段数据的长度要求必须是128位16个字节，如果最后一段不够16个字节了，就需要用Padding来把这段数据填满16个字节，然后分别对每段数据进行加密，最后再把每段加密数据拼起来形成最终的密文。下面介绍几种常用的分组填充模式。</p>
+<h2 id="NoPadding"><a href="#NoPadding" class="headerlink" title="NoPadding"></a><strong>NoPadding</strong></h2><p>NoPadding是指不需要填充，也就是说数据的发送方<strong>肯定会保证最后一段数据也正好是16个字节</strong>。</p>
+<h2 id="ZeroPadding"><a href="#ZeroPadding" class="headerlink" title="ZeroPadding"></a>ZeroPadding</h2><p>ZeroPadding，数据长度不对齐时使用0填充，否则不填充。</p>
+<h2 id="PKCS7Padding"><a href="#PKCS7Padding" class="headerlink" title="PKCS7Padding"></a><strong>PKCS7Padding</strong></h2><p>假设每个区块大小为blockSize（AES当中为16字节，128bit）</p>
+<ul>
+<li>已对齐，填充一个长度为blockSize且每个字节均为blockSize的数据。<blockquote>
+<p>即填充 16 个字节，每个字节的值为 16</p>
+</blockquote>
+</li>
+<li>未对齐，需要补充的字节个数为n，则填充一个长度为n且每个字节均为n的数据。</li>
+</ul>
+<h1 id="AES分组密码工作模式"><a href="#AES分组密码工作模式" class="headerlink" title="AES分组密码工作模式"></a>AES分组密码工作模式</h1><p><strong>AES算法描述怎么加密一个数据块，分组密码工作模式描述了如何重复加密比较长的多个数据块。</strong> 常见的分组密码工作模式有<strong>ECB、CBC、CFB、OFB、CTR</strong>五种，下面通过流程图分别展示了5大模式的分组密码工作加解密的流程。</p>
+<h2 id="ECB"><a href="#ECB" class="headerlink" title="ECB"></a>ECB</h2><p><strong>ECB</strong>(Electronic Codebook, 电子密码本)模式是最简单的加密模式，明文消息被分成固定大小的块（分组），并且每个块被单独加密。每个块的加密和解密都是独立的，且使用相同的方法进行加密，所以<strong>可以进行并行计算</strong>，但是这种方法一旦有一个块被破解，使用相同的方法可以解密所有的明文数据，<strong>安全性比较差。</strong><br>适用于数据较少的情形，加密前需要把明文数据填充到块大小的整倍数。</p>
+<p><img src="21.jpg" alt="img"></p>
+<h2 id="CBC"><a href="#CBC" class="headerlink" title="CBC"></a>CBC</h2><p><strong>CBC</strong>(Cipher Block Chaining, 密码块链)模式中每一个分组要先和前一个分组加密后的数据进行XOR异或操作，然后再进行加密。这样每个密文块依赖该块之前的所有明文块，为了保持每条消息都具有唯一性，第一个数据块进行加密之前需要用初始化向量IV进行异或操作。<strong>CBC模式是一种最常用的加密模式</strong>，它主要缺点是加密是连续的，<strong>不能并行处理</strong>，并且与ECB一样消息块必须填充到块大小的整倍数。</p>
+<p>在链模式如CBC中，每个分组都会影响到下一个分组的加密。这就是为了保证<strong>两个相同的普通文本分组不会生成相同的密文分组</strong>。第一个分组是个特列，因为它前面再没有其他的分组了。链模式允许定义一个额外的称为初始化向量（Initialization Vector, IV）的分组来开始这个链。这个通常会被标成可选的。但你总是需要提供一个。否则，它会用一个全是0的分组，那样会让你的数据<strong>容易受到特定的攻击的侵害</strong>。</p>
+<p><strong>初始向量IV的作用是使加密更加安全可靠，我们使用AES加密时需要主动提供初始向量，而且只需要提供一个初始向量就够了，后面每段数据的加密向量都是前面一段的密文。初始向量IV的长度规定为128位16个字节，初始向量的来源为随机生成。</strong></p>
+<p><img src="22.jpg" alt="img"></p>
+<h2 id="CFB"><a href="#CFB" class="headerlink" title="CFB"></a>CFB</h2><p><strong>CFB</strong>(Cipher Feedback, 密码反馈)模式和CBC模式比较相似，<strong>前一个分组的密文加密后和当前分组的明文XOR异或操作生成当前分组的密文</strong>。CFB模式的解密和CBC模式的加密在流程上其实是非常相似的。</p>
+<p><img src="23.jpg" alt="img"></p>
+<h2 id="OFB"><a href="#OFB" class="headerlink" title="OFB"></a>OFB</h2><p>OFB(Output Feedback, 输出反馈)模式将<strong>分组密码转换为同步流密码</strong>，也就是说可以根据明文长度先独立生成相应长度的流密码。通过流程图可以看出，OFB和CFB非常相似，CFB是前一个分组的密文加密后XOR当前分组明文，OFB是前一个分组与前一个明文块异或之前的流密码XOR当前分组明文。由于异或操作的对称性，OFB模式的解密和加密完全一样的流程。</p>
+<p><img src="24.jpg" alt="img"></p>
+<h2 id="CTR"><a href="#CTR" class="headerlink" title="CTR"></a>CTR</h2><p><strong>CTR</strong>(Counter, 计数器)。在CTR模式中，每次加密时都会生成一个不同的值来作为计数器的初始值，每个分组对应一个逐次累加的计数器，通过对计数器进行加密来生成密钥流，再将密钥流与明文分组进行异或操作得到密文分组。</p>
+<p><img src="25.jpg" alt="img"></p>
+<h1 id="C语言实现"><a href="#C语言实现" class="headerlink" title="C语言实现"></a>C语言实现</h1><p><a href="https://github.com/Tkzccsk/AES128-with-C" target="_blank" rel="noopener">AES-128 C语言实现</a></p>
+<p>秘钥长度为128bit，分组填充模式为PKCS7Padding，提供ECB和CBC两种模式。</p>
+<h1 id="注意的问题"><a href="#注意的问题" class="headerlink" title="注意的问题"></a>注意的问题</h1><p>实际开发中使用AES加密需要注意的地方</p>
+<ul>
+<li>服务端和我们客户端必须使用<strong>一样的密钥和初始向量IV</strong>。</li>
+<li>服务端和我们客户端必须使用<strong>一样的加密模式</strong>。</li>
+<li>服务端和我们客户端必须使用<strong>一样的Padding模式</strong>。</li>
+</ul>
+<p>以上三条有一个不满足，双方就无法完成互相加解密。</p>
+<p>同时针对对称加密<strong>密钥传输问题</strong>这个不足：我们一般采用<strong>RSA+AES加密相结合的方式</strong>，用AES加密数据，而用RSA加密AES的密钥。同时密钥和IV可以随机生成，这要是128位16个字节就行，但是<strong>必须由服务端来生成</strong>，因为如果由我们客户端生成的话，就好比我们客户端存放了非对称加密的私钥一样，这样容易被反编译，不安全，一定要从服务端请求密钥和初始向量IV。</p>
+<p><strong>参考</strong></p>
+<ol>
+<li><p><a href="https://blog.csdn.net/qq_28205153/article/details/55798628" target="_blank" rel="noopener">AES加密算法的详细介绍与实现</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/shaosunrise/article/details/80219950" target="_blank" rel="noopener">AES算法描述及C语言实现</a></p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/3840b344b27c?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation" target="_blank" rel="noopener">第二篇：对称加密及AES加密算法</a></p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="changsk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>changsk</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="http://changsk.top/2020/04/16/AES128/" title="AES加密算法的介绍与C实现">http://changsk.top/2020/04/16/AES128/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AES128/" rel="tag"><i class="fa fa-tag"></i> AES128</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/15/leetcode-54/" rel="next" title="leetcode-54:Spiral Matrix(顺时针旋转打印矩阵)">
+                <i class="fa fa-chevron-left"></i> leetcode-54:Spiral Matrix(顺时针旋转打印矩阵)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/16/Galois-Field/" rel="prev" title="伽罗华域运算及C语言实现">
+                伽罗华域运算及C语言实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/me/me.jpg" alt="changsk">
+            
+              <p class="site-author-name" itemprop="name">changsk</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">223</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">108</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Tkzccsk" title="GitHub &rarr; https://github.com/Tkzccsk" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:2486623255@qq.com" title="E-Mail &rarr; mailto:2486623255@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/tkzc_csk" title="CSDN &rarr; https://blog.csdn.net/tkzc_csk" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#对称加密"><span class="nav-number">1.</span> <span class="nav-text">对称加密</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、什么是对称加密？"><span class="nav-number">1.1.</span> <span class="nav-text">1、什么是对称加密？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、对称加密的工作过程"><span class="nav-number">1.2.</span> <span class="nav-text">2、对称加密的工作过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、对称加密的优点"><span class="nav-number">1.3.</span> <span class="nav-text">3、对称加密的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、对称加密的两大不足"><span class="nav-number">1.4.</span> <span class="nav-text">4、对称加密的两大不足</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AES加密算法简介"><span class="nav-number">2.</span> <span class="nav-text">AES加密算法简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AES的基本结构"><span class="nav-number">3.</span> <span class="nav-text">AES的基本结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、字节代换"><span class="nav-number">3.1.</span> <span class="nav-text">一、字节代换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-字节代换操作"><span class="nav-number">3.1.1.</span> <span class="nav-text">1.字节代换操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-字节代换逆操作"><span class="nav-number">3.1.2.</span> <span class="nav-text">2.字节代换逆操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、行移位"><span class="nav-number">3.2.</span> <span class="nav-text">二、行移位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-行移位操作"><span class="nav-number">3.2.1.</span> <span class="nav-text">1.行移位操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-行移位的逆变换"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.行移位的逆变换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、列混合"><span class="nav-number">3.3.</span> <span class="nav-text">三、列混合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-列混合操作"><span class="nav-number">3.3.1.</span> <span class="nav-text">1.列混合操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-列混合逆运算"><span class="nav-number">3.3.2.</span> <span class="nav-text">2.列混合逆运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、轮密钥加"><span class="nav-number">3.4.</span> <span class="nav-text">四、轮密钥加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥扩展"><span class="nav-number">3.5.</span> <span class="nav-text">密钥扩展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AES解密"><span class="nav-number">4.</span> <span class="nav-text">AES解密</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AES分组填充模式"><span class="nav-number">5.</span> <span class="nav-text">AES分组填充模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NoPadding"><span class="nav-number">5.1.</span> <span class="nav-text">NoPadding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ZeroPadding"><span class="nav-number">5.2.</span> <span class="nav-text">ZeroPadding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PKCS7Padding"><span class="nav-number">5.3.</span> <span class="nav-text">PKCS7Padding</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AES分组密码工作模式"><span class="nav-number">6.</span> <span class="nav-text">AES分组密码工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ECB"><span class="nav-number">6.1.</span> <span class="nav-text">ECB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CBC"><span class="nav-number">6.2.</span> <span class="nav-text">CBC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CFB"><span class="nav-number">6.3.</span> <span class="nav-text">CFB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OFB"><span class="nav-number">6.4.</span> <span class="nav-text">OFB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CTR"><span class="nav-number">6.5.</span> <span class="nav-text">CTR</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C语言实现"><span class="nav-number">7.</span> <span class="nav-text">C语言实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意的问题"><span class="nav-number">8.</span> <span class="nav-text">注意的问题</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changsk</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">896k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">13:35</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+        pbOptions.iconStyle = "box";
+      
+        pbOptions.boxForm = "horizontal";
+      
+        pbOptions.position = "bottomCenter";
+      
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+        flOptions.iconStyle = "box";
+      
+        flOptions.boxForm = "horizontal";
+      
+        flOptions.position = "middleRight";
+      
+        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

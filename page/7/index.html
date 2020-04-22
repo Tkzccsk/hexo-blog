@@ -409,7 +409,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/08/01/sql-where-no-agg/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/09/05/leetcode-350/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -429,7 +429,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/01/sql-where-no-agg/" class="post-title-link" itemprop="url">SQL中where子句中不能出现聚合函数的原因</a>
+                <a href="/2019/09/05/leetcode-350/" class="post-title-link" itemprop="url">leetcode-350:Intersection of Two Arrays II(两个数组的交集)</a>
               
             
           </h1>
@@ -454,192 +454,7 @@
                 
               
 
-              <time title="创建时间：2019-08-01 20:43:35 / 修改时间：23:04:52" itemprop="dateCreated datePublished" datetime="2019-08-01T20:43:35+08:00">2019-08-01</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">2.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文转载自：<a href="https://blog.csdn.net/zhaomengszu/article/details/80784096" target="_blank" rel="noopener">SQL中where子句中不能出现聚合函数的原因</a></p>
-</blockquote>
-<p>首先我们应该熟悉什么聚合函数：</p>
-<p>例如<code>SUM()</code>,<code>MIN()</code>,<code>Max()</code>这类的，我们称作是<strong>聚合函数</strong>。</p>
-<p>那么我们<strong>不能在where子句中使用这些函数</strong>，为什么呢？</p>
-<p>聚集函数也叫列函数，它们都是<strong>基于整列数据进行计算</strong>的，而where子句则是<strong>对数据行进行过滤的</strong>，在筛选过程中依赖“基于已经筛选完毕的数据得出的计算结果”是一种悖论，这是行不通的。更简单地说，<strong>因为聚集函数要对全列数据进行计算，因而使用它的前提是：结果集已经确定！</strong></p>
-<p><strong>而where子句还处于“确定”结果集的过程中，因而不能使用聚集函数。</strong></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/01/sql-where-no-agg/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/07/27/mysql-index-lock/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changsk">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="changsk's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/27/mysql-index-lock/" class="post-title-link" itemprop="url">数据库两大神器【索引和锁】</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-27 21:08:31 / 修改时间：21:34:07" itemprop="dateCreated datePublished" datetime="2019-07-27T21:08:31+08:00">2019-07-27</time>
+              <time title="创建时间：2019-09-05 15:27:02 / 修改时间：15:53:19" itemprop="dateCreated datePublished" datetime="2019-09-05T15:27:02+08:00">2019-09-05</time>
             
 
             
@@ -661,7 +476,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Leetcode/" itemprop="url" rel="index"><span itemprop="name">Leetcode</span></a></span>
 
                 
                 
@@ -690,7 +505,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">24k</span>
+                <span title="本文字数">11k</span>
               
 
               
@@ -704,7 +519,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">22 分钟</span>
+                <span title="阅读时长">10 分钟</span>
               
             </div>
           
@@ -725,19 +540,11 @@
 
       
         
-          <p>本文转载自：<a href="https://juejin.im/post/5b55b842f265da0f9e589e79" target="_blank" rel="noopener">数据库两大神器【索引和锁】</a></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p>只有光头才能变强</p>
-</blockquote>
-<p><strong>索引和锁</strong>在数据库中可以说是非常重要的知识点了，在面试中也会经常会被问到的。</p>
-<p>本文<strong>力求简单讲清每个知识点</strong>，希望大家看完能有所收获</p>
-<blockquote>
-<p>声明：如果没有说明具体的数据库和存储引擎，<strong>默认指的是MySQL中的InnoDB存储引擎</strong></p>
-</blockquote>
+          <p>题目链接：<a href="https://leetcode.com/problems/intersection-of-two-arrays-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/intersection-of-two-arrays-ii/</a></p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/07/27/mysql-index-lock/#more" rel="contents">
+              <a class="btn" href="/2019/09/05/leetcode-350/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -798,7 +605,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/07/26/leetcode-188/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/09/03/leetcode-51/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -818,7 +625,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/26/leetcode-188/" class="post-title-link" itemprop="url">leetcode-188:Best Time to Buy and Sell Stock IV</a>
+                <a href="/2019/09/03/leetcode-51/" class="post-title-link" itemprop="url">leetcode-51:N-Queens(N-皇后问题)</a>
               
             
           </h1>
@@ -843,7 +650,399 @@
                 
               
 
-              <time title="创建时间：2019-07-26 22:47:53" itemprop="dateCreated datePublished" datetime="2019-07-26T22:47:53+08:00">2019-07-26</time>
+              <time title="创建时间：2019-09-03 20:41:55 / 修改时间：22:37:30" itemprop="dateCreated datePublished" datetime="2019-09-03T20:41:55+08:00">2019-09-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Leetcode/" itemprop="url" rel="index"><span itemprop="name">Leetcode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">7.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>题目链接：<a href="https://leetcode.com/problems/n-queens/" target="_blank" rel="noopener">https://leetcode.com/problems/n-queens/</a></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/03/leetcode-51/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/09/03/jianzhioffer-num-of-1-binary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/03/jianzhioffer-num-of-1-binary/" class="post-title-link" itemprop="url">剑指offer:二进制中1的个数</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-03 17:41:30 / 修改时间：17:46:27" itemprop="dateCreated datePublished" datetime="2019-09-03T17:41:30+08:00">2019-09-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/剑指offer/" itemprop="url" rel="index"><span itemprop="name">剑指offer</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">8.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/03/jianzhioffer-num-of-1-binary/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/08/29/leetcode-300/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/29/leetcode-300/" class="post-title-link" itemprop="url">leetcode-300:Longest Increasing Subsequence(LIS,最长上升子序列)</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-29 23:20:14" itemprop="dateCreated datePublished" datetime="2019-08-29T23:20:14+08:00">2019-08-29</time>
             
 
             
@@ -860,7 +1059,423 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-09-17 22:14:56" itemprop="dateModified" datetime="2019-09-17T22:14:56+08:00">2019-09-17</time>
+                <time title="修改时间：2019-08-30 09:45:52" itemprop="dateModified" datetime="2019-08-30T09:45:52+08:00">2019-08-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Leetcode-Algorithm/" itemprop="url" rel="index"><span itemprop="name">Leetcode Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">11k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">10 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>题目链接：<a href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank" rel="noopener">https://leetcode.com/problems/longest-increasing-subsequence/</a></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/29/leetcode-300/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/08/26/subarray-max-sum/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/26/subarray-max-sum/" class="post-title-link" itemprop="url">子矩阵的最大累加和</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-26 14:05:18" itemprop="dateCreated datePublished" datetime="2019-08-26T14:05:18+08:00">2019-08-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-27 10:15:05" itemprop="dateModified" datetime="2019-08-27T10:15:05+08:00">2019-08-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个矩阵matrix，其中的值有正负0，返回子矩阵的最大累加和。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/26/subarray-max-sum/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/08/25/leetcode-547/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/25/leetcode-547/" class="post-title-link" itemprop="url">leetcode-547:Friend Circles(并查集的应用)</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-25 23:17:14" itemprop="dateCreated datePublished" datetime="2019-08-25T23:17:14+08:00">2019-08-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-14 21:57:31" itemprop="dateModified" datetime="2019-09-14T21:57:31+08:00">2019-09-14</time>
               
             
           </span>
@@ -948,11 +1563,11 @@
 
       
         
-          <p>题目链接：<a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/" target="_blank" rel="noopener">https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/</a></p>
+          <p>题目链接：<a href="https://leetcode.com/problems/friend-circles/" target="_blank" rel="noopener">https://leetcode.com/problems/friend-circles/</a></p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/07/26/leetcode-188/#more" rel="contents">
+              <a class="btn" href="/2019/08/25/leetcode-547/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1013,7 +1628,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/07/26/java-annotation/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/08/25/preorder-inorder-build-binary-tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -1033,7 +1648,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/26/java-annotation/" class="post-title-link" itemprop="url">JAVA 注解的基本原理</a>
+                <a href="/2019/08/25/preorder-inorder-build-binary-tree/" class="post-title-link" itemprop="url">剑指offer:给定二叉树的前序和中序，重建二叉树</a>
               
             
           </h1>
@@ -1058,7 +1673,7 @@
                 
               
 
-              <time title="创建时间：2019-07-26 17:51:16 / 修改时间：18:50:30" itemprop="dateCreated datePublished" datetime="2019-07-26T17:51:16+08:00">2019-07-26</time>
+              <time title="创建时间：2019-08-25 15:37:50 / 修改时间：15:40:09" itemprop="dateCreated datePublished" datetime="2019-08-25T15:37:50+08:00">2019-08-25</time>
             
 
             
@@ -1080,7 +1695,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/剑指offer/" itemprop="url" rel="index"><span itemprop="name">剑指offer</span></a></span>
 
                 
                 
@@ -1109,7 +1724,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">12k</span>
+                <span title="本文字数">5.3k</span>
               
 
               
@@ -1123,7 +1738,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">11 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -1144,17 +1759,11 @@
 
       
         
-          <blockquote>
-<p>本文转载自：<a href="https://juejin.im/post/5b45bd715188251b3a1db54f#heading-3" target="_blank" rel="noopener">JAVA 注解的基本原理</a></p>
-</blockquote>
-<p>以前，『XML』是各大框架的青睐者，它以松耦合的方式完成了框架中几乎所有的配置，但是随着项目越来越庞大，『XML』的内容也越来越复杂，维护成本变高。</p>
-<p>于是就有人提出来一种标记式高耦合的配置方式，『注解』。方法上可以进行注解，类上也可以注解，字段属性上也可以注解，反正几乎需要配置的地方都可以进行注解。</p>
-<p>关于『注解』和『XML』两种不同的配置模式，争论了好多年了，各有各的优劣，注解可以提供更大的便捷性，易于维护修改，但耦合度高，而 XML 相对于注解则是相反的。</p>
-<p>追求低耦合就要抛弃高效率，追求效率必然会遇到耦合。本文意不再辨析两者谁优谁劣，而在于以最简单的语言介绍注解相关的基本内容。</p>
+          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/07/26/java-annotation/#more" rel="contents">
+              <a class="btn" href="/2019/08/25/preorder-inorder-build-binary-tree/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1215,7 +1824,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/07/25/os-memory-management/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/08/23/leetcode-40/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -1235,7 +1844,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/25/os-memory-management/" class="post-title-link" itemprop="url">操作系统之内存管理</a>
+                <a href="/2019/08/23/leetcode-40/" class="post-title-link" itemprop="url">leetcode-40:Combination Sum II</a>
               
             
           </h1>
@@ -1260,405 +1869,7 @@
                 
               
 
-              <time title="创建时间：2019-07-25 21:04:52 / 修改时间：21:31:12" itemprop="dateCreated datePublished" datetime="2019-07-25T21:04:52+08:00">2019-07-25</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">7.7k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">7 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文转载自：<a href="https://juejin.im/post/5988330c5188256dd1666626" target="_blank" rel="noopener">计算机系统012 - 操作系统之内存管理</a></p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/07/25/os-memory-management/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/07/25/raft/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changsk">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="changsk's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/25/raft/" class="post-title-link" itemprop="url">Raft算法原理</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-25 10:04:46 / 修改时间：10:18:23" itemprop="dateCreated datePublished" datetime="2019-07-25T10:04:46+08:00">2019-07-25</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">19k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">17 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文转载自：<a href="https://www.codedump.info/post/20180921-raft/" target="_blank" rel="noopener">Raft算法原理</a></p>
-</blockquote>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>关于Raft算法，有两篇经典的论文，一篇是《In search of an Understandable Consensus Algorithm》，这是作者最开始讲述Raft算法原理的论文，但是这篇论文太简单了，很多算法的细节没有涉及到。更详细的论文是《CONSENSUS: BRIDGING THEORY AND PRACTICE》，除了包括第一篇论文的内容以外，还加上了很多细节的描述。在我阅读完etcd raft算法库的实现之后，发现这个库的代码基本就是按照后一篇论文来写的，甚至有部分测试用例的注释里也写明了是针对这篇论文的某一个小节的情况做验证。</p>
-<p>这篇文章做为我后续分析etcd raft算法的前导文章，将结合后一篇论文加上一些自己的演绎和理解来讲解Raft算法的原理。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/07/25/raft/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/07/24/leetcode-215/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changsk">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="changsk's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/24/leetcode-215/" class="post-title-link" itemprop="url">leetcode-215:Kth Largest Element in an Array(数组中第K大的数)</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-24 18:03:01 / 修改时间：21:15:42" itemprop="dateCreated datePublished" datetime="2019-07-24T18:03:01+08:00">2019-07-24</time>
+              <time title="创建时间：2019-08-23 16:35:53 / 修改时间：16:38:15" itemprop="dateCreated datePublished" datetime="2019-08-23T16:35:53+08:00">2019-08-23</time>
             
 
             
@@ -1709,7 +1920,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">12k</span>
+                <span title="本文字数">5.6k</span>
               
 
               
@@ -1723,7 +1934,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">11 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -1744,11 +1955,11 @@
 
       
         
-          <p>题目链接：<a href="https://leetcode.com/problems/kth-largest-element-in-an-array/" target="_blank" rel="noopener">https://leetcode.com/problems/kth-largest-element-in-an-array/</a></p>
+          <p>题目链接：<a href="https://leetcode.com/problems/combination-sum-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/combination-sum-ii/</a></p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/07/24/leetcode-215/#more" rel="contents">
+              <a class="btn" href="/2019/08/23/leetcode-40/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1809,7 +2020,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/07/23/leetcode-199/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/08/23/leetcode-39/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -1829,7 +2040,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/23/leetcode-199/" class="post-title-link" itemprop="url">leetcode-199:Binary Tree Right Side View</a>
+                <a href="/2019/08/23/leetcode-39/" class="post-title-link" itemprop="url">leetcode-39:Combination Sum</a>
               
             
           </h1>
@@ -1854,7 +2065,7 @@
                 
               
 
-              <time title="创建时间：2019-07-23 21:26:10 / 修改时间：21:41:20" itemprop="dateCreated datePublished" datetime="2019-07-23T21:26:10+08:00">2019-07-23</time>
+              <time title="创建时间：2019-08-23 16:32:53 / 修改时间：16:35:41" itemprop="dateCreated datePublished" datetime="2019-08-23T16:32:53+08:00">2019-08-23</time>
             
 
             
@@ -1905,7 +2116,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.2k</span>
+                <span title="本文字数">5k</span>
               
 
               
@@ -1919,7 +2130,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">6 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -1940,11 +2151,11 @@
 
       
         
-          <p>题目链接：<a href="https://leetcode.com/problems/binary-tree-right-side-view/" target="_blank" rel="noopener">https://leetcode.com/problems/binary-tree-right-side-view/</a></p>
+          <p>题目链接：<a href="https://leetcode.com/problems/combination-sum/" target="_blank" rel="noopener">https://leetcode.com/problems/combination-sum/</a></p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/07/23/leetcode-199/#more" rel="contents">
+              <a class="btn" href="/2019/08/23/leetcode-39/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2005,7 +2216,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/07/23/leetcode-114/">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/08/23/leetcode-90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changsk">
@@ -2025,7 +2236,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/23/leetcode-114/" class="post-title-link" itemprop="url">leetcode-114:Flatten Binary Tree to Linked List</a>
+                <a href="/2019/08/23/leetcode-90/" class="post-title-link" itemprop="url">leetcode-90:Subsets II</a>
               
             
           </h1>
@@ -2050,7 +2261,7 @@
                 
               
 
-              <time title="创建时间：2019-07-23 21:00:26 / 修改时间：21:05:41" itemprop="dateCreated datePublished" datetime="2019-07-23T21:00:26+08:00">2019-07-23</time>
+              <time title="创建时间：2019-08-23 16:26:34 / 修改时间：16:28:29" itemprop="dateCreated datePublished" datetime="2019-08-23T16:26:34+08:00">2019-08-23</time>
             
 
             
@@ -2101,7 +2312,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.5k</span>
+                <span title="本文字数">4.1k</span>
               
 
               
@@ -2136,209 +2347,11 @@
 
       
         
-          <p>题目链接：<a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/" target="_blank" rel="noopener">https://leetcode.com/problems/flatten-binary-tree-to-linked-list/</a></p>
+          <p>题目链接：<a href="https://leetcode.com/problems/subsets-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/subsets-ii/</a></p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/07/23/leetcode-114/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://changsk.top/2019/07/23/linux-find/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changsk">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="changsk's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/23/linux-find/" class="post-title-link" itemprop="url">Linux下各种查找命令（find, grep, which, whereis, locate）</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-23 10:22:13 / 修改时间：10:49:31" itemprop="dateCreated datePublished" datetime="2019-07-23T10:22:13+08:00">2019-07-23</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">7.4k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">7 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文转载自：<a href="https://blog.csdn.net/wzzfeitian/article/details/40985549" target="_blank" rel="noopener">Linux下各种查找命令（find, grep, which, whereis, locate）</a></p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/07/23/linux-find/#more" rel="contents">
+              <a class="btn" href="/2019/08/23/leetcode-90/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2388,7 +2401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2433,7 +2446,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-count">251</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2737,7 +2750,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">108</span>
+                      
+                    
+                    <span class="site-state-item-count">109</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2843,7 +2858,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">904k</span>
+    <span title="站点总字数">957k</span>
   
 
   
@@ -2854,7 +2869,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">13:42</span>
+    <span title="站点阅读时长">14:30</span>
   
 </div>
 

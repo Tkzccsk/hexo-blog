@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-438:Find All Anagrams in a String]]></title>
+    <url>%2F2020%2F05%2F16%2Fleetcode-438%2F</url>
+    <content type="text"><![CDATA[题目链接：Find All Anagrams in a String 题目描述 题目难度：Medium Given a string s and a non-empty string p, find all the start indices of p‘s anagrams in s. Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100. The order of output does not matter. Example 1: 123456789Input:s: &quot;cbaebabacd&quot; p: &quot;abc&quot;Output:[0, 6]Explanation:The substring with start index = 0 is &quot;cba&quot;, which is an anagram of &quot;abc&quot;.The substring with start index = 6 is &quot;bac&quot;, which is an anagram of &quot;abc&quot;. Example 2: 12345678910Input:s: &quot;abab&quot; p: &quot;ab&quot;Output:[0, 1, 2]Explanation:The substring with start index = 0 is &quot;ab&quot;, which is an anagram of &quot;ab&quot;.The substring with start index = 1 is &quot;ba&quot;, which is an anagram of &quot;ab&quot;.The substring with start index = 2 is &quot;ab&quot;, which is an anagram of &quot;ab&quot;. Solution1234567891011121314151617public class Solution &#123; public List&lt;Integer&gt; findAnagrams(String s, String p) &#123; List&lt;Integer&gt; list = new ArrayList&lt;&gt;(); if (s == null || s.length() == 0 || p == null || p.length() == 0) return list; int[] hash = new int[256]; //character hash for (char c : p.toCharArray()) &#123; hash[c]++; &#125; int left = 0, right = 0, count = p.length(); while (right &lt; s.length()) &#123; if (hash[s.charAt(right++)]-- &gt;= 1) count--; if (count == 0) list.add(left); if (right - left == p.length() &amp;&amp; hash[s.charAt(left++)]++ &gt;= 0) count++; &#125; return list; &#125;&#125;]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-208:Implement Trie (Prefix Tree,前缀树或者字典树)]]></title>
     <url>%2F2020%2F04%2F22%2Fleetcode-208%2F</url>
     <content type="text"><![CDATA[题目链接：Prefix Tree 题目描述 题目难度：Medium Implement a trie with insert, search, and startsWith methods. Example: 12345678Trie trie = new Trie();trie.insert(&quot;apple&quot;);trie.search(&quot;apple&quot;); // returns truetrie.search(&quot;app&quot;); // returns falsetrie.startsWith(&quot;app&quot;); // returns truetrie.insert(&quot;app&quot;); trie.search(&quot;app&quot;); // returns true Note: You may assume that all inputs are consist of lowercase letters a-z. All inputs are guaranteed to be non-empty strings. Solution参考：https://leetcode.com/problems/implement-trie-prefix-tree/discuss/58832/AC-JAVA-solution-simple-using-single-array 1234567891011121314151617181920212223242526272829303132333435363738394041424344class TrieNode &#123; public boolean isWord; public TrieNode[] children = new TrieNode[26]; public TrieNode() &#123;&#125;&#125;public class Trie &#123; private TrieNode root; public Trie() &#123; root = new TrieNode(); &#125; public void insert(String word) &#123; TrieNode ws = root; for(int i = 0; i &lt; word.length(); i++)&#123; char c = word.charAt(i); if(ws.children[c - 'a'] == null)&#123; ws.children[c - 'a'] = new TrieNode(); &#125; ws = ws.children[c - 'a']; &#125; ws.isWord = true; &#125; public boolean search(String word) &#123; TrieNode ws = root; for(int i = 0; i &lt; word.length(); i++)&#123; char c = word.charAt(i); if(ws.children[c - 'a'] == null) return false; ws = ws.children[c - 'a']; &#125; return ws.isWord; &#125; public boolean startsWith(String prefix) &#123; TrieNode ws = root; for(int i = 0; i &lt; prefix.length(); i++)&#123; char c = prefix.charAt(i); if(ws.children[c - 'a'] == null) return false; ws = ws.children[c - 'a']; &#125; return true; &#125;&#125;]]></content>
@@ -2331,8 +2343,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>HashMap</tag>
         <tag>java</tag>
+        <tag>HashMap</tag>
       </tags>
   </entry>
   <entry>
@@ -2486,8 +2498,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>HashMap</tag>
         <tag>java</tag>
+        <tag>HashMap</tag>
       </tags>
   </entry>
   <entry>
@@ -2883,6 +2895,11 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Error JAVA_HOME is incorrectly set]]></title>
+    <url>%2F2019%2F06%2F11%2FError_JAVA_HOME_is%20_incorrectly_set%2F</url>
+    <content type="text"><![CDATA[在安装、调试、运行Hexo的过程中，出现了以下错误： Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd 然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的： 然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量： 发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图： 或者也可以将jdk装到其他不存在空格的目录下。]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[hexo 的常用命令]]></title>
     <url>%2F2019%2F06%2F11%2Fhexo-command%2F</url>
     <content type="text"><![CDATA[常用 hexo 命令hexo new “postName” #新建文章hexo new page “pageName” #新建页面hexo generate #生成静态页面至public目录hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）hexo deploy #将.deploy目录部署到GitHubhexo help #查看帮助hexo version #查看Hexo的版本 缩写hexo n == hexo newhexo g == hexo generatehexo s == hexo serverhexo d == hexo deploy 组合命令：hexo s -g #生成并本地预览hexo d -g #生成并上传hexo clear # 删除无用 tags 和 categorieshexo clean &amp; hexo d -g # 清除缓存 生成静态页面并发布 给文章添加标签和分类1234567title: hexo 的常用命令date: 2019-06-11 11:43:56tags: - hexo # 文章标签- aaa- bbbcategories: hexo # 该文章类别为 categories\hexo 效果图：]]></content>
@@ -2892,11 +2909,6 @@
       <tags>
         <tag>hexo</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Error JAVA_HOME is incorrectly set]]></title>
-    <url>%2F2019%2F06%2F11%2FError_JAVA_HOME_is%20_incorrectly_set%2F</url>
-    <content type="text"><![CDATA[在安装、调试、运行Hexo的过程中，出现了以下错误： Error: JAVA_HOME is incorrectly set. Please update D:\software\software\hadoop3\hadoop-3.0.2\etc\hadoop\hadoop-env.cmd 然后找到对应的目录，打开hadoop-env.cmd，发现其中的 JAVA_HOME 是这样的： 然后打开 terminal，查询 java 版本 以及 JAVA_HOME 环境变量： 发现 JAVA_HOME 已正确配置。那么问题究竟出在哪里？经网上查阅，因为Program Files中存在空格，所以出现错误，只需要用PROGRA~1代替Program Files即可。如图： 或者也可以将jdk装到其他不存在空格的目录下。]]></content>
   </entry>
   <entry>
     <title><![CDATA[Hello World]]></title>

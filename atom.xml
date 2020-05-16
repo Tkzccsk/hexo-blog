@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://changsk.top/"/>
-  <updated>2020-04-22T08:49:45.574Z</updated>
+  <updated>2020-05-16T13:37:46.734Z</updated>
   <id>http://changsk.top/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-438:Find All Anagrams in a String</title>
+    <link href="http://changsk.top/2020/05/16/leetcode-438/"/>
+    <id>http://changsk.top/2020/05/16/leetcode-438/</id>
+    <published>2020-05-16T13:34:31.000Z</published>
+    <updated>2020-05-16T13:37:46.734Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目链接：<a href="https://leetcode.com/problems/find-all-anagrams-in-a-string/" target="_blank" rel="noopener">Find All Anagrams in a String</a></p><a id="more"></a><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote><p>题目难度：Medium</p></blockquote><p>Given a string <strong>s</strong> and a <strong>non-empty</strong> string <strong>p</strong>, find all the start indices of <strong>p</strong>‘s anagrams in <strong>s</strong>.</p><p>Strings consists of lowercase English letters only and the length of both strings <strong>s</strong> and <strong>p</strong> will not be larger than 20,100.</p><p>The order of output does not matter.</p><p><strong>Example 1:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Input:</span><br><span class="line">s: &quot;cbaebabacd&quot; p: &quot;abc&quot;</span><br><span class="line"></span><br><span class="line">Output:</span><br><span class="line">[0, 6]</span><br><span class="line"></span><br><span class="line">Explanation:</span><br><span class="line">The substring with start index = 0 is &quot;cba&quot;, which is an anagram of &quot;abc&quot;.</span><br><span class="line">The substring with start index = 6 is &quot;bac&quot;, which is an anagram of &quot;abc&quot;.</span><br></pre></td></tr></table></figure><p><strong>Example 2:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input:</span><br><span class="line">s: &quot;abab&quot; p: &quot;ab&quot;</span><br><span class="line"></span><br><span class="line">Output:</span><br><span class="line">[0, 1, 2]</span><br><span class="line"></span><br><span class="line">Explanation:</span><br><span class="line">The substring with start index = 0 is &quot;ab&quot;, which is an anagram of &quot;ab&quot;.</span><br><span class="line">The substring with start index = 1 is &quot;ba&quot;, which is an anagram of &quot;ab&quot;.</span><br><span class="line">The substring with start index = 2 is &quot;ab&quot;, which is an anagram of &quot;ab&quot;.</span><br></pre></td></tr></table></figure><h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">findAnagrams</span><span class="params">(String s, String p)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.length() == <span class="number">0</span> || p == <span class="keyword">null</span> || p.length() == <span class="number">0</span>) <span class="keyword">return</span> list;</span><br><span class="line">    <span class="keyword">int</span>[] hash = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">256</span>]; <span class="comment">//character hash</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">char</span> c : p.toCharArray()) &#123;</span><br><span class="line">        hash[c]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = <span class="number">0</span>, count = p.length();</span><br><span class="line">    <span class="keyword">while</span> (right &lt; s.length()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (hash[s.charAt(right++)]-- &gt;= <span class="number">1</span>) count--; </span><br><span class="line">        <span class="keyword">if</span> (count == <span class="number">0</span>) list.add(left);</span><br><span class="line">        <span class="keyword">if</span> (right - left == p.length() &amp;&amp; hash[s.charAt(left++)]++ &gt;= <span class="number">0</span>) count++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目链接：&lt;a href=&quot;https://leetcode.com/problems/find-all-anagrams-in-a-string/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Find All Anagrams in a String&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Leetcode" scheme="http://changsk.top/categories/Leetcode/"/>
+    
+    
+      <category term="Algorithm" scheme="http://changsk.top/tags/Algorithm/"/>
+    
+      <category term="Leetcode" scheme="http://changsk.top/tags/Leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode-208:Implement Trie (Prefix Tree,前缀树或者字典树)</title>
@@ -458,30 +482,6 @@
     <summary type="html">
     
       &lt;p&gt;题目链接：&lt;a href=&quot;https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Find Minimum in Rotated Sorted Array II&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Leetcode" scheme="http://changsk.top/categories/Leetcode/"/>
-    
-    
-      <category term="Algorithm" scheme="http://changsk.top/tags/Algorithm/"/>
-    
-      <category term="Leetcode" scheme="http://changsk.top/tags/Leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-153:Find Minimum in Rotated Sorted Array(旋转数组中的最小元素)</title>
-    <link href="http://changsk.top/2020/04/18/leetcode-153/"/>
-    <id>http://changsk.top/2020/04/18/leetcode-153/</id>
-    <published>2020-04-18T05:42:36.000Z</published>
-    <updated>2020-04-18T05:52:01.241Z</updated>
-    
-    <content type="html"><![CDATA[<p>题目链接：<a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank" rel="noopener">Find Minimum in Rotated Sorted Array</a></p><a id="more"></a><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote><p>题目难度：Medium</p></blockquote><p>Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.</p><p>(i.e.,  <code>[0,1,2,4,5,6,7]</code> might become  <code>[4,5,6,7,0,1,2]</code>).</p><p>Find the minimum element.</p><p>You may assume no duplicate exists in the array.</p><p><strong>Example 1:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [3,4,5,1,2] </span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure><p><strong>Example 2:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [4,5,6,7,0,1,2]</span><br><span class="line">Output: 0</span><br></pre></td></tr></table></figure><h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><p>参考：<a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/discuss/48487/Java-solution-with-binary-search" target="_blank" rel="noopener">Java solution with binary search</a></p><p>The minimum element must satisfy one of two conditions: <strong>1) If rotate, A[min] &lt; A[min - 1]; 2) If not, A[0].</strong> Therefore, we can use binary search: check the middle element, if it is less than previous one, then it is minimum. If not, there are 2 conditions as well: If it is greater than both left and right element, then minimum element should be on its right, otherwise on its left.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums == <span class="keyword">null</span> || nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (nums.length == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, end = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (start &lt; end) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (mid &gt; <span class="number">0</span> &amp;&amp; nums[mid] &lt; nums[mid - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">return</span> nums[mid];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[start] &lt;= nums[mid] &amp;&amp; nums[mid] &gt; nums[end]) &#123;</span><br><span class="line">                start = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                end = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[start];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;题目链接：&lt;a href=&quot;https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Find Minimum in Rotated Sorted Array&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     

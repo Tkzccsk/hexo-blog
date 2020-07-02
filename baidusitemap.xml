@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://changsk.top/2019/09/22/union-find/</loc>
+    <lastmod>2020-07-02</lastmod>
+  </url>  <url>
     <loc>http://changsk.top/2020/06/27/shell%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2020-06-27</lastmod>
   </url>  <url>
@@ -123,9 +126,6 @@
   </url>  <url>
     <loc>http://changsk.top/2019/09/28/leetcode-134/</loc>
     <lastmod>2019-09-28</lastmod>
-  </url>  <url>
-    <loc>http://changsk.top/2019/09/22/union-find/</loc>
-    <lastmod>2019-09-27</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/09/25/leetcode-132/</loc>
     <lastmod>2019-09-27</lastmod>

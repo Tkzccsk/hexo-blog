@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://changsk.top/2020/07/15/VPN-NAT/</loc>
+    <lastmod>2020-07-19</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2019/09/28/leetcode-134/</loc>
+    <lastmod>2020-07-19</lastmod>
+  </url>  <url>
+    <loc>http://changsk.top/2020/07/16/leetcode-746/</loc>
+    <lastmod>2020-07-16</lastmod>
+  </url>  <url>
     <loc>http://changsk.top/2020/07/12/SSL-TLS/</loc>
     <lastmod>2020-07-12</lastmod>
   </url>  <url>
@@ -144,9 +153,6 @@
   </url>  <url>
     <loc>http://changsk.top/2019/09/28/leetcode-139/</loc>
     <lastmod>2019-09-29</lastmod>
-  </url>  <url>
-    <loc>http://changsk.top/2019/09/28/leetcode-134/</loc>
-    <lastmod>2019-09-28</lastmod>
   </url>  <url>
     <loc>http://changsk.top/2019/09/25/leetcode-132/</loc>
     <lastmod>2019-09-27</lastmod>

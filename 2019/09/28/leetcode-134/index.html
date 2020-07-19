@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="changsk&#39;s blogs">
 <meta property="og:description" content="题目链接：https://leetcode.com/problems/gas-station/">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-28T04:10:09.609Z">
+<meta property="og:updated_time" content="2020-07-19T13:57:17.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode-134:Gas Station(加油站)">
 <meta name="twitter:description" content="题目链接：https://leetcode.com/problems/gas-station/">
@@ -455,12 +455,24 @@
                 
               
 
-              <time title="创建时间：2019-09-28 10:43:59 / 修改时间：12:10:09" itemprop="dateCreated datePublished" datetime="2019-09-28T10:43:59+08:00">2019-09-28</time>
+              <time title="创建时间：2019-09-28 10:43:59" itemprop="dateCreated datePublished" datetime="2019-09-28T10:43:59+08:00">2019-09-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-07-19 21:57:17" itemprop="dateModified" datetime="2020-07-19T21:57:17+08:00">2020-07-19</time>
               
             
           </span>
@@ -520,7 +532,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">7.3k</span>
+                <span title="本文字数">7.1k</span>
               
 
               
@@ -534,7 +546,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">7 分钟</span>
+                <span title="阅读时长">6 分钟</span>
               
             </div>
           
@@ -587,8 +599,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">canCompleteCircuit</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; &amp;gas, vector&lt;<span class="keyword">int</span>&gt; &amp;cost)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> start = <span class="number">0</span>; <span class="comment">// 起始位置</span></span><br><span class="line">  <span class="keyword">int</span> remain = <span class="number">0</span>; <span class="comment">// 当前剩余燃料</span></span><br><span class="line">  <span class="keyword">int</span> debt = <span class="number">0</span>; <span class="comment">// 前面没能走完的路上欠的债</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; gas.size(); i++) &#123;</span><br><span class="line">    remain += gas[i] - cost[i];</span><br><span class="line">    <span class="keyword">if</span> (remain &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      debt += remain;</span><br><span class="line">      start = i + <span class="number">1</span>;</span><br><span class="line">      remain = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> remain + debt &gt;= <span class="number">0</span> ? start : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>参考：</p>
-<h1 id="Leetcode-134-Gas-station"><a href="#Leetcode-134-Gas-station" class="headerlink" title="Leetcode#134 Gas station"></a><a href="https://www.cnblogs.com/boring09/p/4248482.html" target="_blank" rel="noopener">Leetcode#134 Gas station</a></h1></blockquote>
+<p>参考：<br><a href="https://www.cnblogs.com/boring09/p/4248482.html" target="_blank" rel="noopener">Leetcode134 Gas station</a></p>
+</blockquote>
 
       
     </div>
@@ -779,7 +791,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-count">263</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -791,8 +803,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -1105,7 +1115,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">116</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">118</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1194,7 +1208,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Leetcode-134-Gas-station"><span class="nav-number"></span> <span class="nav-text">Leetcode#134 Gas station</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li></ol></div>
             
 
           </div>
@@ -1228,7 +1242,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">997k</span>
+    <span title="站点总字数">1000k</span>
   
 
   
@@ -1239,7 +1253,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">15:06</span>
+    <span title="站点阅读时长">15:09</span>
   
 </div>
 

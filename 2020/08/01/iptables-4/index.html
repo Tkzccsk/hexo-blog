@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文转载自：iptables详解（4）：iptables匹配条件总结之一">
+<meta name="keywords" content="iptables">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iptables详解（4）：iptables匹配条件总结之一">
+<meta property="og:url" content="http://changsk.top/2020/08/01/iptables-4/index.html">
+<meta property="og:site_name" content="changsk&#39;s blogs">
+<meta property="og:description" content="本文转载自：iptables详解（4）：iptables匹配条件总结之一">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/1.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/2.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/3.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/4.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/5.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/6.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/7.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/8.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/9.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/10.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/11.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/12.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/13.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/14.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/15.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/16.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/17.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/18.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/19.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/20.png">
+<meta property="og:image" content="http://changsk.top/2020/08/01/iptables-4/21.png">
+<meta property="og:updated_time" content="2020-08-01T14:09:32.963Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iptables详解（4）：iptables匹配条件总结之一">
+<meta name="twitter:description" content="本文转载自：iptables详解（4）：iptables匹配条件总结之一">
+<meta name="twitter:image" content="http://changsk.top/2020/08/01/iptables-4/1.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="changsk's blogs" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://changsk.top/2020/08/01/iptables-4/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>iptables详解（4）：iptables匹配条件总结之一 | changsk's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">changsk's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">chang.sk@foxmail.com</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-collection">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/collection/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>收藏</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/Tkzccsk" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://changsk.top/2020/08/01/iptables-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changsk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="changsk's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iptables详解（4）：iptables匹配条件总结之一
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-08-01 20:25:06 / 修改时间：22:09:32" itemprop="dateCreated datePublished" datetime="2020-08-01T20:25:06+08:00">2020-08-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机网络/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">9.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">9 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文转载自：<a href="http://www.zsythink.net/archives/1544" target="_blank" rel="noopener">iptables详解（4）：iptables匹配条件总结之一</a></p>
+<a id="more"></a>
+
+<p><strong>注意：在参照本文进行iptables实验时，请务必在个人的测试机上进行，因为如果iptables规则设置不当，有可能使你无法连接到远程主机中。</strong></p>
+<h2 id="匹配条件的更多用法"><a href="#匹配条件的更多用法" class="headerlink" title="匹配条件的更多用法"></a>匹配条件的更多用法</h2><p>还是从我们最常用的”源地址”说起吧，我们知道，<strong>使用-s选项作为匹配条件</strong>，可以匹配报文的源地址，但是之前的示例中，我们每次指定源地址，都只是指定单个IP，示例如下。</p>
+<p><img src="1.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>其实，我们也可以在指定源地址时，一次指定多个，<strong>用”逗号”隔开即可</strong>，示例如下。</p>
+<p><img src="2.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>可以看出，上例中，一次添加了两条规则，两条规则只是源地址对应的IP不同，注意，<strong>上例中的”逗号”两侧均不能包含空格，多个IP之间必须与逗号相连。</strong></p>
+<p>除了能指定具体的IP地址，还能指定某个网段，示例如下</p>
+<p><img src="3.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>上例表示，如果报文的源地址IP在10.6.0.0/16网段内，当报文经过INPUT链时就会被DROP掉。</p>
+<p>其实，我们还可以对匹配条件取反，先看示例，如下。</p>
+<p><img src="4.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>上图中，<strong>使用”! -s 192.168.1.146”表示对 -s 192.168.1.146这个匹配条件取反</strong>， -s 192.168.1.146表示报文源IP地址为192.168.1.146即可满足匹配条件，使用 “!” 取反后则表示，报文源地址IP只要不为192.168.1.146即满足条件，那么，上例中规则表达的意思就是，只要发往本机的报文的源地址不是192.168.1.146，就接受报文。</p>
+<p>此刻，你猜猜，按照上例中的配置，如果此时从146主机上向<a href="http://www.zsythink.net/archives/tag/防火墙/" target="_blank" rel="noopener">防火墙</a>所在的主机发送ping请求，146主机能得到回应吗？（此处不考虑其他链，只考虑filter表的INPUT链）</p>
+<p>为了给你思考的空间，我把答案写的远一点。</p>
+<p>答案是：能，也就是说，按照上例的配置，146主机仍然能够ping通当前主机，为什么呢？我们来分析一下。</p>
+<p>上例中，filter表的INPUT链中只有一条规则，这条规则要表达的意思就是：</p>
+<p>只要报文的源IP不是192.168.1.146，那么就接受此报文，但是，某些小伙伴可能会误会，把上例中的规则理解成如下含义：只要报文的源IP是192.168.1.146，那么就不接受此报文，这种理解与上述理解看似差别不大，其实完全不一样，这样理解是错误的，上述理解才是正确的。</p>
+<p><strong>换句话说就是，报文的源IP不是192.168.1.146时，会被接收，并不能代表，报文的源IP是192.168.1.146时，会被拒绝。</strong></p>
+<p>上例中，因为并没有任何一条规则指明源IP是192.168.1.146时，该执行怎样的动作，所以，当来自192.168.1.146的报文经过INPUT链时，并不能匹配上例中的规则，于是，此报文就继续匹配后面的规则，可是，上例中只有一条规则，这条规则后面没有其他可以匹配的规则，于是，此报文就会去匹配<strong>当前链的默认动作(默认策略)</strong>，而上例中，INPUT链的默认动作为ACCEPT，所以，来自146的ping报文就被接收了，如果，把上例中INPUT链的默认策略改为DROP，那么，146的报文将会被丢弃，146上的ping命令将得不到任何回应，但是<strong>如果将INPUT链的默认策略设置为DROP，当INPUT链中没有任何规则时，所有外来报文将会被丢弃，包括我们ssh远程连接。</strong></p>
+<p>好了，我们通过上例，不仅了解到了怎样对匹配条件取反，还加深了我们对默认策略的了解，一举两得，我们继续聊。</p>
+<h3 id="匹配条件：目标IP地址"><a href="#匹配条件：目标IP地址" class="headerlink" title="匹配条件：目标IP地址"></a>匹配条件：目标IP地址</h3><p>除了可以通过-s选项指定源地址作为匹配条件，我们还可以使用-d选项指定”目标地址”作为匹配条件。</p>
+<p>源地址表示报文从哪里来，目标地址表示报文要到哪里去。</p>
+<p>除了127.0.0.1回环地址以外，当前机器有两个IP地址，IP如下。</p>
+<p><img src="5.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>假设，我们想要拒绝146主机发来的报文，但是我们只想拒绝146向156这个IP发送报文，并不想要防止146向101这个IP发送报文，我们就可以指定目标地址作为匹配条件，示例如下。</p>
+<p><img src="6.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>上例表示只丢弃从146发往156这个IP的报文，但是146发往101这个IP的报文并不会被丢弃，<strong>如果我们不指定任何目标地址，则目标地址默认为0.0.0.0/0，同理，如果我们不指定源地址，源地址默认为0.0.0.0/0，0.0.0.0/0表示所有IP</strong>，示例如下。</p>
+<p><img src="7.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>上例表示，所有IP发送往101的报文都将被丢弃。</p>
+<p>与-s选项一样，<strong>-d选项也可以使用”叹号”进行取反，也能够同时指定多个IP地址，使用”逗号”隔开即可。</strong></p>
+<p>但是请注意，不管是-s选项还是-d选项，<strong>取反操作与同时指定多个IP的操作不能同时使用。</strong></p>
+<p><strong>需要明确的一点就是：当一条规则中有多个匹配条件时，这多个匹配条件之间，默认存在”与”的关系。</strong></p>
+<p><strong>说白了就是，当一条规则中存在多个匹配条件时，报文必须同时满足这些条件，才算做被规则匹配。</strong></p>
+<p>就如下例所示，下图中的规则包含有两个匹配条件，源地址与目标地址，报文必须同时能被这两个条件匹配，才算作被当前规则匹配，也就是说，下例中，报文必须来自146，同时报文的目标地址必须为101，才会被如下规则匹配，两个条件必须同时满足。</p>
+<p><img src="8.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>我们除了能够使用-s选项和-d选项匹配源IP与目标IP以外，还能够匹配”源端口”与”目标端口”，但是我们一会儿再聊怎样匹配端口，我们先聊聊其他选项。</p>
+<h3 id="匹配条件：协议类型"><a href="#匹配条件：协议类型" class="headerlink" title="匹配条件：协议类型"></a>匹配条件：协议类型</h3><p>我们可以<strong>使用-p选项，指定需要匹配的报文的协议类型。</strong></p>
+<p>假设，我们只想要拒绝来自146的tcp类型的请求，那么可以进行如下设置</p>
+<p><img src="9.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>上图中，防火墙拒绝了来自146的tcp报文发往156这个IP，那么我们来测试一下，我们在146上使用ssh连接101这个IP试试（<strong>ssh协议的传输层协议属于tcp协议类型</strong>）</p>
+<p><img src="10.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>如上图所示，ssh连接被拒绝了，那么我们使用ping命令试试 (ping命令使用icmp协议)，看看能不能ping通156。</p>
+<p><img src="11.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>可以看到，PING命令可以ping通156，证明icmp协议并没有被规则匹配到，只有tcp类型的报文被匹配到了。</p>
+<p>那么，-p选项都支持匹配哪些协议呢？我们总结一下</p>
+<p><strong>centos6中，-p选项支持如下协议类型</strong></p>
+<p><strong>tcp, udp, udplite, icmp, esp, ah, sctp</strong></p>
+<p><strong>centos7中，-p选项支持如下协议类型</strong></p>
+<p><strong>tcp, udp, udplite, icmp, icmpv6,esp, ah, sctp, mh</strong></p>
+<p><strong>当不使用-p指定协议类型时，默认表示所有类型的协议都会被匹配到，与使用-p all的效果相同。</strong></p>
+<h3 id="匹配条件：网卡接口"><a href="#匹配条件：网卡接口" class="headerlink" title="匹配条件：网卡接口"></a>匹配条件：网卡接口</h3><p>我们再来认识一个新的匹配条件，当本机有多个网卡时，我们可以<strong>使用 -i 选项去匹配报文是通过哪块网卡流入本机的。</strong></p>
+<p>我们先动手做个小例子，对-i选项有一个初步的了解以后，再结合理论去看。</p>
+<p>当前主机的<strong>网卡名称为eth4</strong>，如下图</p>
+<p><img src="12.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>假设想要拒绝由网卡eth4流入的ping请求报文，则可以进行如下设置。</p>
+<p><img src="13.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>上图中，<strong>使用-i选项，指定网卡名称</strong>，使用-p选项，指定了需要匹配的报文协议类型，上例表示丢弃由eth4网卡流入的icmp类型的报文。</p>
+<p>是不是很容易理解，但是，我们需要考虑一个问题，-i选项是用于匹配报文流入的网卡的，也就是说，从本机发出的报文是不可能会使用到-i选项的，因为这些由本机发出的报文压根不是从网卡流入的，而是要通过网卡发出的，从这个角度考虑，-i选项的使用是有限制的。</p>
+<p>为了更好的解释-i选项，我们回顾一下在理论总结中的一张iptables全局报文流向图，如下。</p>
+<p><img src="14.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>既然-i选项是用于判断报文是从哪个网卡流入的，那么，-i选项只能用于上图中的PREROUTING链、INPUT链、FORWARD链，这是-i选项的特殊性，因为它只是用于判断报文是从哪个网卡流入的，所以只能在上图中”数据流入流向”的链中与FORWARD链中存在，而上图中的”数据发出流向”经过的链中，是不可能使用-i选项的，比如上图中的<strong>OUTPUT链与POSTROUTING链，他们都不能使用-i选项。</strong></p>
+<p>理解完-i选项，再来理解-o选项就好办了。</p>
+<p>当主机有多块网卡时，可以使用-o选项，匹配报文将由哪块网卡流出，没错，-o选项与-i选项是相对的，<strong>-i选项用于匹配报文从哪个网卡流入，-o选项用于匹配报文将从哪个网卡流出。</strong></p>
+<p>聪明如你，一定想到了，<strong>-i选项只能用于PREROUTING链、INPUT链、FORWARD链，那么-o选项只能用于FORWARD链、OUTPUT链、POSTROUTING链。</strong></p>
+<p>因为-o选项是用于匹配报文将由哪个网卡”流出”的，所以与上图中的”数据进入流向”中的链没有任何缘分，所以，-o选项只能用于FORWARD链、OUTPUT链、POSTROUTING链中。</p>
+<p>看来，<strong>FORWARD链属于”中立国”，它能同时使用-i选项与-o选项。</strong></p>
+<h2 id="扩展匹配条件"><a href="#扩展匹配条件" class="headerlink" title="扩展匹配条件"></a>扩展匹配条件</h2><p>好了，现在，我们就要聊聊，怎样匹配报文的”源端口”与”目标端口”。</p>
+<p>在上文中，我们总结了”源地址”与”目标地址”以后，就顺便提到了”源端口”与”目标端口”，但是，为什么刚才不介绍”源端口”与”目标端口”，非要现在介绍呢？这是<strong>因为”源端口”与”目标端口”属于扩展匹配条件，”源地址”与”目标地址”属于基本匹配条件</strong>，上文中介绍到的匹配条件，都属于基本匹配条件，所以，我们单独把”源端口”与”目标端口”，放在后面总结，是为了引出扩展匹配条件的概念。</p>
+<p>那么，先来了解一下，什么是扩展匹配条件。</p>
+<p>不是基本匹配条件的就是扩展匹配条件，这样说好像是句废话，我们可以这样理解，<strong>基本匹配条件我们可以直接使用，而如果想要使用扩展匹配条件，则需要依赖一些扩展模块</strong>，或者说，<strong>在使用扩展匹配条件之前，需要指定相应的扩展模块才行</strong>，这样说不容易明白，我们做个例子，就能够明白。</p>
+<p>我们知道，<strong>sshd服务的默认端口为22</strong>，当我们使用ssh工具远程连接主机时，默认会连接服务端的22号端口，假设，我们现在想要使用iptables设置一条规则，拒绝来自192.168.1.146的ssh请求，我们就可以拒绝146上的报文能够发往本机的22号端口，这个时候，就需要用到”目标端口”选项。</p>
+<p><strong>使用选项–dport可以匹配报文的目标端口，–dport意为destination-port，即表示目标端口。</strong></p>
+<p><strong>注意，与之前的选项不同，–dport前有两条”横杠”，而且，使用–dport选项时，必须事先指定了使用哪种协议</strong>，即必须先使用-p选项，示例如下</p>
+<p><img src="15.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>上图中，我们就使用了<strong>扩展匹配条件–dport</strong>，指定了匹配报文的目标端口，如果外来报文的目标端口为本机的22号端口（ssh默认端口），则拒绝之，<strong>而在使用–dport之前，我们使用-m选项，指定了对应的扩展模块为tcp，也就是说，如果想要使用–dport这个扩展匹配条件，则必须依靠某个扩展模块完成</strong>，上例中，这个扩展模块就是tcp扩展模块，最终，我们使用的是<strong>tcp扩展模块中的dport扩展匹配条件。</strong></p>
+<p>现在，我们再回过头来看看扩展匹配条件的概念，就更加明白了。</p>
+<p><strong>扩展匹配条件被使用时，则需要依赖一些扩展模块，或者说，在使用扩展匹配条件之前，需要指定相应的扩展模块才行。</strong></p>
+<p>现在你明白了吗？ <strong>-m tcp表示使用tcp扩展模块，–dport表示tcp扩展模块中的一个扩展匹配条件，可用于匹配报文的目标端口。</strong></p>
+<p>注意，<strong>-p tcp与 -m tcp并不冲突，-p用于匹配报文的协议，-m 用于指定扩展模块的名称，正好，这个扩展模块也叫tcp。</strong></p>
+<p>其实，上例中，我们可以省略-m选项，示例如下。</p>
+<p><img src="16.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p><strong>当使用-p选项指定了报文的协议时，如果在没有使用-m指定对应的扩展模块名称的情况下，使用了扩展匹配条件，  iptables默认会调用与-p选项对应的协议名称相同的模块。</strong></p>
+<p>上例中，我们使用-p选项指定了协议名称，使用扩展匹配条件–dport指定了目标端口，在使用扩展匹配条件的时候，如果没有使用-m指定使用哪个扩展模块，iptables会默认使用”-m 协议名”，而协议名就是-p选项对应的协议名，上例中，-p 对应的值为tcp，所以默认调用的扩展模块就为-m tcp，如果-p对应的值为udp，那么默认调用的扩展模块就为-m udp。</p>
+<p>所以，上例中，<strong>其实”隐式”的指定了扩展模块</strong>，只是没有表现出来罢了。</p>
+<p>所以，在使用扩展匹配条件时，一定要注意，<strong>如果这个扩展匹配条件所依赖的扩展模块名正好与-p对应的协议名称相同，那么则可省略-m选项，否则则不能省略-m选项，必须使用-m选项指定对应的扩展模块名称</strong>，这样说可能还是不是特别明了，在后续的举例中，我们会更加明了的理解这些概念。</p>
+<p>有”目标端口”，就有”源端口”，<strong>代表”源端口”的扩展匹配条件为–sport</strong></p>
+<p>使用–sport可以判断报文是否从指定的端口发出，即匹配报文的源端口是否与指定的端口一致，–sport表示source-port，即表示源端口之意。</p>
+<p>因为我们已经搞明白了dport，那么sport我就不再赘述了，示例如下</p>
+<p><img src="17.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>上例中，隐含了”-m tcp”之意，表示使用了tcp扩展模块的–sport扩展匹配条件。</p>
+<p><strong>扩展匹配条件是可以取反的，同样是使用”!”进行取反</strong>，比如 “! –dport 22”，表示目标端口不是22的报文将会被匹配到。</p>
+<p>不管是–sport还是–dsport，都能够指定一个端口范围，比如，<strong>–dport 22:25表示目标端口为22到25之间的所有端口</strong>，即22端口、23端口、24端口、25端口，示例如下</p>
+<p><img src="18.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>也可以写成如下图中的模样，下图中第一条规则表示匹配0号到22号之间的所有端口，下图中的第二条规则表示匹配80号端口以及其以后的所有端口（直到65535）。</p>
+<p><img src="19.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>刚才聊到的两个扩展匹配条件都是tcp扩展模块的，其实，tcp扩展模块还有一个比较有用的扩展匹配条件叫做”–tcp-flags”，但是由于篇幅原因，以后再对这个扩展匹配条件进行总结。</p>
+<p>借助tcp扩展模块的–sport或者–dport都可以指定一个连续的端口范围，但是无法同时指定多个离散的、不连续的端口，<strong>如果想要同时指定多个离散的端口，需要借助另一个扩展模块，”multiport”模块。</strong></p>
+<p><strong>我们可以使用multiport模块的–sports扩展条件同时指定多个离散的源端口。</strong></p>
+<p><strong>我们可以使用multiport模块的–dports扩展条件同时指定多个离散的目标端口。</strong></p>
+<p>示例如下</p>
+<p><img src="20.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>上图示例表示，禁止来自146的主机上的tcp报文访问本机的22号端口、36号端口以及80号端口。</p>
+<p>上图中，”-m multiport –dports 22,36,80”表示使用了multiport扩展模块的–dports扩展条件，以同时指定了多个离散的端口，每个端口之间用逗号隔开。</p>
+<p>上图中的-m multiport是不能省略的，如果你省略了-m multiport，就相当于在没有指定扩展模块的情况下，使用了扩展条件（”–dports”），那么上例中，iptables会默认调用”-m tcp”，但是，<strong>“–dports扩展条件”并不属于”tcp扩展模块”,而是属于”multiport扩展模块”</strong>，所以，这时就会报错。</p>
+<p>综上所述，<strong>当使用–dports或者–sports这种扩展匹配条件时，必须使用-m指定模块的名称。</strong></p>
+<p>其实，<strong>使用multiport模块的–sports与–dpors时，也可以指定连续的端口范围，并且能够在指定连续的端口范围的同时，指定离散的端口号</strong>，示例如下。</p>
+<p><img src="21.png" alt="iptables详解（4）：iptables匹配条件总结之一"></p>
+<p>上例中的命令表示拒绝来自192.168.1.146的tcp报文访问当前主机的22号端口以及80到88之间的所有端口号，是不是很方便？有没有很灵活？</p>
+<p>不过需要注意，<strong>multiport扩展只能用于tcp协议与udp协议，即配合-p tcp或者-p udp使用。</strong></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="changsk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>changsk</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="http://changsk.top/2020/08/01/iptables-4/" title="iptables详解（4）：iptables匹配条件总结之一">http://changsk.top/2020/08/01/iptables-4/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iptables/" rel="tag"><i class="fa fa-tag"></i> iptables</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/31/VPN-principle/" rel="next" title="VPN原理">
+                <i class="fa fa-chevron-left"></i> VPN原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/me/me.jpg" alt="changsk">
+            
+              <p class="site-author-name" itemprop="name">changsk</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">282</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">125</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Tkzccsk" title="GitHub &rarr; https://github.com/Tkzccsk" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:2486623255@qq.com" title="E-Mail &rarr; mailto:2486623255@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/tkzc_csk" title="CSDN &rarr; https://blog.csdn.net/tkzc_csk" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#匹配条件的更多用法"><span class="nav-number">1.</span> <span class="nav-text">匹配条件的更多用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#匹配条件：目标IP地址"><span class="nav-number">1.1.</span> <span class="nav-text">匹配条件：目标IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匹配条件：协议类型"><span class="nav-number">1.2.</span> <span class="nav-text">匹配条件：协议类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匹配条件：网卡接口"><span class="nav-number">1.3.</span> <span class="nav-text">匹配条件：网卡接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展匹配条件"><span class="nav-number">2.</span> <span class="nav-text">扩展匹配条件</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changsk</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">1.1m</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">16:01</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+        pbOptions.iconStyle = "box";
+      
+        pbOptions.boxForm = "horizontal";
+      
+        pbOptions.position = "bottomCenter";
+      
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+        flOptions.iconStyle = "box";
+      
+        flOptions.boxForm = "horizontal";
+      
+        flOptions.position = "middleRight";
+      
+        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
